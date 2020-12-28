@@ -1,0 +1,13 @@
+@import 'fonts';
+@import 'variables';
+@import '_mixins';
+@import './utils/normalize';
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
