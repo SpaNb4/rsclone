@@ -3,6 +3,10 @@
 @import '_mixins';
 @import './utils/normalize';
 
+@import './components/header';
+@import './components/canvas';
+
+
 * {
     box-sizing: border-box;
 }
@@ -10,4 +14,31 @@
 body {
     margin: 0;
     padding: 0;
+    min-width: 500px;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: normal;
+    color: $color-pavlova;
+    background-color: $color-pickled-bluewood;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3.3%;
+    box-sizing: content-box;
 }
