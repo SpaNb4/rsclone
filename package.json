@@ -7,7 +7,9 @@
     "last 2 versions",
     "> 5%"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "materialize-css": "^1.0.0-rc.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.11",
