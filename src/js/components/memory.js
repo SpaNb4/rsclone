@@ -73,7 +73,6 @@ const cardsPicsArray = createArray(PICS_ARR);
 
 const createCard = (index) => {
   const card = document.createElement('div');
-  card.dataset.index = index;
   card.dataset.name = cardsPicsArray[index].alt;
   card.className = 'memory-game__card flip-card';
   card.innerHTML = `
@@ -116,10 +115,14 @@ const removeClasses = (elem, className) => {
 const onMemoryGridClick = (evt) => {
   const card = evt.target.closest('.flip-card');
 
-  if (evt.target === memoryGrid || openCards[0] === card) return;
+  if (evt.target === memoryGrid) return;
 
   if (openCards.length === 2) {
     openCards.forEach((elem) => removeClasses(elem, OPENED));
+    removeOpencards();
+  }
+
+  if (openCards.includes(card)) {
     removeOpencards();
   }
 
@@ -127,13 +130,13 @@ const onMemoryGridClick = (evt) => {
   openCards.push(card);
 
   if (openCards.length === 2 && openCards[0].dataset.name === openCards[1].dataset.name) {
-    openCards.forEach((elem) => addClasses(card, DISABLED));
-    count += 2;
+    openCards.forEach((elem) => addClasses(elem, DISABLED));
+    count += 1;
     removeOpencards();
     audioMatch.play();
 
     // check if game won?
-    if (count === cardsPicsArray.length) {
+    if (count === PICS_ARR.length) {
       audioZombie.play();
       addClasses(memoryGrid, WON);
     }
@@ -141,7 +144,7 @@ const onMemoryGridClick = (evt) => {
 }
 
 const resetGame = () => {
-  count += 0;
+  count = 0;
   removeOpencards();
   [... memoryGrid.children].forEach((elem) => {
     removeClasses(elem, DISABLED);
