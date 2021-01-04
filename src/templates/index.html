@@ -25,10 +25,27 @@
     </div>
   </header> -->
   <main>
-    <canvas id="canvas" class="canvas">
-      Your browser does not support canvas. Please try again with a different browser.
-    </canvas>
+    <div class="content">
+      <div id="wall-1" class="wall active">1
+        <div class="door element">
+          <a class="lock element" href="#">
+            <span id="knob" class="knob element"></span>
+          </a>
+        </div>
+        <div class="clock element">
+        </div>
+      </div>
+      <div id="wall-2" class="wall">2</div>
+      <div id="wall-3" class="wall">3</div>
+      <div id="wall-4" class="wall">4</div>
+      <div class="floor"></div>
+    </div>
+    <div class="arrows">
+      <button id="room-arrow-left" class="arrow arrow--left" type="button"></button>
+      <button id="room-arrow-right" class="arrow arrow--right" type="button"></button>
+    </div>
   </main>
+  <div id="puzzle-eva" class="puzzle-eva"></div>
   <footer></footer>
 </body>
 
