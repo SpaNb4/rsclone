@@ -1,4 +1,4 @@
-import { resetGame } from './memory';
+import { resetGame, createGrid, links } from './memory';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -15,6 +15,9 @@ const walls = [
 ];
 
 const openMemoryGame = () => {
+    createGrid();
+    links[0].focus(); // add focus to first element
+
     memory.classList.add(ACTIVE);
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
