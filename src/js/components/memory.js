@@ -9,6 +9,8 @@ import iconWhisky from './../../assets/icons/whisky.svg';
 import matchSound from './../../assets/audio/match.wav';
 import zombieSound from './../../assets/audio/zombie.wav';
 
+import { shuffleArray, doubleArray } from './utils';
+
 const OPENED = 'opened';
 const DISABLED = 'disabled';
 const WON = 'won';
@@ -17,20 +19,9 @@ const audioZombie = new Audio(zombieSound);
 const links = [];
 const openCards = [];
 let count = 0;
+const memoryGrid = document.querySelector('#memory-game-grid');
 
-// utils:
-const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-const createArray = (array) => {
-  return shuffleArray(Array(2).fill(array).flat());
-}
-//
+const cardsPicsArray = shuffleArray(doubleArray(PICS_ARR));
 
 const PICS_ARR = [
   {
@@ -66,9 +57,6 @@ const PICS_ARR = [
     alt: 'whisky'
   },
 ];
-
-const memoryGrid = document.querySelector('#memory-game-grid');
-const cardsPicsArray = createArray(PICS_ARR);
 
 const createCard = (index) => {
   const card = document.createElement('div');
@@ -187,4 +175,4 @@ const onMemoryKeyPress = (evt) => {
 memoryGrid.addEventListener('click', onMemoryGridClick);
 document.addEventListener('keydown', onMemoryKeyPress);
 
-export { resetGame, createGrid, links };
+export { resetGame, createGrid, links, doubleArray };
