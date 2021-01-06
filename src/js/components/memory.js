@@ -6,8 +6,8 @@ import iconGuns from './../../assets/icons/guns.svg';
 import iconHat from './../../assets/icons/hat.svg';
 import iconMoney from './../../assets/icons/money.svg';
 import iconWhisky from './../../assets/icons/whisky.svg';
-import matchSound from './../../assets/audio/match.wav';
-import zombieSound from './../../assets/audio/zombie.wav';
+import matchSound from './../../assets/audio/match.mp3';
+import zombieSound from './../../assets/audio/zombie.mp3';
 
 const OPENED = 'opened';
 const DISABLED = 'disabled';

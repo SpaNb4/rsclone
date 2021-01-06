@@ -1,4 +1,5 @@
 import { resetGame } from './memory';
+import { newGame } from './hangman';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -7,19 +8,25 @@ const clock = document.querySelector('#clock');
 const memory = document.querySelector('#memory-game');
 const overlay = document.querySelector('#overlay');
 
-const walls = [
-    document.querySelector('#wall-1'),
-    document.querySelector('#wall-2'),
-    document.querySelector('#wall-3'),
-    document.querySelector('#wall-4')
-];
+const hangman = document.querySelector('.hangman');
+const hat = document.querySelector('#hat');
+
+const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
 
 const openMemoryGame = () => {
     memory.classList.add(ACTIVE);
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outMemoryGameClick);
-}
+};
+
+const openHangmanGame = () => {
+    hangman.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outMemoryGameClick);
+    newGame();
+};
 
 const closeMemoryGame = () => {
     resetGame();
@@ -27,23 +34,37 @@ const closeMemoryGame = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outMemoryGameClick);
-}
+};
+
+const closeHangmanGame = () => {
+    newGame();
+    hangman.classList.remove(ACTIVE);
+    overlay.classList.remove(ACTIVE);
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outMemoryGameClick);
+};
 
 const onClockClick = () => {
     openMemoryGame();
-}
+};
+
+const onHatClick = () => {
+    openHangmanGame();
+};
 
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
         closeMemoryGame();
+        closeHangmanGame();
     }
-}
+};
 
 const outMemoryGameClick = (evt) => {
     if (evt.target === overlay) {
         closeMemoryGame();
+        closeHangmanGame();
     }
-}
+};
 
 class Room {
     constructor() {
@@ -66,6 +87,7 @@ class Room {
         });
 
         clock.addEventListener('click', onClockClick);
+        hat.addEventListener('click', onHatClick);
     }
 }
 

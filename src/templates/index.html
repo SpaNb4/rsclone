@@ -36,7 +36,10 @@
         <div id="clock" class="clock element">
         </div>
       </div>
-      <div id="wall-2" class="wall">2</div>
+      <div id="wall-2" class="wall">2
+        <div id="hat" class="hat element">
+        </div>
+      </div>
       <div id="wall-3" class="wall">3</div>
       <div id="wall-4" class="wall">4</div>
       <div class="floor"></div>
@@ -48,6 +51,19 @@
   </main>
   <div id="memory-game" class="memory-game">
     <div id="memory-game-grid" class="memory-game__grid"></div>
+  </div>
+  <div class="hangman">
+    <h1>Hangman</h1>
+    <p class="word_field"></p>
+    <form class="hangman_form">
+      <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
+      <input class="guess_btn" type="button" value="Guess">
+      <ul class="wrong_letters">
+        <p>Wrong Letters:</p>
+      </ul>
+      <img class="hangman_img" src="./assets/img/hangman_0.png"><br />
+    </form>
+    <div class="message"></div>
   </div>
   <footer></footer>
 </body>
