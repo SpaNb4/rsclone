@@ -4,6 +4,8 @@ import uncorrectSound from './../../assets/audio/hangman_uncorrect.mp3';
 import loseSound from './../../assets/audio/hangman_lose.mp3';
 import winSound from './../../assets/audio/hangman_win.mp3';
 
+import { checkSymbol } from './../../js/components/utils';
+
 const wordField = document.querySelector('.word_field');
 const messageDiv = document.querySelector('.message');
 const wrongLetters = document.querySelector('.wrong_letters');
@@ -61,6 +63,7 @@ let random: number;
 let keyword: Array<string>;
 let partGuessWord: Array<string>;
 let errors: number = 0;
+export let hangmanSolved: boolean = false;
 
 export function newGame() {
     random = Math.floor(Math.random() * (wordsArr.length - 1));
@@ -105,14 +108,14 @@ function printGuessField() {
 
 function checkWin() {
     // checks if all letters have been found
-    let isWin: boolean = true;
+    hangmanSolved = true;
     partGuessWord.forEach((item) => {
         if (item === '_ ') {
-            isWin = false;
+            hangmanSolved = false;
         }
     });
 
-    if (isWin) {
+    if (hangmanSolved) {
         messageDiv.classList.add('active');
         messageDiv.innerHTML = '<h1 class="title">Awesome, You Won!';
         setTimeout(() => {
@@ -143,15 +146,11 @@ function checkSymbols() {
     // the letter provided by the user
     let userLetter: string = letter.value;
     userLetter = userLetter.toUpperCase();
-    let correctLetter: boolean;
-    keyword.forEach((item, index) => {
-        if (item.toUpperCase() === userLetter) {
-            partGuessWord[index] = `${userLetter} `;
-            correctLetter = true;
-            audioCorrect.play();
-        }
-        letter.value = '';
-    });
+    //true
+    if (checkSymbol(keyword, userLetter, partGuessWord)) {
+        audioCorrect.play();
+    }
+    letter.value = '';
 
     // deletes the guessfield and replaces it with the new one
     wordField.innerHTML = '';
@@ -159,7 +158,7 @@ function checkSymbols() {
 
     // if a guessed letter is not in the word, the letter will be put on the
     // "wrong letters"-list and hangman grows
-    if (!correctLetter && userLetter) {
+    if (!checkSymbol(keyword, userLetter, partGuessWord) && userLetter) {
         const li = document.createElement('li');
         li.innerHTML = `${userLetter}`;
         wrongLetters.appendChild(li);

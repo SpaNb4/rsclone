@@ -1,5 +1,5 @@
-import { resetGame } from './memory';
-import { newGame } from './hangman';
+import { resetGame, createGrid, links } from './memory';
+import { newGame, hangmanSolved } from './hangman';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -14,6 +14,9 @@ const hat = document.querySelector('#hat');
 const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
 
 const openMemoryGame = () => {
+    createGrid();
+    links[0].focus(); // add focus to first element
+
     memory.classList.add(ACTIVE);
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
@@ -49,7 +52,9 @@ const onClockClick = () => {
 };
 
 const onHatClick = () => {
-    openHangmanGame();
+    if (!hangmanSolved) {
+        openHangmanGame();
+    }
 };
 
 const onDocumentEscPress = (evt) => {

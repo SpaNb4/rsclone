@@ -9,29 +9,18 @@ import iconWhisky from './../../assets/icons/whisky.svg';
 import matchSound from './../../assets/audio/match.mp3';
 import zombieSound from './../../assets/audio/zombie.mp3';
 
+import { shuffleArray, doubleArray } from './utils';
+
 const OPENED = 'opened';
 const DISABLED = 'disabled';
 const WON = 'won';
 const audioMatch = new Audio(matchSound);
 const audioZombie = new Audio(zombieSound);
+const links = [];
 const openCards = [];
 let count = 0;
+const memoryGrid = document.querySelector('#memory-game-grid');
 
-// utils:
-const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    let temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
-
-const createArray = (array) => {
-  return shuffleArray(Array(2).fill(array).flat());
-}
-//
 
 const PICS_ARR = [
   {
@@ -68,24 +57,28 @@ const PICS_ARR = [
   },
 ];
 
-const memoryGrid = document.querySelector('#memory-game-grid');
-const cardsPicsArray = createArray(PICS_ARR);
+const cardsPicsArray = shuffleArray(doubleArray(PICS_ARR));
 
 const createCard = (index) => {
   const card = document.createElement('div');
   card.dataset.name = cardsPicsArray[index].alt;
   card.className = 'memory-game__card flip-card';
   card.innerHTML = `
-    <a href="#" class="flip-card__inner">
-      <div class="flip-card__front"></div>
+    <div class="flip-card__inner">
+      <a href="#" class="flip-card__front" data-index="${index}"></a>
       <div class="flip-card__back">
         <img src="${cardsPicsArray[index].src}" alt="card-${cardsPicsArray[index].alt}" width="100" height="100">
       </div>
-    </a>`;
+    </div>`;
+
+  links.push(card.querySelector('a'));
+
   return card;
 }
 
 const createGrid = () => {
+  memoryGrid.innerHTML = '';
+
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < cardsPicsArray.length; i += 1) {
@@ -152,7 +145,35 @@ const resetGame = () => {
   })
 }
 
-memoryGrid.addEventListener('click', onMemoryGridClick);
-window.onload = createGrid();
+const onMemoryKeyPress = (evt) => {
+  let index = Number(document.activeElement.dataset.index);
 
-export { resetGame };
+  if((evt.keyCode == 37 || evt.keyCode == 65) && index % 4) {
+    //  left
+    index -= 1;
+    links[index].focus();
+  }
+
+  if((evt.keyCode == 38 || evt.keyCode == 87) && index > cardsPicsArray.length / 4 - 1) {
+    //  up
+    index -= 4;
+    links[index].focus();
+  }
+
+  if((evt.keyCode == 39 || evt.keyCode == 68) && (index + 1) % 4) {
+    //  right
+    index += 1;
+    links[index].focus();
+  }
+
+  if((evt.keyCode == 40 || evt.keyCode == 83) && index < cardsPicsArray.length * 3 / 4) {
+    // down
+    index += 4;
+    links[index].focus();
+  }
+}
+
+memoryGrid.addEventListener('click', onMemoryGridClick);
+document.addEventListener('keydown', onMemoryKeyPress);
+
+export { resetGame, createGrid, links, doubleArray };
