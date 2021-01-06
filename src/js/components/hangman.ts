@@ -4,12 +4,16 @@ import uncorrectSound from './../../assets/audio/hangman_uncorrect.mp3';
 import loseSound from './../../assets/audio/hangman_lose.mp3';
 import winSound from './../../assets/audio/hangman_win.mp3';
 
+// @ts-ignore
 import { checkSymbol } from './../../js/components/utils';
+// @ts-ignore
+import { overlay, ACTIVE } from './room';
+import { hangman as hangmanDiv } from './wall3';
 
 const wordField = document.querySelector('.word_field');
 const messageDiv = document.querySelector('.message');
 const wrongLetters = document.querySelector('.wrong_letters');
-const hangman: HTMLImageElement = document.querySelector('.hangman_img');
+const hangmanImg: HTMLImageElement = document.querySelector('.hangman_img');
 
 const audioCorrect = new Audio(correctSound);
 const audioUncorrect = new Audio(uncorrectSound);
@@ -81,7 +85,7 @@ export function newGame() {
     messageDiv.classList.remove('active');
     wordField.innerHTML = '';
     wrongLetters.innerHTML = '<p>Wrong Letters:</p>';
-    hangman.src = './assets/img/hangman_0.png';
+    hangmanImg.src = './assets/img/hangman_0.png';
     printGuessField();
 }
 
@@ -120,6 +124,8 @@ function checkWin() {
         messageDiv.innerHTML = '<h1 class="title">Awesome, You Won!';
         setTimeout(() => {
             messageDiv.style.display = 'none';
+            hangmanDiv.classList.remove(ACTIVE);
+            overlay.classList.remove(ACTIVE);
         }, 2000);
         audioWin.play();
     }
@@ -146,7 +152,7 @@ function checkSymbols() {
     // the letter provided by the user
     let userLetter: string = letter.value;
     userLetter = userLetter.toUpperCase();
-    //true
+
     if (checkSymbol(keyword, userLetter, partGuessWord)) {
         audioCorrect.play();
     }
@@ -163,7 +169,7 @@ function checkSymbols() {
         li.innerHTML = `${userLetter}`;
         wrongLetters.appendChild(li);
         errors += 1;
-        hangman.src = `./assets/img/hangman_${errors}.png`;
+        hangmanImg.src = `./assets/img/hangman_${errors}.png`;
         audioUncorrect.play();
     }
 
