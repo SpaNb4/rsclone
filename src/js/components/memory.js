@@ -21,7 +21,6 @@ const openCards = [];
 let count = 0;
 const memoryGrid = document.querySelector('#memory-game-grid');
 
-const cardsPicsArray = shuffleArray(doubleArray(PICS_ARR));
 
 const PICS_ARR = [
   {
@@ -57,6 +56,8 @@ const PICS_ARR = [
     alt: 'whisky'
   },
 ];
+
+const cardsPicsArray = shuffleArray(doubleArray(PICS_ARR));
 
 const createCard = (index) => {
   const card = document.createElement('div');
