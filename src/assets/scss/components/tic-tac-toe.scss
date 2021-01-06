@@ -1,0 +1,86 @@
+.tic-tac-toe {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    overflow: hidden;
+    z-index: 199;
+
+    width: 100%;
+    height: 100%;
+    background: rgb(0,0,0, 0.7);
+
+    &.active {
+        transform: translate(-50%, -50%) scale(1);
+        
+    }
+
+    &__close {
+        color: $color-white;
+        font-size: 70px;
+        float: right;
+        margin-right: 30px;
+
+        &:hover {
+            cursor: pointer;
+        };
+    }
+
+    &__repeat {
+        width: 45px;
+        height: 45px;
+        float: right;
+        margin-right: -45px;
+        margin-top: 80px;
+
+
+        img {
+            width: 100%;
+        }
+
+        &:hover {
+            cursor: pointer;
+        };
+    }
+
+    &__content {
+        // display: block;
+        display: flex;
+        justify-content: center;
+        margin-left: 20%;
+        margin-top: 5%;
+        width: 60%;
+        height: 80%;
+        z-index: 500;
+        background: $color-black;
+    }
+
+    &__game {
+        margin-top: 80px;
+        width: 450px;
+        height: 450px;
+        background: $color-white;
+    }
+
+    .cell {
+        width: 150px;
+        height: 150px;
+        border: 1px solid $color-black;
+        float: left;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 120px;
+        color: $color-black;
+
+        &:hover {
+            cursor: pointer;
+        };
+    }
+
+    .win {
+        text-align: center;
+        font-size: 50px;
+    }
+}
+

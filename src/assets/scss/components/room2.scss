@@ -29,6 +29,16 @@
         
         img {
             width: 100%;
+
+            &:hover {
+                box-shadow: 0px 0px 20px $color-white;
+                cursor: pointer;
+            }
+
+            &:active {
+                box-shadow: 0px 0px 20px $color-white;
+                cursor: pointer;
+            }
         }
     }
 }
@@ -82,6 +92,18 @@
         .cube4 {
             margin-left: 149px;
             margin-top: 127px;
+
+            img {
+                &:hover {
+                    box-shadow: 0px 0px 20px $color-white;
+                    cursor: pointer;
+                }
+
+                &:active {
+                    box-shadow: 0px 0px 20px $color-white;
+                    cursor: pointer;
+                }
+            }
         }
 
         .cube5 {
