@@ -26,13 +26,14 @@
   </header> -->
   <main>
     <div class="content">
+      <div id="overlay" class="overlay"></div>
       <div id="wall-1" class="wall active">1
         <div class="door element">
           <a class="lock element" href="#">
             <span id="knob" class="knob element"></span>
           </a>
         </div>
-        <div class="clock element">
+        <div id="clock" class="clock element">
         </div>
       </div>
       <div id="wall-2" class="wall" >2
@@ -72,7 +73,16 @@
           </div>
         </div>
       </div>
-      <div id="wall-3" class="wall">3</div>
+      <div id="wall-3" class="wall">3
+        <div id="hat" class="hat element"></div>
+        <div id="couch" class="couch element"></div>
+        <div id="safe-box" class="safe-box element"></div>
+        <div id="box" class="box element"></div>
+        <div id="bottle" class="bottle element"></div>
+        <div id="picture" class="picture element"></div>
+        <div id="coffee-table" class="coffee-table element"></div>
+        <div id="cat" class="cat element"></div>
+      </div>
       <div id="wall-4" class="wall">4</div>
       <div class="floor"></div>
     </div>
@@ -100,6 +110,22 @@
     <div class="win"></div>
   </div>
   <div id="puzzle-eva" class="puzzle-eva"></div>
+  <div id="memory-game" class="memory-game">
+    <div id="memory-game-grid" class="memory-game__grid"></div>
+  </div>
+  <div class="hangman">
+    <h1>Hangman</h1>
+    <p class="word_field"></p>
+    <form class="hangman_form">
+      <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
+      <input class="guess_btn" type="button" value="Guess">
+      <ul class="wrong_letters">
+        <p>Wrong Letters:</p>
+      </ul>
+      <img class="hangman_img" src="./assets/img/hangman_0.png"><br />
+    </form>
+    <div class="message"></div>
+  </div>
   <footer></footer>
 </body>
 
