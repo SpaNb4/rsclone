@@ -1,4 +1,5 @@
 import { resetGame, createGrid, links } from './memory';
+import { box, picture, onBoxClick, onPictureClick, closeHangmanGame } from './wall3';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -7,12 +8,7 @@ const clock = document.querySelector('#clock');
 const memory = document.querySelector('#memory-game');
 const overlay = document.querySelector('#overlay');
 
-const walls = [
-    document.querySelector('#wall-1'),
-    document.querySelector('#wall-2'),
-    document.querySelector('#wall-3'),
-    document.querySelector('#wall-4')
-];
+const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
 
 const openMemoryGame = () => {
     createGrid();
@@ -22,7 +18,7 @@ const openMemoryGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outMemoryGameClick);
-}
+};
 
 const closeMemoryGame = () => {
     resetGame();
@@ -30,23 +26,25 @@ const closeMemoryGame = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outMemoryGameClick);
-}
+};
 
 const onClockClick = () => {
     openMemoryGame();
-}
+};
 
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
         closeMemoryGame();
+        closeHangmanGame();
     }
-}
+};
 
 const outMemoryGameClick = (evt) => {
     if (evt.target === overlay) {
         closeMemoryGame();
+        closeHangmanGame();
     }
-}
+};
 
 class Room {
     constructor() {
@@ -68,10 +66,21 @@ class Room {
             this.activeWall.classList.add(ACTIVE);
         });
 
-        clock.addEventListener('click', onClockClick);
+        // all clickable objects
+        const clickableObjArr = [
+            [clock, onClockClick],
+            [box, onBoxClick],
+            [picture, onPictureClick],
+        ];
+
+        clickableObjArr.forEach((item) => {
+            item[0].addEventListener('click', item[1]);
+        });
     }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
 });
+
+export { ACTIVE, overlay, onDocumentEscPress, outMemoryGameClick };

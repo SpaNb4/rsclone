@@ -6,3 +6,4 @@ import '../assets/scss/main.scss';
 import './components/room';
 import './components/door';
 import './components/memory';
+import './components/hangman';

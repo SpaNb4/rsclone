@@ -1,4 +1,4 @@
-import lockedDoorSound from './../../assets/audio/locked-door.wav';
+import lockedDoorSound from './../../assets/audio/locked-door.mp3';
 
 const ROTATE = 'rotate';
 const knob = document.querySelector('#knob');

@@ -32,12 +32,36 @@ module.exports = {
                 use: ['babel-loader'],
             },
             {
-                test: /\.(png|gif|jpe?g|svg|ico|wav)$/i,
+                test: /\.(png|gif|jpe?g|ico)$/i,
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
                             name: 'assets/img/[name].[ext]',
+                            publicPath: '../',
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.svg$/i,
+                use: [
+                    {
+                        loader: 'svg-url-loader',
+                        options: {
+                            name: 'assets/img/[name].[ext]',
+                            publicPath: '../',
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.mp3$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            name: 'assets/audio/[name].[ext]',
                             publicPath: '../',
                         },
                     },
@@ -77,6 +101,10 @@ module.exports = {
                 {
                     from: path.resolve(environment.paths.source, 'assets/img', ''),
                     to: path.resolve(environment.paths.output, 'assets/img', ''),
+                },
+                {
+                    from: path.resolve(environment.paths.source, 'assets/audio', ''),
+                    to: path.resolve(environment.paths.output, 'assets/audio', ''),
                 },
             ],
         }),
