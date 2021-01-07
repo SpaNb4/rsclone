@@ -15,6 +15,10 @@ const messageDiv = document.querySelector('.message');
 const wrongLetters = document.querySelector('.wrong_letters');
 const hangmanImg: HTMLImageElement = document.querySelector('.hangman_img');
 
+// once you got six wrong letters, you lose
+const SIX_ERRORS: number = 6;
+const UNDERSCORE: string = '_ ';
+
 const audioCorrect = new Audio(correctSound);
 const audioUncorrect = new Audio(uncorrectSound);
 const audioLose = new Audio(loseSound);
@@ -69,7 +73,7 @@ let partGuessWord: Array<string>;
 let errors: number = 0;
 export let hangmanSolved: boolean = false;
 
-export function newGame() {
+export function newGame(): void {
     random = Math.floor(Math.random() * (wordsArr.length - 1));
     keyword = wordsArr[random].split('');
     // user hint :)
@@ -79,10 +83,10 @@ export function newGame() {
 
     // underscore in the guessfield
     for (let i = 0; i < partGuessWord.length; i += 1) {
-        partGuessWord[i] = '_ ';
+        partGuessWord[i] = UNDERSCORE;
     }
 
-    messageDiv.classList.remove('active');
+    messageDiv.classList.remove(ACTIVE);
     wordField.innerHTML = '';
     wrongLetters.innerHTML = '<p>Wrong Letters:</p>';
     hangmanImg.src = './assets/img/hangman_0.png';
@@ -103,24 +107,24 @@ form.addEventListener('keydown', (e: KeyboardEvent) => {
 });
 
 // prints the guessfield
-function printGuessField() {
+function printGuessField(): void {
     partGuessWord.forEach((item) => {
         const letter = document.createTextNode(item);
         wordField.appendChild(letter);
     });
 }
 
-function checkWin() {
+function checkWin(): void {
     // checks if all letters have been found
     hangmanSolved = true;
     partGuessWord.forEach((item) => {
-        if (item === '_ ') {
+        if (item === UNDERSCORE) {
             hangmanSolved = false;
         }
     });
 
     if (hangmanSolved) {
-        messageDiv.classList.add('active');
+        messageDiv.classList.add(ACTIVE);
         messageDiv.innerHTML = '<h1 class="title">Awesome, You Won!';
         setTimeout(() => {
             messageDiv.style.display = 'none';
@@ -130,9 +134,8 @@ function checkWin() {
         audioWin.play();
     }
 
-    // once you got six wrong letters, you lose
-    if (errors === 6) {
-        messageDiv.classList.add('active');
+    if (errors === SIX_ERRORS) {
+        messageDiv.classList.add(ACTIVE);
         messageDiv.innerHTML = `
             <h1 class='title'>You Lost.. The word was <span class="highlight">${keyword.join('')}</span></h1>
             <p class="text">Don't worry, you'll get the next one!</p>
@@ -147,7 +150,7 @@ function checkWin() {
 }
 
 // checks if the the letter provided by the user matches one or more of the letters in the word
-function checkSymbols() {
+function checkSymbols(): void {
     const letter: HTMLInputElement = document.querySelector('.letter_input');
     // the letter provided by the user
     let userLetter: string = letter.value;
