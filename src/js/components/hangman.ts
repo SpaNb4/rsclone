@@ -71,7 +71,7 @@ let random: number;
 let keyword: Array<string>;
 let partGuessWord: Array<string>;
 let errors: number = 0;
-export let hangmanSolved: boolean = false;
+export let isHangmanSolved: boolean = false;
 
 export function newGame(): void {
     random = Math.floor(Math.random() * (wordsArr.length - 1));
@@ -116,14 +116,14 @@ function printGuessField(): void {
 
 function checkWin(): void {
     // checks if all letters have been found
-    hangmanSolved = true;
+    isHangmanSolved = true;
     partGuessWord.forEach((item) => {
         if (item === UNDERSCORE) {
-            hangmanSolved = false;
+            isHangmanSolved = false;
         }
     });
 
-    if (hangmanSolved) {
+    if (isHangmanSolved) {
         messageDiv.classList.add(ACTIVE);
         messageDiv.innerHTML = '<h1 class="title">Awesome, You Won!';
         setTimeout(() => {

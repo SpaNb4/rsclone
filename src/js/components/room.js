@@ -1,5 +1,5 @@
 import { resetGame, createGrid, links } from './memory';
-import { box, picture, onBoxClick, onPictureClick, closeHangmanGame } from './wall3';
+import { box, picture, onBoxClick, onPictureClick, closeHangmanGame, closeGemPuzzleGame } from './wall3';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -36,6 +36,7 @@ const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
         closeMemoryGame();
         closeHangmanGame();
+        closeGemPuzzleGame();
     }
 };
 
@@ -43,6 +44,7 @@ const outMemoryGameClick = (evt) => {
     if (evt.target === overlay) {
         closeMemoryGame();
         closeHangmanGame();
+        closeGemPuzzleGame();
     }
 };
 
