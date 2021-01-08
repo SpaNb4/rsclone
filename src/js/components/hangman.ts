@@ -156,7 +156,8 @@ function checkSymbols(): void {
     let userLetter: string = letter.value;
     userLetter = userLetter.toUpperCase();
 
-    if (checkSymbol(keyword, userLetter, partGuessWord)) {
+    let isCorrectLetter=checkSymbol(keyword, userLetter, partGuessWord);
+    if (isCorrectLetter) {
         audioCorrect.play();
     }
     letter.value = '';
@@ -167,7 +168,7 @@ function checkSymbols(): void {
 
     // if a guessed letter is not in the word, the letter will be put on the
     // "wrong letters"-list and hangman grows
-    if (!checkSymbol(keyword, userLetter, partGuessWord) && userLetter) {
+    if (!isCorrectLetter && userLetter) {
         const li = document.createElement('li');
         li.innerHTML = `${userLetter}`;
         wrongLetters.appendChild(li);

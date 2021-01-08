@@ -18,7 +18,6 @@ const openHangmanGame = () => {
 };
 
 const closeHangmanGame = () => {
-    newGame();
     hangman.classList.remove(room.ACTIVE);
     room.overlay.classList.remove(room.ACTIVE);
     document.removeEventListener('keydown', room.onDocumentEscPress);
