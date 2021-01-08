@@ -1,0 +1,109 @@
+.simon-game {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  // overflow: hidden;
+  z-index: 199;
+
+  &.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__piano {
+    display: flex;
+
+    &.disabled {
+      pointer-events: none;
+    }
+
+    &.won {
+      a {
+        background-color: $color-black;
+        border-color: $color-black;
+        transition: background-color 1s;
+      }
+
+      &::after {
+        content: 'Goodbye!';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 48px;
+        z-index: 5;
+      }
+    }
+  }
+
+  &__key {
+    height: calc(var(--width) * 4);
+    width: var(--width);
+
+    &.white {
+      --width: 100px;
+      background-color: $color-white;
+      border: 1px solid $color-mine-shaft;
+
+      &:focus {
+        background-color: #eeede7;
+      }
+
+      &.active {
+        background-color: $color-silver;
+      }
+    }
+
+    &.black {
+      --width: 60px;
+      background-color: $color-black;
+      margin-left: calc(var(--width) / -2);
+      margin-right: calc(var(--width) / -2);
+      z-index: 2;
+
+      &:focus {
+        background-color: #281C2D;
+      }
+
+      &.active {
+        background-color: $color-mine-shaft;
+      }
+    }
+  }
+
+  &__button {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 100px;
+    background-image: url('./../icons/clef.svg');
+    background-size: contain;
+    background-color: transparent;
+    opacity: 0.5;
+    border: none;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+
+  &__result {
+    min-height: 80px;
+    color: $color-pavlova;
+    font-size: 52px;
+    font-weight: 800;
+    text-align: center;
+    background-color: $color-black;
+
+  }
+}

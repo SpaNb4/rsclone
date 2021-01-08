@@ -11,7 +11,7 @@ const openHangmanGame = () => {
     hangman.classList.add(room.ACTIVE);
     room.overlay.classList.add(room.ACTIVE);
     document.addEventListener('keydown', room.onDocumentEscPress);
-    document.addEventListener('click', room.outMemoryGameClick);
+    document.addEventListener('click', room.outGameClick);
 };
 
 const closeHangmanGame = () => {
@@ -19,7 +19,7 @@ const closeHangmanGame = () => {
     hangman.classList.remove(room.ACTIVE);
     room.overlay.classList.remove(room.ACTIVE);
     document.removeEventListener('keydown', room.onDocumentEscPress);
-    document.removeEventListener('click', room.outMemoryGameClick);
+    document.removeEventListener('click', room.outGameClick);
 };
 
 const onBoxClick = () => {
