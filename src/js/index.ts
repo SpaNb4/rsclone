@@ -9,3 +9,4 @@ import './components/tic-tac-toe';
 import './components/memory';
 import './components/hangman';
 import './components/gem_puzzle';
+import './components/simon';

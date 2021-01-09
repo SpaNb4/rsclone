@@ -1,50 +1,78 @@
-import { resetGame, createGrid, links } from './memory';
+import { memoryGame } from './memory';
+import { simonGame } from './simon';
 import { box, picture, onBoxClick, onPictureClick, closeHangmanGame, closeGemPuzzleGame } from './wall3';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
 const rightArrow = document.querySelector('#room-arrow-right');
 const clock = document.querySelector('#clock');
+const piano = document.querySelector('#piano');
 const memory = document.querySelector('#memory-game');
+const simon = document.querySelector('#simon-game');
 const overlay = document.querySelector('#overlay');
 
 const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
 
 const openMemoryGame = () => {
-    createGrid();
-    links[0].focus(); // add focus to first element
+    memoryGame.create();
+    memoryGame.links[0].focus(); // add focus to first element
 
     memory.classList.add(ACTIVE);
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outMemoryGameClick);
+    document.addEventListener('click', outGameClick);
 };
 
 const closeMemoryGame = () => {
-    resetGame();
+    memoryGame.reset();
     memory.classList.remove(ACTIVE);
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outMemoryGameClick);
+    document.removeEventListener('click', outGameClick);
 };
+
+const openSimonGame = () => {
+    simonGame.create();
+    simonGame.button.focus();
+
+    simon.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
+}
+
+const closeSimonGame = () => {
+    simonGame.reset();
+
+    simon.classList.remove(ACTIVE);
+    overlay.classList.remove(ACTIVE);
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+}
 
 const onClockClick = () => {
     openMemoryGame();
 };
+
+const onPianoClick = () => {
+    openSimonGame()
+}
 
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
         closeMemoryGame();
         closeHangmanGame();
         closeGemPuzzleGame();
+        closeSimonGame();
     }
 };
 
-const outMemoryGameClick = (evt) => {
+const outGameClick = (evt) => {
     if (evt.target === overlay) {
         closeMemoryGame();
         closeHangmanGame();
         closeGemPuzzleGame();
+        closeSimonGame();
     }
 };
 
@@ -70,6 +98,7 @@ class Room {
 
         // all clickable objects
         const clickableObjArr = [
+            [piano, onPianoClick],
             [clock, onClockClick],
             [box, onBoxClick],
             [picture, onPictureClick],
@@ -85,4 +114,4 @@ window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
 });
 
-export { ACTIVE, overlay, onDocumentEscPress, outMemoryGameClick };
+export { ACTIVE, overlay, onDocumentEscPress, outGameClick };

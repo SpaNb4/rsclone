@@ -22,4 +22,8 @@ function checkSymbol(keyword, userLetter, partGuessWord) {
     return isCorrectLetter;
 }
 
-export { shuffleArray, doubleArray, checkSymbol };
+const getRandomInt = (max) => {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+export { shuffleArray, doubleArray, checkSymbol, getRandomInt };
