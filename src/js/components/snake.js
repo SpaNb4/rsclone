@@ -17,31 +17,35 @@ const paperitem = '#paper';
 const snakeClass = '.snake';
 const startGameButton = 'startGame';
 const activeClass = 'active';
+const red = 'rgb(245, 0, 6)';
+const green = 'rgb(10, 174, 31)';
+const white = 'rgb(250, 250, 250)';
+const codGray = 'rgb(25, 25, 25)';
 
 const rectStyles = [
     {
         id: 0,
         type: 'Background',
-        stroke: 'rgb(25, 25, 25)',
-        fill: 'rgb(15, 15, 15)',
+        stroke: codGray,
+        fill: codGray,
     },
     {
         id: 1,
         type: 'Snake head',
-        stroke: 'rgb(250, 250, 250)',
-        fill: 'rgb(220, 220, 220)',
+        stroke: white,
+        fill: white,
     },
     {
         id: 2,
         type: 'Snake body',
-        stroke: 'rgb(10, 174, 31)',
-        fill: 'rgb(10, 174, 31)',
+        stroke: green,
+        fill: green,
     },
     {
         id: 3,
         type: 'Food',
-        stroke: 'rgb(245, 0, 6)',
-        fill: 'rgb(245, 0, 6)',
+        stroke: red,
+        fill: red,
     },
 ];
 
