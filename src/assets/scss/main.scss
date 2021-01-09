@@ -5,11 +5,12 @@
 
 @import './components/header';
 @import './components/room';
-@import './components/room2';
+@import './components/wall2';
 @import './components/tic-tac-toe';
 @import './components/memory';
 @import './components//hangman.scss';
 @import './components//simon';
+@import './components//tetris';
 
 * {
     box-sizing: border-box;
