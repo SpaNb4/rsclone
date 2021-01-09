@@ -1,3 +1,5 @@
+import { getRandomIntInclusive} from './utils';
+
 const display = [];
 let viewPort;
 let gameStatus = 'stopped';
@@ -87,12 +89,6 @@ function render(element) {
             ctx.strokeRect(left, top, rectWidth, rectHeight);
         }
     }
-}
-
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function createFood() {
