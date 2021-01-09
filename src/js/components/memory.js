@@ -6,8 +6,8 @@ import iconGuns from './../../assets/icons/guns.svg';
 import iconHat from './../../assets/icons/hat.svg';
 import iconMoney from './../../assets/icons/money.svg';
 import iconWhisky from './../../assets/icons/whisky.svg';
-import matchSound from './../../assets/audio/match.mp3';
-import zombieSound from './../../assets/audio/zombie.mp3';
+import matchSound from './../../assets/audio/memory_match.mp3';
+import zombieSound from './../../assets/audio/memory_zombie.mp3';
 
 import { shuffleArray, doubleArray } from './utils';
 
@@ -20,7 +20,6 @@ const links = [];
 const openCards = [];
 let count = 0;
 const memoryGrid = document.querySelector('#memory-game-grid');
-
 
 const PICS_ARR = [
   {
@@ -174,6 +173,12 @@ const onMemoryKeyPress = (evt) => {
 }
 
 memoryGrid.addEventListener('click', onMemoryGridClick);
-document.addEventListener('keydown', onMemoryKeyPress);
+memoryGrid.addEventListener('keydown', onMemoryKeyPress);
 
-export { resetGame, createGrid, links, doubleArray };
+const memoryGame = {
+  reset: resetGame,
+  create: createGrid,
+  links: links
+}
+
+export { memoryGame };

@@ -55,8 +55,9 @@
 }
 
 .door {
-    left: calc(50% - 150px / 2);
+    left: calc(50% - 15%);
     bottom: 0;
+    transform: translateX(-50%);
     width: 200px; // temp
     height: 460px; // temp
     background-image: url('./../img/door.png');
@@ -85,18 +86,32 @@
 }
 
 .clock {
-    left: 250px;
-    top: 180px;
+    left: calc(50% - 43%);
+    bottom: 240px;
+    transform: translateX(-50%);
     width: 150px;
     height: 200px;
     transform-origin: 15% 50%;
     background-image: url('./../img/clock.png');
     background-position: center top;
     cursor: pointer;
+}
 
-    &.rotate {
-        animation: pull 0.6s;
-    }
+.piano {
+    bottom: -20px;
+    left: calc(50% + 7%);
+    width: 400px;
+    height: 300px;
+    background-image: url('./../img/piano.png');
+    cursor: pointer;
+}
+
+.lamp {
+    bottom: 279px;
+    left: calc(50% + 7% + 300px);
+    width: 90px;
+    height: 130px;
+    background-image: url('./../img/lamp.png');
 }
 
 .arrow {
