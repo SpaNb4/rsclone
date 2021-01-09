@@ -4,17 +4,18 @@ import {createBoard, drawBoard, piece, gameOver, clear} from './tetrisGame.js'
 const cubeImage = '.cube4',
       close = '.tetris__close',
       game = '.tetris',
-      repeat = '.tetris__repeat';
+      repeat = '.tetris__repeat',
+      active = 'active';
 
 let dropStart = Date.now();
 
 document.querySelector(cubeImage).addEventListener('click', () => {
-    document.querySelector(game).classList.add('active');
+    document.querySelector(game).classList.add(active);
     startTetris();
 });
 
 document.querySelector(close).addEventListener('click', () => {
-    document.querySelector(game).classList.remove('active');
+    document.querySelector(game).classList.remove(active);
     
 });
 
