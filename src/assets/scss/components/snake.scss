@@ -1,0 +1,73 @@
+.snake {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    overflow: hidden;
+    z-index: 199;
+
+    width: 100%;
+    height: 100%;
+    background-color: $color-black-ransparency;
+
+
+    &.active {
+        transform: translate(-50%, -50%) scale(1);
+
+    }
+
+    &__close {
+        color: $color-white;
+        font-size: 70px;
+        float: right;
+        margin-right: 30px;
+
+        &:hover {
+            cursor: pointer;
+        };
+    }
+
+    &__content {
+        display: flex;
+        justify-content: center;
+        margin-left: 30%;
+        margin-top: 5%;
+        width: 50%;
+        height: 50%;
+        z-index: 500;
+        background: $color-black;
+    }
+
+    h1 {
+      color: $color-red;
+    }
+
+   .gameDisplay {
+        width: 500px;
+        height: auto;
+        background: $color-mine-shaft;
+        display: inline-block;
+        padding: 0;
+        font-size: 16px;
+        vertical-align: top;
+    }
+
+    .rightMenu {
+        background: $color-mine-shaft;
+        width: auto;
+        display: inline-block;
+        width: 400px;
+        padding: 10px;
+        font-size: 16px;
+        vertical-align: top;
+    }
+
+    .display {
+        font-size: 0;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
