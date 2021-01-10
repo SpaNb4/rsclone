@@ -1,3 +1,5 @@
+import { getWinCombination } from './utils';
+
 export function rowPos(target, gem) {
     let rowPosition;
 
@@ -45,18 +47,7 @@ export function swapCell(target, _i, _j) {
 
 export function checkWin(isRandom) {
     // winning combination
-    const winArr = [];
-    let q = 0;
-    for (let i = 0; i < this.arr.length; i += 1) {
-        winArr[i] = [];
-        for (let j = 0; j < this.arr.length; j += 1) {
-            winArr[i][j] = (q + 1).toString();
-            if (q === this.size - 1) {
-                winArr[i][j] = '';
-            }
-            q += 1;
-        }
-    }
+    const winArr = getWinCombination();
 
     this.isPuzzleSolved = true;
     for (let i = 0; i < this.arr.length; i += 1) {
