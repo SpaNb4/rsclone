@@ -52,7 +52,7 @@ export const GemPuzzle = {
         overlay.classList.add('overlay');
         const gameMenuUl = document.createElement('ul');
         gameMenuUl.classList.add('game_menu');
-        const menuArr = ['Новая игра'];
+        const menuArr = ['New Game'];
         for (let i = 0; i < menuArr.length; i += 1) {
             const gameMenuLi = document.createElement('li');
             gameMenuLi.innerHTML = menuArr[i];
@@ -272,7 +272,7 @@ export const GemPuzzle = {
             const seconds = document.querySelector('.seconds').innerHTML;
 
             const win = document.querySelector('.gem-puzzle .win');
-            win.innerHTML = `<i class="material-icons close_btn">close</i> Ура! Вы решили головоломку за ${minutes}:${seconds} и ${this.moves + 1} ходов`;
+            win.innerHTML = `<i class="material-icons close_btn">close</i> Hurrah! You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves`;
 
             const closeBtn = document.querySelector('.close_btn');
             closeBtn.addEventListener('click', () => {
