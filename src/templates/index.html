@@ -63,35 +63,35 @@
       <div id="wall-2" class="wall" >2
         <div class="wall-2__content">
           <div class="wardrobe">
-            <img class="rack" src="../assets/img/rack.png">
-            <img class="chest" src="../assets/img/chest.png">
+            <img class="rack" src="./assets/img/rack.png">
+            <img class="chest" src="./assets/img/chest.png">
             <div class="frame">
-              <img class="frame-image" src="../assets/img/frame.jpg">
+              <img class="frame-image" src="./assets/img/frame.jpg">
             </div>
           </div>
           <div class="mirror">
-            <img src="../assets/img/mirror.png">
+            <img src="./assets/img/mirror.png">
           </div>
           <div class="shelfs">
             <div class="shelf">
-              <img src="../assets/img/shelf3.png">
+              <img src="./assets/img/shelf3.png">
             </div>
             <div class="shelf">
-              <img src="../assets/img/shelf2.png">
+              <img src="./assets/img/shelf2.png">
               <div class="cube5">
-                <img src="../assets/img/cube5.png">
+                <img src="./assets/img/cube5.png">
               </div>
               <div class="cube4">
-                <img src="../assets/img/cube4.png">
+                <img src="./assets/img/cube4.png">
               </div>
             </div>
             <div class="shelf">
-              <img src="../assets/img/shelf1.png">
+              <img src="./assets/img/shelf1.png">
               <div class="cube2">
-                <img src="../assets/img/cube2.png">
+                <img src="./assets/img/cube2.png">
               </div>
               <div class="cube6">
-                <img src="../assets/img/cube6.png">
+                <img src="./assets/img/cube6.png">
               </div>
             </div>
           </div>
@@ -107,7 +107,15 @@
         <div id="coffee-table" class="coffee-table element"></div>
         <div id="cat" class="cat element"></div>
       </div>
-      <div id="wall-4" class="wall">4</div>
+      <div id="wall-4" class="wall">4
+        <div class="board_paper element"></div>
+        <div id="paper" class="paper_one element"></div>
+        <div class="paper_two element"></div>
+        <div class="chair element"></div>
+        <div class="work_table element"></div>
+        <div class="cat_statuette element"></div>
+        <div class="pillow element"></div>
+      </div>
       <div class="floor"></div>
     </div>
     <div class="arrows">
@@ -117,7 +125,7 @@
   </main>
   <div class="tic-tac-toe">
     <span class="tic-tac-toe__close">&times</span>
-    <div class="tic-tac-toe__repeat"><img src="../assets/img/repeat.png"></div>
+    <div class="tic-tac-toe__repeat"><img src="./assets/img/repeat.png"></div>
     <div class="tic-tac-toe__content">
       <div class="tic-tac-toe__game">
         <div class="cell"></div>
@@ -132,6 +140,17 @@
       </div>
     </div>
     <div class="win"></div>
+  </div>
+  <div class="tetris">
+    <span class="tetris__close">&times</span>
+    <div class="tetris__repeat"><img src="./assets/img/repeat.png"></div>
+    <div class="tetris__content">
+      <canvas class="tetris__game" width="200" height="400"></canvas>
+      <div class="tetrisScore">
+          Score : <span class="numberScore">0</span>
+      </div>
+      <div class="resultTetris"></div>
+    </div>
   </div>
   <div id="memory-game" class="memory-game">
     <div id="memory-game-grid" class="memory-game__grid"></div>
@@ -172,6 +191,24 @@
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+  <div class="snake">
+    <span class="snake__close">&times</span>
+    <div class="snake__content">
+          <div class="gameDisplay">
+            <canvas class="display" id="display">  Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
+          </div>
+          <div class="rightMenu">
+            <h3>Information</h3>
+            <p><label>Snake length:</label>  <span id="snakeLength"></span></p>
+            <p>
+              Arrows - movement<br/>
+              Escape - pause/resume
+            </p>
+            <button id="startGame">Start new game</button>
+            <h1 id="message"></h1>
+          </div>
     </div>
   </div>
   <footer class="main-footer">
