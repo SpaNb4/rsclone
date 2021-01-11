@@ -85,7 +85,15 @@
         <div id="coffee-table" class="coffee-table element"></div>
         <div id="cat" class="cat element"></div>
       </div>
-      <div id="wall-4" class="wall">4</div>
+      <div id="wall-4" class="wall">4
+        <div class="board_paper element"></div>
+        <div id="paper" class="paper_one element"></div>
+        <div class="paper_two element"></div>
+        <div class="chair element"></div>
+        <div class="work_table element"></div>
+        <div class="cat_statuette element"></div>
+        <div class="pillow element"></div>
+      </div>
       <div class="floor"></div>
     </div>
     <div class="arrows">
@@ -143,6 +151,24 @@
     <div id="simon-game-result" class="simon-game__result"></div>
     <div id="simon-game-piano" class="simon-game__piano"></div>
     <button id="simon-game-start" class="simon-game__button" type="button"></button>
+  </div>
+  <div class="snake">
+  <span class="snake__close">&times</span>
+  <div class="snake__content">
+        <div class="gameDisplay">
+          <canvas class="display" id="display">  Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
+        </div>
+        <div class="rightMenu">
+          <h3>Information</h3>
+          <p><label>Snake length:</label>  <span id="snakeLength"></span></p>
+          <p>
+            Arrows - movement<br/>
+            Escape - pause/resume
+          </p>
+          <button id="startGame">Start new game</button>
+          <h1 id="message"></h1>
+        </div>
+  </div>
   </div>
   <footer></footer>
 </body>

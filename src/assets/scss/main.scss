@@ -8,9 +8,10 @@
 @import './components/wall2';
 @import './components/tic-tac-toe';
 @import './components/memory';
-@import './components//hangman.scss';
 @import './components//simon';
 @import './components//tetris';
+@import './components/hangman.scss';
+@import './components/snake.scss';
 
 * {
     box-sizing: border-box;
