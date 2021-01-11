@@ -1,8 +1,12 @@
 // @ts-ignore
 import * as room from './room';
-import { newGame, hangmanSolved } from './hangman';
+import { newGame, isHangmanSolved } from './hangman';
+// @ts-ignore
+import { GemPuzzle } from './gem_puzzle';
 
 const hangman = document.querySelector('.hangman');
+const gemPuzzle = document.querySelector('.gem-puzzle');
+
 const box = document.querySelector('#box');
 const picture = document.querySelector('#picture');
 
@@ -15,7 +19,6 @@ const openHangmanGame = () => {
 };
 
 const closeHangmanGame = () => {
-    newGame();
     hangman.classList.remove(room.ACTIVE);
     room.overlay.classList.remove(room.ACTIVE);
     document.removeEventListener('keydown', room.onDocumentEscPress);
@@ -23,13 +26,30 @@ const closeHangmanGame = () => {
 };
 
 const onBoxClick = () => {
-    if (!hangmanSolved) {
+    if (!isHangmanSolved) {
         openHangmanGame();
     }
 };
 
-const onPictureClick = () => {
-    picture.classList.add('dropped');
+const openGemPuzzleGame = () => {
+    GemPuzzle.init();
+    gemPuzzle.classList.add(room.ACTIVE);
+    room.overlay.classList.add(room.ACTIVE);
+    document.addEventListener('keydown', room.onDocumentEscPress);
+    document.addEventListener('click', room.outGameClick);
 };
 
-export { box, picture, onBoxClick, onPictureClick, closeHangmanGame, hangman };
+const closeGemPuzzleGame = () => {
+    gemPuzzle.classList.remove(room.ACTIVE);
+    room.overlay.classList.remove(room.ACTIVE);
+    document.removeEventListener('keydown', room.onDocumentEscPress);
+    document.removeEventListener('click', room.outGameClick);
+};
+
+const onPictureClick = () => {
+    if (!GemPuzzle.isPuzzleSolved) {
+        openGemPuzzleGame();
+    }
+};
+
+export { box, picture, onBoxClick, onPictureClick, closeHangmanGame, hangman, closeGemPuzzleGame };

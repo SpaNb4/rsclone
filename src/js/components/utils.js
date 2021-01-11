@@ -24,6 +24,24 @@ function checkSymbol(keyword, userLetter, partGuessWord) {
 
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
+};
+
+function getWinCombination() {
+    const winArr = [];
+    const size = 16;
+    const sqrtSize = Math.sqrt(size);
+    let q = 0;
+    for (let i = 0; i < sqrtSize; i += 1) {
+        winArr[i] = [];
+        for (let j = 0; j < sqrtSize; j += 1) {
+            winArr[i][j] = (q + 1).toString();
+            if (q === size - 1) {
+                winArr[i][j] = '';
+            }
+            q += 1;
+        }
+    }
+    return winArr;
 }
 
-export { shuffleArray, doubleArray, checkSymbol, getRandomInt };
+export { shuffleArray, doubleArray, checkSymbol, getRandomInt, getWinCombination };

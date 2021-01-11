@@ -71,7 +71,7 @@ let random: number;
 let keyword: Array<string>;
 let partGuessWord: Array<string>;
 let errors: number = 0;
-export let hangmanSolved: boolean = false;
+export let isHangmanSolved: boolean = false;
 
 export function newGame(): void {
     random = Math.floor(Math.random() * (wordsArr.length - 1));
@@ -116,14 +116,14 @@ function printGuessField(): void {
 
 function checkWin(): void {
     // checks if all letters have been found
-    hangmanSolved = true;
+    isHangmanSolved = true;
     partGuessWord.forEach((item) => {
         if (item === UNDERSCORE) {
-            hangmanSolved = false;
+            isHangmanSolved = false;
         }
     });
 
-    if (hangmanSolved) {
+    if (isHangmanSolved) {
         messageDiv.classList.add(ACTIVE);
         messageDiv.innerHTML = '<h1 class="title">Awesome, You Won!';
         setTimeout(() => {
@@ -156,7 +156,8 @@ function checkSymbols(): void {
     let userLetter: string = letter.value;
     userLetter = userLetter.toUpperCase();
 
-    if (checkSymbol(keyword, userLetter, partGuessWord)) {
+    let isCorrectLetter=checkSymbol(keyword, userLetter, partGuessWord);
+    if (isCorrectLetter) {
         audioCorrect.play();
     }
     letter.value = '';
@@ -167,7 +168,7 @@ function checkSymbols(): void {
 
     // if a guessed letter is not in the word, the letter will be put on the
     // "wrong letters"-list and hangman grows
-    if (!checkSymbol(keyword, userLetter, partGuessWord) && userLetter) {
+    if (!isCorrectLetter && userLetter) {
         const li = document.createElement('li');
         li.innerHTML = `${userLetter}`;
         wrongLetters.appendChild(li);
