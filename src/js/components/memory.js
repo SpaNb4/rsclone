@@ -9,7 +9,7 @@ import iconWhisky from './../../assets/icons/whisky.svg';
 import matchSound from './../../assets/audio/memory_match.mp3';
 import zombieSound from './../../assets/audio/memory_zombie.mp3';
 
-import { shuffleArray, doubleArray } from './utils';
+import { shuffleArray, doubleArray, playAudio } from './utils';
 
 const OPENED = 'opened';
 const DISABLED = 'disabled';
@@ -125,11 +125,11 @@ const onMemoryGridClick = (evt) => {
     openCards.forEach((elem) => addClasses(elem, DISABLED));
     count += 1;
     removeOpencards();
-    audioMatch.play();
+    playAudio(audioMatch);
 
     // check if game won?
     if (count === PICS_ARR.length) {
-      audioZombie.play();
+      playAudio(audioZombie);
       addClasses(memoryGrid, WON);
     }
   }

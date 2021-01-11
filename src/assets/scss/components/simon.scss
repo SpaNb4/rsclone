@@ -3,8 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  transition: 200ms ease-in-out;
-  // overflow: hidden;
+  transition: $transition-300;
   z-index: 199;
 
   &.active {
@@ -41,7 +40,7 @@
     height: calc(var(--width) * 4);
     width: var(--width);
 
-    &.white {
+    &--white {
       --width: 100px;
       background-color: $color-white;
       border: 1px solid $color-mine-shaft;
@@ -55,7 +54,7 @@
       }
     }
 
-    &.black {
+    &--black {
       --width: 60px;
       background-color: $color-black;
       margin-left: calc(var(--width) / -2);
@@ -89,6 +88,7 @@
     &:hover,
     &:focus {
       opacity: 1;
+      background-color: transparent;
     }
 
     &.disabled {

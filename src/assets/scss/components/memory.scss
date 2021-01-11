@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  transition: 200ms ease-in-out;
+  transition: $transition-300;
   border-radius: 10px;
   overflow: hidden;
   z-index: 199;
@@ -18,7 +18,6 @@
     grid-template-columns: repeat(4, 150px);
     grid-template-rows: repeat(4, 150px);
     grid-gap: 20px;
-    // background-color: $color-pavlova;
     background-image: url('./../img/memory-bg.jpg');
 
     &::before {

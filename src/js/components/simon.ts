@@ -13,8 +13,11 @@ import B from './../../assets/audio/notes/B.mp3';
 
 // @ts-ignore
 import { getRandomInt } from './../../js/components/utils';
+// @ts-ignore
+import { playAudio } from './utils';
 
 const CODE: string = '280';
+const CLASS: string = 'simon-game__key';
 
 const piano: HTMLElement = document.querySelector('#simon-game-piano');
 const buttonStart: HTMLElement = document.querySelector('#simon-game-start');
@@ -49,8 +52,8 @@ notes.map((note) => audios.push(new Audio(note.src)));
 const createNoteElement = (index: number): HTMLElement => {
   const key: HTMLElement = document.createElement('a');
   key.setAttribute('href', '#');
-  key.className = notes[index].name.length === 2 ? 'black' : 'white';
-  key.classList.add('simon-game__key');
+  key.className = notes[index].name.length === 2 ? `${CLASS}--black` : `${CLASS}--white`;
+  key.classList.add(CLASS);
   key.dataset.note = notes[index].name;
   key.dataset.index = String(index);
   keys.push(key);
@@ -70,10 +73,11 @@ const createNotes = (): void => {
   piano.classList.add('disabled');
 }
 
-const playSound = (key: any): void => {
+const playNote = (key: any): void => {
   const audio: HTMLAudioElement = audios[Number(key.dataset.index)];
   audio.currentTime = 0;
-  audio.play();
+
+  playAudio(audio);
 
   if (activeKey) activeKey.blur();
   key.classList.add('active');
@@ -87,7 +91,7 @@ const playSound = (key: any): void => {
 const showNextStep = (): void => {
   let key: any = piano.children[getRandomInt(notes.length)];
   gameSteps.push(key);
-  playSound(key);
+  playNote(key);
 }
 
 const checkSteps = (): boolean => {
@@ -125,7 +129,7 @@ const allElementsBlur = (): void => {
 const onPianoClick = (evt: MouseEvent): void => {
   const target: any = evt.target;
   activeKey = target;
-  playSound(target);
+  playNote(target);
   userSteps.push(target);
 
   if (userSteps.length < gameSteps.length) return; // too many or too little steps

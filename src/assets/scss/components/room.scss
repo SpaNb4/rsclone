@@ -12,7 +12,7 @@
 
 .content {
     position: relative;
-    width: 100vw;
+    width: 100%;
 
     .overlay.active {
         position: absolute;
@@ -54,6 +54,40 @@
     z-index: 99;
 }
 
+// arrows
+.arrow {
+    position: absolute;
+    width: 30px;
+    height: 80%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 center;
+    border: none;
+    z-index: 99;
+    opacity: 0;
+    transition: opacity $transition-300;
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+        background-color: transparent;
+    }
+
+    &--left {
+        left: 0;
+        background-image: url('./../img/arrow-left.png');
+    }
+
+    &--right {
+        right: 0;
+        background-image: url('./../img/arrow-right.png');
+    }
+}
+//
+
 .door {
     left: calc(50% - 15%);
     bottom: 0;
@@ -69,7 +103,7 @@
     width: 12px; // temp
     height: 50px; // temp
     background-image: url('./../img/lock.png');
-    transition: transform 0.3s;
+    transition: transform $transition;
 }
 
 .knob {
@@ -112,38 +146,6 @@
     width: 90px;
     height: 130px;
     background-image: url('./../img/lamp.png');
-}
-
-.arrow {
-    position: absolute;
-    width: 30px;
-    height: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 0 center;
-    border: none;
-    z-index: 99;
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
-    outline: none; // ??
-
-    &:hover,
-    &:focus {
-        opacity: 1;
-    }
-
-    &--left {
-        left: 0;
-        background-image: url('./../img/arrow-left.png');
-    }
-
-    &--right {
-        right: 0;
-        background-image: url('./../img/arrow-right.png');
-    }
 }
 
 // wall 3

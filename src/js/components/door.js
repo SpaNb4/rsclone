@@ -1,3 +1,4 @@
+import { playAudio } from './utils';
 import lockedDoorSound from './../../assets/audio/locked-door.mp3';
 
 const ROTATE = 'rotate';
@@ -8,7 +9,7 @@ const onKnobClick = () => {
     knob.classList.remove(ROTATE);
     void knob.offsetWidth;
     knob.classList.add(ROTATE);
-    audio.play();
+    playAudio(audio);
 }
 
 knob.addEventListener('click', onKnobClick);

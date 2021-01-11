@@ -1,14 +1,16 @@
-const shuffleArray = (array) => {
+import { state } from './state';
+
+function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-};
+}
 
-const doubleArray = (array) => {
+function doubleArray(array) {
     return Array(2).fill(array).flat();
-};
+}
 
 function checkSymbol(keyword, userLetter, partGuessWord) {
     let isCorrectLetter;
@@ -22,9 +24,9 @@ function checkSymbol(keyword, userLetter, partGuessWord) {
     return isCorrectLetter;
 }
 
-const getRandomInt = (max) => {
+function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
-};
+}
 
 function getWinCombination() {
     const winArr = [];
@@ -44,4 +46,9 @@ function getWinCombination() {
     return winArr;
 }
 
-export { shuffleArray, doubleArray, checkSymbol, getRandomInt, getWinCombination };
+function playAudio(audio) {
+    if (!state.sound) audio.volume = 0;
+    audio.play();
+}
+
+export { shuffleArray, doubleArray, checkSymbol, getRandomInt, getWinCombination, playAudio };
