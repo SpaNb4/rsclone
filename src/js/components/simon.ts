@@ -11,6 +11,7 @@ import A from './../../assets/audio/notes/A.mp3';
 import Bb from './../../assets/audio/notes/Bb.mp3';
 import B from './../../assets/audio/notes/B.mp3';
 
+import { state } from './state';
 // @ts-ignore
 import { getRandomInt } from './../../js/components/utils';
 // @ts-ignore
@@ -62,6 +63,10 @@ const createNoteElement = (index: number): HTMLElement => {
 }
 
 const createNotes = (): void => {
+  if (!state.simon) return;
+
+  resetGame();
+
   piano.innerHTML = '';
   const fragment = document.createDocumentFragment();
 
@@ -103,7 +108,6 @@ const resetSteps = (array: Array<any>): void => {
 }
 
 const startGame = (): void => {
-  resetGame();
   showNextStep();
 
   activeKey = keys[0]; // active is a firts key
@@ -113,13 +117,17 @@ const startGame = (): void => {
 }
 
 const resetGame = (): void => {
+  if (state.simon) {
+    result.textContent = '';
+    buttonStart.classList.remove('disabled');
+    piano.classList.remove('won');
+  };
+
   count = 0;
   activeKey = null;
   buttonStart.focus();
   resetSteps(gameSteps);
   resetSteps(userSteps);
-  result.textContent = '';
-  buttonStart.classList.remove('disabled');
 }
 
 const allElementsBlur = (): void => {
@@ -137,15 +145,16 @@ const onPianoClick = (evt: MouseEvent): void => {
   if (checkSteps()) {
     result.textContent += CODE[count]; // from 0
 
+    piano.classList.add('disabled');
+
     // WON GAME
     if (count + 1 >= CODE.length) {
       piano.classList.add('won');
-      result.classList.add('disabled');
+      buttonStart.classList.add('disabled');
       allElementsBlur();
+      state.simon = false;
       return; // game end
     };
-
-    piano.classList.add('disabled');
 
     //  play next steps
     let iterations: number = 0;

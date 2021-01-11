@@ -39,6 +39,8 @@
   &__key {
     height: calc(var(--width) * 4);
     width: var(--width);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
     &--white {
       --width: 100px;
@@ -46,7 +48,8 @@
       border: 1px solid $color-mine-shaft;
 
       &:focus {
-        background-color: #eeede7;
+        outline: solid 1px $color-mine-shaft;
+        outline-offset: -2px;
       }
 
       &.active {
@@ -62,7 +65,8 @@
       z-index: 2;
 
       &:focus {
-        background-color: #281C2D;
+        outline: solid 1px $color-silver;
+        outline-offset: -2px;
       }
 
       &.active {

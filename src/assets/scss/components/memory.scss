@@ -30,12 +30,12 @@
       transform: translate(-50%, -50%);
       background-image: url('./../img/memory-word.png');
       opacity: 0;
-      transition: opacity 3s;
     }
 
     &.won::before {
       opacity: 1;
       z-index: 299;
+      transition: opacity 3s;
     }
 
     &.won > .flip-card {

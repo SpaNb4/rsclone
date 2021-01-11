@@ -13,13 +13,13 @@
   <header class="main-header">
     <ul id="slide-out" class="sidenav grey darken-3 main-header__list">
       <li>
-        <a id="menu-volume-toggle" class="grey-text text-lighten-5 main-header__link" href="#" data-sound="true">
+        <a id="menu-volume-toggle" class="grey-text text-lighten-5 main-header__link" href="#" data-sound="on">
           <i class="material-icons grey-text text-lighten-3">volume_up</i>
           <span>Sound</span>
         </a>
       </li>
       <li>
-          <a class="grey-text text-lighten-5 main-header__link" href="#">
+          <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
           <i class="material-icons grey-text text-lighten-3">info</i>
           <span>How to play?</span>
         </a>
@@ -31,7 +31,7 @@
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link" href="#">
+        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link" href="#">
           <i class="material-icons grey-text text-lighten-3">refresh</i>
           <span>Restart</span>
         </a>
@@ -154,6 +154,25 @@
     <div id="simon-game-result" class="simon-game__result"></div>
     <div id="simon-game-piano" class="simon-game__piano"></div>
     <button id="simon-game-start" class="simon-game__button" type="button"></button>
+  </div>
+  <div id="modal-rules" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4>How to play this Game?</h4>
+      <p>
+        There are a number of active objects in this room that change their state when the cursor is hovered over.
+        Each of the objects containes a simple (and probably tricky) puzzle.
+        Crack these puzzles in sequence, get hints and find the key to open the door and finally exit the room!
+      </p>
+      <p>
+        You can use the mouse as well as keybord (WASD & Enter) to play this game.
+      </p>
+      <p>
+        Turn sound off if you prefer to play in silent mode.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
   </div>
   <footer class="main-footer">
     <a href="#">
