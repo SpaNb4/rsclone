@@ -120,11 +120,11 @@
 }
 
 .clock {
-    left: calc(50% - 43%);
+    left: calc(50% - 39%);
     bottom: 240px;
     transform: translateX(-50%);
-    width: 150px;
-    height: 200px;
+    width: 125px;
+    height: 210px;
     transform-origin: 15% 50%;
     background-image: url('./../img/clock.png');
     background-position: center top;
