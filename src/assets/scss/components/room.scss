@@ -851,6 +851,8 @@
   top: 30px;
   width: 42px;
   height: 42px;
+  transition: $transition-300;
+  cursor: pointer;
 
     @include resolution(tablet) {
         width: 65px;
@@ -874,8 +876,6 @@
     &:nth-child(1) {
         left: 25%;
         background-image: url('./../img/paper1.png');
-        transition: $transition-300;
-        cursor: pointer;
 
         &:hover {
             background-image: url('./../img/snake1.png');
