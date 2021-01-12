@@ -8,6 +8,7 @@
     "> 5%"
   ],
   "dependencies": {
+    "locizify": "^4.1.4",
     "materialize-css": "^1.0.0-rc.2",
     "svg-url-loader": "^7.1.1",
     "url-loader": "^4.1.1"
@@ -59,7 +60,7 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.js$": "babel-jest",
+      "^.+\\.(js|ts)$": "babel-jest",
       ".+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2|wav)$": "jest-transform-stub"
     },
     "moduleNameMapper": {
