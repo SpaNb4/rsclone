@@ -867,6 +867,10 @@
         height: 85px;
     }
 
+    &:hover {
+        transform: translateX(-50%) scale(2);
+    }
+
     &:nth-child(1) {
         left: 25%;
         background-image: url('./../img/paper1.png');
@@ -874,7 +878,6 @@
         cursor: pointer;
 
         &:hover {
-            transform: translateX(-50%) scale(2);
             background-image: url('./../img/snake1.png');
         }
     }
@@ -882,6 +885,10 @@
     &:nth-child(2) {
         right: 15%;
         background-image: url('./../img/paper2.png');
+
+        &:hover {
+            background-image: url('./../img/paper2.png');
+        }
     }
 }
 
