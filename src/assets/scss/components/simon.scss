@@ -3,8 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  transition: 200ms ease-in-out;
-  // overflow: hidden;
+  transition: $transition-300;
   z-index: 199;
 
   &.active {
@@ -40,14 +39,17 @@
   &__key {
     height: calc(var(--width) * 4);
     width: var(--width);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
-    &.white {
+    &--white {
       --width: 100px;
       background-color: $color-white;
       border: 1px solid $color-mine-shaft;
 
       &:focus {
-        background-color: #eeede7;
+        outline: solid 1px $color-mine-shaft;
+        outline-offset: -2px;
       }
 
       &.active {
@@ -55,7 +57,7 @@
       }
     }
 
-    &.black {
+    &--black {
       --width: 60px;
       background-color: $color-black;
       margin-left: calc(var(--width) / -2);
@@ -63,7 +65,8 @@
       z-index: 2;
 
       &:focus {
-        background-color: #281C2D;
+        outline: solid 1px $color-silver;
+        outline-offset: -2px;
       }
 
       &.active {
@@ -89,6 +92,7 @@
     &:hover,
     &:focus {
       opacity: 1;
+      background-color: transparent;
     }
 
     &.disabled {

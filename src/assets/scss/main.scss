@@ -4,6 +4,8 @@
 @import './utils/normalize';
 
 @import './components/header';
+@import './components/footer';
+
 @import './components/room';
 @import './components/wall2';
 @import './components/tic-tac-toe';
@@ -18,7 +20,6 @@
 }
 
 body {
-    margin: 0;
     padding: 0;
     min-width: 500px;
     font-size: 14px;
@@ -40,11 +41,4 @@ a {
 
 button {
     cursor: pointer;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 3.3%;
-    box-sizing: content-box;
 }

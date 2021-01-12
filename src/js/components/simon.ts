@@ -11,10 +11,14 @@ import A from './../../assets/audio/notes/A.mp3';
 import Bb from './../../assets/audio/notes/Bb.mp3';
 import B from './../../assets/audio/notes/B.mp3';
 
+import { state } from './state';
 // @ts-ignore
 import { getRandomInt } from './../../js/components/utils';
+// @ts-ignore
+import { playAudio } from './utils';
 
 const CODE: string = '280';
+const CLASS: string = 'simon-game__key';
 
 const piano: HTMLElement = document.querySelector('#simon-game-piano');
 const buttonStart: HTMLElement = document.querySelector('#simon-game-start');
@@ -49,8 +53,8 @@ notes.map((note) => audios.push(new Audio(note.src)));
 const createNoteElement = (index: number): HTMLElement => {
   const key: HTMLElement = document.createElement('a');
   key.setAttribute('href', '#');
-  key.className = notes[index].name.length === 2 ? 'black' : 'white';
-  key.classList.add('simon-game__key');
+  key.className = notes[index].name.length === 2 ? `${CLASS}--black` : `${CLASS}--white`;
+  key.classList.add(CLASS);
   key.dataset.note = notes[index].name;
   key.dataset.index = String(index);
   keys.push(key);
@@ -59,6 +63,10 @@ const createNoteElement = (index: number): HTMLElement => {
 }
 
 const createNotes = (): void => {
+  if (!state.simon) return;
+
+  resetGame();
+
   piano.innerHTML = '';
   const fragment = document.createDocumentFragment();
 
@@ -70,10 +78,11 @@ const createNotes = (): void => {
   piano.classList.add('disabled');
 }
 
-const playSound = (key: any): void => {
+const playNote = (key: any): void => {
   const audio: HTMLAudioElement = audios[Number(key.dataset.index)];
   audio.currentTime = 0;
-  audio.play();
+
+  playAudio(audio);
 
   if (activeKey) activeKey.blur();
   key.classList.add('active');
@@ -87,7 +96,7 @@ const playSound = (key: any): void => {
 const showNextStep = (): void => {
   let key: any = piano.children[getRandomInt(notes.length)];
   gameSteps.push(key);
-  playSound(key);
+  playNote(key);
 }
 
 const checkSteps = (): boolean => {
@@ -99,7 +108,6 @@ const resetSteps = (array: Array<any>): void => {
 }
 
 const startGame = (): void => {
-  resetGame();
   showNextStep();
 
   activeKey = keys[0]; // active is a firts key
@@ -109,13 +117,17 @@ const startGame = (): void => {
 }
 
 const resetGame = (): void => {
+  if (state.simon) {
+    result.textContent = '';
+    buttonStart.classList.remove('disabled');
+    piano.classList.remove('won');
+  };
+
   count = 0;
   activeKey = null;
   buttonStart.focus();
   resetSteps(gameSteps);
   resetSteps(userSteps);
-  result.textContent = '';
-  buttonStart.classList.remove('disabled');
 }
 
 const allElementsBlur = (): void => {
@@ -125,7 +137,7 @@ const allElementsBlur = (): void => {
 const onPianoClick = (evt: MouseEvent): void => {
   const target: any = evt.target;
   activeKey = target;
-  playSound(target);
+  playNote(target);
   userSteps.push(target);
 
   if (userSteps.length < gameSteps.length) return; // too many or too little steps
@@ -133,15 +145,16 @@ const onPianoClick = (evt: MouseEvent): void => {
   if (checkSteps()) {
     result.textContent += CODE[count]; // from 0
 
+    piano.classList.add('disabled');
+
     // WON GAME
     if (count + 1 >= CODE.length) {
       piano.classList.add('won');
-      result.classList.add('disabled');
+      buttonStart.classList.add('disabled');
       allElementsBlur();
+      state.simon = false;
       return; // game end
     };
-
-    piano.classList.add('disabled');
 
     //  play next steps
     let iterations: number = 0;

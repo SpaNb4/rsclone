@@ -12,7 +12,7 @@
 
 .content {
     position: relative;
-    width: 100vw;
+    width: 100%;
 
     .overlay.active {
         position: absolute;
@@ -54,6 +54,40 @@
     z-index: 99;
 }
 
+// arrows
+.arrow {
+    position: absolute;
+    width: 30px;
+    height: 80%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 center;
+    border: none;
+    z-index: 99;
+    opacity: 0;
+    transition: opacity $transition-300;
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+        background-color: transparent;
+    }
+
+    &--left {
+        left: 0;
+        background-image: url('./../img/arrow-left.png');
+    }
+
+    &--right {
+        right: 0;
+        background-image: url('./../img/arrow-right.png');
+    }
+}
+//
+
 .door {
     left: calc(50% - 15%);
     bottom: 0;
@@ -69,7 +103,7 @@
     width: 12px; // temp
     height: 50px; // temp
     background-image: url('./../img/lock.png');
-    transition: transform 0.3s;
+    transition: transform $transition-300;
 }
 
 .knob {
@@ -86,11 +120,11 @@
 }
 
 .clock {
-    left: calc(50% - 43%);
+    left: calc(50% - 39%);
     bottom: 240px;
     transform: translateX(-50%);
-    width: 150px;
-    height: 200px;
+    width: 125px;
+    height: 210px;
     transform-origin: 15% 50%;
     background-image: url('./../img/clock.png');
     background-position: center top;
@@ -99,7 +133,7 @@
 
 .piano {
     bottom: -20px;
-    left: calc(50% + 7%);
+    right: calc(50% - 45%);
     width: 400px;
     height: 300px;
     background-image: url('./../img/piano.png');
@@ -108,7 +142,7 @@
 
 .lamp {
     bottom: 279px;
-    left: calc(50% + 7% + 300px);
+    right: calc(50% - 45% + 50px);
     width: 90px;
     height: 130px;
     background-image: url('./../img/lamp.png');
@@ -181,37 +215,6 @@
   transform-origin: 15% 50%;
   background-image: url('./../img/paper2.png');
   background-position: center top;
-}
-.arrow {
-    position: absolute;
-    width: 30px;
-    height: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 0 center;
-    border: none;
-    z-index: 99;
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
-    outline: none; // ??
-
-    &:hover,
-    &:focus {
-        opacity: 1;
-    }
-
-    &--left {
-        left: 0;
-        background-image: url('./../img/arrow-left.png');
-    }
-
-    &--right {
-        right: 0;
-        background-image: url('./../img/arrow-right.png');
-    }
 }
 
 // wall 3
