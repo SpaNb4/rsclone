@@ -1,10 +1,11 @@
-import { closenGuessaNumberGame } from './room';
+import { getRandomInt } from './utils.js';
 
 let randomNumber: number = 0;
 let numberOfGuesses: number = 0;
 const userGuess: string = 'userGuess';
 const statusArea: string = 'statusArea';
 const historyList: string = 'historyList';
+const maxValue: number = 100;
 
 function writeMessage(elementId: any, message: string, appendMessage: any) {
     const elemToUpdate = document.getElementById(elementId);
@@ -16,7 +17,7 @@ function writeMessage(elementId: any, message: string, appendMessage: any) {
 }
 
 function newGame() {
-    randomNumber = Math.floor(Math.random() * 100) + 1;
+    randomNumber = getRandomInt(maxValue) + 1;
     numberOfGuesses = 0;
     writeMessage('historyList', '', '');
 }
@@ -27,7 +28,7 @@ function guessInRange(guess: number) {
 
 function userGuessed() {
     const userGuessednumber: any = document.getElementById(userGuess).value;
-    if (userGuessednumber.length === 0 || !guessInRange(userGuessednumber)) {
+    if (!userGuessednumber.length || !guessInRange(userGuessednumber)) {
         // Nothing entered or our of range.
         writeMessage(statusArea, '<p>Please enter a number 1-100 and press the Guess button.</p>', '');
     } else if (userGuessednumber.indexOf('.') !== -1) {
@@ -56,6 +57,7 @@ function userGuessed() {
 function resetGame() {
     numberOfGuesses = 0;
     document.getElementById(statusArea).innerHTML = '<p>Please enter a number 1-100 and press the Guess button.</p>';
+    document.getElementById(userGuess).value = '';
 }
 
 document.getElementById('buttonArea').addEventListener('click', () => {

@@ -26,7 +26,7 @@
         border-radius: 10px;
         border-style: solid;
         border-width: 1px;
-        width: 90%;
+        width: 85%;
         padding: 5px;
         text-align: center;
         font-weight: bold;
@@ -39,10 +39,14 @@
     }
     h1 {
         margin-left: 10px;
+        font-size: 25px;
+        width: 95%;
     }
 
     h2 {
         margin-left: 10px;
+        font-size: 20px;
+        width:  100%;
     }
     #historyArea {
         margin-top: 10px;
@@ -51,17 +55,19 @@
     }
 
     #statusArea {
-        width: 200px;
+        width: 180px;
         font-size: 20px;
         margin-left: 10px;
     }
 
     #userGuess {
-        width: 90%;
-        height: 30px;
+        width: 80%;
+        height: 20px;
         margin-left: 10px;
         border-radius: 10px;
         border-width: 1px;
+        padding: 5px;
+        background-color: $color-pavlova;
 
         &:hover {
             box-shadow: 0px 0px 5px $color-silver;
