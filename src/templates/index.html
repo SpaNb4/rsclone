@@ -25,22 +25,28 @@
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link" href="#">
+        <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-stats">
           <i class="material-icons grey-text text-lighten-3">timeline</i>
           <span>Statistics</span>
         </a>
       </li>
       <li>
-        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link" href="#">
+        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-restart">
           <i class="material-icons grey-text text-lighten-3">refresh</i>
           <span>Restart</span>
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link" href="#">
+        <a class="grey-text text-lighten-5 main-header__link dropdown-trigger" href="#dropdown-lang">
           <i class="material-icons grey-text text-lighten-3">language</i>
           <span>Language</span>
+          <i class="material-icons grey-text text-lighten-3 right">arrow_drop_down</i>
         </a>
+        <ul id='dropdown-lang' class='dropdown-content'>
+          <li><a href="#!">English</a></li>
+          <li><a href="#!">Russian</a></li>
+          <li><a href="#!">Japanese</a></li>
+        </ul>
       </li>
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger main-header__button">
@@ -167,25 +173,6 @@
     <div id="simon-game-piano" class="simon-game__piano"></div>
     <button id="simon-game-start" class="simon-game__button" type="button"></button>
   </div>
-  <div id="modal-rules" class="modal">
-    <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h4>How to play this Game?</h4>
-      <p>
-        There are a number of active objects in this room that change their state when the cursor is hovered over.
-        Each of the objects containes a simple (and probably tricky) puzzle.
-        Crack these puzzles in sequence, get hints and find the key to open the door and finally exit the room!
-      </p>
-      <p>
-        You can use the mouse as well as keybord (WASD & Enter) to play this game.
-      </p>
-      <p>
-        Turn sound off if you prefer to play in silent mode.
-      </p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
-    </div>
-  </div>
   <div class="snake">
     <span class="snake__close">&times</span>
     <div class="snake__content">
@@ -216,6 +203,44 @@
       <li>© 2021</li>
     </ul>
   </footer>
+
+  <div id="modal-rules" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h5>How to play this Game?</h5>
+      <p>
+        There are a number of active objects in this room that change their state when the cursor is hovered over.
+        Each of the objects containes a simple (and probably tricky) puzzle.
+        Crack these puzzles in sequence, get hints and find the key to open the door and finally exit the room!
+      </p>
+      <p>
+        You can use the mouse as well as keybord (WASD & Enter) to play this game.
+      </p>
+      <p>
+        Turn sound off if you prefer to play in silent mode.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-stats" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h5>Game Staistics</h5>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-restart" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h5>Your progress was reset. Try again!</h5>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+    </div>
+  </div>
 </body>
 
 </html>
