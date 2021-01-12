@@ -5,9 +5,9 @@ interface stateConfig {
 }
 
 const state: stateConfig = {
-  sound: true,
-  memory: true, // can play
-  simon: true // can play
-}
+    sound: true,
+    memory: true, // can play
+    simon: true, // can play
+};
 
 export { state };
