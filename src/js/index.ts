@@ -14,3 +14,4 @@ import './components/gem_puzzle';
 import './components/simon';
 import './components/tetris';
 import './components/snake';
+import './components/languages';
