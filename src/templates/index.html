@@ -110,7 +110,7 @@
       <div id="wall-4" class="wall">4
         <div class="board_paper element"></div>
         <div id="paper" class="paper_one element"></div>
-        <div class="paper_two element"></div>
+        <div id="paper_two"class="paper_two element"></div>
         <div class="chair element"></div>
         <div class="work_table element"></div>
         <div class="cat_statuette element"></div>
@@ -209,6 +209,22 @@
             <button id="startGame">Start new game</button>
             <h1 id="message"></h1>
           </div>
+    </div>
+  </div>
+  <div class="guess-a-number" id="guess-a-number">
+    <div class="guess-a-number__content">
+      <h1>Number Guessing Game</h1>
+      <div id="statusArea">
+        <p>Please enter a number 1-100 and press the Guess button.</p>
+      </div>
+      <input type="number" id="userGuess" />
+      <div id="buttonArea" class="button">
+        Guess
+      </div>
+      <div id="historyArea">
+        <h2>Your Previous Guesses</h2>
+        <ol id="historyList"></ol>
+      </div>
     </div>
   </div>
   <footer class="main-footer">

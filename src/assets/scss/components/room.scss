@@ -190,6 +190,7 @@
     height: 50px;
     transform-origin: 15% 50%;
     background-image: url('./../img/cat_statuette.png');
+    cursor: pointer;
 }
 
 .paper_one {
@@ -215,6 +216,13 @@
   transform-origin: 15% 50%;
   background-image: url('./../img/paper2.png');
   background-position: center top;
+  cursor: pointer;
+
+  &:hover {
+    width: 150px;
+    height: 150px;
+    background-image: url('./../img/paper2.png');
+  }
 }
 
 // wall 3

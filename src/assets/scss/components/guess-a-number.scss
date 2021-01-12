@@ -1,0 +1,70 @@
+.guess-a-number {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    overflow: hidden;
+    z-index: 199;
+
+    &.active {
+        transform: translate(-50%, -50%) scale(1);
+
+    }
+
+    &__content {
+        display: grid;
+        flex-direction: row-reverse;
+        margin-left: 30%;
+        margin-top: 5%;
+        z-index: 500;
+        background-color:  $color-mine-shaft;
+    }
+
+    .button {
+        margin-top: 10px;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 1px;
+        width: 90%;
+        padding: 5px;
+        text-align: center;
+        font-weight: bold;
+        margin-left: 10px;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0px 0px 5px $color-silver;
+        }
+    }
+    h1 {
+        margin-left: 10px;
+    }
+
+    h2 {
+        margin-left: 10px;
+    }
+    #historyArea {
+        margin-top: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    #statusArea {
+        width: 200px;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    #userGuess {
+        width: 90%;
+        height: 30px;
+        margin-left: 10px;
+        border-radius: 10px;
+        border-width: 1px;
+
+        &:hover {
+            box-shadow: 0px 0px 5px $color-silver;
+        }
+    }
+}

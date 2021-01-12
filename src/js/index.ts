@@ -15,3 +15,4 @@ import './components/simon';
 import './components/tetris';
 import './components/snake';
 import './components/languages';
+import './components/guess-a-number';
