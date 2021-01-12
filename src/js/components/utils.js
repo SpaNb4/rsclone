@@ -60,5 +60,5 @@ function getRandomIntInclusive(min, max) {
 export {
     shuffleArray, doubleArray, checkSymbol,
     getRandomInt, getWinCombination, getRandomIntInclusive,
-    playAudio
+    playAudio,
 };
