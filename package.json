@@ -59,7 +59,7 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.js$": "babel-jest",
+      "^.+\\.(js|ts)$": "babel-jest",
       ".+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2|wav)$": "jest-transform-stub"
     },
     "moduleNameMapper": {
