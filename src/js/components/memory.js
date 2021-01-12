@@ -9,7 +9,8 @@ import iconWhisky from './../../assets/icons/whisky.svg';
 import matchSound from './../../assets/audio/memory_match.mp3';
 import zombieSound from './../../assets/audio/memory_zombie.mp3';
 
-import { shuffleArray, doubleArray } from './utils';
+import { state } from './state';
+import { shuffleArray, doubleArray, playAudio } from './utils';
 
 const OPENED = 'opened';
 const DISABLED = 'disabled';
@@ -76,6 +77,9 @@ const createCard = (index) => {
 }
 
 const createGrid = () => {
+  if (!state.memory) return;
+
+  memoryGrid.classList.remove(WON);
   memoryGrid.innerHTML = '';
 
   const fragment = document.createDocumentFragment();
@@ -94,23 +98,13 @@ const removeOpencards = () => {
   }
 }
 
-//
-const addClasses = (elem, className) => {
-  elem.classList.add(className);
-}
-
-const removeClasses = (elem, className) => {
-  elem.classList.remove(className);
-}
-//
-
 const onMemoryGridClick = (evt) => {
   const card = evt.target.closest('.flip-card');
 
   if (evt.target === memoryGrid) return;
 
   if (openCards.length === 2) {
-    openCards.forEach((elem) => removeClasses(elem, OPENED));
+    openCards.forEach((elem) => elem.classList.remove(OPENED));
     removeOpencards();
   }
 
@@ -118,19 +112,20 @@ const onMemoryGridClick = (evt) => {
     removeOpencards();
   }
 
-  addClasses(card, OPENED);
+  card.classList.add(OPENED);
   openCards.push(card);
 
   if (openCards.length === 2 && openCards[0].dataset.name === openCards[1].dataset.name) {
-    openCards.forEach((elem) => addClasses(elem, DISABLED));
+    openCards.forEach((elem) => elem.classList.add(DISABLED));
     count += 1;
     removeOpencards();
-    audioMatch.play();
+    playAudio(audioMatch);
 
     // check if game won?
     if (count === PICS_ARR.length) {
-      audioZombie.play();
-      addClasses(memoryGrid, WON);
+      playAudio(audioZombie);
+      memoryGrid.classList.add(WON);
+      state.memory = false;
     }
   }
 }
@@ -139,8 +134,8 @@ const resetGame = () => {
   count = 0;
   removeOpencards();
   [... memoryGrid.children].forEach((elem) => {
-    removeClasses(elem, DISABLED);
-    removeClasses(elem, OPENED);
+    elem.classList.remove(DISABLED);
+    elem.classList.remove(OPENED);
   })
 }
 

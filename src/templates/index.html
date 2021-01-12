@@ -10,21 +10,43 @@
 </head>
 
 <body>
-  <!-- <header>
-    <div class="container">
-      <nav class="main-nav">
-        <button id="header-menu-button" class="main-nav__button" type="button">
-          <span></span>
-        </button>
-        <ul class="main-nav__list">
-          <li><a class="main-nav__link" href="#">Settings</a></li>
-          <li><a class="main-nav__link" href="#">How to play?</a></li>
-          <li><a class="main-nav__link" href="#">GitHub</a></li>
-          <li><a class="main-nav__link" href="#">Statistics</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header> -->
+  <header class="main-header">
+    <ul id="slide-out" class="sidenav grey darken-3 main-header__list">
+      <li>
+        <a id="menu-volume-toggle" class="grey-text text-lighten-5 main-header__link" href="#" data-sound="on">
+          <i class="material-icons grey-text text-lighten-3">volume_up</i>
+          <span>Sound</span>
+        </a>
+      </li>
+      <li>
+          <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
+          <i class="material-icons grey-text text-lighten-3">info</i>
+          <span>How to play?</span>
+        </a>
+      </li>
+      <li>
+        <a class="grey-text text-lighten-5 main-header__link" href="#">
+          <i class="material-icons grey-text text-lighten-3">timeline</i>
+          <span>Statistics</span>
+        </a>
+      </li>
+      <li>
+        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link" href="#">
+          <i class="material-icons grey-text text-lighten-3">refresh</i>
+          <span>Restart</span>
+        </a>
+      </li>
+      <li>
+        <a class="grey-text text-lighten-5 main-header__link" href="#">
+          <i class="material-icons grey-text text-lighten-3">language</i>
+          <span>Language</span>
+        </a>
+      </li>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger main-header__button">
+      <i class="material-icons grey-text text-lighten-3 medium">pause_circle_outline</i>
+    </a>
+  </header>
   <main>
     <div class="content">
       <div id="overlay" class="overlay"></div>
@@ -152,25 +174,55 @@
     <div id="simon-game-piano" class="simon-game__piano"></div>
     <button id="simon-game-start" class="simon-game__button" type="button"></button>
   </div>
+  <div id="modal-rules" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4>How to play this Game?</h4>
+      <p>
+        There are a number of active objects in this room that change their state when the cursor is hovered over.
+        Each of the objects containes a simple (and probably tricky) puzzle.
+        Crack these puzzles in sequence, get hints and find the key to open the door and finally exit the room!
+      </p>
+      <p>
+        You can use the mouse as well as keybord (WASD & Enter) to play this game.
+      </p>
+      <p>
+        Turn sound off if you prefer to play in silent mode.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
   <div class="snake">
     <span class="snake__close">&times</span>
     <div class="snake__content">
-      <div class="gameDisplay">
-        <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
-      </div>
-      <div class="rightMenu">
-        <h3>Information</h3>
-        <p><label>Snake length:</label> <span id="snakeLength"></span></p>
-        <p>
-          Arrows - movement<br />
-          Escape - pause/resume
-        </p>
-        <button id="startGame">Start new game</button>
-        <h1 id="message"></h1>
-      </div>
+          <div class="gameDisplay">
+            <canvas class="display" id="display">  Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
+          </div>
+          <div class="rightMenu">
+            <h3>Information</h3>
+            <p><label>Snake length:</label>  <span id="snakeLength"></span></p>
+            <p>
+              Arrows - movement<br/>
+              Escape - pause/resume
+            </p>
+            <button id="startGame">Start new game</button>
+            <h1 id="message"></h1>
+          </div>
     </div>
   </div>
-  <footer></footer>
+  <footer class="main-footer">
+    <a href="#">
+      <img src="./assets/img/rs_school_js.svg" alt="RS Shcool Log" width="55" height="20">
+    </a>
+    <ul class="main-footer__list">
+      <li><a href="https://github.com/alesyakuptsova" target="_blank">Alesia</a></li>
+      <li><a href="https://github.com/lemeshkonastya" target="_blank">Anastasia</a></li>
+      <li><a href="https://github.com/spanb4" target="_blank">Dzmitry</a></li>
+      <li><a href="https://github.com/magklax" target="_blank">Nadezda</a></li>
+      <li>© 2021</li>
+    </ul>
+  </footer>
 </body>
 
 </html>

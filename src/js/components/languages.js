@@ -13,5 +13,5 @@ locizify.init({
     },
     // optional
     // ignoreIds: ['ignoreMeId'],
-    ignoreClasses: ['flip-card__back', 'display'],
+    ignoreClasses: ['flip-card__back', 'display','menu_btn'],
 });
