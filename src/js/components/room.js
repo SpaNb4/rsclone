@@ -8,6 +8,7 @@ const rightArrow = document.querySelector('#room-arrow-right');
 const clock = document.querySelector('#clock');
 const piano = document.querySelector('#piano');
 const memory = document.querySelector('#memory-game');
+const memoryClose = document.querySelector('#memory-game-close');
 const simon = document.querySelector('#simon-game');
 const overlay = document.querySelector('#overlay');
 
@@ -50,14 +51,6 @@ const closeSimonGame = () => {
     document.removeEventListener('click', outGameClick);
 }
 
-const onClockClick = () => {
-    openMemoryGame();
-};
-
-const onPianoClick = () => {
-    openSimonGame()
-}
-
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
         closeMemoryGame();
@@ -98,10 +91,11 @@ class Room {
 
         // all clickable objects
         const clickableObjArr = [
-            [piano, onPianoClick],
-            [clock, onClockClick],
+            [piano, openSimonGame],
+            [clock, openMemoryGame],
             [box, onBoxClick],
             [picture, onPictureClick],
+            [memoryClose, closeMemoryGame],
         ];
 
         clickableObjArr.forEach((item) => {
