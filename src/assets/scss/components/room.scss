@@ -39,7 +39,7 @@
         position: absolute;
         left: 50%;
         bottom: 0;
-        transform: (-50%);
+        transform: translateX(-50%);
         width: 93%;
         max-width: 600px;
 
@@ -80,7 +80,7 @@
 .door {
     left: calc(50% - 20%);
     bottom: 0;
-    transform: (-50%);
+    transform: translateX(-50%);
     width: 120px;
     height: 275px;
 
@@ -719,7 +719,7 @@
 .board_paper {
     left: 50%;
     bottom: 170px;
-    transform: (-50%);
+    transform: translateX(-50%);
     width: 187px;
     height: 117px;
 
@@ -874,7 +874,7 @@
         cursor: pointer;
 
         &:hover {
-            transform: (-50%) scale(2);
+            transform: translateX(-50%) scale(2);
             background-image: url('./../img/snake1.png');
         }
     }
