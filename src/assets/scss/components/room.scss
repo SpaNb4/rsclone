@@ -97,6 +97,19 @@
     background-image: url('./../img/door.png');
 }
 
+.door-open {
+    left: calc(50% - 15%);
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 200px; // temp
+    height: 460px; // temp
+    background-image: url('./../img/door-open.png');
+}
+
+.door-none {
+    display: none;
+}
+
 .lock {
     left: 22px;
     top: 55%;
@@ -291,3 +304,133 @@
     background-size: cover;
 }
 // wall 3
+
+.lock1, .lock2, .lock3, .lock4, .lock5, .lock6, .lock7, .lock8 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin-left: calc(50% - 25%);
+    bottom: 0;
+    margin-bottom: 380px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.lock2 {
+    margin-bottom: 330px;
+}
+
+.lock3 {
+    margin-bottom: 280px;
+}
+
+.lock4 {
+    margin-bottom: 230px;
+}
+
+.lock5 {
+    margin-bottom: 180px;
+}
+
+.lock6 {
+    margin-bottom: 130px;
+}
+
+.lock7 {
+    margin-bottom: 80px;
+}
+
+.lock8 {
+    margin-bottom: 30px;
+}
+
+
+.lock__close, .lock__open {
+    position: absolute;
+    margin: 0;
+    width: 50px;
+    display: none;
+
+    & img {
+        position: absolute;
+        width: 100%;
+        transition: all 1s ease-in-out;
+    }
+}
+
+.lock__active {
+    display: block;
+}
+
+.lock__text {
+    position: absolute;
+    margin-top: 450px;
+    margin-left: 195px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+}
+
+.game-over-lock {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    overflow: hidden;
+    z-index: 199;
+
+    width: 100%;
+    height: 100%;
+    background: rgb(0,0,0, 0.3);
+
+    &.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+        color: $color-white;
+        font-size: 70px;
+        float: right;
+        margin-right: 30px;
+
+        &:hover {
+            cursor: pointer;
+        };
+    }
+}
+
+.lock-game {
+
+    &__close, &__open {
+        top: 0;
+        position: absolute;
+        margin-left: 27%;
+        width: 700px;
+        display: none;
+
+        img {
+            width: 100%;
+            transition: all 1s ease-in-out;
+        }
+    }
+
+    &__active {
+        display: block;
+    }
+
+    &__exit {
+        position: absolute;
+        width: 300px;
+        margin-top: 450px;
+        margin-left: 40%;
+    }
+
+    &__text {
+        height: 50px;
+        font-size: 30px;
+        font-weight: 700;
+    }
+}
