@@ -68,6 +68,16 @@
             <div class="lamp element"></div>
           </div>
         </div>
+        <div class="door-open element door-none"></div>
+        <div class="lock1"></div>
+        <div class="lock2"></div>
+        <div class="lock3"></div>
+        <div class="lock4"></div>
+        <div class="lock5"></div>
+        <div class="lock6"></div>
+        <div class="lock7"></div>
+        <div class="lock8"></div>
+      </div>
       </div>
       <div id="wall-2" class="wall">2
         <div class="wall__container">
@@ -173,6 +183,29 @@
     <div id="simon-game-result" class="simon-game__result"></div>
     <div id="simon-game-piano" class="simon-game__piano"></div>
     <button id="simon-game-start" class="simon-game__button" type="button"></button>
+  </div>
+  <div id="modal-rules" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4>How to play this Game?</h4>
+      <p>
+        There are a number of active objects in this room that change their state when the cursor is hovered over.
+        Each of the objects containes a simple (and probably tricky) puzzle.
+        Crack these puzzles in sequence, get hints and find the key to open the door and finally exit the room!
+      </p>
+      <p>
+        You can use the mouse as well as keybord (WASD & Enter) to play this game.
+      </p>
+      <p>
+        Turn sound off if you prefer to play in silent mode.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+  <div class="game-over-lock">
+    <span class="game-over-lock__close">&times</span>
+    <div class="game-over-lock__content"></div>
   </div>
   <div class="snake">
     <span class="snake__close">&times</span>
