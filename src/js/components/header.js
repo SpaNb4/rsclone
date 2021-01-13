@@ -26,10 +26,12 @@ function onRestartClick() {
 
 function navInit() {
   M.Sidenav.init(document.querySelectorAll('.sidenav'), { edge: 'right' });
-  M.Modal.init(document.querySelectorAll('.modal'), {});
+  M.Modal.init(document.querySelectorAll('.modal'), {startingTop: '10%'});
+  M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), { coverTrigger: false });
 
   volumeToggle.addEventListener('click', onVolumeClick);
   restartButton.addEventListener('click', onRestartClick);
+
 }
 
 function headerInit() {

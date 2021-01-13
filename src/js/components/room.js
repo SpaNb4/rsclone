@@ -9,6 +9,7 @@ const rightArrow = document.querySelector('#room-arrow-right');
 const clock = document.querySelector('#clock');
 const piano = document.querySelector('#piano');
 const memory = document.querySelector('#memory-game');
+const memoryClose = document.querySelector('#memory-game-close');
 const simon = document.querySelector('#simon-game');
 const overlay = document.querySelector('#overlay');
 const paperitem = document.querySelector('#paper_two');
@@ -129,6 +130,7 @@ class Room {
             [clock, onClockClick],
             [box, onBoxClick],
             [picture, onPictureClick],
+            [memoryClose, closeMemoryGame],
             [paperitem, onPaperitemClick],
         ];
 
