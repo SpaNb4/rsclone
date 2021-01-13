@@ -7,7 +7,7 @@
 @import './components/footer';
 
 @import './components/room';
-@import './components/wall2';
+// @import './components/wall2';
 @import './components/tic-tac-toe';
 @import './components/memory';
 @import './components/simon';
@@ -23,7 +23,7 @@
 
 body {
     padding: 0;
-    min-width: 500px;
+    min-width: 480px;
     font-size: 14px;
     line-height: 1.3;
     font-weight: normal;

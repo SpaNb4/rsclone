@@ -67,7 +67,7 @@ const createCard = (index) => {
     <div class="flip-card__inner">
       <a href="#" class="flip-card__front" data-index="${index}"></a>
       <div class="flip-card__back">
-        <img src="${cardsPicsArray[index].src}" alt="card-${cardsPicsArray[index].alt}" width="100" height="100">
+        <img src="${cardsPicsArray[index].src}" alt="card-${cardsPicsArray[index].alt}">
       </div>
     </div>`;
 

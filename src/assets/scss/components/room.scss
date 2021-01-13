@@ -21,7 +21,7 @@
         width: 100%;
         height: 100%;
         background-color: rgba($color-black, 0.45);
-        z-index: 198;
+        z-index: 100;
     }
 }
 
@@ -34,6 +34,28 @@
     background-size: 100% 100%;
     background-position: 0 0;
     font-size: 170px;
+
+    &__container {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 93%;
+        max-width: 600px;
+
+        @include resolution(tablet) {
+            max-width: 850px;
+        }
+
+        @include resolution(desktop) {
+            max-width: 1100px;
+        }
+
+        @include resolution(big-desktop) {
+            max-width: 1320px;
+        }
+
+    }
 
     &.active {
         display: block;
@@ -51,49 +73,32 @@
     position: absolute;
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center bottom;
     z-index: 99;
 }
-
-// arrows
-.arrow {
-    position: absolute;
-    width: 30px;
-    height: 80%;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 0 center;
-    border: none;
-    z-index: 99;
-    opacity: 0;
-    transition: opacity $transition-300;
-
-    &:hover,
-    &:focus {
-        opacity: 1;
-        background-color: transparent;
-    }
-
-    &--left {
-        left: 0;
-        background-image: url('./../img/arrow-left.png');
-    }
-
-    &--right {
-        right: 0;
-        background-image: url('./../img/arrow-right.png');
-    }
-}
-//
 
 .door {
-    left: calc(50% - 15%);
+    left: calc(50% - 20%);
     bottom: 0;
     transform: translateX(-50%);
-    width: 200px; // temp
-    height: 460px; // temp
+    width: 120px;
+    height: 275px;
+
+    @include resolution(tablet) {
+        width: 180px;
+        height: 415px;
+    }
+
+    @include resolution(desktop) {
+        width: 200px;
+        height: 460px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 240px;
+        height: 550px;
+    }
+
     background-image: url('./../img/door.png');
 }
 
@@ -111,19 +116,51 @@
 }
 
 .lock {
-    left: 22px;
-    top: 55%;
-    width: 12px; // temp
-    height: 50px; // temp
+    left: 12%;
+    top: 52%;
+    width: 7.5px;
+    height: 25px;
+
+    @include resolution(tablet) {
+        width: 12px;
+        height: 40px;
+    }
+
+    @include resolution(desktop) {
+        width: 15px;
+        height: 50px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 18px;
+        height: 60px;
+    }
+
     background-image: url('./../img/lock.png');
     transition: transform $transition-300;
 }
 
 .knob {
     left: 0;
-    top: 8px;
-    width: 30px;
-    height: 12px;
+    top: 15%;
+    width: 20px;
+    height: 8px;
+
+    @include resolution(tablet) {
+        width: 30px;
+        height: 12px;
+    }
+
+    @include resolution(desktop) {
+        width: 40px;
+        height: 16px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 48px;
+        height: 20px;
+    }
+
     transform-origin: 15% 50%;
     background-image: url('./../img/knob.png');
 
@@ -133,183 +170,535 @@
 }
 
 .clock {
-    left: calc(50% - 39%);
-    bottom: 240px;
-    transform: translateX(-50%);
-    width: 125px;
-    height: 210px;
-    transform-origin: 15% 50%;
+    left: 0;
+    bottom: 140px;
+    width: 70px;
+    height: 120px;
+
+    @include resolution(tablet) {
+        bottom: 200px;
+        width: 105px;
+        height: 180px;
+    }
+
+    @include resolution(desktop) {
+        bottom: 250px;
+        width: 115px;
+        height: 190px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: 260px;
+        width: 140px;
+        height: 230px;
+    }
+
     background-image: url('./../img/clock.png');
-    background-position: center top;
     cursor: pointer;
 }
 
 .piano {
-    bottom: -20px;
-    right: calc(50% - 45%);
-    width: 400px;
-    height: 300px;
+    right: 0;
+    bottom: -10px;
+    width: 240px;
+    height: 180px;
+
+    @include resolution(tablet) {
+        bottom: -20px;
+        width: 360px;
+        height: 270px;
+    }
+
+    @include resolution(desktop) {
+        bottom: -40px;
+        width: 400px;
+        height: 300px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: -50px;
+        width: 480px;
+        height: 365px;
+    }
+
     background-image: url('./../img/piano.png');
     cursor: pointer;
 }
 
 .lamp {
-    bottom: 279px;
-    right: calc(50% - 45% + 50px);
-    width: 90px;
-    height: 130px;
+    right: 10%;
+    bottom: 99%;
+    width: 54px;
+    height: 78px;
+
+    @include resolution(tablet) {
+        width: 80px;
+        height: 118px;
+    }
+
+    @include resolution(desktop) {
+        width: 90px;
+        height: 130px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 96px;
+        height: 144px;
+    }
+
     background-image: url('./../img/lamp.png');
+    cursor: default;
 }
 
-.board_paper {
-  left: calc(50% - 250px / 2);
-  top: 200px;
-  width: 400px;
-  height: 350px;
-  transform-origin: 15% 50%;
-  background-image: url('./../img/board-paper.jpg');
-  background-position: center top;
+// wall 2
+.rack {
+    left: 0;
+    bottom: 160px;
+    width: 240px;
+    height: 172px;
+
+    @include resolution(tablet) {
+        bottom: 200px;
+        width: 360px;
+        height: 258px;
+    }
+
+    @include resolution(desktop) {
+        bottom: 220px;
+        width: 400px;
+        height: 285px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: 250px;
+        width: 480px;
+        height: 345px;
+    }
+
+    background-image: url('./../img/rack.png');
 }
 
-.work_table {
-  left: calc(50% - 450px / 2);
-  top: 380px;
-  width: 550px;
-  height: 550px;
-  transform-origin: 15% 50%;
-  background-image: url('./../img/work-table.png');
-  background-position: center top;
+.chest {
+    left: 0;
+    bottom: -20px;
+    width: 240px;
+    height: 122px;
+
+    @include resolution(tablet) {
+        bottom: -30px;
+        width: 360px;
+        height: 183px;
+    }
+
+    @include resolution(desktop) {
+        bottom: -50px;
+        width: 400px;
+        height: 205px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: -60px;
+        width: 480px;
+        height: 246px;
+    }
+
+    background-image: url('./../img/chest.png');
 }
-.chair {
-    left:calc(65% + 50px / 2);
-    top: 500px;
-    width: 300px;
-    height: 350px;
-    transform-origin: 15% 50%;
-    background-image: url('./../img/chair.png');
-  }
-.pillow {
-  left:calc(15% + 450px / 2);
-  top: 750px;
-  width: 100px;
-  height: 100px;
-  transform-origin: 15% 50%;
-  background-image: url('./../img/pillow.png');
-}
-.cat_statuette {
-    left:calc(65% - 450px / 2);
-    top: 570px;
+
+.frame {
+    bottom: 78%;
+    right: 15%;
     width: 50px;
     height: 50px;
-    transform-origin: 15% 50%;
-    background-image: url('./../img/cat_statuette.png');
+
+    @include resolution(tablet) {
+        width: 75px;
+        height: 75px;
+    }
+
+    @include resolution(desktop) {
+        width: 100px;
+        height: 100px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 115px;
+        height: 115px;
+    }
+
+    background-image: url('./../img/frame.jpg');
     cursor: pointer;
 }
 
-.paper_one {
-  left:calc(50% - 150px / 2);
-  top: 250px;
-  width: 70px;
-  height: 70px;
-  transform-origin: 15% 50%;
-  background-image: url('./../img/paper1.png');
-  cursor: pointer;
+.shelfs {
+    right: 0;
+    bottom: 0;
+    width: 200px;
 
-  &:hover {
-    width: 150px;
-    height: 150px;
-    background-image: url('./../img/snake1.png');
-  }
+    @include resolution(tablet) {
+        width: 300px;
+    }
+
+    @include resolution(desktop) {
+        width: 330px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 396px;
+    }
 }
-.paper_two {
-  left:calc(50% + 150px/ 2);
-  top: 250px;
-  width: 70px;
-  height: 70px;
-  transform-origin: 15% 50%;
-  background-image: url('./../img/paper2.png');
-  background-position: center top;
-  cursor: pointer;
 
-  &:hover {
-    width: 150px;
-    height: 150px;
-    background-image: url('./../img/paper2.png');
-  }
+.shelf {
+    left: 0;
+    width: 100%;
+
+    &:nth-child(1) {
+        bottom: 240px;
+        height: 120px;
+
+        @include resolution(tablet) {
+            bottom: 320px;
+            height: 180px;
+        }
+
+        @include resolution(desktop) {
+            bottom: 335px;
+            height: 195px;
+        }
+
+        @include resolution(big-desktop) {
+            bottom: 400px;
+            height: 234px;
+        }
+
+        background-image: url('./../img/shelf3.png');
+    }
+
+    &:nth-child(2) {
+        bottom: 165px;
+        height: 62px;
+
+        @include resolution(tablet) {
+            bottom: 215px;
+            height: 93px;
+        }
+
+        @include resolution(desktop) {
+            bottom: 225px;
+            height: 100px;
+        }
+
+        @include resolution(big-desktop) {
+            bottom: 265px;
+            height: 120px;
+        }
+
+        background-image: url('./../img/shelf2.png');
+
+        .cube {
+            bottom: 10%;
+            width: 20px;
+            height: 20px;
+
+            @include resolution(tablet) {
+                width: 30px;
+                height: 30px;
+            }
+
+            @include resolution(desktop) {
+                width: 35px;
+                height: 35px;
+            }
+
+            @include resolution(big-desktop) {
+                width: 45px;
+                height: 45px;
+            }
+
+
+            &:nth-child(1) {
+                left: 15%;
+                background-image: url('./../img/cube5.png');
+                cursor: pointer;
+            }
+
+            &:nth-child(2) {
+                left: 40%;
+                background-image: url('./../img/cube4.png');
+            }
+        }
+    }
+
+    &:nth-child(3) {
+        bottom: 85px;
+        height: 67px;
+
+        @include resolution(tablet) {
+            bottom: 100px;
+            height: 101px;
+        }
+
+        @include resolution(desktop) {
+            bottom: 100px;
+            height: 109px;
+        }
+
+        @include resolution(big-desktop) {
+            bottom: 120px;
+            height: 131px;
+        }
+
+        background-image: url('./../img/shelf1.png');
+
+        .cube {
+            bottom: 10%;
+
+            &:nth-child(1) {
+                left: 50%;
+                width: 22px;
+                height: 17px;
+
+                @include resolution(tablet) {
+                    width: 33px;
+                    height: 26px;
+                }
+
+                @include resolution(desktop) {
+                    width: 38px;
+                    height: 30px;
+                }
+
+                @include resolution(big-desktop) {
+                    width: 49px;
+                    height: 39px;
+                }
+
+                background-image: url('./../img/cube2.png');
+            }
+
+            &:nth-child(2) {
+                left: 75%;
+                width: 15px;
+                height: 20px;
+
+                @include resolution(tablet) {
+                    width: 23px;
+                    height: 30px;
+                }
+
+                @include resolution(desktop) {
+                    width: 27px;
+                    height: 35px;
+                }
+
+                @include resolution(big-desktop) {
+                    width: 35px;
+                    height: 45px;
+                }
+
+                background-image: url('./../img/cube6.png');
+            }
+        }
+    }
 }
 
 // wall 3
 .couch {
-    left: 547px;
-    top: 577px;
-    width: 532px;
-    height: 318px;
+    right: 0;
+    bottom: -10px;
+    width: 240px;
+    height: 135px;
+
+    @include resolution(tablet) {
+        width: 350px;
+        height: 203px;
+    }
+
+    @include resolution(desktop) {
+        width: 390px;
+        height: 215px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 470px;
+        height: 260px;
+    }
+
     background-image: url('./../img/couch.png');
-    background-position: center;
-    background-size: cover;
 }
+
 .safe-box {
-    left: 1161px;
-    top: 427px;
-    width: 152px;
-    height: 124px;
+    right: calc(240px / 2);
+    bottom: 180px;
+    transform: translateX(50%);
+    width: 84px;
+    height: 84px;
+
+    @include resolution(tablet) {
+        right: calc(350px / 2);
+        bottom: 240px;
+        width: 125px;
+        height: 125px;
+    }
+
+    @include resolution(desktop) {
+        right: calc(390px / 2);
+        bottom: 260px;
+        width: 140px;
+        height: 140px;
+    }
+
+    @include resolution(big-desktop) {
+        right: calc(470px / 2);
+        bottom: 330px;
+        width: 170px;
+        height: 170px;
+    }
+
     background-image: url('./../img/safe-box.png');
-    background-position: top;
-    background-size: cover;
     cursor: pointer;
 }
 .box {
-    left: 70px;
-    top: 777px;
-    width: 152px;
-    height: 158px;
+    left: 25%;
+    bottom: -60px;
+    width: 85px;
+    height: 85px;
+
+    @include resolution(tablet) {
+        width: 125px;
+        height: 125px;
+    }
+
+    @include resolution(desktop) {
+        width: 140px;
+        height: 140px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 170px;
+        height: 170px;
+    }
+
     background-image: url('./../img/box.png');
-    background-position: center;
-    background-size: cover;
     cursor: pointer;
 }
+
 .bottle {
-    left: 416px;
-    top: 782px;
-    width: 84px;
-    height: 80px;
+    left: 5%;
+    bottom: -30px;
+    width: 45px;
+    height: 45px;
+
+    @include resolution(tablet) {
+        bottom: -50px;
+        width: 70px;
+        height: 70px;
+    }
+
+    @include resolution(desktop) {
+        bottom: -70px;
+        width: 75px;
+        height: 75px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: -75px;
+        width: 90px;
+        height: 90px;
+    }
+
     background-image: url('./../img/bottle.png');
-    background-position: center;
-    background-size: cover;
 }
+
 .picture {
-    left: 1155px;
-    top: 417px;
-    width: 152px;
-    height: 158px;
+    right: calc(240px / 2);
+    bottom: 190px;
+    transform: translateX(50%);
+    width: 84px;
+    height: 84px;
+
+    @include resolution(tablet) {
+        right: calc(350px / 2);
+        bottom: 250px;
+        width: 125px;
+        height: 125px;
+    }
+
+    @include resolution(desktop) {
+        right: calc(390px / 2);
+        bottom: 270px;
+        width: 140px;
+        height: 140px;
+    }
+
+    @include resolution(big-desktop) {
+        right: calc(470px / 2);
+        bottom: 340px;
+        width: 170px;
+        height: 170px;
+    }
+
     background-image: url('./../img/picture.png');
-    background-position: center;
-    background-size: cover;
     cursor: pointer;
     transition: 0.6s;
     &.dropped {
         cursor: default;
-        transform: rotate(15deg);
-        top: 727px;
+        transform:  translateX(-50%) rotate(15deg);
+        bottom: -20px;
     }
 }
 .coffee-table {
-    left: 718px;
-    top: 760px;
-    width: 242px;
-    height: 186px;
+    right: calc(240px / 2);
+    bottom: -50px;
+    transform: translateX(50%);
+    width: 115px;
+    height: 115px;
+
+    @include resolution(tablet) {
+        right: calc(350px / 2);
+        bottom: -60px;
+        width: 175px;
+        height: 175px;
+    }
+
+    @include resolution(desktop) {
+        right: calc(390px / 2);
+        bottom: -70px;
+        width: 195px;
+        height: 195px;
+    }
+
+    @include resolution(big-desktop) {
+        right: calc(470px / 2);
+        bottom: -80px;
+        width: 235px;
+        height: 235px;
+    }
+
     background-image: url('./../img/coffee-table.png');
-    background-position: top;
-    background-size: cover;
 }
 .cat {
-    left: 713px;
-    top: 662px;
-    width: 112px;
-    height: 126px;
+    left: 15%;
+    bottom: 35%;
+    width: 60px;
+    height: 60px;
+
+    @include resolution(tablet) {
+        width: 90px;
+        height: 90px;
+    }
+
+    @include resolution(desktop) {
+        width: 100px;
+        height: 100px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 120px;
+        height: 120px;
+    }
+
     background-image: url('./../img/cat.png');
-    background-position: top;
-    background-size: cover;
 }
 // wall 3
 
@@ -442,3 +831,241 @@
         font-weight: 700;
     }
 }
+
+.mirror {
+    left: 0;
+    bottom: -10px;
+    width: 100px;
+    height: 235px;
+
+    @include resolution(tablet) {
+        bottom: -20px;
+        width: 150px;
+        height: 353px;
+    }
+
+    @include resolution(desktop) {
+        bottom: -30px;
+        width: 165px;
+        height: 385px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: -40px;
+        width: 200px;
+        height: 475px;
+    }
+
+    background-image: url('./../img/mirror.png');
+}
+
+// wall 4
+.board_paper {
+    left: 50%;
+    bottom: 170px;
+    transform: translateX(-50%);
+    width: 187px;
+    height: 117px;
+
+    @include resolution(tablet) {
+        bottom: 240px;
+        width: 280px;
+        height: 175px;
+    }
+
+    @include resolution(desktop) {
+        bottom: 260px;
+        width: 310px;
+        height: 205px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: 290px;
+        width: 372px;
+        height: 246px;
+    }
+
+    background-image: url('./../img/board-paper.jpg');
+}
+
+.work_table {
+    left: 0;
+    bottom: -20px;
+    width: 250px;
+    height: 190px;
+
+    @include resolution(tablet) {
+        bottom: -30px;
+        width: 375px;
+        height: 285px;
+    }
+
+    @include resolution(desktop) {
+        bottom: -40px;
+        width: 415px;
+        height: 315px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: -60px;
+        width: 500px;
+        height: 380px;
+    }
+
+    background-image: url('./../img/work-table.png');
+    background-position: center top;
+}
+
+.chair {
+    right: 0;
+    bottom: -30px;
+    width: 115px;
+    height: 190px;
+
+    @include resolution(tablet) {
+        bottom: -40px;
+        width: 175px;
+        height: 285px;
+    }
+
+    @include resolution(desktop) {
+        bottom: -50px;
+        width: 195px;
+        height: 320px;
+    }
+
+    @include resolution(big-desktop) {
+        bottom: -70px;
+        width: 234px;
+        height: 384px;
+    }
+
+    background-image: url('./../img/chair.png');
+}
+
+.pillow {
+    left: 15%;
+    bottom: -10px;
+    width: 60px;
+    height: 30px;
+
+    @include resolution(tablet) {
+        width: 90px;
+        height: 45px;
+    }
+
+    @include resolution(desktop) {
+        width: 100px;
+        height: 50px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 120px;
+        height: 60px;
+    }
+
+    background-image: url('./../img/pillow.png');
+}
+
+.cat_statuette {
+    right: 25%;
+    bottom: 62%;
+    width: 30px;
+    height: 40px;
+
+    @include resolution(tablet) {
+        width: 45px;
+        height: 60px;
+    }
+
+    @include resolution(desktop) {
+        width: 50px;
+        height: 67px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 60px;
+        height: 80px;
+    }
+
+    background-image: url('./../img/cat_statuette.png');
+}
+
+.paper {
+  top: 30px;
+  width: 42px;
+  height: 42px;
+  transition: $transition-300;
+  cursor: pointer;
+
+    @include resolution(tablet) {
+        width: 65px;
+        height: 65px;
+    }
+
+    @include resolution(desktop) {
+        width: 70px;
+        height: 70px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 85px;
+        height: 85px;
+    }
+
+    &:hover {
+        transform: translateX(-50%) scale(2);
+    }
+
+    &:nth-child(1) {
+        left: 25%;
+        background-image: url('./../img/paper1.png');
+
+        &:hover {
+            background-image: url('./../img/snake1.png');
+        }
+    }
+
+    &:nth-child(2) {
+        right: 15%;
+        background-image: url('./../img/paper2.png');
+
+        &:hover {
+            background-image: url('./../img/paper2.png');
+        }
+    }
+}
+
+// arrows
+.arrow {
+    position: absolute;
+    width: 30px;
+    height: 80%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 center;
+    border: none;
+    z-index: 99;
+    opacity: 0;
+    transition: opacity $transition-300;
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+        background-color: transparent;
+    }
+
+    &--left {
+        left: 0;
+        background-image: url('./../img/arrow-left.png');
+    }
+
+    &--right {
+        right: 0;
+        background-image: url('./../img/arrow-right.png');
+    }
+}
+//
