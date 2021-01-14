@@ -114,19 +114,20 @@
   &__start {
     position: absolute;
     top: 50%;
-    right: -10px;
+    right: -15px;
     transform: translate(100%, -50%);
-    width: 100px;
-    height: 100px;
+    width: 95px;
+    height: 258px;
 
     @include resolution(big-mobile) {
-      width: 75px;
-      height: 75px;
+      width: 32px;
+      height: 86px;
     }
 
     background-image: url('./../icons/clef.svg');
     background-size: contain;
     background-color: transparent;
+    background-position: 0 0;
     opacity: 0.5;
     border: none;
 
@@ -157,12 +158,22 @@
     width: 100%;
     min-height: 80px;
     padding: 0 15px;
+
+    @include resolution(big-mobile) {
+      padding: 0 10px;
+    }
+
     color: $color-pavlova;
     background-color: $color-black;
   }
 
   &__message {
     font-size: 22px;
+
+    @include resolution(big-mobile) {
+      font-size: 16px;
+    }
+
     color: $color-pavlova;
     text-align: center;
     z-index: 5;
