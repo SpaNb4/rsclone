@@ -21,7 +21,7 @@ const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-
 
 const openMemoryGame = () => {
     memoryGame.create();
-    state.memory ? memoryGame.button.focus() : memoryClose.focus();
+    state.memory ? memoryGame.links[0].focus() : memoryClose.focus();
 
     memory.classList.add(ACTIVE);
     overlay.classList.add(ACTIVE);
@@ -98,6 +98,7 @@ const onDocumentEscPress = (evt) => {
 
 const outGameClick = (evt) => {
     if (evt.target === overlay) {
+        console.log(true);
         closeMemoryGame();
         closeHangmanGame();
         closeGemPuzzleGame();
