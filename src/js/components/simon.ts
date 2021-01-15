@@ -1,3 +1,9 @@
+import { state } from './state';
+// @ts-ignore
+import { getRandomInt } from './../../js/components/utils';
+// @ts-ignore
+import { playAudio } from './utils';
+
 import C from './../../assets/audio/notes/C.mp3';
 import Db from './../../assets/audio/notes/Db.mp3';
 import D from './../../assets/audio/notes/D.mp3';
@@ -10,28 +16,6 @@ import Ab from './../../assets/audio/notes/Ab.mp3';
 import A from './../../assets/audio/notes/A.mp3';
 import Bb from './../../assets/audio/notes/Bb.mp3';
 import B from './../../assets/audio/notes/B.mp3';
-
-import { state } from './state';
-// @ts-ignore
-import { getRandomInt } from './../../js/components/utils';
-// @ts-ignore
-import { playAudio } from './utils';
-
-const CODE: string = '280';
-const CLASS: string = 'simon-game__key';
-
-const piano: HTMLElement = document.querySelector('#simon-game-piano');
-const buttonStart: HTMLElement = document.querySelector('#simon-game-start');
-const result: HTMLElement = document.querySelector('#simon-game-result');
-
-const audios: Array<HTMLAudioElement> = [];
-const gameSteps: Array<HTMLElement> = [];
-const userSteps: Array<HTMLElement> = [];
-const keys: Array<HTMLElement>  = [];
-
-let count: number = 0;
-let activeKey: HTMLElement | null = null;
-let isStepFinished = true;
 
 const notes = [
   { src: C, name: 'C' },
@@ -48,7 +32,33 @@ const notes = [
   { src: B, name: 'B' },
 ]
 
-notes.map((note) => audios.push(new Audio(note.src)));
+const ROUND_NUMBER: number = 3;
+const CLASS: string = 'simon-game__key';
+const STAR_ELEMENT = '<i class="material-icons">star</i>';
+
+const piano: HTMLElement = document.querySelector('#simon-game-piano');
+const buttonStart: HTMLElement = document.querySelector('#simon-game-start');
+const score: HTMLElement = document.querySelector('#simon-game-score');
+const message: HTMLElement = document.querySelector('#simon-game-message');
+const buttonClose: HTMLElement = document.querySelector('#simon-game-close');
+
+interface IGameState {
+  keys: Array<HTMLElement>
+  pianoSteps: Array<HTMLElement>,
+  userSteps: Array<HTMLElement>,
+  pressed: HTMLElement,
+  count: number,
+}
+
+const game: IGameState = {
+  keys: [],
+  pianoSteps: [],
+  userSteps: [],
+  pressed: null,
+  count: 0
+}
+
+const audios: Array<HTMLAudioElement> = notes.map((note) => new Audio(note.src));
 
 const createNoteElement = (index: number): HTMLElement => {
   const key: HTMLElement = document.createElement('a');
@@ -57,77 +67,129 @@ const createNoteElement = (index: number): HTMLElement => {
   key.classList.add(CLASS);
   key.dataset.note = notes[index].name;
   key.dataset.index = String(index);
-  keys.push(key);
+  game.keys.push(key);
 
   return key;
 }
 
 const createNotes = (): void => {
-  if (!state.simon) return;
-
-  resetGame();
-
+  game.keys = [];
   piano.innerHTML = '';
   const fragment = document.createDocumentFragment();
-
   for (let i = 0; i < notes.length; i += 1) {
     fragment.appendChild(createNoteElement(i));
   }
-
   piano.appendChild(fragment);
-  piano.classList.add('disabled');
 }
 
-const playNote = (key: any): void => {
+const playNote = (key: HTMLElement): void => {
   const audio: HTMLAudioElement = audios[Number(key.dataset.index)];
   audio.currentTime = 0;
 
   playAudio(audio);
-
-  if (activeKey) activeKey.blur();
   key.classList.add('active');
 
   audio.addEventListener('ended', () => {
     key.classList.remove('active');
-    if (activeKey && isStepFinished) activeKey.focus();
   });
 }
 
-const showNextStep = (): void => {
-  let key: any = piano.children[getRandomInt(notes.length)];
-  gameSteps.push(key);
+const createNextStep = (): void => {
+  let key: HTMLElement = game.keys[getRandomInt(notes.length)];
+  game.pianoSteps.push(key);
+
+  setStepGoing();
   playNote(key);
 }
 
-const checkSteps = (): boolean => {
-  return userSteps.length === gameSteps.length && userSteps.every((v, i) => v === gameSteps[i]);
+const showNextSteps = (): void => {
+  let promise = new Promise(function(resolve) {
+    let iterations: number = 0;
+
+    const interval: NodeJS.Timeout = setInterval(() => {
+      iterations += 1;
+      createNextStep();
+      if (iterations > game.count) {
+        clearInterval(interval);
+        game.count += 1;
+        resolve(game.count);
+      }
+    }, 1000);
+  });
+
+  promise.then(() => {
+    setTimeout(setStepFinished, 1000);
+  })
 }
 
-const resetSteps = (array: Array<any>): void => {
-  while (array.length > 0) array.pop();
+const isStepsCorrect = (): boolean => {
+  return game.userSteps.length === game.pianoSteps.length && game.userSteps.every((v, i) => v === game.pianoSteps[i]);
+}
+
+const resetSteps = (): void => {
+  game.pianoSteps = [];
+  game.userSteps = [];
+}
+
+const setInitState = () => {
+  game.count = 0;
+  message.textContent = 'Press The Clef to start game';
+  score.innerHTML = '';
+  buttonStart.classList.remove('disabled');
+  buttonStart.focus();
+  piano.classList.add('disabled');
+  piano.classList.remove('won');
+}
+
+const setStartedState = () => {
+  message.textContent = '...';
+  buttonStart.classList.add('disabled');
+}
+
+const setFinishedState = () => {
+  message.textContent = 'Congrats! The word is *****!';
+  buttonClose.focus();
+  buttonStart.classList.add('disabled');
+  piano.classList.add('disabled');
+  piano.classList.add('won');
+  state.simon = false;
+}
+
+const setStepGoing = () => {
+  message.textContent = '...';
+  piano.classList.add('disabled');
+  allElementsBlur();
+}
+
+const setWrongSteps = () => {
+  message.textContent = 'Error! Try again';
+}
+
+const setStepFinished = () => {
+  game.pressed.focus();
+  message.textContent = 'Repeat after piano';
+  piano.classList.remove('disabled');
+}
+
+const createGame = (): void => {
+  if (state.simon) {
+    createNotes();
+    setInitState();
+  }
 }
 
 const startGame = (): void => {
-  showNextStep();
-
-  activeKey = keys[0]; // active is a firts key
-
-  buttonStart.classList.add('disabled');
-  piano.classList.remove('disabled');
+  game.pressed = game.keys[0];
+  showNextSteps();
+  setStartedState();
 }
 
 const resetGame = (): void => {
   if (state.simon) {
-    result.textContent = '';
+    resetSteps();
+    setInitState();
     buttonStart.classList.remove('disabled');
-    piano.classList.remove('won');
   };
-
-  count = 0;
-  activeKey = null;
-  buttonStart.focus();
-  resetSteps(gameSteps);
-  resetSteps(userSteps);
 }
 
 const allElementsBlur = (): void => {
@@ -135,50 +197,34 @@ const allElementsBlur = (): void => {
 }
 
 const onPianoClick = (evt: MouseEvent): void => {
-  const target: any = evt.target;
-  activeKey = target;
-  playNote(target);
-  userSteps.push(target);
+    let target : HTMLElement;
 
-  if (userSteps.length < gameSteps.length) return; // too many or too little steps
+    if (evt.target instanceof HTMLElement) {
+      target =  evt.target;
+    }
 
-  if (checkSteps()) {
-    result.textContent += CODE[count]; // from 0
+    game.pressed = target;
+    game.userSteps.push(target);
+    playNote(target);
 
-    piano.classList.add('disabled');
+    if (game.userSteps.length === game.pianoSteps.length) {
+      if (isStepsCorrect()) {
+        score.innerHTML += STAR_ELEMENT;
+        resetSteps();
 
-    // WON GAME
-    if (count + 1 >= CODE.length) {
-      piano.classList.add('won');
-      buttonStart.classList.add('disabled');
-      allElementsBlur();
-      state.simon = false;
-      return; // game end
-    };
+        // if game over
+        if (game.count >= ROUND_NUMBER) {
+          setTimeout(setFinishedState, 1000);
+        } else {
+          showNextSteps();
+        }
 
-    //  play next steps
-    let iterations: number = 0;
-    const interval: NodeJS.Timeout = setInterval(() => {
-      isStepFinished = false;
-      allElementsBlur();
-
-      iterations += 1;
-      showNextStep();
-      if (iterations > count) {
-        piano.classList.remove('disabled');
-
-        isStepFinished = true;
-
-        setTimeout(() => activeKey.focus(), 1000);
-        clearInterval(interval);
+      } else {
+        setWrongSteps();
+        setTimeout(resetGame, 2000);
       }
-    }, 1000);
-
-    count += 1;
-  } else {
-    resetGame();
+    }
   }
-}
 
 const onPianoKeyPress = (evt: KeyboardEvent): void => {
   let index: number;
@@ -189,17 +235,16 @@ const onPianoKeyPress = (evt: KeyboardEvent): void => {
 
   if((evt.key == 'ArrowLeft' || evt.key == 'a') && index > 0) {
     index -= 1;
-    keys[index].focus();
+    game.keys[index].focus();
   }
 
   if((evt.key === 'ArrowRight' || evt.key === 'd') && index < notes.length - 1) {
     index += 1;
-    keys[index].focus();
+    game.keys[index].focus();
   }
 }
 
 buttonStart.addEventListener('click', startGame);
-
 buttonStart.addEventListener('keydown', (evt: KeyboardEvent): void => {
   evt.preventDefault();
   if (evt.key === 'Enter') startGame();
@@ -209,7 +254,7 @@ piano.addEventListener('click', onPianoClick);
 piano.addEventListener('keydown', onPianoKeyPress);
 
 const simonGame = {
-  create: createNotes,
+  create: createGame,
   reset: resetGame,
   button: buttonStart
 }

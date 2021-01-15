@@ -23,11 +23,6 @@ module.exports = merge(webpackConfiguration, {
     watchOptions: {
       poll: 300,
     },
-    proxy: {
-      "*": "http://[::1]:3000"
-      // "secure": false,
-      // "changeOrigin": true
-    },
     ...environment.server,
   },
 

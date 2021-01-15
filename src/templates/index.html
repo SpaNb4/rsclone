@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test</title>
-  <link rel="shortcut icon" href="./assets/img/favicon.ico">
+  <link rel="shortcut icon" href="./favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -92,7 +92,6 @@
         <div class="lock7"></div>
         <div class="lock8"></div>
       </div>
-    </div>
     <div id="wall-2" class="wall">2
       <div class="wall__container">
         <div class="rack element"></div>
@@ -176,7 +175,7 @@
     </div>
   </div>
   <div id="memory-game" class="memory-game">
-    <a href="#" id="memory-game-close"><i class="material-icons medium text-grey memory-game__close">close</i></a>
+    <a href="#" id="memory-game-close" class="memory-game__close"><i class="material-icons medium grey-text text-grey">close</i></a>
     <div id="memory-game-grid" class="memory-game__grid"></div>
   </div>
   <div class="hangman">
@@ -194,9 +193,13 @@
   </div>
   <div class="gem-puzzle"></div>
   <div id="simon-game" class="simon-game">
-    <div id="simon-game-result" class="simon-game__result"></div>
+    <a href="#!" id="simon-game-close" class="simon-game__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#!" id="simon-game-start" class="simon-game__start"></a>
+    <div class="simon-game__control">
+      <div id="simon-game-score" class="simon-game__score"></div>
+      <div id="simon-game-message" class="simon-game__message"></div>
+    </div>
     <div id="simon-game-piano" class="simon-game__piano"></div>
-    <button id="simon-game-start" class="simon-game__button" type="button"></button>
   </div>
   <div id="modal-rules" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
