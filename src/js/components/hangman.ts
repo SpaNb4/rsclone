@@ -76,8 +76,6 @@ export let isHangmanSolved: boolean = false;
 export function newGame(): void {
     random = Math.floor(Math.random() * (wordsArr.length - 1));
     keyword = wordsArr[random].split('');
-    // user hint :)
-    console.log(keyword);
     partGuessWord = new Array(keyword.length);
     errors = 0;
 

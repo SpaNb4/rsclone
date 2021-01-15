@@ -226,7 +226,6 @@ export const GemPuzzle = {
         const newGameLi = document.querySelector('.game_menu li');
         newGameLi.addEventListener('click', () => {
             this.isPause = !this.isPause;
-            console.log('212')
             this.init();
         });
     },
