@@ -1,0 +1,15 @@
+.modal {
+    .input-field {
+        .email_helper {
+            &.invalid {
+                color: $color-red;
+            }
+            &.correct {
+                color: $color-apple;
+            }
+        }
+    }
+    .logout {
+        cursor: pointer;
+    }
+}
