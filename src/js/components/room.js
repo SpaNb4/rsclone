@@ -1,3 +1,4 @@
+import { state } from './state';
 import { memoryGame } from './memory';
 import { simonGame } from './simon';
 import { box, picture, onBoxClick, onPictureClick, closeHangmanGame, closeGemPuzzleGame } from './wall3';
@@ -11,6 +12,7 @@ const piano = document.querySelector('#piano');
 const memory = document.querySelector('#memory-game');
 const memoryClose = document.querySelector('#memory-game-close');
 const simon = document.querySelector('#simon-game');
+const simonClose = document.querySelector('#simon-game-close');
 const overlay = document.querySelector('#overlay');
 const paperitem = document.querySelector('#paper_two');
 const guessAnumber = document.querySelector('#guess-a-number');
@@ -19,7 +21,7 @@ const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-
 
 const openMemoryGame = () => {
     memoryGame.create();
-    memoryGame.links[0].focus(); // add focus to first element
+    state.memory ? memoryGame.links[0].focus() : memoryClose.focus();
 
     memory.classList.add(ACTIVE);
     overlay.classList.add(ACTIVE);
@@ -37,7 +39,7 @@ const closeMemoryGame = () => {
 
 const openSimonGame = () => {
     simonGame.create();
-    simonGame.button.focus();
+    state.simon ? simonGame.button.focus() : simonClose.focus();
 
     simon.classList.add(ACTIVE);
     overlay.classList.add(ACTIVE);
@@ -96,6 +98,7 @@ const onDocumentEscPress = (evt) => {
 
 const outGameClick = (evt) => {
     if (evt.target === overlay) {
+        console.log(true);
         closeMemoryGame();
         closeHangmanGame();
         closeGemPuzzleGame();
@@ -131,6 +134,7 @@ class Room {
             [box, onBoxClick],
             [picture, onPictureClick],
             [memoryClose, closeMemoryGame],
+            [simonClose, closeSimonGame],
             [paperitem, onPaperitemClick],
         ];
 

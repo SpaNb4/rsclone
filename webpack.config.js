@@ -106,6 +106,10 @@ module.exports = {
                     from: path.resolve(environment.paths.source, 'assets/audio', ''),
                     to: path.resolve(environment.paths.output, 'assets/audio', ''),
                 },
+                {
+                    from: path.resolve(environment.paths.source, '', 'favicon.ico'),
+                    to: path.resolve(environment.paths.output, '', 'favicon.ico'),
+                },
             ],
         }),
     ].concat(htmlPluginEntries),
