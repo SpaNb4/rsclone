@@ -1,13 +1,13 @@
 import movesound from './../../assets/audio/move.mp3';
 import * as swap from './gem_puzzle_swap';
 import { picture, closeGemPuzzleGame } from './wall3';
+import { playAudio } from './utils';
 
 const container = document.querySelector('.gem-puzzle');
 
 export const GemPuzzle = {
     size: 16,
     moves: 0,
-    isSound: true,
     isPause: false,
     isPuzzleSolved: false,
     currTime: 0,
@@ -61,18 +61,6 @@ export const GemPuzzle = {
 
         overlay.append(gameMenuUl);
 
-        const sound = document.createElement('div');
-        sound.classList.add('sound');
-        sound.innerHTML = '<i class="material-icons">notifications_active</i>';
-        sound.addEventListener('click', () => {
-            this.isSound = !this.isSound;
-            if (this.isSound) {
-                sound.innerHTML = '<i class="material-icons">notifications_active</i>';
-            } else {
-                sound.innerHTML = '<i class="material-icons">notifications_off</i>';
-            }
-        });
-
         const solve = document.createElement('div');
         solve.classList.add('solve');
         solve.innerHTML = '<i class="material-icons">last_page</i>';
@@ -87,7 +75,7 @@ export const GemPuzzle = {
 
         const bottomMenu = document.createElement('div');
         bottomMenu.classList.add('bottom_menu');
-        bottomMenu.append(sound, solve);
+        bottomMenu.append(solve);
 
         for (let i = 0; i < this.size; i += 1) {
             const cellsItem = document.createElement('div');
@@ -133,7 +121,6 @@ export const GemPuzzle = {
 
     clearField() {
         container.innerHTML = '';
-        this.isSound = true;
         this.isPause = false;
         this.isPuzzleSolved = false;
         this.currTime = 0;
@@ -293,10 +280,8 @@ export const GemPuzzle = {
     },
 
     moveSound() {
-        if (this.isSound) {
-            const sound = new Audio(movesound);
-            sound.play();
-        }
+        const sound = new Audio(movesound);
+        playAudio(sound);
     },
 
     handleClick(e) {

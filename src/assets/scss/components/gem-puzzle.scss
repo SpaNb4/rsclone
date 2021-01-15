@@ -17,6 +17,15 @@
     }
     .material-icons {
         font-size: 50px;
+        @include resolution(tablet) {
+            font-size: 40px;
+        }
+        @include resolution(big-mobile) {
+            font-size: 32px;
+        }
+        @include resolution(mobile) {
+            font-size: 28px;
+        }
     }
     .top_menu {
         display: flex;
@@ -74,6 +83,15 @@
             border: 1px solid $color-black;
             &.over {
                 outline: 2px dashed $color-black;
+            }
+            @include resolution(tablet) {
+                font-size: 20px;
+            }
+            @include resolution(big-mobile) {
+                font-size: 16px;
+            }
+            @include resolution(mobile) {
+                font-size: 14px;
             }
         }
         .overlay,
@@ -133,42 +151,4 @@
             }
         }
     }
-}
-
-//*==========  Desktop First Method  ==========*/
-
-/* Large Devices, Wide Screens */
-@media only screen and (max-width: 1200px) {
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (max-width: 992px) {
-}
-
-/* Small Devices, Tablets */
-@media only screen and (max-width: 768px) {
-    .container .material-icons {
-        font-size: 40px;
-    }
-    .container .cells_items .cells_item {
-        font-size: 20px;
-    }
-}
-
-/* Extra Small Devices, Phones */
-@media only screen and (max-width: 480px) {
-    .container {
-        .material-icons {
-            font-size: 32px;
-        }
-        .cells_items {
-            .cells_item {
-                font-size: 14px;
-            }
-        }
-    }
-}
-
-/* Custom, iPhone Retina */
-@media only screen and (max-width: 320px) {
 }
