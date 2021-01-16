@@ -27,6 +27,16 @@
             font-size: 28px;
         }
     }
+    .gem-puzzle_close_btn {
+        position: absolute;
+        top: 0;
+        right: -10px;
+        transform: translateX(100%);
+        cursor: pointer;
+    }
+    .highlight {
+        color: $color-yellow;
+    }
     .top_menu {
         display: flex;
         justify-content: space-between;
@@ -95,11 +105,9 @@
             }
         }
         .overlay,
-        .best_score,
         .win {
             display: none;
             font-size: 24px;
-            color: $color-mint-green;
             position: absolute;
             z-index: 99;
             background: rgba(0, 0, 0, 0.6);
@@ -109,6 +117,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                flex-direction: column;
                 z-index: 99;
             }
             .game_menu {
@@ -118,27 +127,6 @@
                     cursor: pointer;
                     margin-bottom: 20px;
                 }
-            }
-        }
-        .best_score {
-            h3 {
-                font-size: 24px;
-                margin: 0;
-                margin-top: 10px;
-            }
-            table {
-                font-size: 18px;
-                text-align: center;
-                td {
-                    padding: 1px 10px;
-                }
-            }
-            .back_btn {
-                margin-bottom: 10px;
-            }
-            &.visible {
-                flex-direction: column;
-                justify-content: space-between;
             }
         }
         .win {
