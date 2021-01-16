@@ -19,7 +19,7 @@
         </a>
       </li>
       <li>
-          <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
+        <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
           <i class="material-icons grey-text text-lighten-3">info</i>
           <span>How to play?</span>
         </a>
@@ -31,7 +31,8 @@
         </a>
       </li>
       <li>
-        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-restart">
+        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-restart">
           <i class="material-icons grey-text text-lighten-3">refresh</i>
           <span>Restart</span>
         </a>
@@ -161,25 +162,31 @@
     </div>
   </div>
   <div id="memory-game" class="memory-game">
-    <a href="#" id="memory-game-close" class="memory-game__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#" id="memory-game-close" class="memory-game__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <div id="memory-game-grid" class="memory-game__grid"></div>
   </div>
   <div class="hangman">
     <h1>Hangman</h1>
     <p class="word_field"></p>
     <form class="hangman_form">
-      <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
-      <input class="guess_btn" type="button" value="Guess">
+      <div class="input_wrapper">
+        <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
+        <input class="guess_btn" type="button" value="Guess">
+      </div>
       <ul class="wrong_letters">
         <p>Wrong Letters:</p>
       </ul>
-      <img class="hangman_img" src="./assets/img/hangman_0.png"><br />
+      <div class="hangman_image_wrap">
+        <img class="hangman_img" src="./assets/img/hangman_0.png">
+      </div>
     </form>
     <div class="message"></div>
   </div>
   <div class="gem-puzzle"></div>
   <div id="simon-game" class="simon-game">
-    <a href="#!" id="simon-game-close" class="simon-game__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#!" id="simon-game-close" class="simon-game__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <a href="#!" id="simon-game-start" class="simon-game__start"></a>
     <div class="simon-game__control">
       <div id="simon-game-score" class="simon-game__score"></div>
@@ -213,19 +220,19 @@
   <div class="snake">
     <span class="snake__close">&times</span>
     <div class="snake__content">
-          <div class="gameDisplay">
-            <canvas class="display" id="display">  Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
-          </div>
-          <div class="rightMenu">
-            <h3>Information</h3>
-            <p><label>Snake length:</label>  <span id="snakeLength"></span></p>
-            <p>
-              Arrows - movement<br/>
-              Escape - pause/resume
-            </p>
-            <button id="startGame">Start new game</button>
-            <h1 id="message"></h1>
-          </div>
+      <div class="gameDisplay">
+        <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
+      </div>
+      <div class="rightMenu">
+        <h3>Information</h3>
+        <p><label>Snake length:</label> <span id="snakeLength"></span></p>
+        <p>
+          Arrows - movement<br />
+          Escape - pause/resume
+        </p>
+        <button id="startGame">Start new game</button>
+        <h1 id="message"></h1>
+      </div>
     </div>
   </div>
   <div class="guess-a-number" id="guess-a-number">

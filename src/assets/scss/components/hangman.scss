@@ -8,7 +8,7 @@
     padding: 20px;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
-    background-color: #273E47;
+    background-color: #273e47;
     z-index: 199;
     font-family: 'Londrina Solid', cursive;
     margin: 0 auto;
@@ -21,44 +21,93 @@
     .word_field {
         color: $color-malibu;
     }
+    .hangman_img {
+        max-width: 100%;
+        height: auto;
+    }
     h1 {
         font-size: 50px;
         margin-bottom: 20px;
         color: $color-malibu;
         font-weight: 300;
+        @include resolution(tablet) {
+            font-size: 44px;
+        }
+        @include resolution(big-mobile) {
+            font-size: 38px;
+        }
+        @include resolution(mobile) {
+            font-size: 30px;
+        }
     }
     .correct {
         color: $color-malibu;
         text-shadow: 1px 2px 0 $color-dodger-blue;
     }
-    .letter_input {
-        font-family: 'Londrina Solid', cursive;
-        width: 300px;
-        outline: none;
-        padding: 10px;
-        font-size: 30px;
-        margin-bottom: 20px;
-        margin-right: 5px;
-        border: 1px solid #aaa;
-        color: gray;
-    }
-    .guess_btn {
-        border: none;
-        font-size: 30px;
-        padding: 10px 20px;
-        cursor: pointer;
-        background: $color-malibu;
-        color: $color-white;
-        transition: 0.3s;
-        margin: 10px 0;
-        text-shadow: 1px 2px 0 $color-dodger-blue;
-        &:hover {
-            background: $color-dodger-blue;
+    .hangman_form {
+        .input_wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            @include resolution(tablet) {
+                flex-direction: column;
+                align-items: center;
+            }
+            @include resolution(big-mobile) {
+                flex-direction: column;
+                align-items: center;
+            }
+            @include resolution(mobile) {
+                flex-direction: column;
+                align-items: center;
+            }
+            .letter_input {
+                font-family: 'Londrina Solid', cursive;
+                width: 300px;
+                padding: 10px;
+                font-size: 30px;
+                color: $color-white;
+                @include resolution(tablet) {
+                    width: 100%;
+                    font-size: 28px;
+                }
+                @include resolution(big-mobile) {
+                    width: 100%;
+                    font-size: 24px;
+                }
+                @include resolution(mobile) {
+                    width: 100%;
+                    font-size: 22px;
+                }
+            }
+            .guess_btn {
+                border: none;
+                font-size: 30px;
+                padding: 10px 20px;
+                cursor: pointer;
+                background: $color-malibu;
+                color: $color-white;
+                transition: 0.3s;
+                margin: 10px 0;
+                text-shadow: 1px 2px 0 $color-dodger-blue;
+                &:hover {
+                    background: $color-dodger-blue;
+                }
+                @include resolution(tablet) {
+                    font-size: 28px;
+                }
+                @include resolution(big-mobile) {
+                    font-size: 24px;
+                }
+                @include resolution(mobile) {
+                    font-size: 20px;
+                }
+            }
         }
     }
     .wrong_letters {
         font-size: 20px;
-        height: 108px; // temp
+        height: 120px;
         p {
             margin-bottom: 10px;
         }
@@ -67,10 +116,20 @@
             font-size: 40px;
             background: lighten(red, 15%);
             text-shadow: 1px 2px 0 red;
-            padding: 10px;
+            padding: 5px 10px 5px 10px;
             color: $color-white;
             text-transform: uppercase;
             margin-right: 10px;
+            margin-bottom: 10px;
+            @include resolution(tablet) {
+                font-size: 35px;
+            }
+            @include resolution(big-mobile) {
+                font-size: 30px;
+            }
+            @include resolution(mobile) {
+                font-size: 28px;
+            }
         }
     }
     p {
@@ -98,7 +157,6 @@
 
         .highlight {
             color: $color-yellow;
-            text-transform: capitalize;
         }
 
         .text {
