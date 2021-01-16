@@ -105,6 +105,12 @@
             }
         }
     }
+    .hangman_close_btn {
+        position: absolute;
+        top: 0;
+        right: -10px;
+        transform: translateX(100%);
+    }
     .wrong_letters {
         font-size: 20px;
         height: 120px;
