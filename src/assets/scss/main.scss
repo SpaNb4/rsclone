@@ -5,6 +5,7 @@
 
 @import './components/header';
 @import './components/footer';
+@import './components/intro';
 
 @import './components/room';
 // @import './components/wall2';
@@ -43,4 +44,9 @@ a {
 
 button {
     cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }

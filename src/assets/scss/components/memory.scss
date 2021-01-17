@@ -5,7 +5,7 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   transition: $transition-300;
-  z-index: 199;
+  z-index: 101;
 
 
   &.active {
@@ -64,7 +64,7 @@
 
     &.won::before {
       opacity: 1;
-      z-index: 299;
+      z-index: 1;
       transition: opacity 3s;
     }
 
