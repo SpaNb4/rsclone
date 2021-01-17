@@ -1,4 +1,7 @@
 import { getRandomInt } from './utils.js';
+import winSound from './../../assets/audio/guessanumber_win.mp3';
+import uncorrectSound from './../../assets/audio/guessanumber_wrong_answer.mp3';
+import { playAudio } from './utils';
 
 let randomNumber: number = 0;
 let numberOfGuesses: number = 0;
@@ -39,15 +42,21 @@ function userGuessed() {
         if (Number(userGuessednumber) === randomNumber) {
             // Got it
             writeMessage(statusArea, `<p style='color:rgb(245, 0, 6)'>You got me in ${numberOfGuesses} guesses, I was thinking ${randomNumber}. You won!</p>`, '');
+            const audioWin = new Audio(winSound);
+            playAudio(audioWin);
             newGame();
         } else if (Number(userGuessednumber) < randomNumber) {
             // User needs to guess higher
             writeMessage(statusArea, `<p>You need to guess higher than ${userGuessednumber}, try again...</p>`, '');
             writeMessage(historyList, `<li>${userGuessednumber} (too low)</li>`, true);
+            const audioUncorrect = new Audio(uncorrectSound);
+            playAudio(audioUncorrect);
         } else {
             // User needs to guess lower
             writeMessage(statusArea, `<p>You need to guess lower than ${userGuessednumber}, try again...</p>`, '');
             writeMessage(historyList, `<li>${userGuessednumber} (too high)</li>`, true);
+            const audioUncorrect = new Audio(uncorrectSound);
+            playAudio(audioUncorrect);
         }
     }
 

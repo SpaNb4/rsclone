@@ -1,4 +1,7 @@
-import { getRandomIntInclusive} from './utils';
+import { getRandomIntInclusive } from './utils';
+import winSound from './../../assets/audio/snake-game-win.mp3';
+import overSound from './../../assets/audio/snake-game-over.mp3';
+import { playAudio } from './utils';
 
 const display = [];
 let viewPort;
@@ -10,10 +13,8 @@ const gameSpeed = 10;
 let renderIndex = 0;
 const speedUpLimit = 5;
 let onTick;
-const close = '.snake__close';
 const message = '#message';
 const snakeLengthtoWin = 10;
-const paperitem = '#paper';
 const snakeClass = '.snake';
 const startGameButton = 'startGame';
 const activeClass = 'active';
@@ -207,11 +208,15 @@ function gameOver(endType) {
     clearInterval(gameTimer);
     gameStatus = 'stopped';
     document.querySelector(message).textContent = 'The game is over. You can try again!';
+    const audioOver = new Audio(overSound);
+    playAudio(audioOver);
 }
 
 function gameWin(endType) {
     gameStatus = 'win';
     document.querySelector(message).textContent = 'You won!';
+    const audioWin = new Audio(winSound);
+    playAudio(audioWin);
 }
 
 function setSnakeOnDisplay() {
@@ -324,16 +329,23 @@ document.getElementById(startGameButton).onclick = () => {
     startGame(statRender);
 };
 
-document.querySelector(paperitem).addEventListener('click', () => {
+function openSnakeGame() {
     document.querySelector(snakeClass).classList.add(activeClass);
     viewPort = document.getElementById('display');
     initGame(viewPort);
     startGame(statRender);
-});
+}
 
-document.querySelector(close).addEventListener('click', () => {
+function closeSnakeGame() {
     document.querySelector(message).textContent = '';
     clearInterval(gameTimer);
     clearDisplay();
     document.querySelector(snakeClass).classList.remove(activeClass);
-});
+}
+
+const snakeGame = {
+    create: openSnakeGame,
+    reset: closeSnakeGame,
+};
+
+export { snakeGame };

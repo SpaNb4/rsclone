@@ -144,7 +144,7 @@
     <div id="wall-4" class="wall">4
       <div class="wall__container">
         <div class="board_paper element">
-          <div id="paper" class="paper element"></div>
+          <div id="paper_one" class="paper element"></div>
           <div id="paper_two" class="paper element"></div>
         </div>
         <div class="chair element"></div>
@@ -247,8 +247,8 @@
     <span class="game-over-lock__close">&times</span>
     <div class="game-over-lock__content"></div>
   </div>
-  <div class="snake">
-    <span class="snake__close">&times</span>
+  <div class="snake" id="snake">
+    <a href="#" id="snake__close" class="snake__close"><i class="material-icons medium grey-text text-grey">close</i></a>
     <div class="snake__content">
       <div class="gameDisplay">
         <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
@@ -256,18 +256,19 @@
       <div class="rightMenu">
         <h3>Information</h3>
         <p><label>Snake length:</label> <span id="snakeLength"></span></p>
-        <p>
+        <p id="snake-p-size">
           Arrows - movement<br />
           Escape - pause/resume
         </p>
         <button id="startGame">Start new game</button>
-        <h1 id="message"></h1>
+        <h4 id="message"></h4>
       </div>
     </div>
   </div>
   <div class="guess-a-number" id="guess-a-number">
+    <a href="#" id="guess-a-number-close" class="guess-a-number__close"><i class="material-icons medium grey-text text-grey">close</i></a>
     <div class="guess-a-number__content">
-      <h1>Number Guessing Game</h1>
+      <h3>Number Guessing Game</h3>
       <div id="statusArea">
         <p>Please enter a number 1-100 and press the Guess button.</p>
       </div>
@@ -276,7 +277,7 @@
         Guess
       </div>
       <div id="historyArea">
-        <h2>Your Previous Guesses</h2>
+        <h4>Your Previous Guesses</h4>
         <ol id="historyList"></ol>
       </div>
     </div>

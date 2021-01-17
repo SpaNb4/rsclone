@@ -3,6 +3,7 @@ import { memoryGame } from './memory';
 import { simonGame } from './simon';
 import { box, picture, onBoxClick, onPictureClick, closeHangmanGame, closeGemPuzzleGame } from './wall3';
 import { guessAnumberGame } from './guess-a-number.ts';
+import { snakeGame } from './snake';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -16,6 +17,10 @@ const simonClose = document.querySelector('#simon-game-close');
 const overlay = document.querySelector('#overlay');
 const paperitem = document.querySelector('#paper_two');
 const guessAnumber = document.querySelector('#guess-a-number');
+const paperitemone = document.querySelector('#paper_one');
+const snake = document.querySelector('#snake');
+const snakeClose = document.querySelector('.snake__close');
+const guessANumberClose = document.querySelector('.guess-a-number__close');
 
 const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
 
@@ -74,6 +79,23 @@ const closenGuessaNumberGame = () => {
     document.addEventListener('click', outGameClick);
 }
 
+const openSnakeGameClick = () => {
+    snakeGame.create();
+
+    snake.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
+}
+
+const closeSnakeGameClick = () => {
+    snakeGame.reset();
+
+    snake.classList.remove(ACTIVE);
+    overlay.classList.remove(ACTIVE);
+    document.addEventListener('click', outGameClick);
+}
+
 const onClockClick = () => {
     openMemoryGame();
 };
@@ -84,6 +106,10 @@ const onPianoClick = () => {
 
 const onPaperitemClick = () => {
     openGuessaNumberGame();
+}
+
+const onPaperItemOneClick = () => {
+    openSnakeGameClick();
 }
 
 const onDocumentEscPress = (evt) => {
@@ -103,6 +129,7 @@ const outGameClick = (evt) => {
         closeGemPuzzleGame();
         closeSimonGame();
         closenGuessaNumberGame();
+        closeSnakeGameClick();
     }
 };
 
@@ -135,6 +162,9 @@ class Room {
             [memoryClose, closeMemoryGame],
             [simonClose, closeSimonGame],
             [paperitem, onPaperitemClick],
+            [paperitemone, onPaperItemOneClick],
+            [snakeClose, closeSnakeGameClick],
+            [guessANumberClose, closenGuessaNumberGame],
         ];
 
         clickableObjArr.forEach((item) => {
@@ -147,4 +177,6 @@ window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
 });
 
-export { ACTIVE, overlay, onDocumentEscPress, outGameClick, closenGuessaNumberGame};
+export {
+    ACTIVE, overlay, onDocumentEscPress, outGameClick, closenGuessaNumberGame, closeSnakeGameClick,
+};
