@@ -13,13 +13,26 @@
   <header class="main-header">
     <ul id="slide-out" class="sidenav grey darken-3 main-header__list">
       <li>
+        <a id="menu-register-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-register">
+          <i class="material-icons grey-text text-lighten-3">account_circle</i>
+          <span>Register</span>
+        </a>
+      </li>
+      <li>
+        <a id="menu-login-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-login">
+          <i class="material-icons grey-text text-lighten-3">account_box</i>
+          <span>Login</span>
+        </a>
+      </li>
+      <li>
         <a id="menu-volume-toggle" class="grey-text text-lighten-5 main-header__link" href="#" data-sound="on">
           <i class="material-icons grey-text text-lighten-3">volume_up</i>
           <span>Sound</span>
         </a>
       </li>
       <li>
-          <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
+        <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
           <i class="material-icons grey-text text-lighten-3">info</i>
           <span>How to play?</span>
         </a>
@@ -31,7 +44,8 @@
         </a>
       </li>
       <li>
-        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-restart">
+        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-restart">
           <i class="material-icons grey-text text-lighten-3">refresh</i>
           <span>Restart</span>
         </a>
@@ -78,53 +92,53 @@
         <div class="lock7"></div>
         <div class="lock8"></div>
       </div>
-      <div id="wall-2" class="wall">2
-        <div class="wall__container">
-          <div class="rack element"></div>
-          <div class="chest element">
-            <div class="frame element frame-image"></div>
+    <div id="wall-2" class="wall">2
+      <div class="wall__container">
+        <div class="rack element"></div>
+        <div class="chest element">
+          <div class="frame element frame-image"></div>
+        </div>
+        <div class="shelfs element">
+          <div class="shelf element"></div>
+          <div class="shelf element">
+            <div class="cube cube4 element"></div>
+            <div class="cube element"></div>
           </div>
-          <div class="shelfs element">
-            <div class="shelf element"></div>
-            <div class="shelf element">
-              <div class="cube cube4 element"></div>
-              <div class="cube element"></div>
-            </div>
-            <div class="shelf element">
-              <div class="cube element"></div>
-              <div class="cube element"></div>
-            </div>
+          <div class="shelf element">
+            <div class="cube element"></div>
+            <div class="cube element"></div>
           </div>
         </div>
       </div>
-      <div id="wall-3" class="wall">3
-        <div class="wall__container">
-          <div id="hat" class="hat element"></div>
-          <div id="couch" class="couch element">
-            <div id="cat" class="cat element"></div>
-          </div>
-          <div class="mirror element"></div>
-          <div id="safe-box" class="safe-box element"></div>
-          <div id="picture" class="picture element"></div>
-          <div id="box" class="box element"></div>
-          <div id="bottle" class="bottle element"></div>
-          <div id="coffee-table" class="coffee-table element"></div>
+    </div>
+    <div id="wall-3" class="wall">3
+      <div class="wall__container">
+        <div id="hat" class="hat element"></div>
+        <div id="couch" class="couch element">
+          <div id="cat" class="cat element"></div>
+        </div>
+        <div class="mirror element"></div>
+        <div id="safe-box" class="safe-box element"></div>
+        <div id="picture" class="picture element"></div>
+        <div id="box" class="box element"></div>
+        <div id="bottle" class="bottle element"></div>
+        <div id="coffee-table" class="coffee-table element"></div>
+      </div>
+    </div>
+    <div id="wall-4" class="wall">4
+      <div class="wall__container">
+        <div class="board_paper element">
+          <div id="paper" class="paper element"></div>
+          <div id="paper_two" class="paper element"></div>
+        </div>
+        <div class="chair element"></div>
+        <div class="work_table element">
+          <div class="cat_statuette element"></div>
+          <div class="pillow element"></div>
         </div>
       </div>
-      <div id="wall-4" class="wall">4
-        <div class="wall__container">
-          <div class="board_paper element">
-            <div id="paper" class="paper element"></div>
-            <div id="paper_two" class="paper element"></div>
-          </div>
-          <div class="chair element"></div>
-          <div class="work_table element">
-            <div class="cat_statuette element"></div>
-            <div class="pillow element"></div>
-          </div>
-        </div>
-      </div>
-      <div class="floor"></div>
+    </div>
+    <div class="floor"></div>
     </div>
     <div class="arrows">
       <button id="room-arrow-left" class="arrow arrow--left" type="button"></button>
@@ -213,19 +227,19 @@
   <div class="snake">
     <span class="snake__close">&times</span>
     <div class="snake__content">
-          <div class="gameDisplay">
-            <canvas class="display" id="display">  Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
-          </div>
-          <div class="rightMenu">
-            <h3>Information</h3>
-            <p><label>Snake length:</label>  <span id="snakeLength"></span></p>
-            <p>
-              Arrows - movement<br/>
-              Escape - pause/resume
-            </p>
-            <button id="startGame">Start new game</button>
-            <h1 id="message"></h1>
-          </div>
+      <div class="gameDisplay">
+        <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
+      </div>
+      <div class="rightMenu">
+        <h3>Information</h3>
+        <p><label>Snake length:</label> <span id="snakeLength"></span></p>
+        <p>
+          Arrows - movement<br />
+          Escape - pause/resume
+        </p>
+        <button id="startGame">Start new game</button>
+        <h1 id="message"></h1>
+      </div>
     </div>
   </div>
   <div class="guess-a-number" id="guess-a-number">
@@ -289,6 +303,57 @@
   <div id="modal-restart" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
       <h5>Your progress was reset. Try again!</h5>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-register" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 class="center-align">Register your account</h4>
+      <form id="register_form">
+        <div class='input-field'>
+          <input class='validate' type='email' name='register_email' id='register_email' />
+          <label for='register_email'>Enter your email</label>
+          <span id="email_helper_register" class="email_helper helper-text hide">Helper text</span>
+        </div>
+        <div class='input-field'>
+          <input class='validate' type='password' name='register_password' id='register_password' />
+          <label for='register_password'>Enter your password</label>
+        </div>
+        <div class='row center-align'>
+          <button type='submit' name='btn_register' class='btn btn-large waves-effect teal'>Register</button>
+        </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-login" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 id="login_heading" class="center-align">Login to your account</h4>
+      <form id="login_form">
+        <div class='input-field'>
+          <input class='validate' type='email' name='login_email' id='login_email' />
+          <label for='login_email'>Enter your email</label>
+          <span id="email_helper_login" class="email_helper helper-text hide">Helper text</span>
+        </div>
+        <div class='input-field'>
+          <input class='validate' type='password' name='login_password' id='login_password' />
+          <label for='login_password'>Enter your password</label>
+        </div>
+        <div class='row center-align'>
+          <button type='submit' name='btn_login' class='btn btn-large waves-effect teal'>Login</button>
+        </div>
+
+      </form>
+      <div class="center-align">
+        <a id="logout" class="logout">Logout</a>
+      </div>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
