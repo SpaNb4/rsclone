@@ -7,22 +7,22 @@ import winSound from './../../assets/audio/hangman_win.mp3';
 // @ts-ignore
 import { checkSymbol } from './../../js/components/utils';
 // @ts-ignore
-import { overlay, ACTIVE } from './room';
-import { hangman as hangmanDiv } from './wall3';
+import { playAudio } from './utils';
+// @ts-ignore
+import { ACTIVE } from './room';
+import { closeHangmanGame } from './wall3';
 
 const wordField = document.querySelector('.word_field');
 const messageDiv = document.querySelector('.message');
 const wrongLetters = document.querySelector('.wrong_letters');
 const hangmanImg: HTMLImageElement = document.querySelector('.hangman_img');
+const hangmanForm = document.querySelector('.hangman_form');
+const closeBtn = document.querySelector('.hangman_close_btn');
 
 // once you got six wrong letters, you lose
 const SIX_ERRORS: number = 6;
 const UNDERSCORE: string = '_ ';
-
-const audioCorrect = new Audio(correctSound);
-const audioUncorrect = new Audio(uncorrectSound);
-const audioLose = new Audio(loseSound);
-const audioWin = new Audio(winSound);
+const SECRET_WORD = 'test word';
 
 const wordsArr: Array<string> = [
     'javascript',
@@ -96,12 +96,15 @@ guessBtn.addEventListener('click', () => {
     checkSymbols();
 });
 
-const form = document.querySelector('.hangman_form');
-form.addEventListener('keydown', (e: KeyboardEvent) => {
+hangmanForm.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         checkSymbols();
     }
+});
+
+closeBtn.addEventListener('click', () => {
+   closeHangmanGame();
 });
 
 // prints the guessfield
@@ -123,13 +126,9 @@ function checkWin(): void {
 
     if (isHangmanSolved) {
         messageDiv.classList.add(ACTIVE);
-        messageDiv.innerHTML = '<h1 class="title">Awesome, You Won!';
-        setTimeout(() => {
-            messageDiv.style.display = 'none';
-            hangmanDiv.classList.remove(ACTIVE);
-            overlay.classList.remove(ACTIVE);
-        }, 2000);
-        audioWin.play();
+        messageDiv.innerHTML = `<h1 class="title">Awesome, You Won! The word is <span class="highlight">${SECRET_WORD}</span>!`;
+        const audioWin = new Audio(winSound);
+        playAudio(audioWin);
     }
 
     if (errors === SIX_ERRORS) {
@@ -138,7 +137,8 @@ function checkWin(): void {
             <h1 class='title'>You Lost.. The word was <span class="highlight">${keyword.join('')}</span></h1>
             <p class="text">Don't worry, you'll get the next one!</p>
             <button class="res_btn">Play Again?</button>`;
-        audioLose.play();
+        const audioLose = new Audio(loseSound);
+        playAudio(audioLose);
 
         const resBtn = document.querySelector('.res_btn');
         resBtn.addEventListener('click', () => {
@@ -154,9 +154,10 @@ function checkSymbols(): void {
     let userLetter: string = letter.value;
     userLetter = userLetter.toUpperCase();
 
-    let isCorrectLetter=checkSymbol(keyword, userLetter, partGuessWord);
+    let isCorrectLetter = checkSymbol(keyword, userLetter, partGuessWord);
     if (isCorrectLetter) {
-        audioCorrect.play();
+        const audioCorrect = new Audio(correctSound);
+        playAudio(audioCorrect);
     }
     letter.value = '';
 
@@ -172,7 +173,8 @@ function checkSymbols(): void {
         wrongLetters.appendChild(li);
         errors += 1;
         hangmanImg.src = `./assets/img/hangman_${errors}.png`;
-        audioUncorrect.play();
+        const audioUncorrect = new Audio(uncorrectSound);
+        playAudio(audioUncorrect);
     }
 
     checkWin();

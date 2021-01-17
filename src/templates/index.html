@@ -175,25 +175,32 @@
     </div>
   </div>
   <div id="memory-game" class="memory-game">
-    <a href="#" id="memory-game-close" class="memory-game__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#" id="memory-game-close" class="memory-game__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <div id="memory-game-grid" class="memory-game__grid"></div>
   </div>
   <div class="hangman">
+    <span class="hangman_close_btn"><i class="material-icons medium grey-text text-grey">close</i></span>
     <h1>Hangman</h1>
     <p class="word_field"></p>
     <form class="hangman_form">
-      <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
-      <input class="guess_btn" type="button" value="Guess">
+      <div class="input_wrapper">
+        <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
+        <input class="guess_btn" type="button" value="Guess">
+      </div>
       <ul class="wrong_letters">
         <p>Wrong Letters:</p>
       </ul>
-      <img class="hangman_img" src="./assets/img/hangman_0.png"><br />
+      <div class="hangman_image_wrap">
+        <img class="hangman_img" src="./assets/img/hangman_0.png">
+      </div>
     </form>
     <div class="message"></div>
   </div>
   <div class="gem-puzzle"></div>
   <div id="simon-game" class="simon-game">
-    <a href="#!" id="simon-game-close" class="simon-game__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#!" id="simon-game-close" class="simon-game__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <a href="#!" id="simon-game-start" class="simon-game__start"></a>
     <div class="simon-game__control">
       <div id="simon-game-score" class="simon-game__score"></div>
