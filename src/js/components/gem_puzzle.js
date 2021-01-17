@@ -1,13 +1,14 @@
 import movesound from './../../assets/audio/move.mp3';
 import * as swap from './gem_puzzle_swap';
 import { picture, closeGemPuzzleGame } from './wall3';
+import { playAudio } from './utils';
 
 const container = document.querySelector('.gem-puzzle');
+const SECRET_WORD = 'test word';
 
 export const GemPuzzle = {
     size: 16,
     moves: 0,
-    isSound: true,
     isPause: false,
     isPuzzleSolved: false,
     currTime: 0,
@@ -61,18 +62,6 @@ export const GemPuzzle = {
 
         overlay.append(gameMenuUl);
 
-        const sound = document.createElement('div');
-        sound.classList.add('sound');
-        sound.innerHTML = '<i class="material-icons">notifications_active</i>';
-        sound.addEventListener('click', () => {
-            this.isSound = !this.isSound;
-            if (this.isSound) {
-                sound.innerHTML = '<i class="material-icons">notifications_active</i>';
-            } else {
-                sound.innerHTML = '<i class="material-icons">notifications_off</i>';
-            }
-        });
-
         const solve = document.createElement('div');
         solve.classList.add('solve');
         solve.innerHTML = '<i class="material-icons">last_page</i>';
@@ -87,7 +76,7 @@ export const GemPuzzle = {
 
         const bottomMenu = document.createElement('div');
         bottomMenu.classList.add('bottom_menu');
-        bottomMenu.append(sound, solve);
+        bottomMenu.append(solve);
 
         for (let i = 0; i < this.size; i += 1) {
             const cellsItem = document.createElement('div');
@@ -104,11 +93,18 @@ export const GemPuzzle = {
         const win = document.createElement('div');
         win.classList.add('win');
 
-        container.appendChild(topMenu);
-        main.append(overlay, win);
+        const closeGemPuzzleBtn = document.createElement('span');
+        closeGemPuzzleBtn.classList.add('gem-puzzle_close_btn');
+        closeGemPuzzleBtn.innerHTML = '<i class="material-icons medium grey-text text-grey">close</i>';
+        closeGemPuzzleBtn.addEventListener('click', () => {
+           closeGemPuzzleGame();
+        });
+
+        container.append(topMenu);
+        main.append(overlay, win, closeGemPuzzleBtn);
         container.append(main, bottomMenu);
 
-        document.body.appendChild(container);
+        document.body.append(container);
 
         const elHeight = document.querySelector('.cells_item').offsetWidth;
 
@@ -133,7 +129,6 @@ export const GemPuzzle = {
 
     clearField() {
         container.innerHTML = '';
-        this.isSound = true;
         this.isPause = false;
         this.isPuzzleSolved = false;
         this.currTime = 0;
@@ -226,7 +221,6 @@ export const GemPuzzle = {
         const newGameLi = document.querySelector('.game_menu li');
         newGameLi.addEventListener('click', () => {
             this.isPause = !this.isPause;
-            console.log('212')
             this.init();
         });
     },
@@ -273,7 +267,8 @@ export const GemPuzzle = {
             const seconds = document.querySelector('.seconds').innerHTML;
 
             const win = document.querySelector('.gem-puzzle .win');
-            win.innerHTML = `<i class="material-icons close_btn">close</i> Hurrah! You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves`;
+            win.innerHTML = `<i class="material-icons close_btn">close</i><p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves</p>
+            <p>The word is <span class="highlight">${SECRET_WORD}</span>!</p>`;
 
             const closeBtn = document.querySelector('.close_btn');
             closeBtn.addEventListener('click', () => {
@@ -283,21 +278,14 @@ export const GemPuzzle = {
             win.classList.toggle('visible');
 
             setTimeout(() => {
-                win.classList.toggle('visible');
-                closeGemPuzzleGame();
-            }, 2000);
-
-            setTimeout(() => {
                 picture.classList.add('dropped');
             }, 3000);
         }
     },
 
     moveSound() {
-        if (this.isSound) {
-            const sound = new Audio(movesound);
-            sound.play();
-        }
+        const sound = new Audio(movesound);
+        playAudio(sound);
     },
 
     handleClick(e) {

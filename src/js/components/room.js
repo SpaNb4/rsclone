@@ -98,7 +98,6 @@ const onDocumentEscPress = (evt) => {
 
 const outGameClick = (evt) => {
     if (evt.target === overlay) {
-        console.log(true);
         closeMemoryGame();
         closeHangmanGame();
         closeGemPuzzleGame();
