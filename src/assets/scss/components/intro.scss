@@ -22,6 +22,7 @@
 
   &__content {
     position: absolute;
+    width: 75%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -39,6 +40,19 @@
   &__sub {
     margin: 0 0 25px;
     font-size: 16px;
+
+    @include resolution(tablet) {
+      font-size: 20px;
+    }
+
+    @include resolution(desktop) {
+      font-size: 22px;
+    }
+
+    @include resolution(big-desktop) {
+      font-size: 26px;
+    }
+
     text-transform: uppercase;
   }
 
@@ -46,12 +60,24 @@
     margin: 0 0 35px;
     font-family: $font-viaoda-libre;
     font-size: 32px;
+
+    @include resolution(tablet) {
+      font-size: 42px;
+    }
+
+    @include resolution(desktop) {
+      font-size: 58px;
+    }
+
+    @include resolution(big-desktop) {
+      font-size: 64px;
+    }
+
     text-transform: capitalize;
   }
 
   &__text {
     margin: 0 0 35px;
-    // font-size: 14px;
   }
 
   .btn {
@@ -61,9 +87,8 @@
 
   &__image {
     margin: 0 auto 35px;
-    width: 90px;
+    width: 15vh;
     background-color: #000;
-    // box-shadow: 10px 10px 249px 0px rgba(#ffb703, 0.75);
     opacity: 0.7;
   }
 
