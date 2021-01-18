@@ -15,7 +15,10 @@ const lock = '.game-over-lock',
       lockGameActive = 'lock-game__active',
       doorOpen = '.door-open',
       door = '.door',
-      doorNoneDisplay = 'door-none';
+      doorNoneDisplay = 'door-none',
+      enter = 13,
+      numLockFromString = 5,
+      num = 1;
 
 const arrLock = ['.lock1', '.lock2', '.lock3', '.lock4', '.lock5', '.lock6', '.lock7', '.lock8'],
       codeWords = ['тестовая', 'фраза', 'состоящая', 'из', 'восьми', 'слов', 'для', 'выхода'];
@@ -62,7 +65,7 @@ document.querySelector(close).addEventListener('click', () => {
 
 const KeyDown = (event) => {
     switch(event.keyCode) {
-        case 13:
+        case enter:
             checkTextExit();
             break;
     }
@@ -76,7 +79,7 @@ const checkOpenLock = (elem) => {
 }
 
 const checkTextExit = () => {
-    if (document.querySelector(lockGameText).value === codeWords[indexLock[5] - 1]) {
+    if (document.querySelector(lockGameText).value === codeWords[indexLock[numLockFromString] - num]) {
         document.querySelector(lockGameClose).classList.remove(lockGameActive);
         document.querySelector(lockGameOpen).classList.add(lockGameActive);
         flagOpen = true;
@@ -88,7 +91,7 @@ const checkTextExit = () => {
 }
 
 const checkGameOverDoor = () => {
-    if (countOpenLock === 8) {
+    if (countOpenLock === arrLock.length) {
         document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
         document.querySelector(door).classList.add(doorNoneDisplay);
     }
