@@ -3,6 +3,7 @@ import { memoryGame } from './memory';
 import { simonGame } from './simon';
 import { box, picture, onBoxClick, onPictureClick, closeHangmanGame, closeGemPuzzleGame } from './wall3';
 import { guessAnumberGame } from './guess-a-number.ts';
+import { snakeGame } from './snake';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -16,6 +17,10 @@ const simonClose = document.querySelector('#simon-game-close');
 const overlay = document.querySelector('#overlay');
 const paperitem = document.querySelector('#paper_two');
 const guessAnumber = document.querySelector('#guess-a-number');
+const paperitemone = document.querySelector('#paper_one');
+const snake = document.querySelector('#snake');
+const snakeClose = document.querySelector('.snake__close');
+const guessANumberClose = document.querySelector('.guess-a-number__close');
 
 const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
 
@@ -45,7 +50,7 @@ const openSimonGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const closeSimonGame = () => {
     simonGame.reset();
@@ -54,7 +59,7 @@ const closeSimonGame = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
-}
+};
 
 const openGuessaNumberGame = () => {
     guessAnumberGame.create();
@@ -63,7 +68,7 @@ const openGuessaNumberGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const closenGuessaNumberGame = () => {
     guessAnumberGame.reset();
@@ -72,7 +77,24 @@ const closenGuessaNumberGame = () => {
     overlay.classList.remove(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
+
+const openSnakeGameClick = () => {
+    snakeGame.create();
+
+    snake.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
+};
+
+const closeSnakeGameClick = () => {
+    snakeGame.reset();
+
+    snake.classList.remove(ACTIVE);
+    overlay.classList.remove(ACTIVE);
+    document.addEventListener('click', outGameClick);
+};
 
 const onClockClick = () => {
     openMemoryGame();
@@ -80,11 +102,7 @@ const onClockClick = () => {
 
 const onPianoClick = () => {
     openSimonGame();
-}
-
-const onPaperitemClick = () => {
-    openGuessaNumberGame();
-}
+};
 
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
@@ -93,6 +111,7 @@ const onDocumentEscPress = (evt) => {
         closeGemPuzzleGame();
         closeSimonGame();
         closenGuessaNumberGame();
+        closeSnakeGameClick();
     }
 };
 
@@ -103,6 +122,7 @@ const outGameClick = (evt) => {
         closeGemPuzzleGame();
         closeSimonGame();
         closenGuessaNumberGame();
+        closeSnakeGameClick();
     }
 };
 
@@ -134,7 +154,10 @@ class Room {
             [picture, onPictureClick],
             [memoryClose, closeMemoryGame],
             [simonClose, closeSimonGame],
-            [paperitem, onPaperitemClick],
+            [paperitem, openGuessaNumberGame],
+            [paperitemone, openSnakeGameClick],
+            [snakeClose, closeSnakeGameClick],
+            [guessANumberClose, closenGuessaNumberGame],
         ];
 
         clickableObjArr.forEach((item) => {
@@ -147,4 +170,6 @@ window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
 });
 
-export { ACTIVE, overlay, onDocumentEscPress, outGameClick, closenGuessaNumberGame};
+export {
+    ACTIVE, overlay, onDocumentEscPress, outGameClick,
+};
