@@ -119,6 +119,7 @@ const onDocumentEscPress = (evt) => {
         closeGemPuzzleGame();
         closeSimonGame();
         closenGuessaNumberGame();
+        closeSnakeGameClick();
     }
 };
 
@@ -178,5 +179,5 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 export {
-    ACTIVE, overlay, onDocumentEscPress, outGameClick, closenGuessaNumberGame, closeSnakeGameClick,
+    ACTIVE, overlay, onDocumentEscPress, outGameClick,
 };

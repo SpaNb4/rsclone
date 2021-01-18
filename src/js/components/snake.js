@@ -1,7 +1,6 @@
-import { getRandomIntInclusive } from './utils';
-import winSound from './../../assets/audio/snake-game-win.mp3';
-import overSound from './../../assets/audio/snake-game-over.mp3';
-import { playAudio } from './utils';
+import { getRandomIntInclusive, playAudio } from './utils';
+import winSound from '../../assets/audio/snake-game-win.mp3';
+import overSound from '../../assets/audio/snake-game-over.mp3';
 
 const display = [];
 let viewPort;
@@ -22,6 +21,8 @@ const red = 'rgb(245, 0, 6)';
 const green = 'rgb(10, 174, 31)';
 const white = 'rgb(250, 250, 250)';
 const codGray = 'rgb(25, 25, 25)';
+const snakeLength = 'snakeLength';
+const displayId = 'display';
 
 const rectStyles = [
     {
@@ -148,19 +149,7 @@ function downPress() {
     snake.xDir = 0;
 }
 
-function escPress() {
-    if (gameStatus === 'game') {
-        gameStatus = 'paused';
-        return;
-    }
-
-    if (gameStatus === 'paused') {
-        gameStatus = 'game';
-    }
-}
-
 const keyMap = {
-    Escape: escPress,
     ArrowRight: rightPress,
     ArrowLeft: leftPress,
     ArrowUp: upPress,
@@ -319,7 +308,7 @@ function startGame(onTickHandler) {
 }
 
 function statRender() {
-    document.getElementById('snakeLength').innerHTML = snake.sections.length;
+    document.getElementById(snakeLength).innerHTML = snake.sections.length;
 }
 
 document.getElementById(startGameButton).onclick = () => {
@@ -331,7 +320,7 @@ document.getElementById(startGameButton).onclick = () => {
 
 function openSnakeGame() {
     document.querySelector(snakeClass).classList.add(activeClass);
-    viewPort = document.getElementById('display');
+    viewPort = document.getElementById(displayId);
     initGame(viewPort);
     startGame(statRender);
 }
