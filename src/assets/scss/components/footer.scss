@@ -12,19 +12,26 @@
   &__list {
     margin-left: auto;
     display: flex;
+    align-items: center;
 
     li {
       margin-left: 15px;
-    }
+      height: auto;
 
-    a {
-      font-size: 12px;
-      color: $color-pavlova;
-      transition: color $transition-300;
+      a {
+        filter: grayscale(50%);
+        transition: $transition-300;
 
-      &:hover,
-      &:focus {
-        color: $color-white;
+        &:hover,
+        &:focus {
+          opacity: 1;
+          filter: grayscale(0%);
+        }
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
       }
     }
   }

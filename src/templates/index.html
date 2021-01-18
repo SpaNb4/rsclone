@@ -10,6 +10,22 @@
 </head>
 
 <body>
+  <div class="intro">
+    <div id="intro-content-1" class="intro__content">
+      <p class="intro__sub">welcome to</p>
+      <h1 class="intro__title">Lorem ipsum dolor</h1>
+      <div class="intro__image">
+        <img src="./assets/img/door-intro.png" alt="">
+      </div>
+      <a href="#!" id="intro-start-button" class="btn btn-large amber lighten-3 black-text waves-effect">Start Game</a>
+    </div>
+    <div id="intro-content-2" class="intro__content disabled">
+      <p class="intro__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolores ea quibusdam similique facere quasi ullam vitae, eos placeat est. Odio illum fugit veritatis nobis facere quis odit! Fugit, explicabo.</p>
+      <a href="#!" id="intro-continue-button" class="btn btn-large amber lighten-3 black-text waves-effect">Continue</a>
+    </div>
+    <canvas id="intro-canvas"></canvas>
+  </div>
+
   <header class="main-header">
     <ul id="slide-out" class="sidenav grey darken-3 main-header__list">
       <li>
@@ -269,11 +285,7 @@
     <a href="https://rs.school/js/" target="_blank">
       <img src="./assets/img/rs_school_js.svg" alt="RS Shcool Log" width="55" height="20">
     </a>
-    <ul class="main-footer__list">
-      <li><a href="https://github.com/alesyakuptsova" target="_blank">Alesia</a></li>
-      <li><a href="https://github.com/lemeshkonastya" target="_blank">Anastasia</a></li>
-      <li><a href="https://github.com/spanb4" target="_blank">Dzmitry</a></li>
-      <li><a href="https://github.com/magklax" target="_blank">Nadezda</a></li>
+    <ul id="footer-list" class="main-footer__list">
       <li>© 2021</li>
     </ul>
   </footer>
