@@ -2,70 +2,112 @@
     position: fixed;
     top: 50%;
     left: 50%;
+    width: 700px;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
     overflow: hidden;
     z-index: 199;
 
-    width: 100%;
-    height: 100%;
-    background-color: rgba($color-black, 0.45);
+    @include resolution(big-mobile) {
+        width: 445px;
+    }
 
+    @include resolution(mobile) {
+        width: 355px;
+    }
 
     &.active {
         transform: translate(-50%, -50%) scale(1);
-
     }
 
     &__close {
-        color: $color-white;
-        font-size: 70px;
-        float: right;
-        margin-right: 30px;
-
-        &:hover {
-            cursor: pointer;
-        };
+        position: absolute;
+        top: 0;
+        right: 50px;
+        transform: translateX(100%);
     }
 
     &__content {
         display: flex;
-        justify-content: center;
-        margin-left: 30%;
-        margin-top: 5%;
-        width: 50%;
-        height: 50%;
         z-index: 500;
     }
 
-    h1 {
-      color: $color-red;
+    h4 {
+        color: $color-red;
+        font-size: 18px;
+        width: 150px;
+
+        @include resolution(big-mobile) {
+            font-size: 14px;
+            width: 95px;
+        }
+
+        @include resolution(mobile) {
+            font-size: 10px;
+            width: 85px;
+            margin-top: 3px;
+        }
+    }
+
+    h3 {
+        font-size: 20px;
+
+        @include resolution(big-mobile) {
+            font-size: 14px;
+        }
+
+        @include resolution(mobile) {
+            font-size: 14px;
+        }
     }
 
    .gameDisplay {
-        width: 500px;
-        height: auto;
-        background: $color-mine-shaft;
         display: inline-block;
         padding: 0;
         font-size: 16px;
         vertical-align: top;
     }
 
+    #snake-p-size {
+        font-size: 16px;
+
+        @include resolution(mobile) {
+            font-size: 12px;
+        }
+    }
+    
     .rightMenu {
         background: $color-mine-shaft;
-        width: auto;
         display: inline-block;
-        width: 300px;
-        font-size: 16px;
         vertical-align: top;
+        height: 500px;
+        width: 150px;
+
+        @include resolution(big-mobile) {
+            height: 300px;
+            width: 95px;
+        }
+        @include resolution(mobile) {
+            height: 220px;
+            width: 85px;
+        }
     }
 
     .display {
         font-size: 0;
         margin: 0;
         padding: 0;
-        width: 100%;
-        height: 100%;
+        width: 500px;
+        height: 500px;
+        background: $color-mine-shaft;
+
+        @include resolution(big-mobile) {
+            width: 300px;
+            height: 300px;
+        }
+        @include resolution(mobile) {
+            height: 220px;
+            width: 220px;
+        }
     }
 }
