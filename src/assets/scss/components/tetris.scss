@@ -2,6 +2,8 @@
     position: fixed;
     top: 50%;
     left: 50%;
+    display: flex;
+    justify-content: center;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
     overflow: hidden;
@@ -9,31 +11,43 @@
 
     width: 100%;
     height: 100%;
-    background: rgb(0,0,0, 0.7);
+    background: $color-black-ransparency;
 
     &.active {
         transform: translate(-50%, -50%) scale(1);
-        
     }
 
     &__close {
+        position: absolute;
+        margin-left: 93%;
         color: $color-white;
         font-size: 70px;
-        float: right;
-        margin-right: 30px;
 
         &:hover {
             cursor: pointer;
         };
+
+        @include resolution(tablet) {
+            margin-left: 90%;
+        }
+
+        @include resolution(big-mobile) {
+            top: -25px;
+            margin-left: 70%;
+        }
+
+        @include resolution(mobile) {
+            top: -25px;
+            margin-left: 60%;
+        }
     }
 
     &__repeat {
+        position: absolute;
+        margin-left: 93%;
         width: 45px;
         height: 45px;
-        float: right;
-        margin-right: -45px;
         margin-top: 80px;
-
 
         img {
             width: 100%;
@@ -42,6 +56,21 @@
         &:hover {
             cursor: pointer;
         };
+
+        @include resolution(tablet) {
+            margin-left: 90%;
+        }
+
+        @include resolution(big-mobile) {
+            margin-left: 90%;
+            margin-top: 5px;
+        }
+
+        @include resolution(mobile) {
+            position: absolute;
+            margin-left: 80%;
+            margin-top: 5px;
+        }
     }
 
     &__content {
@@ -49,22 +78,31 @@
         flex-direction: column;
         justify-content: center;
         background: $color-black;
-        margin-left: 35%;
-        margin-top: 5%;
-        width: 30%;
-        height: 80%;
+        margin-top: 50px;
+        width: 300px;
+        height: 500px;
 
         canvas {
             display: block;
             margin:0 auto;
         }
 
-        .tetrisScore, .resultTetris{
-            color: white;
+        .tetrisScore {
             font-size: 25px;
             font-weight: bold;
             text-align: center;
         }
+    }
+
+    .resultTetris, .codeTetris {
+        position: absolute;
+        font-size: 50px;
+        text-align: center;
+        top: 550px;
+    }
+
+    .codeTetris {
+        margin-top: 50px;
     }
 }
 
