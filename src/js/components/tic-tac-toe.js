@@ -1,52 +1,73 @@
+import { playAudio } from './utils';
+import soundClickTicTacToe from './../../assets/audio/tictactoe-click.mp3';
+import soundWinTicTacToe from './../../assets/audio/tictactoe-win.mp3';
+import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3';
+
 const classCeil = '.cell',
       classWin = '.win',
-      stepX = 'X',
-      step0 = '0',
-      index0 = '0',
-      index1 = '1',
-      index2 = '2',
-      index3 = '3',
-      index4 = '4',
-      index5 = '5',
-      index6 = '6',
-      index7 = '7',
-      index8 = '8',
+      stepX = '<img src="./assets/img/lollipops.png">',
+      step0 = '<img src="./assets/img/donut.png">',
+      index0 = 0,
+      index1 = 1,
+      index2 = 2,
+      index3 = 3,
+      index4 = 4,
+      index5 = 5,
+      index6 = 6,
+      index7 = 7,
+      index8 = 8,
       winX = 'Вы выиграли !',
       gameOver = 'Игра закончена, вы проиграли',
       countBlock = 9,
       maxStep = 5,
       firstStep = 0,
+      elemArr0 = 0,
+      elemArr1 = 1,
+      elemArr2 = 2,
       frameImage = '.frame-image',
       game = '.tic-tac-toe',
       close = '.tic-tac-toe__close',
-      repeat = '.tic-tac-toe__repeat';
-let step = firstStep;
+      repeat = '.tic-tac-toe__repeat',
+      classCodeTicTacToe = '.codeTicTacToe',
+      textCodeTicTacToe = 'Кодовое слово: ТЕСТ',
+      audioClickTicTacToe = new Audio(soundClickTicTacToe),
+      audioWinTicTacToe = new Audio(soundWinTicTacToe),
+      audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
+
+let step = firstStep,
+    arr = [elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0];
 
 document.querySelector(frameImage).addEventListener('click', () => {
     document.querySelector(game).classList.add('active');
     gameTicTacToe();
+    playAudio(audioClickTicTacToe);
 });
 
 document.querySelector(close).addEventListener('click', () => {
     document.querySelector(game).classList.remove('active');
     clearGameTicTacToe();
+    playAudio(audioClickTicTacToe);
 });
 
 document.querySelector(repeat).addEventListener('click', () => {
     clearGameTicTacToe();
+    playAudio(audioClickTicTacToe);
 });
 
 const gameTicTacToe = () => {
-    document.querySelectorAll(classCeil).forEach((elem) => {
+    document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
+            playAudio(audioClickTicTacToe);
             if (elem.innerHTML === '') {
                 elem.innerHTML = stepX;
+                arr[index] = elemArr1;
     
                 step++;
                 if (step !== maxStep) {
                     computer();
                 }
-                check();
+                winTicTacToe(elemArr1, winX);
+                winTicTacToe(elemArr2, gameOver);
     
                 if (step === maxStep && document.querySelector(classWin).innerHTML === '') {
                     document.querySelector(classWin).innerHTML = gameOver;
@@ -63,12 +84,14 @@ const clearGameTicTacToe = () => {
 
     document.querySelector(classWin).innerHTML = '';
     step = firstStep;
+    arr = [elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0];
 }
 
 const computer = () => {
     let index = randIndex();
     if (document.querySelectorAll(classCeil)[index].innerHTML === '') {
         document.querySelectorAll(classCeil)[index].innerHTML = step0;
+        arr[index] = elemArr2;
     } else {
         computer();
     }
@@ -78,21 +101,23 @@ const randIndex = () => {
     return Math.floor(Math.random() * countBlock);
 }
 
-const check = () => {
-    let cell = document.querySelectorAll(classCeil),
-        textWin = document.querySelector(classWin);
-
-    win(cell, textWin, stepX, winX);
-    win(cell, textWin, step0, gameOver);
+const winTicTacToe = (step, win) => {
+    if (arr[index0] === step && arr[index3] === step && arr[index6] === step) conclusionGameTicTacToe(win);
+    else if (arr[index1] === step && arr[index4] === step && arr[index7] === step) conclusionGameTicTacToe(win);
+    else if (arr[index2] === step && arr[index5] === step && arr[index8] === step) conclusionGameTicTacToe(win);
+    else if (arr[index0] === step && arr[index1] === step && arr[index2] === step) conclusionGameTicTacToe(win);
+    else if (arr[index3] === step && arr[index4] === step && arr[index5] === step) conclusionGameTicTacToe(win);
+    else if (arr[index6] === step && arr[index7] === step && arr[index8] === step) conclusionGameTicTacToe(win);
+    else if (arr[index0] === step && arr[index4] === step && arr[index8] === step) conclusionGameTicTacToe(win);
+    else if (arr[index2] === step && arr[index4] === step && arr[index6] === step) conclusionGameTicTacToe(win);
 }
 
-const win = (cell, textWin, step, win) => {
-    if (cell[index0].innerHTML === step && cell[index3].innerHTML === step && cell[index6].innerHTML === step) textWin.innerHTML = win;
-    else if (cell[index1].innerHTML === step && cell[index4].innerHTML === step && cell[index7].innerHTML === step) textWin.innerHTML = win;
-    else if (cell[index2].innerHTML === step && cell[index5].innerHTML === step && cell[index8].innerHTML === step) textWin.innerHTML = win;
-    else if (cell[index0].innerHTML === step && cell[index1].innerHTML === step && cell[index2].innerHTML === step) textWin.innerHTML = win;
-    else if (cell[index3].innerHTML === step && cell[index4].innerHTML === step && cell[index5].innerHTML === step) textWin.innerHTML = win;
-    else if (cell[index6].innerHTML === step && cell[index7].innerHTML === step && cell[index8].innerHTML === step) textWin.innerHTML = win;
-    else if (cell[index0].innerHTML === step && cell[index4].innerHTML === step && cell[index8].innerHTML === step) textWin.innerHTML = win;
-    else if (cell[index2].innerHTML === step && cell[index4].innerHTML === step && cell[index6].innerHTML === step) textWin.innerHTML = win;
+const conclusionGameTicTacToe = (win) => {
+    document.querySelector(classWin).innerHTML = win;
+    if (win === winX) {
+        document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
+        playAudio(audioWinTicTacToe);
+    } else {
+        playAudio(audioGameOverTicTacToe);
+    }
 }
