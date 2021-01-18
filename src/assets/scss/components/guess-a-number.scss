@@ -19,7 +19,7 @@
     &__close {
         position: absolute;
         top: 0;
-        right: 50px;
+        right: 55px;
         transform: translateX(100%);
     }
 
@@ -66,6 +66,7 @@
         margin-top: 10px;
         padding-left: 5px;
         padding-right: 5px;
+        font-size: 16px;
 
         @include resolution(mobile) {
             font-size: 14px;

@@ -69,10 +69,13 @@
     }
 
     #snake-p-size {
+        font-size: 16px;
+
         @include resolution(mobile) {
             font-size: 12px;
         }
     }
+    
     .rightMenu {
         background: $color-mine-shaft;
         display: inline-block;

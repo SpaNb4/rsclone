@@ -50,7 +50,7 @@ const openSimonGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const closeSimonGame = () => {
     simonGame.reset();
@@ -59,7 +59,7 @@ const closeSimonGame = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
-}
+};
 
 const openGuessaNumberGame = () => {
     guessAnumberGame.create();
@@ -68,7 +68,7 @@ const openGuessaNumberGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const closenGuessaNumberGame = () => {
     guessAnumberGame.reset();
@@ -77,7 +77,7 @@ const closenGuessaNumberGame = () => {
     overlay.classList.remove(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const openSnakeGameClick = () => {
     snakeGame.create();
@@ -86,7 +86,7 @@ const openSnakeGameClick = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const closeSnakeGameClick = () => {
     snakeGame.reset();
@@ -94,7 +94,7 @@ const closeSnakeGameClick = () => {
     snake.classList.remove(ACTIVE);
     overlay.classList.remove(ACTIVE);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const onClockClick = () => {
     openMemoryGame();
@@ -102,15 +102,7 @@ const onClockClick = () => {
 
 const onPianoClick = () => {
     openSimonGame();
-}
-
-const onPaperitemClick = () => {
-    openGuessaNumberGame();
-}
-
-const onPaperItemOneClick = () => {
-    openSnakeGameClick();
-}
+};
 
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
@@ -162,8 +154,8 @@ class Room {
             [picture, onPictureClick],
             [memoryClose, closeMemoryGame],
             [simonClose, closeSimonGame],
-            [paperitem, onPaperitemClick],
-            [paperitemone, onPaperItemOneClick],
+            [paperitem, openGuessaNumberGame],
+            [paperitemone, openSnakeGameClick],
             [snakeClose, closeSnakeGameClick],
             [guessANumberClose, closenGuessaNumberGame],
         ];
