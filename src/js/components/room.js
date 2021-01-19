@@ -24,7 +24,7 @@ const guessANumberClose = document.querySelector('.guess-a-number__close');
 
 const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
 
-const openMemoryGame = () => {
+const onClockClick = () => {
     memoryGame.create();
     state.memory ? memoryGame.links[0].focus() : memoryClose.focus();
 
@@ -42,7 +42,7 @@ const closeMemoryGame = () => {
     document.removeEventListener('click', outGameClick);
 };
 
-const openSimonGame = () => {
+const onPianoClick = () => {
     simonGame.create();
     state.simon ? simonGame.button.focus() : simonClose.focus();
 
@@ -94,14 +94,6 @@ const closeSnakeGameClick = () => {
     snake.classList.remove(ACTIVE);
     overlay.classList.remove(ACTIVE);
     document.addEventListener('click', outGameClick);
-};
-
-const onClockClick = () => {
-    openMemoryGame();
-};
-
-const onPianoClick = () => {
-    openSimonGame();
 };
 
 const onDocumentEscPress = (evt) => {

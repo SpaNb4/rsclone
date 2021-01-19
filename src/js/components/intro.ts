@@ -90,10 +90,11 @@ const content1: HTMLElement = document.querySelector('#intro-content-1');
 const content2: HTMLElement = document.querySelector('#intro-content-2');
 
 startButton.addEventListener('click', () => {
-  content1.classList.toggle(DISABLED);
-  content2.classList.toggle(DISABLED);
+  content1.classList.add(DISABLED);
+  content2.classList.remove(DISABLED);
 });
 
 continueButton.addEventListener('click', () => {
+  content2.classList.add(DISABLED);
   content1.parentElement.classList.add(DISABLED);
 });
