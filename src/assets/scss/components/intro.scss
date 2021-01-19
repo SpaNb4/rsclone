@@ -34,6 +34,9 @@
     background-color: transparent;
     z-index: 101;
     transition: $transition-300;
+    p {
+      margin-block-end: 0;
+    }
 
     // &--flex {
     //   display: flex;

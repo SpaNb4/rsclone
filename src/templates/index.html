@@ -20,7 +20,11 @@
       <a href="#!" id="intro-start-button" class="btn btn-large amber lighten-3 black-text waves-effect">Start Game</a>
     </div>
     <div id="intro-content-2" class="intro__content disabled">
-      <p class="intro__text">How could I find myself in such an awkward situation? I'm kind of a smart guy, but that could happen to anyone. My boss - Mr. Atkinson runs a private detective agency in Chicago, and as you might guess I'm his assistant.<br>Well, just between us, he's kind of paranoid, sets up the traps to protect his office aginst all unwanted visitor. So today I needed to pick up a folder with documents and bring them to the court session. We were approached by Ms. Smith with a very delicate matter, but I can't talk about that. Also The Boss assigned me to feed Chex. This is a cat and our third member. Guess what happened next. Cheks jumped on me, I walked right into the trap and activated the locking mechanis.<br>Now I have to find eight clues to open this dump door as soon as possible!</p>
+      <p class="intro__text">
+      <p>How could I find myself in such an awkward situation? I'm kind of a smart guy, but that could happen to anyone. My boss - Mr. Atkinson runs a private detective agency in Chicago, and as you might guess I'm his assistant.</p>
+      <p>Well, just between us, he's kind of paranoid, sets up the traps to protect his office aginst all unwanted visitor. So today I needed to pick up a folder with documents and bring them to the court session. We were approached by Ms. Smith with a very delicate matter, but I can't talk about that. Also The Boss assigned me to feed Chex. This is a cat and our third member. Guess what happened next. Cheks jumped on me, I walked right into the trap and activated the locking mechanis.</p>
+      <p>Now I have to find eight clues to open this dump door as soon as possible!</p>
+      </p>
       <a href="#!" id="intro-continue-button" class="btn btn-large amber lighten-3 black-text waves-effect">Continue</a>
     </div>
     <div id="intro-content-3" class="intro__content disabled">
@@ -76,6 +80,12 @@
         </a>
       </li>
       <li>
+        <a id="menu-logout-button" class="hide grey-text text-lighten-5 main-header__link" href="#">
+          <i class="material-icons grey-text text-lighten-3">account_box</i>
+          <span>Logout</span>
+        </a>
+      </li>
+      <li>
         <a id="menu-volume-toggle" class="grey-text text-lighten-5 main-header__link" href="#" data-sound="on">
           <i class="material-icons grey-text text-lighten-3">volume_up</i>
           <span>Sound</span>
@@ -88,7 +98,7 @@
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-stats">
+        <a id="menu-stats-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-stats">
           <i class="material-icons grey-text text-lighten-3">timeline</i>
           <span>Statistics</span>
         </a>
@@ -107,9 +117,9 @@
           <i class="material-icons grey-text text-lighten-3 right">arrow_drop_down</i>
         </a>
         <ul id='dropdown-lang' class='dropdown-content'>
-          <li><a href="#!">English</a></li>
-          <li><a href="#!">Russian</a></li>
-          <li><a href="#!">Japanese</a></li>
+          <li><a href="/?lng=en">English</a></li>
+          <li><a href="/?lng=ru">Russian</a></li>
+          <li><a href="/?lng=ja">Japanese</a></li>
         </ul>
       </li>
     </ul>
@@ -142,53 +152,53 @@
         <div class="lock7"></div>
         <div class="lock8"></div>
       </div>
-    <div id="wall-2" class="wall">2
-      <div class="wall__container">
-        <div class="rack element"></div>
-        <div class="chest element">
-          <div class="frame element frame-image"></div>
-        </div>
-        <div class="shelfs element">
-          <div class="shelf element"></div>
-          <div class="shelf element">
-            <div class="cube cube4 element"></div>
-            <div class="cube element"></div>
+      <div id="wall-2" class="wall">2
+        <div class="wall__container">
+          <div class="rack element"></div>
+          <div class="chest element">
+            <div class="frame element frame-image"></div>
           </div>
-          <div class="shelf element">
-            <div class="cube element"></div>
-            <div class="cube element"></div>
+          <div class="shelfs element">
+            <div class="shelf element"></div>
+            <div class="shelf element">
+              <div class="cube cube4 element"></div>
+              <div class="cube element"></div>
+            </div>
+            <div class="shelf element">
+              <div class="cube element"></div>
+              <div class="cube element"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="wall-3" class="wall">3
-      <div class="wall__container">
-        <div id="hat" class="hat element"></div>
-        <div id="couch" class="couch element">
-          <div id="cat" class="cat element"></div>
-        </div>
-        <div class="mirror element"></div>
-        <div id="safe-box" class="safe-box element"></div>
-        <div id="picture" class="picture element"></div>
-        <div id="box" class="box element"></div>
-        <div id="bottle" class="bottle element"></div>
-        <div id="coffee-table" class="coffee-table element"></div>
-      </div>
-    </div>
-    <div id="wall-4" class="wall">4
-      <div class="wall__container">
-        <div class="board_paper element">
-          <div id="paper_one" class="paper element"></div>
-          <div id="paper_two" class="paper element"></div>
-        </div>
-        <div class="chair element"></div>
-        <div class="work_table element">
-          <div class="cat_statuette element"></div>
-          <div class="pillow element"></div>
+      <div id="wall-3" class="wall">3
+        <div class="wall__container">
+          <div id="hat" class="hat element"></div>
+          <div id="couch" class="couch element">
+            <div id="cat" class="cat element"></div>
+          </div>
+          <div class="mirror element"></div>
+          <div id="safe-box" class="safe-box element"></div>
+          <div id="picture" class="picture element"></div>
+          <div id="box" class="box element"></div>
+          <div id="bottle" class="bottle element"></div>
+          <div id="coffee-table" class="coffee-table element"></div>
         </div>
       </div>
-    </div>
-    <div class="floor"></div>
+      <div id="wall-4" class="wall">4
+        <div class="wall__container">
+          <div class="board_paper element">
+            <div id="paper_one" class="paper element"></div>
+            <div id="paper_two" class="paper element"></div>
+          </div>
+          <div class="chair element"></div>
+          <div class="work_table element">
+            <div class="cat_statuette element"></div>
+            <div class="pillow element"></div>
+          </div>
+        </div>
+      </div>
+      <div class="floor"></div>
     </div>
     <div class="arrows">
       <button id="room-arrow-left" class="arrow arrow--left" type="button"></button>
@@ -263,7 +273,8 @@
     <div class="game-over-lock__content"></div>
   </div>
   <div class="snake" id="snake">
-    <a href="#" id="snake__close" class="snake__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#" id="snake__close" class="snake__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <div class="snake__content">
       <div class="gameDisplay">
         <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
@@ -280,11 +291,12 @@
     </div>
   </div>
   <div class="guess-a-number" id="guess-a-number">
-    <a href="#" id="guess-a-number-close" class="guess-a-number__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#" id="guess-a-number-close" class="guess-a-number__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <div class="guess-a-number__content">
       <h3>Number Guessing Game</h3>
       <div id="statusArea">
-        <p>Please enter a number 1-100 and press the Guess button.</p>
+        <p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span>.</p>
       </div>
       <input type="number" id="userGuess" />
       <div id="buttonArea" class="button">
@@ -327,7 +339,7 @@
 
   <div id="modal-stats" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h5>Game Staistics</h5>
+      <h5>Game Statistics</h5>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
@@ -385,9 +397,6 @@
         </div>
 
       </form>
-      <div class="center-align">
-        <a id="logout" class="logout">Logout</a>
-      </div>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>

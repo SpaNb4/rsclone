@@ -18,19 +18,19 @@ import Bb from './../../assets/audio/notes/Bb.mp3';
 import B from './../../assets/audio/notes/B.mp3';
 
 const notes = [
-  { src: C, name: 'C' },
-  { src: Db, name: 'Db' },
-  { src: D, name: 'D' },
-  { src: Eb, name: 'Eb' },
-  { src: E, name: 'E' },
-  { src: F, name: 'F' },
-  { src: Gb, name: 'Gb' },
-  { src: G, name: 'G' },
-  { src: Ab, name: 'Ab' },
-  { src: A, name: 'A' },
-  { src: Bb, name: 'Bb' },
-  { src: B, name: 'B' },
-]
+    { src: C, name: 'C' },
+    { src: Db, name: 'Db' },
+    { src: D, name: 'D' },
+    { src: Eb, name: 'Eb' },
+    { src: E, name: 'E' },
+    { src: F, name: 'F' },
+    { src: Gb, name: 'Gb' },
+    { src: G, name: 'G' },
+    { src: Ab, name: 'Ab' },
+    { src: A, name: 'A' },
+    { src: Bb, name: 'Bb' },
+    { src: B, name: 'B' },
+];
 
 const ROUND_NUMBER: number = 3;
 const CLASS: string = 'simon-game__key';
@@ -43,164 +43,164 @@ const message: HTMLElement = document.querySelector('#simon-game-message');
 const buttonClose: HTMLElement = document.querySelector('#simon-game-close');
 
 interface IGameState {
-  keys: Array<HTMLElement>
-  pianoSteps: Array<HTMLElement>,
-  userSteps: Array<HTMLElement>,
-  pressed: HTMLElement,
-  count: number,
+    keys: Array<HTMLElement>;
+    pianoSteps: Array<HTMLElement>;
+    userSteps: Array<HTMLElement>;
+    pressed: HTMLElement;
+    count: number;
 }
 
 const game: IGameState = {
-  keys: [],
-  pianoSteps: [],
-  userSteps: [],
-  pressed: null,
-  count: 0
-}
+    keys: [],
+    pianoSteps: [],
+    userSteps: [],
+    pressed: null,
+    count: 0,
+};
 
 const audios: Array<HTMLAudioElement> = notes.map((note) => new Audio(note.src));
 
 const createNoteElement = (index: number): HTMLElement => {
-  const key: HTMLElement = document.createElement('a');
-  key.setAttribute('href', '#');
-  key.className = notes[index].name.length === 2 ? `${CLASS}--black` : `${CLASS}--white`;
-  key.classList.add(CLASS);
-  key.dataset.note = notes[index].name;
-  key.dataset.index = String(index);
-  game.keys.push(key);
+    const key: HTMLElement = document.createElement('a');
+    key.setAttribute('href', '#');
+    key.className = notes[index].name.length === 2 ? `${CLASS}--black` : `${CLASS}--white`;
+    key.classList.add(CLASS);
+    key.dataset.note = notes[index].name;
+    key.dataset.index = String(index);
+    game.keys.push(key);
 
-  return key;
-}
+    return key;
+};
 
 const createNotes = (): void => {
-  game.keys = [];
-  piano.innerHTML = '';
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < notes.length; i += 1) {
-    fragment.appendChild(createNoteElement(i));
-  }
-  piano.appendChild(fragment);
-}
+    game.keys = [];
+    piano.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < notes.length; i += 1) {
+        fragment.appendChild(createNoteElement(i));
+    }
+    piano.appendChild(fragment);
+};
 
 const playNote = (key: HTMLElement): void => {
-  const audio: HTMLAudioElement = audios[Number(key.dataset.index)];
-  audio.currentTime = 0;
+    const audio: HTMLAudioElement = audios[Number(key.dataset.index)];
+    audio.currentTime = 0;
 
-  playAudio(audio);
-  key.classList.add('active');
+    playAudio(audio);
+    key.classList.add('active');
 
-  audio.addEventListener('ended', () => {
-    key.classList.remove('active');
-  });
-}
+    audio.addEventListener('ended', () => {
+        key.classList.remove('active');
+    });
+};
 
 const createNextStep = (): void => {
-  let key: HTMLElement = game.keys[getRandomInt(notes.length)];
-  game.pianoSteps.push(key);
+    let key: HTMLElement = game.keys[getRandomInt(notes.length)];
+    game.pianoSteps.push(key);
 
-  setStepGoing();
-  playNote(key);
-}
+    setStepGoing();
+    playNote(key);
+};
 
 const showNextSteps = (): void => {
-  let promise = new Promise(function(resolve) {
-    let iterations: number = 0;
+    let promise = new Promise(function (resolve) {
+        let iterations: number = 0;
 
-    const interval: NodeJS.Timeout = setInterval(() => {
-      iterations += 1;
-      createNextStep();
-      if (iterations > game.count) {
-        clearInterval(interval);
-        game.count += 1;
-        resolve(game.count);
-      }
-    }, 1000);
-  });
+        const interval: NodeJS.Timeout = setInterval(() => {
+            iterations += 1;
+            createNextStep();
+            if (iterations > game.count) {
+                clearInterval(interval);
+                game.count += 1;
+                resolve(game.count);
+            }
+        }, 1000);
+    });
 
-  promise.then(() => {
-    setTimeout(setStepFinished, 1000);
-  })
-}
+    promise.then(() => {
+        setTimeout(setStepFinished, 1000);
+    });
+};
 
 const isStepsCorrect = (): boolean => {
-  return game.userSteps.length === game.pianoSteps.length && game.userSteps.every((v, i) => v === game.pianoSteps[i]);
-}
+    return game.userSteps.length === game.pianoSteps.length && game.userSteps.every((v, i) => v === game.pianoSteps[i]);
+};
 
 const resetSteps = (): void => {
-  game.pianoSteps = [];
-  game.userSteps = [];
-}
+    game.pianoSteps = [];
+    game.userSteps = [];
+};
 
 const setInitState = () => {
-  game.count = 0;
-  message.textContent = 'Press The Clef to start game';
-  score.innerHTML = '';
-  buttonStart.classList.remove('disabled');
-  buttonStart.focus();
-  piano.classList.add('disabled');
-  piano.classList.remove('won');
-}
+    game.count = 0;
+    message.innerHTML = '<p>Press The Clef to start game</p>';
+    score.innerHTML = '';
+    buttonStart.classList.remove('disabled');
+    buttonStart.focus();
+    piano.classList.add('disabled');
+    piano.classList.remove('won');
+};
 
 const setStartedState = () => {
-  message.textContent = '...';
-  buttonStart.classList.add('disabled');
-}
+    message.textContent = '...';
+    buttonStart.classList.add('disabled');
+};
 
 const setFinishedState = () => {
-  message.textContent = 'Congrats! The word is *****!';
-  buttonClose.focus();
-  buttonStart.classList.add('disabled');
-  piano.classList.add('disabled');
-  piano.classList.add('won');
-  state.simon = false;
-}
+    message.innerHTML = '<p><span>Congrats! The word is</span> *****!</p>';
+    buttonClose.focus();
+    buttonStart.classList.add('disabled');
+    piano.classList.add('disabled');
+    piano.classList.add('won');
+    state.simon = false;
+};
 
 const setStepGoing = () => {
-  message.textContent = '...';
-  piano.classList.add('disabled');
-  allElementsBlur();
-}
+    message.textContent = '...';
+    piano.classList.add('disabled');
+    allElementsBlur();
+};
 
 const setWrongSteps = () => {
-  message.textContent = 'Error! Try again';
-}
+    message.innerHTML = '<span>Error! Try again</span>';
+};
 
 const setStepFinished = () => {
-  game.pressed.focus();
-  message.textContent = 'Repeat after piano';
-  piano.classList.remove('disabled');
-}
+    game.pressed.focus();
+    message.innerHTML = '<p>Repeat after piano</p>';
+    piano.classList.remove('disabled');
+};
 
 const createGame = (): void => {
-  if (state.simon) {
-    createNotes();
-    setInitState();
-  }
-}
+    if (state.simon) {
+        createNotes();
+        setInitState();
+    }
+};
 
 const startGame = (): void => {
-  game.pressed = game.keys[0];
-  showNextSteps();
-  setStartedState();
-}
+    game.pressed = game.keys[0];
+    showNextSteps();
+    setStartedState();
+};
 
 const resetGame = (): void => {
-  if (state.simon) {
-    resetSteps();
-    setInitState();
-    buttonStart.classList.remove('disabled');
-  };
-}
+    if (state.simon) {
+        resetSteps();
+        setInitState();
+        buttonStart.classList.remove('disabled');
+    }
+};
 
 const allElementsBlur = (): void => {
-  if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-}
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+};
 
 const onPianoClick = (evt: MouseEvent): void => {
-    let target : HTMLElement;
+    let target: HTMLElement;
 
     if (evt.target instanceof HTMLElement) {
-      target =  evt.target;
+        target = evt.target;
     }
 
     game.pressed = target;
@@ -208,55 +208,54 @@ const onPianoClick = (evt: MouseEvent): void => {
     playNote(target);
 
     if (game.userSteps.length === game.pianoSteps.length) {
-      if (isStepsCorrect()) {
-        score.innerHTML += STAR_ELEMENT;
-        resetSteps();
+        if (isStepsCorrect()) {
+            score.innerHTML += STAR_ELEMENT;
+            resetSteps();
 
-        // if game over
-        if (game.count >= ROUND_NUMBER) {
-          setTimeout(setFinishedState, 1000);
+            // if game over
+            if (game.count >= ROUND_NUMBER) {
+                setTimeout(setFinishedState, 1000);
+            } else {
+                showNextSteps();
+            }
         } else {
-          showNextSteps();
+            setWrongSteps();
+            setTimeout(resetGame, 2000);
         }
-
-      } else {
-        setWrongSteps();
-        setTimeout(resetGame, 2000);
-      }
     }
-  }
+};
 
 const onPianoKeyPress = (evt: KeyboardEvent): void => {
-  let index: number;
+    let index: number;
 
-  if (document.activeElement instanceof HTMLElement) {
-    index = Number(document.activeElement.dataset.index);
-  }
+    if (document.activeElement instanceof HTMLElement) {
+        index = Number(document.activeElement.dataset.index);
+    }
 
-  if((evt.key == 'ArrowLeft' || evt.key == 'a') && index > 0) {
-    index -= 1;
-    game.keys[index].focus();
-  }
+    if ((evt.key == 'ArrowLeft' || evt.key == 'a') && index > 0) {
+        index -= 1;
+        game.keys[index].focus();
+    }
 
-  if((evt.key === 'ArrowRight' || evt.key === 'd') && index < notes.length - 1) {
-    index += 1;
-    game.keys[index].focus();
-  }
-}
+    if ((evt.key === 'ArrowRight' || evt.key === 'd') && index < notes.length - 1) {
+        index += 1;
+        game.keys[index].focus();
+    }
+};
 
 buttonStart.addEventListener('click', startGame);
 buttonStart.addEventListener('keydown', (evt: KeyboardEvent): void => {
-  evt.preventDefault();
-  if (evt.key === 'Enter') startGame();
+    evt.preventDefault();
+    if (evt.key === 'Enter') startGame();
 });
 
 piano.addEventListener('click', onPianoClick);
 piano.addEventListener('keydown', onPianoKeyPress);
 
 const simonGame = {
-  create: createGame,
-  reset: resetGame,
-  button: buttonStart
-}
+    create: createGame,
+    reset: resetGame,
+    button: buttonStart,
+};
 
 export { simonGame };

@@ -14,8 +14,8 @@ const tetris = '.tetris__game',
       column = 10,
       size = 20,
       colorBackground = white,
-      textGameOver = 'The game is over, you lose',
-      winText = 'You won';
+      textGameOver = '<span>The game is over, you lost</span>',
+      winText = '<span>You won</span>';
 
 let score = 0,
     board = [];
