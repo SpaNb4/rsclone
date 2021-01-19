@@ -2,23 +2,38 @@
     position: fixed;
     top: 50%;
     left: 50%;
+    width: 400px;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
     overflow: hidden;
     z-index: 199;
 
+    @include resolution(mobile) {
+        width: 350px;
+    }
+
     &.active {
         transform: translate(-50%, -50%) scale(1);
+    }
 
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 55px;
+        transform: translateX(100%);
     }
 
     &__content {
         display: grid;
         flex-direction: row-reverse;
-        margin-left: 30%;
-        margin-top: 5%;
+        width: 350px;
+        height: auto;
         z-index: 500;
         background-color:  $color-mine-shaft;
+
+        @include resolution(mobile) {
+            width: 300px;
+        }
     }
 
     .button {
@@ -26,47 +41,49 @@
         border-radius: 10px;
         border-style: solid;
         border-width: 1px;
-        width: 85%;
+        width: 200px;
         padding: 5px;
         text-align: center;
         font-weight: bold;
-        margin-left: 10px;
+        margin: auto;
         cursor: pointer;
 
         &:hover {
             box-shadow: 0px 0px 5px $color-silver;
         }
     }
-    h1 {
-        margin-left: 10px;
+    h3 {
+        margin-left: 15px;
         font-size: 25px;
-        width: 95%;
     }
 
-    h2 {
+    h4 {
         margin-left: 10px;
         font-size: 20px;
-        width:  100%;
     }
+
     #historyArea {
         margin-top: 10px;
         padding-left: 5px;
         padding-right: 5px;
+        font-size: 16px;
+
+        @include resolution(mobile) {
+            font-size: 14px;
+        }
     }
 
     #statusArea {
-        width: 180px;
         font-size: 20px;
-        margin-left: 10px;
+        margin-left: 15px;
     }
 
     #userGuess {
-        width: 80%;
-        height: 20px;
-        margin-left: 10px;
+        width: 200px;
+        height: 30px;
+        margin: 10px auto;
         border-radius: 10px;
         border-width: 1px;
-        padding: 5px;
         background-color: $color-pavlova;
 
         &:hover {

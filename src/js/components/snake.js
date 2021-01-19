@@ -1,4 +1,6 @@
-import { getRandomIntInclusive} from './utils';
+import { getRandomIntInclusive, playAudio } from './utils';
+import winSound from '../../assets/audio/snake-game-win.mp3';
+import overSound from '../../assets/audio/snake-game-over.mp3';
 
 const display = [];
 let viewPort;
@@ -10,10 +12,8 @@ const gameSpeed = 10;
 let renderIndex = 0;
 const speedUpLimit = 5;
 let onTick;
-const close = '.snake__close';
 const message = '#message';
 const snakeLengthtoWin = 10;
-const paperitem = '#paper';
 const snakeClass = '.snake';
 const startGameButton = 'startGame';
 const activeClass = 'active';
@@ -21,6 +21,8 @@ const red = 'rgb(245, 0, 6)';
 const green = 'rgb(10, 174, 31)';
 const white = 'rgb(250, 250, 250)';
 const codGray = 'rgb(25, 25, 25)';
+const snakeLength = 'snakeLength';
+const displayId = 'display';
 
 const rectStyles = [
     {
@@ -147,19 +149,7 @@ function downPress() {
     snake.xDir = 0;
 }
 
-function escPress() {
-    if (gameStatus === 'game') {
-        gameStatus = 'paused';
-        return;
-    }
-
-    if (gameStatus === 'paused') {
-        gameStatus = 'game';
-    }
-}
-
 const keyMap = {
-    Escape: escPress,
     ArrowRight: rightPress,
     ArrowLeft: leftPress,
     ArrowUp: upPress,
@@ -207,11 +197,15 @@ function gameOver(endType) {
     clearInterval(gameTimer);
     gameStatus = 'stopped';
     document.querySelector(message).textContent = 'The game is over. You can try again!';
+    const audioOver = new Audio(overSound);
+    playAudio(audioOver);
 }
 
 function gameWin(endType) {
     gameStatus = 'win';
     document.querySelector(message).textContent = 'You won!';
+    const audioWin = new Audio(winSound);
+    playAudio(audioWin);
 }
 
 function setSnakeOnDisplay() {
@@ -314,7 +308,7 @@ function startGame(onTickHandler) {
 }
 
 function statRender() {
-    document.getElementById('snakeLength').innerHTML = snake.sections.length;
+    document.getElementById(snakeLength).innerHTML = snake.sections.length;
 }
 
 document.getElementById(startGameButton).onclick = () => {
@@ -324,16 +318,23 @@ document.getElementById(startGameButton).onclick = () => {
     startGame(statRender);
 };
 
-document.querySelector(paperitem).addEventListener('click', () => {
+function openSnakeGame() {
     document.querySelector(snakeClass).classList.add(activeClass);
-    viewPort = document.getElementById('display');
+    viewPort = document.getElementById(displayId);
     initGame(viewPort);
     startGame(statRender);
-});
+}
 
-document.querySelector(close).addEventListener('click', () => {
+function closeSnakeGame() {
     document.querySelector(message).textContent = '';
     clearInterval(gameTimer);
     clearDisplay();
     document.querySelector(snakeClass).classList.remove(activeClass);
-});
+}
+
+const snakeGame = {
+    create: openSnakeGame,
+    reset: closeSnakeGame,
+};
+
+export { snakeGame };
