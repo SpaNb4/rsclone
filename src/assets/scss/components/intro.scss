@@ -1,0 +1,146 @@
+.intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background: #000;
+  z-index: 100;
+
+  &.disabled {
+    display: none;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    position: absolute;
+    width: 75%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: transparent;
+    z-index: 101;
+    transition: $transition-300;
+    p {
+      margin-block-end: 0;
+    }
+
+    // &--flex {
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: center;
+    //   height: 100%;
+    // }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+
+  &__sub {
+    margin: 0 0 15px;
+    font-size: 16px;
+
+    @include resolution(tablet) {
+      font-size: 20px;
+    }
+
+    @include resolution(desktop) {
+      font-size: 22px;
+    }
+
+    @include resolution(big-desktop) {
+      font-size: 26px;
+    }
+
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0 0 35px;
+    font-family: $font-viaoda-libre;
+    font-size: 32px;
+
+    @include resolution(tablet) {
+      font-size: 42px;
+    }
+
+    @include resolution(desktop) {
+      font-size: 58px;
+    }
+
+    @include resolution(big-desktop) {
+      font-size: 64px;
+    }
+
+    text-transform: capitalize;
+  }
+
+  &__text {
+    max-width: 600px;
+    padding: 0 25px;
+    margin: 0 auto 35px;
+    font-size: 1.1em;
+
+    @include resolution(big-desktop) {
+      max-width: 900px;
+    }
+  }
+
+  .btn {
+    align-self: center;
+    font-family: $font-viaoda-libre;
+    font-weight: 700;
+  }
+
+  &__image {
+    margin: 0 auto 35px;
+    width: 15vh;
+    background-color: #000;
+    opacity: 0.7;
+  }
+
+  img {
+    vertical-align: top;
+  }
+
+  &__list {
+    margin-bottom: 25px;
+  }
+
+  &__link {
+    position: relative;
+    display: inline-block;
+    padding: 5px 0;
+    color: $color-pavlova;
+    border-bottom: 1px solid transparent;
+    transition: $transition-300;
+
+    &:hover {
+      border-color: $color-pavlova;
+    }
+  }
+
+  &__copyrights {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    font-size: 0.75em;
+  }
+}
+

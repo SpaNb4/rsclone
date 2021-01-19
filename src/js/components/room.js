@@ -7,6 +7,7 @@ import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown } from './tetris';
 import soundClickGameTicTacToe from './../../assets/audio/tictactoe-click.mp3';
 import soundClickTetris from './../../assets/audio/tetris-click.mp3';
+import { snakeGame } from './snake';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -33,10 +34,14 @@ const closeLock = document.querySelector('.game-over-lock__close');
 const audioClickGameTicTacToe = new Audio(soundClickGameTicTacToe);
 const audioClickTetris = new Audio(soundClickTetris);
 
+const paperitemone = document.querySelector('#paper_one');
+const snake = document.querySelector('#snake');
+const snakeClose = document.querySelector('.snake__close');
+const guessANumberClose = document.querySelector('.guess-a-number__close');
 
 const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
 
-const openMemoryGame = () => {
+const onClockClick = () => {
     memoryGame.create();
     state.memory ? memoryGame.links[0].focus() : memoryClose.focus();
 
@@ -54,7 +59,7 @@ const closeMemoryGame = () => {
     document.removeEventListener('click', outGameClick);
 };
 
-const openSimonGame = () => {
+const onPianoClick = () => {
     simonGame.create();
     state.simon ? simonGame.button.focus() : simonClose.focus();
 
@@ -62,7 +67,7 @@ const openSimonGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const closeSimonGame = () => {
     simonGame.reset();
@@ -71,7 +76,7 @@ const closeSimonGame = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
-}
+};
 
 const openGuessaNumberGame = () => {
     guessAnumberGame.create();
@@ -80,7 +85,7 @@ const openGuessaNumberGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const closenGuessaNumberGame = () => {
     guessAnumberGame.reset();
@@ -89,7 +94,7 @@ const closenGuessaNumberGame = () => {
     overlay.classList.remove(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const openTicTacToeGame = () => {
     gameTicTacToe();
@@ -148,17 +153,22 @@ const clearTetrisGame = () => {
     playAudio(audioClickTetris);
 };
 
-const onClockClick = () => {
-    openMemoryGame();
+const openSnakeGameClick = () => {
+    snakeGame.create();
+
+    snake.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
 };
 
-const onPianoClick = () => {
-    openSimonGame();
-}
+const closeSnakeGameClick = () => {
+    snakeGame.reset();
 
-const onPaperitemClick = () => {
-    openGuessaNumberGame();
-}
+    snake.classList.remove(ACTIVE);
+    overlay.classList.remove(ACTIVE);
+    document.addEventListener('click', outGameClick);
+};
 
 const onTicTacToeClick = () => {
     openTicTacToeGame();
@@ -178,6 +188,7 @@ const onDocumentEscPress = (evt) => {
         closeTicTacToeGame();
         closeTetrisGame();
         closeLocks();
+        closeSnakeGameClick();
     }
 };
 
@@ -191,6 +202,7 @@ const outGameClick = (evt) => {
         closeTicTacToeGame();
         closeTetrisGame();
         closeLocks();
+        closeSnakeGameClick();
     }
 };
 
@@ -230,6 +242,10 @@ class Room {
             [closeTetris, closeTetrisGame],
             [repeatTetris, clearTetrisGame],
             [closeLock, closeLocks]
+            [paperitem, openGuessaNumberGame],
+            [paperitemone, openSnakeGameClick],
+            [snakeClose, closeSnakeGameClick],
+            [guessANumberClose, closenGuessaNumberGame],
         ];
 
         clickableObjArr.forEach((item) => {
@@ -242,4 +258,6 @@ window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
 });
 
-export { ACTIVE, overlay, onDocumentEscPress, outGameClick, closenGuessaNumberGame};
+export {
+    ACTIVE, overlay, onDocumentEscPress, outGameClick,
+};

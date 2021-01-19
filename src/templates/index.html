@@ -10,8 +10,81 @@
 </head>
 
 <body>
+  <div class="intro">
+    <div id="intro-content-1" class="intro__content">
+      <h4 class="intro__sub">welcome to</h4>
+      <h1 class="intro__title">Lorem ipsum dolor</h1>
+      <div class="intro__image">
+        <img src="./assets/img/door-intro.png" alt="">
+      </div>
+      <a href="#!" id="intro-start-button" class="btn btn-large amber lighten-3 black-text waves-effect">Start Game</a>
+    </div>
+    <div id="intro-content-2" class="intro__content disabled">
+      <p class="intro__text">
+      <p>How could I find myself in such an awkward situation? I'm kind of a smart guy, but that could happen to anyone. My boss - Mr. Atkinson runs a private detective agency in Chicago, and as you might guess I'm his assistant.</p>
+      <p>Well, just between us, he's kind of paranoid, sets up the traps to protect his office aginst all unwanted visitor. So today I needed to pick up a folder with documents and bring them to the court session. We were approached by Ms. Smith with a very delicate matter, but I can't talk about that. Also The Boss assigned me to feed Chex. This is a cat and our third member. Guess what happened next. Cheks jumped on me, I walked right into the trap and activated the locking mechanis.</p>
+      <p>Now I have to find eight clues to open this dump door as soon as possible!</p>
+      </p>
+      <a href="#!" id="intro-continue-button" class="btn btn-large amber lighten-3 black-text waves-effect">Continue</a>
+    </div>
+    <div id="intro-content-3" class="intro__content disabled">
+      <h2 class="intro__title">Credits</h2>
+      <h4 class="intro__sub">Created by</h4>
+      <ul class="intro__list">
+        <li>
+          <a class="intro__link" href="https://github.com/AlesyaKuptsova">Alesya</a>
+        </li>
+        <li>
+          <a class="intro__link" href="https://github.com/lemeshkonastya" target="_blank">Anastasia</a>
+        </li>
+        <li>
+          <a class="intro__link" href="https://github.com/spanb4" target="_blank">Dzmitry</a>
+        </li>
+        <li>
+          <a class="intro__link" href="https://github.com/magklax" target="_blank">Nadezda</a>
+        </li>
+      </ul>
+      <h4 class="intro__sub">Images and Icons</h4>
+      <ul class="intro__list">
+        <li>
+          <a class="intro__link" href="https://www.flaticon.com/" target="_blank">Flaticon</a>
+        </li>
+        <li>
+          <a class="intro__link" href="https://www.freepik.com/" target="_blank">Freepik</a>
+        </li>
+      </ul>
+      <h4 class="intro__sub">Sound Effects</h4>
+      <ul class="intro__list">
+        <li>
+          <a class="intro__link" href="https://mixkit.co/free-sound-effects/goal/" target="_blank">Mixkit</a>
+        </li>
+      </ul>
+      <div class="intro__copyrights">Lorem ipsum dolor @ 2021</div>
+    </div>
+    <canvas id="intro-canvas"></canvas>
+  </div>
+
   <header class="main-header">
     <ul id="slide-out" class="sidenav grey darken-3 main-header__list">
+      <li>
+        <a id="menu-register-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-register">
+          <i class="material-icons grey-text text-lighten-3">account_circle</i>
+          <span>Register</span>
+        </a>
+      </li>
+      <li>
+        <a id="menu-login-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-login">
+          <i class="material-icons grey-text text-lighten-3">account_box</i>
+          <span>Login</span>
+        </a>
+      </li>
+      <li>
+        <a id="menu-logout-button" class="hide grey-text text-lighten-5 main-header__link" href="#">
+          <i class="material-icons grey-text text-lighten-3">account_box</i>
+          <span>Logout</span>
+        </a>
+      </li>
       <li>
         <a id="menu-volume-toggle" class="grey-text text-lighten-5 main-header__link" href="#" data-sound="on">
           <i class="material-icons grey-text text-lighten-3">volume_up</i>
@@ -19,19 +92,20 @@
         </a>
       </li>
       <li>
-          <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
+        <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
           <i class="material-icons grey-text text-lighten-3">info</i>
           <span>How to play?</span>
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-stats">
+        <a id="menu-stats-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-stats">
           <i class="material-icons grey-text text-lighten-3">timeline</i>
           <span>Statistics</span>
         </a>
       </li>
       <li>
-        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-restart">
+        <a id="menu-restart-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-restart">
           <i class="material-icons grey-text text-lighten-3">refresh</i>
           <span>Restart</span>
         </a>
@@ -43,9 +117,9 @@
           <i class="material-icons grey-text text-lighten-3 right">arrow_drop_down</i>
         </a>
         <ul id='dropdown-lang' class='dropdown-content'>
-          <li><a href="#!">English</a></li>
-          <li><a href="#!">Russian</a></li>
-          <li><a href="#!">Japanese</a></li>
+          <li><a href="/?lng=en">English</a></li>
+          <li><a href="/?lng=ru">Russian</a></li>
+          <li><a href="/?lng=ja">Japanese</a></li>
         </ul>
       </li>
     </ul>
@@ -115,7 +189,7 @@
       <div id="wall-4" class="wall">4
         <div class="wall__container">
           <div class="board_paper element">
-            <div id="paper" class="paper element"></div>
+            <div id="paper_one" class="paper element"></div>
             <div id="paper_two" class="paper element"></div>
           </div>
           <div class="chair element"></div>
@@ -165,25 +239,32 @@
     <div class="codeTetris"></div>
   </div>
   <div id="memory-game" class="memory-game">
-    <a href="#" id="memory-game-close" class="memory-game__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#" id="memory-game-close" class="memory-game__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <div id="memory-game-grid" class="memory-game__grid"></div>
   </div>
   <div class="hangman">
+    <span class="hangman_close_btn"><i class="material-icons medium grey-text text-grey">close</i></span>
     <h1>Hangman</h1>
     <p class="word_field"></p>
     <form class="hangman_form">
-      <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
-      <input class="guess_btn" type="button" value="Guess">
+      <div class="input_wrapper">
+        <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
+        <input class="guess_btn" type="button" value="Guess">
+      </div>
       <ul class="wrong_letters">
         <p>Wrong Letters:</p>
       </ul>
-      <img class="hangman_img" src="./assets/img/hangman_0.png"><br />
+      <div class="hangman_image_wrap">
+        <img class="hangman_img" src="./assets/img/hangman_0.png">
+      </div>
     </form>
     <div class="message"></div>
   </div>
   <div class="gem-puzzle"></div>
   <div id="simon-game" class="simon-game">
-    <a href="#!" id="simon-game-close" class="simon-game__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#!" id="simon-game-close" class="simon-game__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <a href="#!" id="simon-game-start" class="simon-game__start"></a>
     <div class="simon-game__control">
       <div id="simon-game-score" class="simon-game__score"></div>
@@ -191,59 +272,42 @@
     </div>
     <div id="simon-game-piano" class="simon-game__piano"></div>
   </div>
-  <div id="modal-rules" class="modal">
-    <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h4>How to play this Game?</h4>
-      <p>
-        There are a number of active objects in this room that change their state when the cursor is hovered over.
-        Each of the objects containes a simple (and probably tricky) puzzle.
-        Crack these puzzles in sequence, get hints and find the key to open the door and finally exit the room!
-      </p>
-      <p>
-        You can use the mouse as well as keybord (WASD & Enter) to play this game.
-      </p>
-      <p>
-        Turn sound off if you prefer to play in silent mode.
-      </p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
-    </div>
-  </div>
   <div class="game-over-lock">
     <span class="game-over-lock__close"><i class="material-icons medium grey-text text-grey">close</i></span>
     <div class="game-over-lock__content"></div>
   </div>
-  <div class="snake">
-    <span class="snake__close">&times</span>
+  <div class="snake" id="snake">
+    <a href="#" id="snake__close" class="snake__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <div class="snake__content">
-          <div class="gameDisplay">
-            <canvas class="display" id="display">  Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
-          </div>
-          <div class="rightMenu">
-            <h3>Information</h3>
-            <p><label>Snake length:</label>  <span id="snakeLength"></span></p>
-            <p>
-              Arrows - movement<br/>
-              Escape - pause/resume
-            </p>
-            <button id="startGame">Start new game</button>
-            <h1 id="message"></h1>
-          </div>
+      <div class="gameDisplay">
+        <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
+      </div>
+      <div class="rightMenu">
+        <h3>Information</h3>
+        <p><label>Snake length:</label> <span id="snakeLength"></span></p>
+        <p id="snake-p-size">
+          Arrows - movement
+        </p>
+        <button id="startGame">Start new game</button>
+        <h4 id="message"></h4>
+      </div>
     </div>
   </div>
   <div class="guess-a-number" id="guess-a-number">
+    <a href="#" id="guess-a-number-close" class="guess-a-number__close"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
     <div class="guess-a-number__content">
-      <h1>Number Guessing Game</h1>
+      <h3>Number Guessing Game</h3>
       <div id="statusArea">
-        <p>Please enter a number 1-100 and press the Guess button.</p>
+        <p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span>.</p>
       </div>
       <input type="number" id="userGuess" />
       <div id="buttonArea" class="button">
         Guess
       </div>
       <div id="historyArea">
-        <h2>Your Previous Guesses</h2>
+        <h4>Your Previous Guesses</h4>
         <ol id="historyList"></ol>
       </div>
     </div>
@@ -252,11 +316,7 @@
     <a href="https://rs.school/js/" target="_blank">
       <img src="./assets/img/rs_school_js.svg" alt="RS Shcool Log" width="55" height="20">
     </a>
-    <ul class="main-footer__list">
-      <li><a href="https://github.com/alesyakuptsova" target="_blank">Alesia</a></li>
-      <li><a href="https://github.com/lemeshkonastya" target="_blank">Anastasia</a></li>
-      <li><a href="https://github.com/spanb4" target="_blank">Dzmitry</a></li>
-      <li><a href="https://github.com/magklax" target="_blank">Nadezda</a></li>
+    <ul id="footer-list" class="main-footer__list">
       <li>© 2021</li>
     </ul>
   </footer>
@@ -283,7 +343,7 @@
 
   <div id="modal-stats" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h5>Game Staistics</h5>
+      <h5>Game Statistics</h5>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
@@ -293,6 +353,54 @@
   <div id="modal-restart" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
       <h5>Your progress was reset. Try again!</h5>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-register" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 class="center-align">Register your account</h4>
+      <form id="register_form">
+        <div class='input-field'>
+          <input class='validate' type='email' name='register_email' id='register_email' />
+          <label for='register_email'>Enter your email</label>
+          <span id="email_helper_register" class="email_helper helper-text hide">Helper text</span>
+        </div>
+        <div class='input-field'>
+          <input class='validate' type='password' name='register_password' id='register_password' />
+          <label for='register_password'>Enter your password</label>
+        </div>
+        <div class='row center-align'>
+          <button type='submit' name='btn_register' class='btn btn-large waves-effect teal'>Register</button>
+        </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-login" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 id="login_heading" class="center-align">Login to your account</h4>
+      <form id="login_form">
+        <div class='input-field'>
+          <input class='validate' type='email' name='login_email' id='login_email' />
+          <label for='login_email'>Enter your email</label>
+          <span id="email_helper_login" class="email_helper helper-text hide">Helper text</span>
+        </div>
+        <div class='input-field'>
+          <input class='validate' type='password' name='login_password' id='login_password' />
+          <label for='login_password'>Enter your password</label>
+        </div>
+        <div class='row center-align'>
+          <button type='submit' name='btn_login' class='btn btn-large waves-effect teal'>Login</button>
+        </div>
+
+      </form>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
