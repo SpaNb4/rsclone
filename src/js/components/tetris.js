@@ -1,43 +1,19 @@
-
 import {createBoard, drawBoard, piece, gameOver, clear} from './tetrisGame.js'
 import { playAudio } from './utils';
 import soundClickTetris from './../../assets/audio/tetris-click.mp3';
 
-const cubeImage = '.cube4',
-      close = '.tetris__close',
-      game = '.tetris',
-      repeat = '.tetris__repeat',
-      active = 'active',
-      audioClickTetris = new Audio(soundClickTetris);
+const audioClickTetris = new Audio(soundClickTetris);
 
 let dropStart = Date.now();
 
-document.querySelector(cubeImage).addEventListener('click', () => {
-    document.querySelector(game).classList.add(active);
-    startTetris();
-    playAudio(audioClickTetris);
-});
-
-document.querySelector(close).addEventListener('click', () => {
-    document.querySelector(game).classList.remove(active);
-    playAudio(audioClickTetris);
-    
-});
-
-document.querySelector(repeat).addEventListener('click', () => {
-    startTetris();
-    playAudio(audioClickTetris);
-});
-
-const startTetris = () => {
+export const startTetris = () => {
     createBoard();
     drawBoard();
     clear();
     drop();
 }
 
-
-const KeyDown = (event) => {
+export const KeyDown = (event) => {
     switch(event.keyCode) {
         case 37:
             piece.moveLeft();
@@ -73,5 +49,3 @@ const drop = () => {
         requestAnimationFrame(drop);
     }
 }
-
-document.addEventListener("keydown", KeyDown);

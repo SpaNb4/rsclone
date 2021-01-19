@@ -1,4 +1,4 @@
-import { playAudio } from './utils';
+import { playAudio, getRandomInt } from './utils';
 import soundClickTicTacToe from './../../assets/audio/tictactoe-click.mp3';
 import soundWinTicTacToe from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3';
@@ -24,10 +24,6 @@ const classCeil = '.cell',
       elemArr0 = 0,
       elemArr1 = 1,
       elemArr2 = 2,
-      frameImage = '.frame-image',
-      game = '.tic-tac-toe',
-      close = '.tic-tac-toe__close',
-      repeat = '.tic-tac-toe__repeat',
       classCodeTicTacToe = '.codeTicTacToe',
       textCodeTicTacToe = 'Code word: TEST',
       audioClickTicTacToe = new Audio(soundClickTicTacToe),
@@ -37,24 +33,7 @@ const classCeil = '.cell',
 let step = firstStep,
     arr = [elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0];
 
-document.querySelector(frameImage).addEventListener('click', () => {
-    document.querySelector(game).classList.add('active');
-    gameTicTacToe();
-    playAudio(audioClickTicTacToe);
-});
-
-document.querySelector(close).addEventListener('click', () => {
-    document.querySelector(game).classList.remove('active');
-    clearGameTicTacToe();
-    playAudio(audioClickTicTacToe);
-});
-
-document.querySelector(repeat).addEventListener('click', () => {
-    clearGameTicTacToe();
-    playAudio(audioClickTicTacToe);
-});
-
-const gameTicTacToe = () => {
+export const gameTicTacToe = () => {
     document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
             playAudio(audioClickTicTacToe);
@@ -77,7 +56,7 @@ const gameTicTacToe = () => {
     });
 }
 
-const clearGameTicTacToe = () => {
+export const closeGameTicTacToe = () => {
     document.querySelectorAll(classCeil).forEach((elem) => {
         elem.innerHTML = '';
     });
@@ -88,17 +67,13 @@ const clearGameTicTacToe = () => {
 }
 
 const computer = () => {
-    let index = randIndex();
+    let index = getRandomInt(countBlock);
     if (document.querySelectorAll(classCeil)[index].innerHTML === '') {
         document.querySelectorAll(classCeil)[index].innerHTML = step0;
         arr[index] = elemArr2;
     } else {
         computer();
     }
-}
-
-const randIndex = () => {
-    return Math.floor(Math.random() * countBlock);
 }
 
 const winTicTacToe = (step, win) => {

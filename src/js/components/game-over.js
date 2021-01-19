@@ -18,7 +18,8 @@ const lock = '.game-over-lock',
       doorNoneDisplay = 'door-none',
       enter = 13,
       numLockFromString = 5,
-      num = 1;
+      num = 1,
+      background = '#overlay';
 
 const arrLock = ['.lock1', '.lock2', '.lock3', '.lock4', '.lock5', '.lock6', '.lock7', '.lock8'],
       codeWords = ['тестовая', 'фраза', 'состоящая', 'из', 'восьми', 'слов', 'для', 'выхода'];
@@ -54,6 +55,7 @@ arrLock.forEach((elem) => {
     document.querySelector(elem).addEventListener('click', () => {
         indexLock = elem;
         document.querySelector(lock).classList.add(active);
+        document.querySelector(background).classList.add(active);
         document.querySelector(lockContent).innerHTML = layoutLockGame;
         document.addEventListener("keydown", KeyDown);
     });
@@ -61,6 +63,7 @@ arrLock.forEach((elem) => {
 
 document.querySelector(close).addEventListener('click', () => {
     document.querySelector(lock).classList.remove(active);
+    // document.querySelector(background).classList.remove(active);
 });
 
 const KeyDown = (event) => {
