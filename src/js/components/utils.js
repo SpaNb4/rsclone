@@ -47,7 +47,7 @@ function getWinCombination() {
 }
 
 function playAudio(audio) {
-    if (!state.sound) audio.volume = 0;
+    audio.volume = state.volume;
     audio.play();
 }
 

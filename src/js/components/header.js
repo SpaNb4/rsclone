@@ -1,9 +1,6 @@
 import { state } from './state';
 
-const V_ON = 'volume_up';
-const V_OFF = 'volume_off';
-
-const volumeToggle = document.querySelector('#menu-volume-toggle');
+const volumeRange = document.querySelector('#volume-range');
 const restartButton = document.querySelector('#menu-restart-button');
 const loginButton = document.querySelector('#menu-login-button');
 const emailLoginHelperText = document.querySelector('#email_helper_login');
@@ -16,18 +13,10 @@ const backendURL = 'https://spanb4.herokuapp.com';
 const INVALID = 'invalid';
 const CORRECT = 'correct';
 const HIDE = 'hide';
-const USER='user';
+const USER ='user';
 
-function onVolumeClick(evt) {
-    state.sound = !state.sound;
-
-    if (evt.currentTarget.dataset.sound === 'on') {
-        evt.currentTarget.dataset.sound = 'off';
-        evt.currentTarget.querySelector('i').textContent = V_OFF;
-    } else {
-        evt.currentTarget.dataset.sound = 'on';
-        evt.currentTarget.querySelector('i').textContent = V_ON;
-    }
+function onVolumeRangeChange(evt) {
+    state.sound = evt.target.value / 100;
 }
 
 function onRestartClick() {
@@ -126,9 +115,10 @@ registerForm.addEventListener('submit', function (e) {
 function navInit() {
     M.Sidenav.init(document.querySelectorAll('.sidenav'), { edge: 'right' });
     M.Modal.init(document.querySelectorAll('.modal'), { startingTop: '10%' });
-    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), { coverTrigger: false });
+    M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
+    M.FormSelect.init(document.querySelectorAll('select'), { classes: 'main-header__select' });
 
-    volumeToggle.addEventListener('click', onVolumeClick);
+    volumeRange.addEventListener('change', onVolumeRangeChange);
     restartButton.addEventListener('click', onRestartClick);
     loginButton.addEventListener('click', onLoginClick);
     logoutButton.addEventListener('click', onLogoutClick);

@@ -1,11 +1,11 @@
 interface stateConfig {
-  sound: boolean;
+  volume: number;
   memory: boolean;
   simon: boolean;
 }
 
 const state: stateConfig = {
-    sound: true,
+  volume: 1,
     memory: true, // can play
     simon: true, // can play
 };
