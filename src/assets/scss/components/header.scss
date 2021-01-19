@@ -7,6 +7,31 @@
 
   &__link {
     font-size: 18px !important;
+
+    &.custom-select {
+      display: flex;
+    }
+  }
+
+  // materilize custom styles
+  .sidenav .collapsible-header {
+    padding: 0 32px;
+  }
+
+  .range-field {
+    padding: 0 25px;
+  }
+
+  input[type=range] {
+    border: none;
+  }
+
+  .select-wrapper .select-dropdown {
+    color: #fafafa !important;
+  }
+
+  .thumb {
+    display: none!important;
   }
 
   &__button {

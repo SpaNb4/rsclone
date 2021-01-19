@@ -1,9 +1,6 @@
 import { state } from './state';
 
-const V_ON = 'volume_up';
-const V_OFF = 'volume_off';
-
-const volumeToggle = document.querySelector('#menu-volume-toggle');
+const volumeRange = document.querySelector('#volume-range');
 const restartButton = document.querySelector('#menu-restart-button');
 const loginButton = document.querySelector('#menu-login-button');
 const logoutButton = document.querySelector('#menu-logout-button');
@@ -19,16 +16,8 @@ const CORRECT = 'correct';
 const HIDE = 'hide';
 const USER = 'user';
 
-function onVolumeClick(evt) {
-    state.sound = !state.sound;
-
-    if (evt.currentTarget.dataset.sound === 'on') {
-        evt.currentTarget.dataset.sound = 'off';
-        evt.currentTarget.querySelector('i').textContent = V_OFF;
-    } else {
-        evt.currentTarget.dataset.sound = 'on';
-        evt.currentTarget.querySelector('i').textContent = V_ON;
-    }
+function onVolumeRangeChange(evt) {
+    state.sound = evt.target.value / 100;
 }
 
 function onRestartClick() {
@@ -117,7 +106,8 @@ registerForm.addEventListener('submit', function (e) {
 function navInit() {
     M.Sidenav.init(document.querySelectorAll('.sidenav'), { edge: 'right' });
     M.Modal.init(document.querySelectorAll('.modal'), { startingTop: '10%' });
-    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), { coverTrigger: false });
+    M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
+    M.FormSelect.init(document.querySelectorAll('select'), { classes: 'main-header__select' });
 
     if (localStorage.getItem(USER)) {
         loginButton.classList.add(HIDE);
@@ -131,7 +121,7 @@ function navInit() {
         statsButton.classList.add(HIDE);
     }
 
-    volumeToggle.addEventListener('click', onVolumeClick);
+    volumeRange.addEventListener('change', onVolumeRangeChange);
     restartButton.addEventListener('click', onRestartClick);
     logoutButton.addEventListener('click', onLogoutClick);
 }

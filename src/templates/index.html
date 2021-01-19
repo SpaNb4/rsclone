@@ -21,9 +21,9 @@
     </div>
     <div id="intro-content-2" class="intro__content disabled">
       <p class="intro__text">
-      <p>How could I find myself in such an awkward situation? I'm kind of a smart guy, but that could happen to anyone. My boss - Mr. Atkinson runs a private detective agency in Chicago, and as you might guess I'm his assistant.</p>
-      <p>Well, just between us, he's kind of paranoid, sets up the traps to protect his office aginst all unwanted visitor. So today I needed to pick up a folder with documents and bring them to the court session. We were approached by Ms. Smith with a very delicate matter, but I can't talk about that. Also The Boss assigned me to feed Chex. This is a cat and our third member. Guess what happened next. Cheks jumped on me, I walked right into the trap and activated the locking mechanis.</p>
-      <p>Now I have to find eight clues to open this dump door as soon as possible!</p>
+        <p>How could I find myself in such an awkward situation? I'm kind of a smart guy, but that could happen to anyone. My boss - Mr. Atkinson runs a private detective agency in Chicago, and as you might guess I'm his assistant.</p>
+        <p>Well, just between us, he's kind of paranoid, sets up the traps to protect his office aginst all unwanted visitor. So today I needed to pick up a folder with documents and bring them to the court session. We were approached by Ms. Smith with a very delicate matter, but I can't talk about that. Also The Boss assigned me to feed Chex. This is a cat and our third member. Guess what happened next. Cheks jumped on me, I walked right into the trap and activated the locking mechanis.</p>
+        <p>Now I have to find eight clues to open this dump door as soon as possible!</p>
       </p>
       <a href="#!" id="intro-continue-button" class="btn btn-large amber lighten-3 black-text waves-effect">Continue</a>
     </div>
@@ -65,7 +65,7 @@
   </div>
 
   <header class="main-header">
-    <ul id="slide-out" class="sidenav grey darken-3 main-header__list">
+    <ul id="slide-out" class="sidenav grey darken-3 main-header__list collapsible">
       <li>
         <a id="menu-register-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
           href="#modal-register">
@@ -86,10 +86,15 @@
         </a>
       </li>
       <li>
-        <a id="menu-volume-toggle" class="grey-text text-lighten-5 main-header__link" href="#" data-sound="on">
-          <i class="material-icons grey-text text-lighten-3">volume_up</i>
-          <span>Sound</span>
+        <a class="grey-text text-lighten-5 main-header__link collapsible-header" href="#">
+          <i class="material-icons grey-text text-lighten-3">insert_chart</i>
+          <span>Volume</span>
         </a>
+          <form action="#" class="main-header__volume collapsible-body grey darken-3">
+            <div class="range-field">
+              <input type="range" id="volume-range" min="0" max="100" class="grey-text text-lighten-5" />
+            </div>
+          </form>
       </li>
       <li>
         <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
@@ -111,16 +116,15 @@
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link dropdown-trigger" href="#dropdown-lang">
+        <a class="main-header__link custom-select">
           <i class="material-icons grey-text text-lighten-3">language</i>
-          <span>Language</span>
-          <i class="material-icons grey-text text-lighten-3 right">arrow_drop_down</i>
+          <select>
+            <option value="" disabled selected>Language</option>
+            <option value="english"><a href="/?lng=en">English</a></option>
+            <option value="russian"><a href="/?lng=en">Russian</a></option>
+            <option value="japanese"><a href="/?lng=en">Japanese</a></option>
+          </select>
         </a>
-        <ul id='dropdown-lang' class='dropdown-content'>
-          <li><a href="/?lng=en">English</a></li>
-          <li><a href="/?lng=ru">Russian</a></li>
-          <li><a href="/?lng=ja">Japanese</a></li>
-        </ul>
       </li>
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger main-header__button">
@@ -359,17 +363,17 @@
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
       <h4 class="center-align">Register your account</h4>
       <form id="register_form">
-        <div class='input-field'>
-          <input class='validate' type='email' name='register_email' id='register_email' />
-          <label for='register_email'>Enter your email</label>
+        <div class="input-field">
+          <input class="validate" type="email" name="register_email" id="register_email" />
+          <label for="register_email">Enter your email</label>
           <span id="email_helper_register" class="email_helper helper-text hide">Helper text</span>
         </div>
-        <div class='input-field'>
-          <input class='validate' type='password' name='register_password' id='register_password' />
-          <label for='register_password'>Enter your password</label>
+        <div class="input-field">
+          <input class="validate" type="password" name="register_password" id="register_password" />
+          <label for="register_password">Enter your password</label>
         </div>
-        <div class='row center-align'>
-          <button type='submit' name='btn_register' class='btn btn-large waves-effect teal'>Register</button>
+        <div class="row center-align">
+          <button type="submit" name="btn_register" class="btn btn-large waves-effect teal">Register</button>
         </div>
 
       </form>
@@ -383,17 +387,17 @@
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
       <h4 id="login_heading" class="center-align">Login to your account</h4>
       <form id="login_form">
-        <div class='input-field'>
-          <input class='validate' type='email' name='login_email' id='login_email' />
-          <label for='login_email'>Enter your email</label>
+        <div class="input-field">
+          <input class="validate" type="email" name="login_email" id="login_email" />
+          <label for="login_email">Enter your email</label>
           <span id="email_helper_login" class="email_helper helper-text hide">Helper text</span>
         </div>
-        <div class='input-field'>
-          <input class='validate' type='password' name='login_password' id='login_password' />
-          <label for='login_password'>Enter your password</label>
+        <div class="input-field">
+          <input class="validate" type="password" name="login_password" id="login_password" />
+          <label for="login_password">Enter your password</label>
         </div>
-        <div class='row center-align'>
-          <button type='submit' name='btn_login' class='btn btn-large waves-effect teal'>Login</button>
+        <div class="row center-align">
+          <button type="submit" name="btn_login" class="btn btn-large waves-effect teal">Login</button>
         </div>
 
       </form>
