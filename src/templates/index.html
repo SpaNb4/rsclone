@@ -42,6 +42,12 @@
         </a>
       </li>
       <li>
+        <a id="menu-logout-button" class="hide grey-text text-lighten-5 main-header__link" href="#">
+          <i class="material-icons grey-text text-lighten-3">account_box</i>
+          <span>Logout</span>
+        </a>
+      </li>
+      <li>
         <a id="menu-volume-toggle" class="grey-text text-lighten-5 main-header__link" href="#" data-sound="on">
           <i class="material-icons grey-text text-lighten-3">volume_up</i>
           <span>Sound</span>
@@ -54,7 +60,7 @@
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-stats">
+        <a id="menu-stats-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-stats">
           <i class="material-icons grey-text text-lighten-3">timeline</i>
           <span>Statistics</span>
         </a>
@@ -73,9 +79,9 @@
           <i class="material-icons grey-text text-lighten-3 right">arrow_drop_down</i>
         </a>
         <ul id='dropdown-lang' class='dropdown-content'>
-          <li><a href="#!">English</a></li>
-          <li><a href="#!">Russian</a></li>
-          <li><a href="#!">Japanese</a></li>
+          <li><a href="/?lng=en">English</a></li>
+          <li><a href="/?lng=ru">Russian</a></li>
+          <li><a href="/?lng=ja">Japanese</a></li>
         </ul>
       </li>
     </ul>
@@ -269,7 +275,7 @@
     <div class="guess-a-number__content">
       <h1>Number Guessing Game</h1>
       <div id="statusArea">
-        <p>Please enter a number 1-100 and press the Guess button.</p>
+        <p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span>.</p>
       </div>
       <input type="number" id="userGuess" />
       <div id="buttonArea" class="button">
@@ -312,7 +318,7 @@
 
   <div id="modal-stats" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h5>Game Staistics</h5>
+      <h5>Game Statistics</h5>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
@@ -370,9 +376,6 @@
         </div>
 
       </form>
-      <div class="center-align">
-        <a id="logout" class="logout">Logout</a>
-      </div>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
