@@ -951,7 +951,6 @@
     justify-content: center;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
-    overflow: hidden;
     z-index: 199;
 
     &.active {
@@ -959,23 +958,30 @@
     }
 
     &__close {
-        color: $color-white;
-        font-size: 70px;
         position: absolute;
-        margin-left: 93%;
+        left: 650px;
+        transform: translateX(100%);
 
         &:hover {
             cursor: pointer;
         };
 
+        @include resolution(desktop) {
+            left: 450px;
+        }
+
+        @include resolution(tablet) {
+            left: 450px;
+        }
+
         @include resolution(big-mobile) {
-            margin-left: 60%;
-            top: 100px;
+            left: 250px;
+            top: 200px;
         }
 
         @include resolution(mobile) {
-            margin-left: 60%;
-            top: 150px;
+            left: 250px;
+            top: 200px;
         }
     }
 

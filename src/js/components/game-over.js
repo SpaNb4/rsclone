@@ -57,16 +57,11 @@ arrLock.forEach((elem) => {
         document.querySelector(lock).classList.add(active);
         document.querySelector(background).classList.add(active);
         document.querySelector(lockContent).innerHTML = layoutLockGame;
-        document.addEventListener("keydown", KeyDown);
+        document.addEventListener("keydown", KeyDownLock);
     });
 });
 
-document.querySelector(close).addEventListener('click', () => {
-    document.querySelector(lock).classList.remove(active);
-    // document.querySelector(background).classList.remove(active);
-});
-
-const KeyDown = (event) => {
+const KeyDownLock = (event) => {
     switch(event.keyCode) {
         case enter:
             checkTextExit();
@@ -97,5 +92,7 @@ const checkGameOverDoor = () => {
     if (countOpenLock === arrLock.length) {
         document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
         document.querySelector(door).classList.add(doorNoneDisplay);
+        document.querySelector('#intro-content-3').classList.remove('disabled');
+        document.querySelector('#intro-content-3').parentElement.classList.remove('disabled');
     }
 }

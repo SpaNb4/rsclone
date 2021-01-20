@@ -16,7 +16,6 @@
         position: absolute;
         left: 250px;
         transform: translateX(100%);
-        cursor: pointer;
         top: -100px;
 
         @include resolution(big-mobile) {
