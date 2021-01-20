@@ -1,52 +1,53 @@
-
 import {createBoard, drawBoard, piece, gameOver, clear} from './tetrisGame.js'
+import { playAudio } from './utils';
+import soundClickTetris from './../../assets/audio/tetris-click.mp3';
 
-const cubeImage = '.cube4',
-      close = '.tetris__close',
-      game = '.tetris',
-      repeat = '.tetris__repeat',
-      active = 'active';
+const audioClickTetris = new Audio(soundClickTetris);
 
 let dropStart = Date.now();
 
-document.querySelector(cubeImage).addEventListener('click', () => {
-    document.querySelector(game).classList.add(active);
-    startTetris();
-});
-
-document.querySelector(close).addEventListener('click', () => {
-    document.querySelector(game).classList.remove(active);
-    
-});
-
-document.querySelector(repeat).addEventListener('click', () => {
-    startTetris();
-});
-
-const startTetris = () => {
+export const startTetris = () => {
     createBoard();
     drawBoard();
     clear();
     drop();
 }
 
-
-const KeyDown = (event) => {
+export const KeyDown = (event) => {
     switch(event.keyCode) {
         case 37:
             piece.moveLeft();
             dropStart = Date.now();
+            if(!gameOver){
+                playAudio(audioClickTetris);
+                audioClickTetris.currentTime = 0;
+            }
+            playAudio(audioClickTetris);
             break;
         case 38:
             piece.rotate();
             dropStart = Date.now();
+            if(!gameOver){
+                playAudio(audioClickTetris);
+                audioClickTetris.currentTime = 0;
+            }
+            playAudio(audioClickTetris);
             break;
         case 39:
             piece.moveRight();
             dropStart = Date.now();
+            if(!gameOver){
+                playAudio(audioClickTetris);
+                audioClickTetris.currentTime = 0;
+            }
+            playAudio(audioClickTetris);
             break;
         case 40:
             piece.moveDown();
+            if(!gameOver){
+                playAudio(audioClickTetris);
+                audioClickTetris.currentTime = 0;
+            }
             break;
     }
 }
@@ -63,5 +64,3 @@ const drop = () => {
         requestAnimationFrame(drop);
     }
 }
-
-document.addEventListener("keydown", KeyDown);

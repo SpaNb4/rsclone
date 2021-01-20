@@ -1,12 +1,9 @@
+import { indexLock } from './room';
+
 let flagOpen = false,
-    indexLock,
     countOpenLock = 0;
 
-const lock = '.game-over-lock',
-      lockContent = '.game-over-lock__content',
-      active = 'active',
-      close = '.game-over-lock__close',
-      lockClose = '.lock__close',
+const lockClose = '.lock__close',
       lockOpen = '.lock__open',
       lockActive = 'lock__active',
       lockGameText = '.lock-game__text',
@@ -15,10 +12,13 @@ const lock = '.game-over-lock',
       lockGameActive = 'lock-game__active',
       doorOpen = '.door-open',
       door = '.door',
-      doorNoneDisplay = 'door-none';
+      doorNoneDisplay = 'door-none',
+      enter = 13,
+      numLockFromString = 5,
+      num = 1;
 
-const arrLock = ['.lock1', '.lock2', '.lock3', '.lock4', '.lock5', '.lock6', '.lock7', '.lock8'],
-      codeWords = ['тестовая', 'фраза', 'состоящая', 'из', 'восьми', 'слов', 'для', 'выхода'];
+export const arrLock = ['.lock1', '.lock2', '.lock3', '.lock4', '.lock5', '.lock6', '.lock7', '.lock8'];
+const codeWords = ['тестовая', 'фраза', 'состоящая', 'из', 'восьми', 'слов', 'для', 'выхода'];
 
 const layoutLock = `
     <div class="lock__close lock__active">
@@ -29,7 +29,7 @@ const layoutLock = `
     </div>
 `;
 
-const layoutLockGame = `
+export const layoutLockGame = `
     <div class="lock-game">
         <div class="lock-game__close lock-game__active">
             <img src="./assets/img/close.png">
@@ -47,22 +47,9 @@ arrLock.forEach((elem) => {
     document.querySelector(elem).innerHTML += layoutLock;
 });
 
-arrLock.forEach((elem) => {
-    document.querySelector(elem).addEventListener('click', () => {
-        indexLock = elem;
-        document.querySelector(lock).classList.add(active);
-        document.querySelector(lockContent).innerHTML = layoutLockGame;
-        document.addEventListener("keydown", KeyDown);
-    });
-});
-
-document.querySelector(close).addEventListener('click', () => {
-    document.querySelector(lock).classList.remove(active);
-});
-
-const KeyDown = (event) => {
+export const KeyDownLock = (event) => {
     switch(event.keyCode) {
-        case 13:
+        case enter:
             checkTextExit();
             break;
     }
@@ -76,7 +63,7 @@ const checkOpenLock = (elem) => {
 }
 
 const checkTextExit = () => {
-    if (document.querySelector(lockGameText).value === codeWords[indexLock[5] - 1]) {
+    if (document.querySelector(lockGameText).value === codeWords[indexLock[numLockFromString] - num]) {
         document.querySelector(lockGameClose).classList.remove(lockGameActive);
         document.querySelector(lockGameOpen).classList.add(lockGameActive);
         flagOpen = true;
@@ -88,8 +75,10 @@ const checkTextExit = () => {
 }
 
 const checkGameOverDoor = () => {
-    if (countOpenLock === 8) {
+    if (countOpenLock === arrLock.length) {
         document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
         document.querySelector(door).classList.add(doorNoneDisplay);
+        document.querySelector('#intro-content-3').classList.remove('disabled');
+        document.querySelector('#intro-content-3').parentElement.classList.remove('disabled');
     }
 }
