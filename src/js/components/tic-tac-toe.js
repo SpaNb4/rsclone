@@ -16,8 +16,8 @@ const classCeil = '.cell',
       index6 = 6,
       index7 = 7,
       index8 = 8,
-      winX = 'You won !',
-      gameOver = 'The game is over, you lose',
+      winX = '<span>You won</span> !',
+      gameOver = '<span>The game is over, you lose</span>',
       countBlock = 9,
       maxStep = 5,
       firstStep = 0,
@@ -25,7 +25,7 @@ const classCeil = '.cell',
       elemArr1 = 1,
       elemArr2 = 2,
       classCodeTicTacToe = '.codeTicTacToe',
-      textCodeTicTacToe = 'Code word: TEST',
+      textCodeTicTacToe = '<span>Code word:</span> TEST',
       audioClickTicTacToe = new Audio(soundClickTicTacToe),
       audioWinTicTacToe = new Audio(soundWinTicTacToe),
       audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
@@ -37,6 +37,7 @@ export const gameTicTacToe = () => {
     document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
             playAudio(audioClickTicTacToe);
+            audioClickTicTacToe.currentTime = 0;
             if (elem.innerHTML === '') {
                 elem.innerHTML = stepX;
                 arr[index] = elemArr1;

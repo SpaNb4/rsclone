@@ -18,21 +18,36 @@ export const KeyDown = (event) => {
         case 37:
             piece.moveLeft();
             dropStart = Date.now();
+            if(!gameOver){
+                playAudio(audioClickTetris);
+                audioClickTetris.currentTime = 0;
+            }
             playAudio(audioClickTetris);
             break;
         case 38:
             piece.rotate();
             dropStart = Date.now();
+            if(!gameOver){
+                playAudio(audioClickTetris);
+                audioClickTetris.currentTime = 0;
+            }
             playAudio(audioClickTetris);
             break;
         case 39:
             piece.moveRight();
             dropStart = Date.now();
+            if(!gameOver){
+                playAudio(audioClickTetris);
+                audioClickTetris.currentTime = 0;
+            }
             playAudio(audioClickTetris);
             break;
         case 40:
             piece.moveDown();
-            playAudio(audioClickTetris);
+            if(!gameOver){
+                playAudio(audioClickTetris);
+                audioClickTetris.currentTime = 0;
+            }
             break;
     }
 }

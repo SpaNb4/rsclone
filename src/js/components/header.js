@@ -1,4 +1,5 @@
 import { state } from './state';
+import locizify from 'locizify';
 
 const volumeRange = document.querySelector('#volume-range');
 const restartButton = document.querySelector('#menu-restart-button');
@@ -10,6 +11,7 @@ const emailLoginHelperText = document.querySelector('#email_helper_login');
 const emailRegisterHelperText = document.querySelector('#email_helper_register');
 const loginForm = document.querySelector('#login_form');
 const registerForm = document.querySelector('#register_form');
+const selectLng = document.querySelector('.select-lang');
 const backendURL = 'https://spanb4.herokuapp.com';
 const INVALID = 'invalid';
 const CORRECT = 'correct';
@@ -101,6 +103,16 @@ registerForm.addEventListener('submit', function (e) {
             emailRegisterHelperText.classList.remove(HIDE);
         }
     });
+});
+
+selectLng.addEventListener('change', () => {
+    if (selectLng.value == 'english') {
+        location.href = '/?lng=en';
+    } else if (selectLng.value == 'russian') {
+        location.href = '/?lng=ru';
+    } else if (selectLng.value == 'japanese') {
+        location.href = '/?lng=ja';
+    }
 });
 
 function navInit() {
