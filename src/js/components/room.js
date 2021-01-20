@@ -6,6 +6,7 @@ import { guessAnumberGame } from './guess-a-number.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown } from './tetris';
 import { snakeGame } from './snake';
+import { KeyDownLock, arrLock, layoutLockGame } from './game-over';
 
 const ACTIVE = 'active';
 const leftArrow = document.querySelector('#room-arrow-left');
@@ -29,6 +30,7 @@ const closeTetris = document.querySelector('.tetris__close');
 const repeatTetris = document.querySelector('.tetris__repeat');
 const lock = document.querySelector('.game-over-lock');
 const closeLock = document.querySelector('.game-over-lock__close');
+const lockContent = document.querySelector('.game-over-lock__content');
 
 const paperitemone = document.querySelector('#paper_one');
 const snake = document.querySelector('#snake');
@@ -36,6 +38,8 @@ const snakeClose = document.querySelector('.snake__close');
 const guessANumberClose = document.querySelector('.guess-a-number__close');
 
 const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
+
+let indexLock;
 
 const onClockClick = () => {
     memoryGame.create();
@@ -117,6 +121,15 @@ const clearTicTacToeGame = () => {
 const closeLocks = () => {
     lock.classList.remove(ACTIVE);
     overlay.classList.remove(ACTIVE);
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+}
+
+const openLocks = () => {
+    lock.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    lockContent.innerHTML = layoutLockGame;
+    document.addEventListener("keydown", KeyDownLock);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
 }
@@ -226,11 +239,18 @@ class Room {
             [paperitem, openGuessaNumberGame],
             [paperitemone, openSnakeGameClick],
             [snakeClose, closeSnakeGameClick],
-            [guessANumberClose, closenGuessaNumberGame]
+            [guessANumberClose, closenGuessaNumberGame],
         ];
 
         clickableObjArr.forEach((item) => {
             item[0].addEventListener('click', item[1]);
+        });
+
+        arrLock.forEach((elem) => {
+            document.querySelector(elem).addEventListener('click', () => {
+                openLocks();
+                indexLock = elem;
+            });
         });
     }
 }
@@ -240,5 +260,5 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 export {
-    ACTIVE, overlay, onDocumentEscPress, outGameClick,
+    ACTIVE, overlay, onDocumentEscPress, outGameClick, indexLock
 };
