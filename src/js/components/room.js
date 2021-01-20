@@ -37,139 +37,89 @@ const lockContent = document.querySelector('.game-over-lock__content');
 
 let indexLock;
 
+//  open functions:
 const openMemoryGame = () => {
     memoryGame.create();
     state.memory ? memoryGame.links[0].focus() : memoryClose.focus();
-
     memory.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
-};
-
-const closeMemoryGame = () => {
-    memoryGame.reset();
-    memory.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
 };
 
 const openSimonGame = () => {
     simonGame.create();
     state.simon ? simonGame.button.focus() : simonClose.focus();
-
     simon.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
-};
-
-const closeSimonGame = () => {
-    simonGame.reset();
-
-    simon.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
 };
 
 const openGuessaNumberGame = () => {
     guessAnumberGame.create();
-
     guessAnumber.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
-};
-
-const closenGuessaNumberGame = () => {
-    guessAnumberGame.reset();
-
-    guessAnumber.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
 };
 
 const openTicTacToeGame = () => {
     gameTicTacToe();
     gameTicTacToePlay.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
 };
-
-const closeTicTacToeGame = () => {
-    closeGameTicTacToe();
-    gameTicTacToePlay.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-};
-
-const clearTicTacToeGame = () => {
-    closeGameTicTacToe();
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-};
-
-const closeLocks = () => {
-    lock.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-}
 
 const openLocks = () => {
     lock.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
     lockContent.innerHTML = layoutLockGame;
     document.addEventListener("keydown", KeyDownLock);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
 }
 
 const openTetrisGame = () => {
     startTetris();
     gameTetris.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
     document.addEventListener("keydown", KeyDown);
-};
-
-const closeTetrisGame = () => {
-    gameTetris.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-};
-
-const clearTetrisGame = () => {
-    startTetris();
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
 };
 
 const openSnakeGameClick = () => {
     snakeGame.create();
-
     snake.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
 };
+
+//  close functions:
+const closeMemoryGame = () => {
+    memoryGame.reset();
+    memory.classList.remove(ACTIVE);
+};
+
+const closeSimonGame = () => {
+    simonGame.reset();
+    simon.classList.remove(ACTIVE);
+};
+
+const closeGuessaNumberGame = () => {
+    guessAnumberGame.reset();
+    guessAnumber.classList.remove(ACTIVE);
+}
+
+const closeTicTacToeGame = () => {
+    closeGameTicTacToe();
+    gameTicTacToePlay.classList.remove(ACTIVE);
+};
+
+const closeLocks = () => {
+    lock.classList.remove(ACTIVE);
+}
+
+const closeTetrisGame = () => {
+    gameTetris.classList.remove(ACTIVE);
+}
 
 const closeSnakeGameClick = () => {
     snakeGame.reset();
-
     snake.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.addEventListener('click', outGameClick);
 };
 
-//
+//  clear functions:
+const clearTetrisGame = () => {
+    startTetris();
+};
+
+const clearTicTacToeGame = () => {
+    closeGameTicTacToe();
+};
+
 // all clickable objects
 const openGameObjects = [
     [piano, openSimonGame],
@@ -192,7 +142,7 @@ const closeCallbacks = [
     closeHangmanGame,
     closeGemPuzzleGame,
     closeSimonGame,
-    closenGuessaNumberGame,
+    closeGuessaNumberGame,
     closeTicTacToeGame,
     closeTetrisGame,
     closeLocks,
@@ -201,6 +151,16 @@ const closeCallbacks = [
 
 const closeAllGames = () => {
     closeCallbacks.forEach((callback) => callback());
+    overlay.classList.remove(ACTIVE);
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+};
+
+// open overlay and add handlers
+const addEventHandlers = () => {
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
 }
 
 const onDocumentEscPress = (evt) => {
@@ -233,20 +193,30 @@ class Room {
             this.activeWall.classList.add(ACTIVE);
         });
 
-        // open or clear any games
-        [...openGameObjects, ...clearGameOBjects].forEach((item) => {
+        // open any games
+        openGameObjects.forEach((item) => {
+            item[0].addEventListener('click', () => {
+                item[1]();
+                addEventHandlers();
+            });
+        });
+
+        // clear
+        clearGameOBjects.forEach((item) => {
             item[0].addEventListener('click', item[1]);
         });
 
-        // close any game by clock
+        // close any game or lock by click
         allCloseButtons.forEach((button) => {
             button.addEventListener('click', closeAllGames);
         });
 
+        // open clocks
         arrLock.forEach((elem) => {
             document.querySelector(elem).addEventListener('click', () => {
                 openLocks();
                 indexLock = elem;
+                addEventHandlers();
             });
         });
     }
