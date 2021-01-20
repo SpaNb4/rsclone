@@ -1,7 +1,13 @@
+import { playAudio } from './utils';
+import soundWinTetris from './../../assets/audio/tictactoe-win.mp3';
+import soundGameOverTetris from './../../assets/audio/tictactoe-gameover.mp3';
+
 const tetris = '.tetris__game',
       numberScore = '.numberScore',
       context2D = '2d',
       resultTetris = '.resultTetris',
+      classCodeTetris = '.codeTetris',
+      textCodeTetris = 'Code word: TEST',
       white = 'white',
       salmon = 'salmon',
       yellow = 'yellow',
@@ -14,160 +20,172 @@ const tetris = '.tetris__game',
       column = 10,
       size = 20,
       colorBackground = white,
-      textGameOver = '<span>The game is over, you lost</span>',
-      winText = '<span>You won</span>';
+      textGameOver = 'The game is over, you lose',
+      winText = 'You won',
+      audioWinTetris = new Audio(soundWinTetris),
+      audioGameOverTetris = new Audio(soundGameOverTetris),
+      elem0 = 0,
+      elem1 = 1,
+      startScore = 0,
+      winScore = 50,
+      indexFigure = 0,
+      indexColor = 1,
+      addScore = 10,
+      coord0 = 0,
+      coordStartX = 3,
+      coodStartY = -2;
 
-let score = 0,
+let score = startScore,
     board = [];
 
 const I = [
 	[
-		[0, 0, 0, 0],
-		[1, 1, 1, 1],
-		[0, 0, 0, 0],
-		[0, 0, 0, 0],
+		[elem0, elem0, elem0, elem0],
+		[elem1, elem1, elem1, elem1],
+		[elem0, elem0, elem0, elem0],
+		[elem0, elem0, elem0, elem0],
 	],
 	[
-		[0, 0, 1, 0],
-		[0, 0, 1, 0],
-		[0, 0, 1, 0],
-		[0, 0, 1, 0],
+		[elem0, elem0, elem1, elem0],
+		[elem0, elem0, elem1, elem0],
+		[elem0, elem0, elem1, elem0],
+		[elem0, elem0, elem1, elem0],
 	],
 	[
-		[0, 0, 0, 0],
-		[0, 0, 0, 0],
-		[1, 1, 1, 1],
-		[0, 0, 0, 0],
+		[elem0, elem0, elem0, elem0],
+		[elem0, elem0, elem0, elem0],
+		[elem1, elem1, elem1, elem1],
+		[elem0, elem0, elem0, elem0],
 	],
 	[
-		[0, 1, 0, 0],
-		[0, 1, 0, 0],
-		[0, 1, 0, 0],
-		[0, 1, 0, 0],
+		[elem0, elem1, elem0, elem0],
+		[elem0, elem1, elem0, elem0],
+		[elem0, elem1, elem0, elem0],
+		[elem0, elem1, elem0, elem0],
 	]
 ];
 
 const J = [
 	[
-		[1, 0, 0],
-		[1, 1, 1],
-		[0, 0, 0]
+		[elem1, elem0, elem0],
+		[elem1, elem1, elem1],
+		[elem0, elem0, elem0]
 	],
 	[
-		[0, 1, 1],
-		[0, 1, 0],
-		[0, 1, 0]
+		[elem0, elem1, elem1],
+		[elem0, elem1, elem0],
+		[elem0, elem1, elem0]
 	],
 	[
-		[0, 0, 0],
-		[1, 1, 1],
-		[0, 0, 1]
+		[elem0, elem0, elem0],
+		[elem1, elem1, elem1],
+		[elem0, elem0, elem1]
 	],
 	[
-		[0, 1, 0],
-		[0, 1, 0],
-		[1, 1, 0]
+		[elem0, elem1, elem0],
+		[elem0, elem1, elem0],
+		[elem1, elem1, elem0]
 	]
 ];
 
 const L = [
 	[
-		[0, 0, 1],
-		[1, 1, 1],
-		[0, 0, 0]
+		[elem0, elem0, elem1],
+		[elem1, elem1, elem1],
+		[elem0, elem0, elem0]
 	],
 	[
-		[0, 1, 0],
-		[0, 1, 0],
-		[0, 1, 1]
+		[elem0, elem1, elem0],
+		[elem0, elem1, elem0],
+		[elem0, elem1, elem1]
 	],
 	[
-		[0, 0, 0],
-		[1, 1, 1],
-		[1, 0, 0]
+		[elem0, elem0, elem0],
+		[elem1, elem1, elem1],
+		[elem1, elem0, elem0]
 	],
 	[
-		[1, 1, 0],
-		[0, 1, 0],
-		[0, 1, 0]
+		[elem1, elem1, elem0],
+		[elem0, elem1, elem0],
+		[elem0, elem1, elem0]
 	]
 ];
 
 const O = [
 	[
-		[0, 0, 0, 0],
-		[0, 1, 1, 0],
-		[0, 1, 1, 0],
-		[0, 0, 0, 0],
+		[elem0, elem0, elem0, elem0],
+		[elem0, elem1, elem1, elem0],
+		[elem0, elem1, elem1, elem0],
+		[elem0, elem0, elem0, elem0],
 	]
 ];
 
 const S = [
 	[
-		[0, 1, 1],
-		[1, 1, 0],
-		[0, 0, 0]
+		[elem0, elem1, elem1],
+		[elem1, elem1, elem0],
+		[elem0, elem0, elem0]
 	],
 	[
-		[0, 1, 0],
-		[0, 1, 1],
-		[0, 0, 1]
+		[elem0, elem1, elem0],
+		[elem0, elem1, elem1],
+		[elem0, elem0, elem1]
 	],
 	[
-		[0, 0, 0],
-		[0, 1, 1],
-		[1, 1, 0]
+		[elem0, elem0, elem0],
+		[elem0, elem1, elem1],
+		[elem1, elem1, elem0]
 	],
 	[
-		[1, 0, 0],
-		[1, 1, 0],
-		[0, 1, 0]
+		[elem1, elem0, elem0],
+		[elem1, elem1, elem0],
+		[elem0, elem1, elem0]
 	]
 ];
 
 const T = [
 	[
-		[0, 1, 0],
-		[1, 1, 1],
-		[0, 0, 0]
+		[elem0, elem1, elem0],
+		[elem1, elem1, elem1],
+		[elem0, elem0, elem0]
 	],
 	[
-		[0, 1, 0],
-		[0, 1, 1],
-		[0, 1, 0]
+		[elem0, elem1, elem0],
+		[elem0, elem1, elem1],
+		[elem0, elem1, elem0]
 	],
 	[
-		[0, 0, 0],
-		[1, 1, 1],
-		[0, 1, 0]
+		[elem0, elem0, elem0],
+		[elem1, elem1, elem1],
+		[elem0, elem1, elem0]
 	],
 	[
-		[0, 1, 0],
-		[1, 1, 0],
-		[0, 1, 0]
+		[elem0, elem1, elem0],
+		[elem1, elem1, elem0],
+		[elem0, elem1, elem0]
 	]
 ];
 
 const Z = [
 	[
-		[1, 1, 0],
-		[0, 1, 1],
-		[0, 0, 0]
+		[elem1, elem1, elem0],
+		[elem0, elem1, elem1],
+		[elem0, elem0, elem0]
 	],
 	[
-		[0, 0, 1],
-		[0, 1, 1],
-		[0, 1, 0]
+		[elem0, elem0, elem1],
+		[elem0, elem1, elem1],
+		[elem0, elem1, elem0]
 	],
 	[
-		[0, 0, 0],
-		[1, 1, 0],
-		[0, 1, 1]
+		[elem0, elem0, elem0],
+		[elem1, elem1, elem0],
+		[elem0, elem1, elem1]
 	],
 	[
-		[0, 1, 0],
-		[1, 1, 0],
-		[1, 0, 0]
+		[elem0, elem1, elem0],
+		[elem1, elem1, elem0],
+		[elem1, elem0, elem0]
 	]
 ];
 
@@ -214,8 +232,8 @@ class Piece {
         this.tetrominoN = 0;
         this.activeTetromino = this.tetromino[this.tetrominoN];
         
-        this.x = 3;
-        this.y = -2;
+        this.x = coordStartX;
+        this.y = coodStartY;
     }    
     
     fill(color) {
@@ -294,6 +312,7 @@ class Piece {
                 if(this.y + y < 0){
                     document.querySelector(resultTetris).innerHTML = textGameOver;
                     gameOver = true;
+                    playAudio(audioGameOverTetris);
                     break;
                 }
                 board[this.y + y][this.x + x] = this.color;
@@ -315,7 +334,7 @@ class Piece {
                 for(let c = 0; c < column; c++){
                     board[0][c] = colorBackground;
                 }
-                score += 10;
+                score += addScore;
             }
         }
         drawBoard();
@@ -334,11 +353,11 @@ class Piece {
                 let newX = this.x + c + x;
                 let newY = this.y + r + y;
                 
-                if(newX < 0 || newX >= column || newY >= row){
+                if(newX < coord0 || newX >= column || newY >= row){
                     return true;
                 }
                 
-                if(newY < 0){
+                if(newY < coord0){
                     continue;
                 }
                 
@@ -353,21 +372,23 @@ class Piece {
 
 const createPiece = () => {
     let index = Math.floor(Math.random() * pieces.length);
-    return new Piece( pieces[index][0], pieces[index][1]);
+    return new Piece( pieces[index][indexFigure], pieces[index][indexColor]);
 }
 
 export let piece = createPiece();
 export let gameOver = false;
 
 const winTetris = (score) => {
-    if (score > 40) {
+    if (score >= winScore) {
         document.querySelector(resultTetris).innerHTML = winText;
+        document.querySelector(classCodeTetris).innerHTML = textCodeTetris;
         gameOver = true;
+        playAudio(audioWinTetris);
     }
 }
 
 export const clear = () => {
-    score = 0;
+    score = startScore;
     document.querySelector(numberScore).innerHTML = score;
     document.querySelector(resultTetris).innerHTML = '';
     gameOver = false;

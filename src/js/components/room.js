@@ -3,6 +3,8 @@ import { memoryGame } from './memory';
 import { simonGame } from './simon';
 import { box, picture, onBoxClick, onPictureClick, closeHangmanGame, closeGemPuzzleGame } from './wall3';
 import { guessAnumberGame } from './guess-a-number.ts';
+import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
+import { startTetris, KeyDown } from './tetris';
 import { snakeGame } from './snake';
 
 const ACTIVE = 'active';
@@ -17,6 +19,17 @@ const simonClose = document.querySelector('#simon-game-close');
 const overlay = document.querySelector('#overlay');
 const paperitem = document.querySelector('#paper_two');
 const guessAnumber = document.querySelector('#guess-a-number');
+const frameImage = document.querySelector('.frame-image');
+const gameTicTacToePlay = document.querySelector('.tic-tac-toe');
+const closeTicTacToe = document.querySelector('.tic-tac-toe__close');
+const repeatTicTacToe = document.querySelector('.tic-tac-toe__repeat');
+const cubeImage = document.querySelector('.cube4');
+const gameTetris = document.querySelector('.tetris');
+const closeTetris = document.querySelector('.tetris__close');
+const repeatTetris = document.querySelector('.tetris__repeat');
+const lock = document.querySelector('.game-over-lock');
+const closeLock = document.querySelector('.game-over-lock__close');
+
 const paperitemone = document.querySelector('#paper_one');
 const snake = document.querySelector('#snake');
 const snakeClose = document.querySelector('.snake__close');
@@ -79,6 +92,57 @@ const closenGuessaNumberGame = () => {
     document.addEventListener('click', outGameClick);
 };
 
+const openTicTacToeGame = () => {
+    gameTicTacToe();
+    gameTicTacToePlay.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
+};
+
+const closeTicTacToeGame = () => {
+    closeGameTicTacToe();
+    gameTicTacToePlay.classList.remove(ACTIVE);
+    overlay.classList.remove(ACTIVE);
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+};
+
+const clearTicTacToeGame = () => {
+    closeGameTicTacToe();
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+};
+
+const closeLocks = () => {
+    lock.classList.remove(ACTIVE);
+    overlay.classList.remove(ACTIVE);
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+}
+
+const openTetrisGame = () => {
+    startTetris();
+    gameTetris.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
+    document.addEventListener("keydown", KeyDown);
+};
+
+const closeTetrisGame = () => {
+    gameTetris.classList.remove(ACTIVE);
+    overlay.classList.remove(ACTIVE);
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+};
+
+const clearTetrisGame = () => {
+    startTetris();
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+};
+
 const openSnakeGameClick = () => {
     snakeGame.create();
 
@@ -103,6 +167,9 @@ const onDocumentEscPress = (evt) => {
         closeGemPuzzleGame();
         closeSimonGame();
         closenGuessaNumberGame();
+        closeTicTacToeGame();
+        closeTetrisGame();
+        closeLocks();
         closeSnakeGameClick();
     }
 };
@@ -114,6 +181,9 @@ const outGameClick = (evt) => {
         closeGemPuzzleGame();
         closeSimonGame();
         closenGuessaNumberGame();
+        closeTicTacToeGame();
+        closeTetrisGame();
+        closeLocks();
         closeSnakeGameClick();
     }
 };
@@ -146,10 +216,17 @@ class Room {
             [picture, onPictureClick],
             [memoryClose, closeMemoryGame],
             [simonClose, closeSimonGame],
+            [frameImage, openTicTacToeGame],
+            [closeTicTacToe, closeTicTacToeGame],
+            [repeatTicTacToe, clearTicTacToeGame],
+            [cubeImage, openTetrisGame],
+            [closeTetris, closeTetrisGame],
+            [repeatTetris, clearTetrisGame],
+            [closeLock, closeLocks],
             [paperitem, openGuessaNumberGame],
             [paperitemone, openSnakeGameClick],
             [snakeClose, closeSnakeGameClick],
-            [guessANumberClose, closenGuessaNumberGame],
+            [guessANumberClose, closenGuessaNumberGame]
         ];
 
         clickableObjArr.forEach((item) => {
