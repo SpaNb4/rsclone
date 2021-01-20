@@ -37,6 +37,7 @@ export const gameTicTacToe = () => {
     document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
             playAudio(audioClickTicTacToe);
+            audioClickTicTacToe.currentTime = 0;
             if (elem.innerHTML === '') {
                 elem.innerHTML = stepX;
                 arr[index] = elemArr1;
