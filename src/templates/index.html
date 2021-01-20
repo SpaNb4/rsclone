@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="intro">
+  <div class="intro disabled">
     <div id="intro-content-1" class="intro__content">
       <h4 class="intro__sub">welcome to</h4>
       <h1 class="intro__title">Lorem ipsum dolor</h1>
@@ -160,7 +160,7 @@
             <div class="lamp element"></div>
           </div>
         </div>
-        
+
       </div>
       <div id="wall-2" class="wall">2
         <div class="wall__container">
@@ -210,13 +210,15 @@
       </div>
       <div class="floor"></div>
     </div>
-    <div class="arrows">
-      <button id="room-arrow-left" class="arrow arrow--left" type="button"></button>
-      <button id="room-arrow-right" class="arrow arrow--right" type="button"></button>
+    <div class="arrows" id="room-arrows">
+      <button class="arrow arrow--left" type="button"></button>
+      <button class="arrow arrow--right" type="button"></button>
     </div>
   </main>
   <div class="tic-tac-toe">
-    <a href="#!" class="tic-tac-toe__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#!" class="tic-tac-toe__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
     <div class="tic-tac-toe__repeat"><img src="./assets/img/repeat.png"></div>
     <div class="tic-tac-toe__content">
       <div class="tic-tac-toe__game">
@@ -235,7 +237,9 @@
     <div class="codeTicTacToe"></div>
   </div>
   <div class="tetris">
-    <a href="#!" class="tetris__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#!" class="tetris__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
     <div class="tetris__repeat"><img src="./assets/img/repeat.png"></div>
     <div class="tetris__content">
       <canvas class="tetris__game" width="200" height="400"></canvas>
@@ -247,12 +251,15 @@
     <div class="codeTetris"></div>
   </div>
   <div id="memory-game" class="memory-game">
-    <a href="#" id="memory-game-close" class="memory-game__close"><i
-        class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#" class="memory-game__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
     <div id="memory-game-grid" class="memory-game__grid"></div>
   </div>
   <div class="hangman">
-    <span class="hangman_close_btn"><i class="material-icons medium grey-text text-grey">close</i></span>
+    <span class="hangman_close_btn all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </span>
     <h1>Hangman</h1>
     <p class="word_field"></p>
     <form class="hangman_form">
@@ -271,8 +278,9 @@
   </div>
   <div class="gem-puzzle"></div>
   <div id="simon-game" class="simon-game">
-    <a href="#!" id="simon-game-close" class="simon-game__close"><i
-        class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#!" class="simon-game__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
     <a href="#!" id="simon-game-start" class="simon-game__start"></a>
     <div class="simon-game__control">
       <div id="simon-game-score" class="simon-game__score"></div>
@@ -281,11 +289,13 @@
     <div id="simon-game-piano" class="simon-game__piano"></div>
   </div>
   <div class="game-over-lock">
-    <a href="#!" class="game-over-lock__close"><i class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#!" class="game-over-lock__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
     <div class="game-over-lock__content"></div>
   </div>
   <div class="snake" id="snake">
-    <a href="#" id="snake__close" class="snake__close"><i
+    <a href="#" id="snake__close" class="snake__close all-close-button"><i
         class="material-icons medium grey-text text-grey">close</i></a>
     <div class="snake__content">
       <div class="gameDisplay">
@@ -303,8 +313,9 @@
     </div>
   </div>
   <div class="guess-a-number" id="guess-a-number">
-    <a href="#" id="guess-a-number-close" class="guess-a-number__close"><i
-        class="material-icons medium grey-text text-grey">close</i></a>
+    <a href="#" id="guess-a-number-close" class="guess-a-number__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
     <div class="guess-a-number__content">
       <h3>Number Guessing Game</h3>
       <div id="statusArea">

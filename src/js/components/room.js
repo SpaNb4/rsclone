@@ -9,195 +9,169 @@ import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame } from './game-over';
 
 const ACTIVE = 'active';
-const leftArrow = document.querySelector('#room-arrow-left');
-const rightArrow = document.querySelector('#room-arrow-right');
+
+const arrows = document.querySelector('#room-arrows');
+const overlay = document.querySelector('#overlay');
+const walls = [...document.querySelectorAll('.wall')];
+const allCloseButtons = [...document.querySelectorAll('.all-close-button')];
+
 const clock = document.querySelector('#clock');
 const piano = document.querySelector('#piano');
-const memory = document.querySelector('#memory-game');
-const memoryClose = document.querySelector('#memory-game-close');
-const simon = document.querySelector('#simon-game');
-const simonClose = document.querySelector('#simon-game-close');
-const overlay = document.querySelector('#overlay');
-const paperitem = document.querySelector('#paper_two');
-const guessAnumber = document.querySelector('#guess-a-number');
-const frameImage = document.querySelector('.frame-image');
-const gameTicTacToePlay = document.querySelector('.tic-tac-toe');
-const closeTicTacToe = document.querySelector('.tic-tac-toe__close');
-const repeatTicTacToe = document.querySelector('.tic-tac-toe__repeat');
-const cubeImage = document.querySelector('.cube4');
-const gameTetris = document.querySelector('.tetris');
-const closeTetris = document.querySelector('.tetris__close');
-const repeatTetris = document.querySelector('.tetris__repeat');
+const paperOne = document.querySelector('#paper_one');
+const paperTwo = document.querySelector('#paper_two');
+const frame = document.querySelector('.frame-image');
+const cube = document.querySelector('.cube4');
 const lock = document.querySelector('.game-over-lock');
-const closeLock = document.querySelector('.game-over-lock__close');
-const lockContent = document.querySelector('.game-over-lock__content');
 
-const paperitemone = document.querySelector('#paper_one');
+const memory = document.querySelector('#memory-game');
+const simon = document.querySelector('#simon-game');
 const snake = document.querySelector('#snake');
-const snakeClose = document.querySelector('.snake__close');
-const guessANumberClose = document.querySelector('.guess-a-number__close');
+const gameTetris = document.querySelector('.tetris');
+const guessAnumber = document.querySelector('#guess-a-number');
+const gameTicTacToePlay = document.querySelector('.tic-tac-toe');
 
-const walls = [document.querySelector('#wall-1'), document.querySelector('#wall-2'), document.querySelector('#wall-3'), document.querySelector('#wall-4')];
+const repeatTicTacToe = document.querySelector('.tic-tac-toe__repeat');
+const repeatTetris = document.querySelector('.tetris__repeat');
+
+const lockContent = document.querySelector('.game-over-lock__content');
 
 let indexLock;
 
-const onClockClick = () => {
+//  open functions:
+const openMemoryGame = () => {
     memoryGame.create();
     state.memory ? memoryGame.links[0].focus() : memoryClose.focus();
-
     memory.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
 };
 
-const closeMemoryGame = () => {
-    memoryGame.reset();
-    memory.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-};
-
-const onPianoClick = () => {
+const openSimonGame = () => {
     simonGame.create();
     state.simon ? simonGame.button.focus() : simonClose.focus();
-
     simon.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
-};
-
-const closeSimonGame = () => {
-    simonGame.reset();
-
-    simon.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
 };
 
 const openGuessaNumberGame = () => {
     guessAnumberGame.create();
-
     guessAnumber.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
-};
-
-const closenGuessaNumberGame = () => {
-    guessAnumberGame.reset();
-
-    guessAnumber.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
 };
 
 const openTicTacToeGame = () => {
     gameTicTacToe();
     gameTicTacToePlay.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
 };
-
-const closeTicTacToeGame = () => {
-    closeGameTicTacToe();
-    gameTicTacToePlay.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-};
-
-const clearTicTacToeGame = () => {
-    closeGameTicTacToe();
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-};
-
-const closeLocks = () => {
-    lock.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-}
 
 const openLocks = () => {
     lock.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
     lockContent.innerHTML = layoutLockGame;
     document.addEventListener("keydown", KeyDownLock);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
 }
 
 const openTetrisGame = () => {
     startTetris();
     gameTetris.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
     document.addEventListener("keydown", KeyDown);
-};
-
-const closeTetrisGame = () => {
-    gameTetris.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-};
-
-const clearTetrisGame = () => {
-    startTetris();
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
 };
 
 const openSnakeGameClick = () => {
     snakeGame.create();
-
     snake.classList.add(ACTIVE);
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
 };
+
+//  close functions:
+const closeMemoryGame = () => {
+    memoryGame.reset();
+    memory.classList.remove(ACTIVE);
+};
+
+const closeSimonGame = () => {
+    simonGame.reset();
+    simon.classList.remove(ACTIVE);
+};
+
+const closeGuessaNumberGame = () => {
+    guessAnumberGame.reset();
+    guessAnumber.classList.remove(ACTIVE);
+}
+
+const closeTicTacToeGame = () => {
+    closeGameTicTacToe();
+    gameTicTacToePlay.classList.remove(ACTIVE);
+};
+
+const closeLocks = () => {
+    lock.classList.remove(ACTIVE);
+}
+
+const closeTetrisGame = () => {
+    gameTetris.classList.remove(ACTIVE);
+}
 
 const closeSnakeGameClick = () => {
     snakeGame.reset();
-
     snake.classList.remove(ACTIVE);
-    overlay.classList.remove(ACTIVE);
-    document.addEventListener('click', outGameClick);
 };
+
+//  clear functions:
+const clearTetrisGame = () => {
+    startTetris();
+};
+
+const clearTicTacToeGame = () => {
+    closeGameTicTacToe();
+};
+
+// all clickable objects
+const openGameObjects = [
+    [piano, openSimonGame],
+    [clock, openMemoryGame],
+    [box, onBoxClick],
+    [picture, onPictureClick],
+    [frame, openTicTacToeGame],
+    [cube, openTetrisGame],
+    [paperTwo, openGuessaNumberGame],
+    [paperOne, openSnakeGameClick]
+];
+
+const clearGameOBjects = [
+    [repeatTicTacToe, clearTicTacToeGame],
+    [repeatTetris, clearTetrisGame],
+]
+
+const closeCallbacks = [
+    closeMemoryGame,
+    closeHangmanGame,
+    closeGemPuzzleGame,
+    closeSimonGame,
+    closeGuessaNumberGame,
+    closeTicTacToeGame,
+    closeTetrisGame,
+    closeLocks,
+    closeSnakeGameClick
+]
+
+const closeAllGames = () => {
+    closeCallbacks.forEach((callback) => callback());
+    overlay.classList.remove(ACTIVE);
+    document.removeEventListener('keydown', onDocumentEscPress);
+    document.removeEventListener('click', outGameClick);
+};
+
+// open overlay and add handlers
+const addEventHandlers = () => {
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
+}
 
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
-        closeMemoryGame();
-        closeHangmanGame();
-        closeGemPuzzleGame();
-        closeSimonGame();
-        closenGuessaNumberGame();
-        closeTicTacToeGame();
-        closeTetrisGame();
-        closeLocks();
-        closeSnakeGameClick();
+        closeAllGames();
     }
 };
 
 const outGameClick = (evt) => {
     if (evt.target === overlay) {
-        closeMemoryGame();
-        closeHangmanGame();
-        closeGemPuzzleGame();
-        closeSimonGame();
-        closenGuessaNumberGame();
-        closeTicTacToeGame();
-        closeTetrisGame();
-        closeLocks();
-        closeSnakeGameClick();
+        closeAllGames();
     }
 };
 
@@ -207,49 +181,42 @@ class Room {
     }
 
     init() {
-        leftArrow.addEventListener('click', () => {
+        arrows.addEventListener('click', (evt) => {
             this.activeWall.classList.remove(ACTIVE);
             let index = walls.indexOf(this.activeWall);
-            this.activeWall = index > 0 ? walls[index - 1] : walls[walls.length - 1];
+
+            if (evt.target.classList.contains('arrow--right')) {
+                this.activeWall = index < walls.length - 1 ? walls[index + 1] : walls[0];
+            } else {
+                this.activeWall = index > 0 ? walls[index - 1] : walls[walls.length - 1];
+            }
             this.activeWall.classList.add(ACTIVE);
         });
 
-        rightArrow.addEventListener('click', () => {
-            this.activeWall.classList.remove(ACTIVE);
-            let index = walls.indexOf(this.activeWall);
-            this.activeWall = index < walls.length - 1 ? walls[index + 1] : walls[0];
-            this.activeWall.classList.add(ACTIVE);
+        // open any games
+        openGameObjects.forEach((item) => {
+            item[0].addEventListener('click', () => {
+                item[1]();
+                addEventHandlers();
+            });
         });
 
-        // all clickable objects
-        const clickableObjArr = [
-            [piano, onPianoClick],
-            [clock, onClockClick],
-            [box, onBoxClick],
-            [picture, onPictureClick],
-            [memoryClose, closeMemoryGame],
-            [simonClose, closeSimonGame],
-            [frameImage, openTicTacToeGame],
-            [closeTicTacToe, closeTicTacToeGame],
-            [repeatTicTacToe, clearTicTacToeGame],
-            [cubeImage, openTetrisGame],
-            [closeTetris, closeTetrisGame],
-            [repeatTetris, clearTetrisGame],
-            [closeLock, closeLocks],
-            [paperitem, openGuessaNumberGame],
-            [paperitemone, openSnakeGameClick],
-            [snakeClose, closeSnakeGameClick],
-            [guessANumberClose, closenGuessaNumberGame],
-        ];
-
-        clickableObjArr.forEach((item) => {
+        // clear
+        clearGameOBjects.forEach((item) => {
             item[0].addEventListener('click', item[1]);
         });
 
+        // close any game or lock by click
+        allCloseButtons.forEach((button) => {
+            button.addEventListener('click', closeAllGames);
+        });
+
+        // open clocks
         arrLock.forEach((elem) => {
             document.querySelector(elem).addEventListener('click', () => {
                 openLocks();
                 indexLock = elem;
+                addEventHandlers();
             });
         });
     }
