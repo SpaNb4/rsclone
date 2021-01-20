@@ -1,6 +1,8 @@
 import { getRandomInt, playAudio } from './utils.js';
 import winSound from '../../assets/audio/guessanumber_win.mp3';
 import uncorrectSound from '../../assets/audio/guessanumber_wrong_answer.mp3';
+import { Timer } from './timer.js';
+import { createTimerView } from './timer_view.js'
 
 let randomNumber: number = 0;
 let numberOfGuesses: number = 0;
@@ -9,6 +11,7 @@ const statusArea: string = 'statusArea';
 const historyList: string = 'historyList';
 const maxValue: number = 100;
 const buttonArea: string = 'buttonArea';
+const stateTimer = new Timer('guess-a-number');
 
 function writeMessage(elementId: any, message: string, appendMessage: any) {
     const elemToUpdate = document.getElementById(elementId);
@@ -24,6 +27,10 @@ function newGame() {
     numberOfGuesses = 0;
     writeMessage('historyList', '', '');
     document.getElementById(userGuess).focus();
+    const timerContainer = document.querySelector('#timer-guess-a-number');
+    timerContainer.innerHTML = '';
+    createTimerView(timerContainer, stateTimer);
+    stateTimer.reset();
 }
 
 function guessInRange(guess: number) {
@@ -45,7 +52,8 @@ function userGuessed() {
             writeMessage(statusArea, `<p style='color:rgb(245, 0, 6)'><span>You got me in</span> ${numberOfGuesses} <span>guesses</span>, <span>I was thinking</span> ${randomNumber}. <span>You won</span>!</p>`, '');
             const audioWin = new Audio(winSound);
             playAudio(audioWin);
-            newGame();
+            stateTimer.finish();
+            //newGame();
         } else if (Number(userGuessednumber) < randomNumber) {
             // User needs to guess higher
             writeMessage(statusArea, `<p><span>You need to guess higher than</span> ${userGuessednumber}, <span>try again</span>...</p>`, '');

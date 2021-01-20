@@ -1,4 +1,6 @@
 import { getRandomIntInclusive, playAudio } from './utils';
+import { createTimerView } from './timer_view';
+import { Timer } from './timer';
 import winSound from '../../assets/audio/snake-game-win.mp3';
 import overSound from '../../assets/audio/snake-game-over.mp3';
 
@@ -23,6 +25,7 @@ const white = 'rgb(250, 250, 250)';
 const codGray = 'rgb(25, 25, 25)';
 const snakeLength = 'snakeLength';
 const displayId = 'display';
+const stateTimer = new Timer("snake");
 
 const rectStyles = [
     {
@@ -204,6 +207,7 @@ function gameOver(endType) {
 function gameWin(endType) {
     gameStatus = 'win';
     document.querySelector(message).textContent = 'You won!';
+    stateTimer.finish();
     const audioWin = new Audio(winSound);
     playAudio(audioWin);
 }
@@ -323,6 +327,10 @@ function openSnakeGame() {
     viewPort = document.getElementById(displayId);
     initGame(viewPort);
     startGame(statRender);
+    const timerContainer = document.querySelector('#timer-snake');
+    timerContainer.innerHTML = '';
+    createTimerView(timerContainer, stateTimer);
+    stateTimer.reset();
 }
 
 function closeSnakeGame() {
