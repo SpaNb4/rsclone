@@ -5,8 +5,6 @@ import { box, picture, onBoxClick, onPictureClick, closeHangmanGame, closeGemPuz
 import { guessAnumberGame } from './guess-a-number.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown } from './tetris';
-import soundClickGameTicTacToe from './../../assets/audio/tictactoe-click.mp3';
-import soundClickTetris from './../../assets/audio/tetris-click.mp3';
 import { snakeGame } from './snake';
 
 const ACTIVE = 'active';
@@ -31,8 +29,6 @@ const closeTetris = document.querySelector('.tetris__close');
 const repeatTetris = document.querySelector('.tetris__repeat');
 const lock = document.querySelector('.game-over-lock');
 const closeLock = document.querySelector('.game-over-lock__close');
-const audioClickGameTicTacToe = new Audio(soundClickGameTicTacToe);
-const audioClickTetris = new Audio(soundClickTetris);
 
 const paperitemone = document.querySelector('#paper_one');
 const snake = document.querySelector('#snake');
@@ -102,7 +98,6 @@ const openTicTacToeGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-    playAudio(audioClickGameTicTacToe);
 };
 
 const closeTicTacToeGame = () => {
@@ -111,14 +106,12 @@ const closeTicTacToeGame = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
-    playAudio(audioClickGameTicTacToe);
 };
 
 const clearTicTacToeGame = () => {
     closeGameTicTacToe();
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
-    playAudio(audioClickGameTicTacToe);
 };
 
 const closeLocks = () => {
@@ -134,7 +127,6 @@ const openTetrisGame = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-    playAudio(audioClickTetris);
     document.addEventListener("keydown", KeyDown);
 };
 
@@ -143,14 +135,12 @@ const closeTetrisGame = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
-    playAudio(audioClickTetris);
 };
 
 const clearTetrisGame = () => {
     startTetris();
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
-    playAudio(audioClickTetris);
 };
 
 const openSnakeGameClick = () => {
@@ -168,14 +158,6 @@ const closeSnakeGameClick = () => {
     snake.classList.remove(ACTIVE);
     overlay.classList.remove(ACTIVE);
     document.addEventListener('click', outGameClick);
-};
-
-const onTicTacToeClick = () => {
-    openTicTacToeGame();
-};
-
-const onTetrisClick = () => {
-    openTetrisGame();
 };
 
 const onDocumentEscPress = (evt) => {
@@ -234,18 +216,17 @@ class Room {
             [picture, onPictureClick],
             [memoryClose, closeMemoryGame],
             [simonClose, closeSimonGame],
-            [paperitem, onPaperitemClick],
-            [frameImage, onTicTacToeClick],
+            [frameImage, openTicTacToeGame],
             [closeTicTacToe, closeTicTacToeGame],
             [repeatTicTacToe, clearTicTacToeGame],
-            [cubeImage, onTetrisClick],
+            [cubeImage, openTetrisGame],
             [closeTetris, closeTetrisGame],
             [repeatTetris, clearTetrisGame],
-            [closeLock, closeLocks]
+            [closeLock, closeLocks],
             [paperitem, openGuessaNumberGame],
             [paperitemone, openSnakeGameClick],
             [snakeClose, closeSnakeGameClick],
-            [guessANumberClose, closenGuessaNumberGame],
+            [guessANumberClose, closenGuessaNumberGame]
         ];
 
         clickableObjArr.forEach((item) => {
