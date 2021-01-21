@@ -1,13 +1,24 @@
-interface stateConfig {
+const volumeRange: HTMLInputElement = document.querySelector('#volume-range');
+const keyboardSwitch: HTMLInputElement = document.querySelector('#keyboard-switch');
+
+interface Istate {
   volume: number;
   memory: boolean;
   simon: boolean;
+  isMiniGameOpened: boolean;
+  keyboard: boolean;
+  paused: boolean;
+  callback: () => void;
 }
 
-const state: stateConfig = {
-  volume: 1,
-    memory: true, // can play
-    simon: true, // can play
+const state: Istate = {
+  volume: Number(volumeRange.value) / 100,
+  memory: true,
+  simon: true,
+  isMiniGameOpened: false,
+  keyboard: keyboardSwitch.checked,
+  paused: false,
+  callback: null
 };
 
-export { state };
+export { state, volumeRange, keyboardSwitch };

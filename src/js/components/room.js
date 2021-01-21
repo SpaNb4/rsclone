@@ -7,6 +7,9 @@ import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame } from './game-over';
+import { getCoordsArray } from './utils';
+import { gamearea } from './keyboard';
+import * as intro from './intro';
 
 const ACTIVE = 'active';
 
@@ -60,16 +63,17 @@ const openTicTacToeGame = () => {
     gameTicTacToePlay.classList.add(ACTIVE);
 };
 
-const openLocks = () => {
+const openLocks = (elem) => {
+    indexLock = elem;
     lock.classList.add(ACTIVE);
     lockContent.innerHTML = layoutLockGame;
-    document.addEventListener("keydown", KeyDownLock);
+    document.addEventListener('keydown', KeyDownLock);
 }
 
 const openTetrisGame = () => {
     startTetris();
     gameTetris.classList.add(ACTIVE);
-    document.addEventListener("keydown", KeyDown);
+    document.addEventListener('', KeyDown);
 };
 
 const openSnakeGameClick = () => {
@@ -132,6 +136,9 @@ const openGameObjects = [
     [paperOne, openSnakeGameClick]
 ];
 
+// all clickable objects coordinates
+let clickableCoords = getCoordsArray([...openGameObjects, ...arrLock.map(elem => [document.querySelector(elem), openLocks])]);
+
 const clearGameOBjects = [
     [repeatTicTacToe, clearTicTacToeGame],
     [repeatTetris, clearTetrisGame],
@@ -154,6 +161,7 @@ const closeAllGames = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
+    miniGameHandler();
 };
 
 // open overlay and add handlers
@@ -161,6 +169,7 @@ const addEventHandlers = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
+    miniGameHandler();
 }
 
 const onDocumentEscPress = (evt) => {
@@ -175,23 +184,64 @@ const outGameClick = (evt) => {
     }
 };
 
+const miniGameHandler = () => {
+    state.isMiniGameOpened = !state.isMiniGameOpened;
+    gamearea.switch();
+}
+
 class Room {
     constructor() {
+        this.keys = [];
         this.activeWall = walls[0];
     }
 
-    init() {
-        arrows.addEventListener('click', (evt) => {
-            this.activeWall.classList.remove(ACTIVE);
-            let index = walls.indexOf(this.activeWall);
+    changeWall(side) {
+        let index = walls.indexOf(this.activeWall);
+        this.activeWall.classList.remove(ACTIVE);
 
-            if (evt.target.classList.contains('arrow--right')) {
-                this.activeWall = index < walls.length - 1 ? walls[index + 1] : walls[0];
-            } else {
-                this.activeWall = index > 0 ? walls[index - 1] : walls[walls.length - 1];
+        if (side === 'right') {
+            this.activeWall = index < walls.length - 1 ? walls[index + 1] : walls[0];
+        }
+
+        if (side === 'left') {
+            this.activeWall = index > 0 ? walls[index - 1] : walls[walls.length - 1];
+        }
+
+        this.activeWall.classList.add(ACTIVE);
+
+        // update coordinates after changing wall
+        clickableCoords = getCoordsArray(openGameObjects);
+        console.log(clickableCoords);
+
+    }
+
+    onArrowsClick(evt) {
+        this.changeWall(evt.target.dataset.side);
+    }
+
+    keysPressed(evt) {
+        if (!state.isMiniGameOpened) {
+            evt.preventDefault();
+
+            this.keys[evt.keyCode] = true;
+
+            if (this.keys[17] && this.keys[39]) {
+                this.changeWall('left');
             }
-            this.activeWall.classList.add(ACTIVE);
-        });
+
+            if (this.keys[17] && this.keys[37]) {
+                this.changeWall('right');
+            }
+        }
+    }
+
+    keysReleased(evt) {
+        if (state.isMiniGameOpened) return null;
+        this.keys[evt.keyCode] = false;
+    }
+
+    init() {
+        intro.init();
 
         // open any games
         openGameObjects.forEach((item) => {
@@ -214,11 +264,15 @@ class Room {
         // open clocks
         arrLock.forEach((elem) => {
             document.querySelector(elem).addEventListener('click', () => {
-                openLocks();
-                indexLock = elem;
+                openLocks(elem);
                 addEventHandlers();
             });
         });
+
+        // arrows
+        arrows.addEventListener('click', this.onArrowsClick.bind(this));
+        document.addEventListener('keydown', this.keysPressed.bind(this), false);
+        document.addEventListener('keyup', this.keysReleased.bind(this), false);
     }
 }
 
@@ -227,5 +281,6 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 export {
-    ACTIVE, overlay, onDocumentEscPress, outGameClick, indexLock
+    ACTIVE, overlay, onDocumentEscPress, outGameClick, indexLock,
+    clickableCoords, addEventHandlers
 };

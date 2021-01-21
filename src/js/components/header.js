@@ -1,7 +1,7 @@
-import { state } from './state';
+import { state, volumeRange, keyboardSwitch } from './state';
+import { gamearea } from './keyboard';
 import locizify from 'locizify';
 
-const volumeRange = document.querySelector('#volume-range');
 const restartButton = document.querySelector('#menu-restart-button');
 const loginButton = document.querySelector('#menu-login-button');
 const logoutButton = document.querySelector('#menu-logout-button');
@@ -25,6 +25,11 @@ function onVolumeRangeChange(evt) {
 function onRestartClick() {
     state.memory = true; // restart memory
     state.simon = true; // restart memory
+}
+
+function onKeyboardSwitchChange(evt) {
+    state.keyboard = evt.target.checked;
+    gamearea.switch();
 }
 
 function onLogoutClick() {
@@ -116,10 +121,25 @@ selectLng.addEventListener('change', () => {
 });
 
 function navInit() {
-    M.Sidenav.init(document.querySelectorAll('.sidenav'), { edge: 'right' });
     M.Modal.init(document.querySelectorAll('.modal'), { startingTop: '10%' });
     M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
     M.FormSelect.init(document.querySelectorAll('select'), { classes: 'main-header__select' });
+
+    const sidenavInstance = M.Sidenav.init(document.querySelector('.sidenav'), {
+        edge: 'right',
+        onOpenEnd: () => state.paused = true,
+        onCloseEnd: () => state.paused = false,
+    });
+
+    document.addEventListener('keydown', (evt) => {
+        if (evt.key === 'p' & state.keyboard) {
+            sidenavInstance.open();
+        }
+
+        if (evt.key === 'Escape') {
+            sidenavInstance.close();
+        }
+    })
 
     if (localStorage.getItem(USER)) {
         loginButton.classList.add(HIDE);
@@ -136,6 +156,7 @@ function navInit() {
     volumeRange.addEventListener('change', onVolumeRangeChange);
     restartButton.addEventListener('click', onRestartClick);
     logoutButton.addEventListener('click', onLogoutClick);
+    keyboardSwitch.addEventListener('change', onKeyboardSwitchChange);
 }
 
 function headerInit() {

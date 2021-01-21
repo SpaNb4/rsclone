@@ -57,8 +57,33 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function isIntInclude(int, width, min, max) {
+    return (int > min && int < max) || (int + width > min && int + width < max);
+}
+
+function isOnElement(elem, pointer) {
+    if (isIntInclude(pointer.x, pointer.width, elem.minX, elem.maxX) && isIntInclude(pointer.y, pointer.height, elem.minY, elem.maxY)) {
+        state.callback = elem.callback;
+        return true;
+    } else {
+        state.callback = null;
+    }
+}
+
+function getCoordsArray(array) {
+    return array.map((elem) => {
+        return {
+            minX: elem[0].getBoundingClientRect().left,
+            maxX: elem[0].getBoundingClientRect().left + elem[0].offsetWidth,
+            minY: elem[0].getBoundingClientRect().top,
+            maxY: elem[0].getBoundingClientRect().top + elem[0].offsetHeight,
+            callback: elem[1]
+        };
+    });
+}
+
 export {
     shuffleArray, doubleArray, checkSymbol,
     getRandomInt, getWinCombination, getRandomIntInclusive,
-    playAudio,
+    playAudio, isOnElement, getCoordsArray
 };
