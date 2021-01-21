@@ -10,7 +10,6 @@ import { checkSymbol } from './../../js/components/utils';
 import { playAudio } from './utils';
 // @ts-ignore
 import { ACTIVE } from './room';
-import { closeHangmanGame } from './wall3';
 
 const wordField = document.querySelector('.word_field');
 const messageDiv = document.querySelector('.message');
@@ -101,10 +100,6 @@ hangmanForm.addEventListener('keydown', (e: KeyboardEvent) => {
         e.preventDefault();
         checkSymbols();
     }
-});
-
-closeBtn.addEventListener('click', () => {
-   closeHangmanGame();
 });
 
 // prints the guessfield
