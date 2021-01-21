@@ -136,6 +136,7 @@ const closeHangmanGame = () => {
 };
 
 const closeGemPuzzleGame = () => {
+
     gemPuzzle.classList.remove(ACTIVE);
 };
 

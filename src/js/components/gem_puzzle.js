@@ -223,8 +223,9 @@ export const GemPuzzle = {
         let i = 0;
         let j = 0;
 
-        if (this.isPuzzleSolved) {
+        if (this.isPuzzleSolved || !modal.classList.contains("active")) {
             clearInterval(this.interval);
+            this.interval = null;
         } else {
             [i, j] = this.movesArr[this.movesArr.length - 1];
             swap.checkNextEl.call(this, i, j, this.findEl(this.arr[i][j]));
