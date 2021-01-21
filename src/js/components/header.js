@@ -1,5 +1,4 @@
 import { state } from './state';
-import locizify from 'locizify';
 
 const volumeRange = document.querySelector('#volume-range');
 const restartButton = document.querySelector('#menu-restart-button');
@@ -7,11 +6,13 @@ const loginButton = document.querySelector('#menu-login-button');
 const logoutButton = document.querySelector('#menu-logout-button');
 const statsButton = document.querySelector('#menu-stats-button');
 const registerButton = document.querySelector('#menu-register-button');
+const saveButton = document.querySelector('#menu-save-button');
 const emailLoginHelperText = document.querySelector('#email_helper_login');
 const emailRegisterHelperText = document.querySelector('#email_helper_register');
 const loginForm = document.querySelector('#login_form');
 const registerForm = document.querySelector('#register_form');
 const selectLng = document.querySelector('.select-lang');
+const saveMsg = document.querySelector('.save-message');
 const backendURL = 'https://spanb4.herokuapp.com';
 const INVALID = 'invalid';
 const CORRECT = 'correct';
@@ -38,6 +39,8 @@ function onLogoutClick() {
         .then((res) => {
             if (res.logout) {
                 logoutButton.classList.add(HIDE);
+                saveButton.classList.add(HIDE);
+                statsButton.classList.add(HIDE);
                 loginButton.classList.remove(HIDE);
                 registerButton.classList.remove(HIDE);
                 localStorage.removeItem(USER);
@@ -73,6 +76,7 @@ loginForm.addEventListener('submit', function (e) {
                 loginButton.classList.add(HIDE);
                 registerButton.classList.add(HIDE);
                 statsButton.classList.remove(HIDE);
+                saveButton.classList.remove(HIDE);
 
                 localStorage.setItem(USER, res.success);
             }
@@ -115,6 +119,31 @@ selectLng.addEventListener('change', () => {
     }
 });
 
+saveButton.addEventListener('click', () => {
+    let complited = {
+        hangman: true,
+        gem_puzzle: true,
+    };
+    fetch(`${backendURL}/account`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: localStorage.getItem(USER),
+            complitedGame: complited,
+        }),
+    })
+        .then((res) => res.json())
+        .then((res) => {
+            if (res.errors) {
+                saveMsg.innerHTML = 'Error! Your progress has not been saved!';
+            } else if (res.success) {
+                saveMsg.innerHTML = 'Your progress has been successfully saved!';
+            }
+        });
+});
+
 function navInit() {
     M.Sidenav.init(document.querySelectorAll('.sidenav'), { edge: 'right' });
     M.Modal.init(document.querySelectorAll('.modal'), { startingTop: '10%' });
@@ -126,11 +155,13 @@ function navInit() {
         registerButton.classList.add(HIDE);
         logoutButton.classList.remove(HIDE);
         statsButton.classList.remove(HIDE);
+        saveButton.classList.remove(HIDE);
     } else {
         loginButton.classList.remove(HIDE);
         registerButton.classList.remove(HIDE);
         logoutButton.classList.add(HIDE);
         statsButton.classList.add(HIDE);
+        saveButton.classList.add(HIDE);
     }
 
     volumeRange.addEventListener('change', onVolumeRangeChange);
