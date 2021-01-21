@@ -5,8 +5,6 @@ import { state } from "./state";
 import { clickableCoords, addEventHandlers, indexLock } from "./room";
 // @ts-ignore
 import { isOnElement } from './utils';
-// @ts-ignore
-import { arrLock } from './game-over';
 
 const DIFF = 2;
 const content: HTMLElement = document.querySelector("#game-content");
@@ -34,7 +32,7 @@ class GameArea {
     content.prepend(this.canvas);
 
     document.addEventListener('keydown', (evt) => {
-      if (!state.isMiniGameOpened && !state.paused) this.key = evt.key;
+      if (!state.isMiniGameOpened && !state.paused) this.key = evt.code;
 
       if (evt.key === 'Enter' && pointer.onElement) {
           state.callback();
@@ -51,12 +49,12 @@ class GameArea {
 
   switch() {
     if (state.keyboard) {
-      this.canvas.classList.add("active");
-      content.dataset.keyboard = "off";
+      this.canvas.classList.add('active');
+      content.dataset.keyboard = 'off';
 
     } else {
-      this.canvas.classList.remove("active");
-      content.dataset.keyboard = "on";
+      this.canvas.classList.remove('active');
+      content.dataset.keyboard = 'on';
     }
 
     if (!state.isMiniGameOpened) {
@@ -97,22 +95,22 @@ class Pointer {
     this.dy = 0;
 
     switch (gamearea.key) {
-      case 'a':
+      case 'KeyA':
         if (this.x > 0) {
           this.dx = -DIFF;
         }
         break;
-      case 'd':
+      case 'KeyD':
         if (this.x + this.size < gamearea.container) {
           this.dx = DIFF;
         }
         break;
-      case 'w':
+      case 'KeyW':
         if (this.y > 0) {
           this.dy = -DIFF;
         }
         break;
-      case 's':
+      case 'KeyS':
         if (this.y + this.size < gamearea.canvas.height) {
           this.dy = DIFF;
         }

@@ -21,7 +21,7 @@ const HIDE = 'hide';
 const USER = 'user';
 
 function onVolumeRangeChange(evt) {
-    state.sound = evt.target.value / 100;
+    state.volume = Number(evt.target.value) / 100;
 }
 
 function onRestartClick() {
@@ -160,11 +160,11 @@ function navInit() {
     });
 
     document.addEventListener('keydown', (evt) => {
-        if (evt.key === 'p' & state.keyboard) {
+        if (evt.code === 'KeyP' & state.keyboard) {
             sidenavInstance.open();
         }
 
-        if (evt.key === 'Escape') {
+        if (evt.code === 'Escape') {
             sidenavInstance.close();
         }
     })
