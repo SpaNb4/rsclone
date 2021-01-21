@@ -117,7 +117,7 @@
       </li>
       <li>
         <a id="menu-save-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-save">
-          <i class="material-icons grey-text text-lighten-3">refresh</i>
+          <i class="material-icons grey-text text-lighten-3">save</i>
           <span>Save Game</span>
         </a>
       </li>
@@ -277,7 +277,12 @@
     </form>
     <div class="message"></div>
   </div>
-  <div class="gem-puzzle"></div>
+  <div class="gem-puzzle">
+    <a href="#" class="gem-puzzle_close_btn all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
+    <div class="gem-puzzle-container"></div>
+  </div>
   <div id="simon-game" class="simon-game">
     <a href="#!" class="simon-game__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
@@ -344,11 +349,7 @@
   <div id="modal-rules" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
       <h5>How to play this Game?</h5>
-      <p>
-        There are a number of active objects in this room that change their state when the cursor is hovered over.
-        Each of the objects containes a simple (and probably tricky) puzzle.
-        Crack these puzzles in sequence, get hints and find the key to open the door and finally exit the room!
-      </p>
+      <p>how_to_play</p>
       <p>
         You can use the mouse as well as keybord (WASD & Enter) to play this game.
       </p>
@@ -393,12 +394,13 @@
       <h4 class="center-align">Register your account</h4>
       <form id="register_form">
         <div class="input-field">
-          <input class="validate" type="email" name="register_email" id="register_email" />
+          <input class="validate" type="email" name="register_email" id="register_email" required />
           <label for="register_email">Enter your email</label>
           <span id="email_helper_register" class="email_helper helper-text hide">Helper text</span>
         </div>
         <div class="input-field">
-          <input class="validate" type="password" name="register_password" id="register_password" />
+          <input class="validate" type="password" minlength="4" maxlength="8" name="register_password"
+            id="register_password" required />
           <label for="register_password">Enter your password</label>
         </div>
         <div class="row center-align">

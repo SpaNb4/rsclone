@@ -138,8 +138,6 @@ saveButton.addEventListener('click', () => {
         .then((res) => {
             if (res.errors) {
                 saveMsg.innerHTML = 'Error! Your progress has not been saved!';
-            } else if (res.success) {
-                saveMsg.innerHTML = 'Your progress has been successfully saved!';
             }
         });
 });

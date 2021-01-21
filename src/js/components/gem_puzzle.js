@@ -1,9 +1,10 @@
 import movesound from './../../assets/audio/move.mp3';
 import * as swap from './gem_puzzle_swap';
-import { picture, closeGemPuzzleGame } from './wall3';
+import { picture } from './room';
 import { playAudio } from './utils';
 
-const container = document.querySelector('.gem-puzzle');
+const container = document.querySelector('.gem-puzzle-container');
+const modal = document.querySelector('.gem-puzzle');
 const SECRET_WORD = 'test word';
 
 export const GemPuzzle = {
@@ -93,18 +94,11 @@ export const GemPuzzle = {
         const win = document.createElement('div');
         win.classList.add('win');
 
-        const closeGemPuzzleBtn = document.createElement('span');
-        closeGemPuzzleBtn.classList.add('gem-puzzle_close_btn');
-        closeGemPuzzleBtn.innerHTML = '<i class="material-icons medium grey-text text-grey">close</i>';
-        closeGemPuzzleBtn.addEventListener('click', () => {
-           closeGemPuzzleGame();
-        });
-
         container.append(topMenu);
-        main.append(overlay, win, closeGemPuzzleBtn);
+        main.append(overlay, win);
         container.append(main, bottomMenu);
 
-        document.body.append(container);
+        modal.append(container);
 
         const elHeight = document.querySelector('.cells_item').offsetWidth;
 
@@ -229,8 +223,9 @@ export const GemPuzzle = {
         let i = 0;
         let j = 0;
 
-        if (this.isPuzzleSolved) {
+        if (this.isPuzzleSolved || !modal.classList.contains('active') || this.currTime == 0) {
             clearInterval(this.interval);
+            this.interval = null;
         } else {
             [i, j] = this.movesArr[this.movesArr.length - 1];
             swap.checkNextEl.call(this, i, j, this.findEl(this.arr[i][j]));

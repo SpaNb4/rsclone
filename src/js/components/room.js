@@ -1,12 +1,13 @@
 import { state } from './state';
 import { memoryGame } from './memory';
 import { simonGame } from './simon';
-import { box, picture, onBoxClick, onPictureClick, closeHangmanGame, closeGemPuzzleGame } from './wall3';
 import { guessAnumberGame } from './guess-a-number.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame } from './game-over';
+import { newGame, isHangmanSolved } from './hangman';
+import { GemPuzzle } from './gem_puzzle';
 
 const ACTIVE = 'active';
 
@@ -22,6 +23,8 @@ const paperTwo = document.querySelector('#paper_two');
 const frame = document.querySelector('.frame-image');
 const cube = document.querySelector('.cube4');
 const lock = document.querySelector('.game-over-lock');
+const box = document.querySelector('#box');
+const picture = document.querySelector('#picture');
 
 const memory = document.querySelector('#memory-game');
 const simon = document.querySelector('#simon-game');
@@ -32,6 +35,9 @@ const gameTicTacToePlay = document.querySelector('.tic-tac-toe');
 
 const repeatTicTacToe = document.querySelector('.tic-tac-toe__repeat');
 const repeatTetris = document.querySelector('.tetris__repeat');
+
+const hangman = document.querySelector('.hangman');
+const gemPuzzle = document.querySelector('.gem-puzzle');
 
 const lockContent = document.querySelector('.game-over-lock__content');
 
@@ -63,18 +69,32 @@ const openTicTacToeGame = () => {
 const openLocks = () => {
     lock.classList.add(ACTIVE);
     lockContent.innerHTML = layoutLockGame;
-    document.addEventListener("keydown", KeyDownLock);
-}
+    document.addEventListener('keydown', KeyDownLock);
+};
 
 const openTetrisGame = () => {
     startTetris();
     gameTetris.classList.add(ACTIVE);
-    document.addEventListener("keydown", KeyDown);
+    document.addEventListener('keydown', KeyDown);
 };
 
 const openSnakeGameClick = () => {
     snakeGame.create();
     snake.classList.add(ACTIVE);
+};
+
+const openHangmanGame = () => {
+    if (!isHangmanSolved) {
+        newGame();
+        hangman.classList.add(ACTIVE);
+    }
+};
+
+const openGemPuzzleGame = () => {
+    if (!GemPuzzle.isPuzzleSolved) {
+        GemPuzzle.init();
+        gemPuzzle.classList.add(ACTIVE);
+    }
 };
 
 //  close functions:
@@ -91,7 +111,7 @@ const closeSimonGame = () => {
 const closeGuessaNumberGame = () => {
     guessAnumberGame.reset();
     guessAnumber.classList.remove(ACTIVE);
-}
+};
 
 const closeTicTacToeGame = () => {
     closeGameTicTacToe();
@@ -100,15 +120,24 @@ const closeTicTacToeGame = () => {
 
 const closeLocks = () => {
     lock.classList.remove(ACTIVE);
-}
+};
 
 const closeTetrisGame = () => {
     gameTetris.classList.remove(ACTIVE);
-}
+};
 
 const closeSnakeGameClick = () => {
     snakeGame.reset();
     snake.classList.remove(ACTIVE);
+};
+
+const closeHangmanGame = () => {
+    hangman.classList.remove(ACTIVE);
+};
+
+const closeGemPuzzleGame = () => {
+
+    gemPuzzle.classList.remove(ACTIVE);
 };
 
 //  clear functions:
@@ -124,30 +153,20 @@ const clearTicTacToeGame = () => {
 const openGameObjects = [
     [piano, openSimonGame],
     [clock, openMemoryGame],
-    [box, onBoxClick],
-    [picture, onPictureClick],
+    [box, openHangmanGame],
+    [picture, openGemPuzzleGame],
     [frame, openTicTacToeGame],
     [cube, openTetrisGame],
     [paperTwo, openGuessaNumberGame],
-    [paperOne, openSnakeGameClick]
+    [paperOne, openSnakeGameClick],
 ];
 
 const clearGameOBjects = [
     [repeatTicTacToe, clearTicTacToeGame],
     [repeatTetris, clearTetrisGame],
-]
+];
 
-const closeCallbacks = [
-    closeMemoryGame,
-    closeHangmanGame,
-    closeGemPuzzleGame,
-    closeSimonGame,
-    closeGuessaNumberGame,
-    closeTicTacToeGame,
-    closeTetrisGame,
-    closeLocks,
-    closeSnakeGameClick
-]
+const closeCallbacks = [closeMemoryGame, closeHangmanGame, closeGemPuzzleGame, closeSimonGame, closeGuessaNumberGame, closeTicTacToeGame, closeTetrisGame, closeLocks, closeSnakeGameClick];
 
 const closeAllGames = () => {
     closeCallbacks.forEach((callback) => callback());
@@ -161,7 +180,7 @@ const addEventHandlers = () => {
     overlay.classList.add(ACTIVE);
     document.addEventListener('keydown', onDocumentEscPress);
     document.addEventListener('click', outGameClick);
-}
+};
 
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
@@ -226,6 +245,4 @@ window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
 });
 
-export {
-    ACTIVE, overlay, onDocumentEscPress, outGameClick, indexLock
-};
+export { ACTIVE, overlay, onDocumentEscPress, outGameClick, indexLock, picture };
