@@ -223,7 +223,7 @@ export const GemPuzzle = {
         let i = 0;
         let j = 0;
 
-        if (this.isPuzzleSolved || !modal.classList.contains("active")) {
+        if (this.isPuzzleSolved || !modal.classList.contains("active") ||  this.currTime ==0) {
             clearInterval(this.interval);
             this.interval = null;
         } else {
