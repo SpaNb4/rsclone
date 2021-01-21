@@ -1,6 +1,6 @@
 import movesound from './../../assets/audio/move.mp3';
 import * as swap from './gem_puzzle_swap';
-import { picture } from './wall3';
+import { picture } from './room';
 import { playAudio } from './utils';
 
 const container = document.querySelector('.gem-puzzle-container');
