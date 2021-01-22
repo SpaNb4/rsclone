@@ -1,3 +1,5 @@
+import Sharer from 'sharer.js';
+
 const classShare = 'share__button',
       textLink = 'Link to the game Quest Escape Room: ',
       urlLink = 'https://rsclone-test1.netlify.app/',
@@ -30,3 +32,4 @@ const linkMenu = () => {
 }
 
 linkMenu();
+window.Sharer.init();
