@@ -232,12 +232,12 @@ const onPianoKeyPress = (evt: KeyboardEvent): void => {
         index = Number(document.activeElement.dataset.index);
     }
 
-    if ((evt.key == 'ArrowLeft' || evt.key == 'a') && index > 0) {
+    if ((evt.code == 'ArrowLeft' || evt.code == 'KeyA') && index > 0) {
         index -= 1;
         game.keys[index].focus();
     }
 
-    if ((evt.key === 'ArrowRight' || evt.key === 'd') && index < notes.length - 1) {
+    if ((evt.code === 'ArrowRight' || evt.code === 'KeyD') && index < notes.length - 1) {
         index += 1;
         game.keys[index].focus();
     }

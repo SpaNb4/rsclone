@@ -5,25 +5,23 @@ const DISABLED: string = 'disabled';
 const STAR_NUMBER: number = 120;
 const VELOCITY: number = 0.15;
 const PADDING: number = 10;
-
+const startButton: HTMLElement = document.querySelector('#intro-start-button');
+const continueButton: HTMLElement = document.querySelector('#intro-continue-button');
+const content1: HTMLElement = document.querySelector('#intro-content-1');
+const content2: HTMLElement = document.querySelector('#intro-content-2');
 const canvas: HTMLCanvasElement = document.querySelector('#intro-canvas');
 const ctx = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const rounds: Array<IStar> = [];
+const stars: Array<IStar> = [];
 
 interface IStar {
-  x: number;
-  y: number;
-  index: number;
-  radius: number;
-  color: string;
   draw: () => void;
   update: () => void;
 }
 
-class Star {
+class Star implements IStar {
   x: number;
   y: number;
   index: number;
@@ -63,38 +61,44 @@ function animate(): void {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  rounds.forEach((round) => round.update());
+  stars.forEach((round) => round.update());
 }
 
+const skipIntroOne = () => {
+  content1.classList.add(DISABLED);
+  content2.classList.remove(DISABLED);
 
-function init(): void {
+  continueButton.focus();
+}
+
+const skipIntroTwo= () => {
+  content2.classList.add(DISABLED);
+  content1.parentElement.classList.add(DISABLED);
+}
+
+export function init(): void {
+  startButton.focus();
+
+  startButton.addEventListener('click',skipIntroOne);
+  continueButton.addEventListener('click', skipIntroTwo);
+
+  startButton.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Enter') skipIntroOne();
+  });
+
+  continueButton.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Enter') skipIntroTwo();
+  });
+
+  document.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
   for (let i = 0; i < STAR_NUMBER; i += 1) {
-    rounds.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, i));
+    stars.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, i));
   }
 
   animate();
 }
 
-init();
-
-document.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-//
-
-const startButton: HTMLElement = document.querySelector('#intro-start-button');
-const continueButton: HTMLElement = document.querySelector('#intro-continue-button');
-const content1: HTMLElement = document.querySelector('#intro-content-1');
-const content2: HTMLElement = document.querySelector('#intro-content-2');
-
-startButton.addEventListener('click', () => {
-  content1.classList.add(DISABLED);
-  content2.classList.remove(DISABLED);
-});
-
-continueButton.addEventListener('click', () => {
-  content2.classList.add(DISABLED);
-  content1.parentElement.classList.add(DISABLED);
-});
