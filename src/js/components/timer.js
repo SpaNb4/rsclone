@@ -5,16 +5,22 @@ function nowMilliseconds() {
     return date.getTime();
 }
 
-class Timer {
-    constructor(gameName) {
+class GameTimer {
+    constructor(gameName, roomState) {
+        this.roomState = roomState;
         this.gameName = gameName;
         this.finishTime = null;
-        this.reset();
+        this.gameOpened();
     }
 
-    reset() {
+    gameOpened() {
         this.startTime = nowMilliseconds();
         this.finishTime = null;
+    }
+
+    gameFinished() {
+        this.finishTime = this.getTimeDiffSeconds();
+        this.roomState.saveTime(this.gameName, this.finishTime);
     }
 
     getTimeSeconds() {
@@ -24,13 +30,9 @@ class Timer {
         return this.finishTime;
     }
 
-    finish() {
-        this.finishTime = this.getTimeDiffSeconds();
-    }
-
     getTimeDiffSeconds() {
         return Math.round((nowMilliseconds() - this.startTime) / millisecondsCoefficient);
     }
 }
 
-export { Timer };
+export { GameTimer };

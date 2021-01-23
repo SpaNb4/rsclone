@@ -1,6 +1,7 @@
 import { state, volumeRange, keyboardSwitch } from './state';
 import { gamearea } from './keyboard';
 import locizify from 'locizify';
+import { getRoomState } from './room_state';
 
 const restartButton = document.querySelector('#menu-restart-button');
 const loginButton = document.querySelector('#menu-login-button');
@@ -49,6 +50,7 @@ function onLogoutClick() {
                 loginButton.classList.remove(HIDE);
                 registerButton.classList.remove(HIDE);
                 localStorage.removeItem(USER);
+                getRoomState().setUser(null);
             }
         });
 }
@@ -84,6 +86,7 @@ loginForm.addEventListener('submit', function (e) {
                 saveButton.classList.remove(HIDE);
 
                 localStorage.setItem(USER, res.success);
+                getRoomState().setUser(this.login_email.value);
             }
         });
 });

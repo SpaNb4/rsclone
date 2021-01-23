@@ -22,3 +22,7 @@ import './components/game-over';
 import './components/guess-a-number';
 import './components/share';
 import './components/fakes';
+import './components/statistics_view';
+import './components/timer';
+import './components/timer_view';
+import './components/room_state';
