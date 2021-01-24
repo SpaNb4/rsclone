@@ -3,7 +3,7 @@ import { memoryGame } from './memory';
 import { simonGame } from './simon';
 import { guessAnumberGame } from './guess-a-number.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
-import { startTetris, KeyDown } from './tetris';
+import { startTetris, KeyDown, stopTetris } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame } from './game-over';
 import { getCoordsArray } from './utils';
@@ -128,6 +128,7 @@ const closeLocks = () => {
 };
 
 const closeTetrisGame = () => {
+    stopTetris();
     gameTetris.classList.remove(ACTIVE);
 };
 

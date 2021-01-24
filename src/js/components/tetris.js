@@ -4,13 +4,19 @@ import soundClickTetris from './../../assets/audio/tetris-click.mp3';
 
 const audioClickTetris = new Audio(soundClickTetris);
 
-let dropStart = Date.now();
+let dropStart = Date.now(),
+    stopGameTetris = false;
 
 export const startTetris = () => {
+    stopGameTetris = false;
     createBoard();
     drawBoard();
     clear();
     drop();
+}
+
+export const stopTetris = () => {
+    stopGameTetris = true;
 }
 
 export const KeyDown = (event) => {
@@ -18,33 +24,30 @@ export const KeyDown = (event) => {
         case 37:
             piece.moveLeft();
             dropStart = Date.now();
-            if(!gameOver){
+            if(!stopGameTetris){
                 playAudio(audioClickTetris);
                 audioClickTetris.currentTime = 0;
             }
-            playAudio(audioClickTetris);
             break;
         case 38:
             piece.rotate();
             dropStart = Date.now();
-            if(!gameOver){
+            if(!stopGameTetris){
                 playAudio(audioClickTetris);
                 audioClickTetris.currentTime = 0;
             }
-            playAudio(audioClickTetris);
             break;
         case 39:
             piece.moveRight();
             dropStart = Date.now();
-            if(!gameOver){
+            if(!stopGameTetris){
                 playAudio(audioClickTetris);
                 audioClickTetris.currentTime = 0;
             }
-            playAudio(audioClickTetris);
             break;
         case 40:
             piece.moveDown();
-            if(!gameOver){
+            if(!stopGameTetris){
                 playAudio(audioClickTetris);
                 audioClickTetris.currentTime = 0;
             }
@@ -60,7 +63,7 @@ const drop = () => {
         dropStart = Date.now();
     }
     
-    if(!gameOver){
+    if(!gameOver && !stopGameTetris){
         requestAnimationFrame(drop);
     }
 }
