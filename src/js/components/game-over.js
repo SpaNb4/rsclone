@@ -78,7 +78,13 @@ const checkGameOverDoor = () => {
     if (countOpenLock === arrLock.length) {
         document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
         document.querySelector(door).classList.add(doorNoneDisplay);
+        openDoor();
+    }
+}
+
+const openDoor = () => {
+    document.querySelector(doorOpen).addEventListener('click', () => {
         document.querySelector('#intro-content-3').classList.remove('disabled');
         document.querySelector('#intro-content-3').parentElement.classList.remove('disabled');
-    }
+    });
 }
