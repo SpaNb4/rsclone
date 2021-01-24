@@ -16,7 +16,6 @@ const messageDiv = document.querySelector('.message');
 const wrongLetters = document.querySelector('.wrong_letters');
 const hangmanImg: HTMLImageElement = document.querySelector('.hangman_img');
 const hangmanForm = document.querySelector('.hangman_form');
-const closeBtn = document.querySelector('.hangman_close_btn');
 
 // once you got six wrong letters, you lose
 const SIX_ERRORS: number = 6;
