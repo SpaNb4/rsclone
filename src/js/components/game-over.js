@@ -88,3 +88,10 @@ const openDoor = () => {
         document.querySelector('#intro-content-3').parentElement.classList.remove('disabled');
     });
 }
+
+export const displayLock = (elem) => {
+    if (document.querySelector(`${elem} ${lockOpen}`).classList.contains(lockActive)) {
+        document.querySelector(lockGameClose).classList.remove(lockGameActive);
+        document.querySelector(lockGameOpen).classList.add(lockGameActive);
+    }
+}

@@ -5,7 +5,7 @@ import { guessAnumberGame } from './guess-a-number.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown, stopTetris } from './tetris';
 import { snakeGame } from './snake';
-import { KeyDownLock, arrLock, layoutLockGame } from './game-over';
+import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
 import { getCoordsArray } from './utils';
 import { gamearea } from './keyboard';
 import * as intro from './intro';
@@ -74,6 +74,7 @@ const openLocks = (elem) => {
     lock.classList.add(ACTIVE);
     lockContent.innerHTML = layoutLockGame;
     document.addEventListener('keydown', KeyDownLock);
+    displayLock(indexLock);
 };
 
 const openTetrisGame = () => {
