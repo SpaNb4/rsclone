@@ -234,8 +234,6 @@ class Room {
 
         // update coordinates after changing wall
         clickableCoords = getCoordsArray(openGameObjects);
-        console.log(clickableCoords);
-
     }
 
     onArrowsClick(evt) {

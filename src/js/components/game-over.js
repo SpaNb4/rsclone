@@ -1,4 +1,5 @@
 import { indexLock } from './room';
+import { getRandomInt } from './utils';
 
 let flagOpen = false,
     countOpenLock = 0;
@@ -18,7 +19,50 @@ const lockClose = '.lock__close',
       num = 1;
 
 export const arrLock = ['.lock1', '.lock2', '.lock3', '.lock4', '.lock5', '.lock6', '.lock7', '.lock8'];
-const codeWords = ['тестовая', 'фраза', 'состоящая', 'из', 'восьми', 'слов', 'для', 'выхода'];
+
+const firstPassphrase = ['Always', 'forgive', 'your', 'enemies', 'Nothing', 'annoys', 'them', 'more'];
+const secondPassphrase = ['Success', 'is', 'one', 'percent', 'inspiration', 'ninety-nine', 'percent', 'perspiration'];
+const thirdPassphrase = ['The answer', 'is meaningless', 'unless', 'you', 'discover', 'it', 'for', 'yourself'];
+let codePhrase;
+
+export let codeWordGameGemPuzzle;
+export let codeWordGameMemory;
+export let codeWordGameSnake;
+export let codeWordGameTetris;
+export let codeWordGameGuess;
+export let codeWordGameSimon;
+export let codeWordGameTicTacToe;
+export let codeWordGameHangman;
+
+const definePhrase = () => {
+    switch(getRandomInt(3)) {
+        case 0:
+            codePhrase = firstPassphrase;
+            break;
+        case 1:
+            codePhrase = secondPassphrase;
+            break;
+        case 2:
+            codePhrase = thirdPassphrase;
+            break;
+    }
+}
+
+const distributionOfCodewords = () => {
+    definePhrase();
+    console.log(codePhrase);
+
+    codeWordGameGemPuzzle = codePhrase[0];
+    codeWordGameMemory = codePhrase[1];
+    codeWordGameSnake = codePhrase[2];
+    codeWordGameTetris = codePhrase[3];
+    codeWordGameGuess = codePhrase[4];
+    codeWordGameSimon = codePhrase[5];
+    codeWordGameHangman = codePhrase[6];
+    codeWordGameTicTacToe = codePhrase[7];
+}
+
+distributionOfCodewords();
 
 const layoutLock = `
     <div class="lock__close lock__active">
@@ -63,7 +107,7 @@ const checkOpenLock = (elem) => {
 }
 
 const checkTextExit = () => {
-    if (document.querySelector(lockGameText).value === codeWords[indexLock[numLockFromString] - num]) {
+    if (document.querySelector(lockGameText).value === codePhrase[indexLock[numLockFromString] - num]) {
         document.querySelector(lockGameClose).classList.remove(lockGameActive);
         document.querySelector(lockGameOpen).classList.add(lockGameActive);
         flagOpen = true;
