@@ -123,19 +123,43 @@
     }
 
     background-image: url('./../img/door.png');
+    transform: 5s;
+    opacity: 1;
 }
 
 .door-open {
-    left: calc(50% - 15%);
+    left: calc(50% - 20%);
     bottom: 0;
     transform: translateX(-50%);
-    width: 200px; // temp
-    height: 460px; // temp
+    width: 240px;
+    height: 600px;
     background-image: url('./../img/door-open.png');
+    transform: 5s;
+    opacity: 1;
+
+    @include resolution(desktop) {
+        width: 200px;
+        height: 460px;
+    }
+
+    @include resolution(tablet) {
+        width: 180px;
+        height: 415px;
+    }
+
+    @include resolution(big-mobile) {
+        width: 120px;
+        height: 300px;
+    }
+
+    @include resolution(mobile) {
+        width: 120px;
+        height: 300px;
+    }
 }
 
 .door-none {
-    display: none;
+    opacity: 0;
 }
 
 .lock {
