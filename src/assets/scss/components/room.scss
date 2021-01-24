@@ -13,6 +13,15 @@
 .content {
     position: relative;
     width: 100%;
+    cursor: url('./../icons/lens.png'), auto;
+
+    &[data-keyboard='off']{
+        cursor: none;
+
+        .element {
+            cursor: none;
+        }
+    }
 
     .overlay.active {
         position: absolute;
@@ -22,6 +31,19 @@
         height: 100%;
         background-color: rgba($color-black, 0.45);
         z-index: 100;
+        cursor: auto;
+    }
+
+    &__canvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+
+        &.active {
+            z-index: 1;
+        }
     }
 }
 
@@ -75,6 +97,8 @@
     background-size: contain;
     background-position: center bottom;
     z-index: 99;
+    cursor: url('./../icons/lens.png'), auto;
+    transition: 1s;
 }
 
 .door {
@@ -116,7 +140,7 @@
 }
 
 .lock {
-    left: 12%;
+    left: 11.5%;
     top: 52%;
     width: 7.5px;
     height: 25px;
@@ -132,12 +156,17 @@
     }
 
     @include resolution(big-desktop) {
+        left: 10%;
         width: 18px;
         height: 60px;
     }
 
     background-image: url('./../img/lock.png');
     transition: transform $transition-300;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .knob {
@@ -206,7 +235,10 @@
     }
 
     background-image: url('./../img/clock.png');
-    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .piano {
@@ -234,7 +266,10 @@
     }
 
     background-image: url('./../img/piano.png');
-    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .lamp {
@@ -259,7 +294,6 @@
     }
 
     background-image: url('./../img/lamp.png');
-    cursor: default;
 }
 
 // wall 2
@@ -341,8 +375,6 @@
     }
 
     background-image: url('./../img/frame.jpg');
-    cursor: pointer;
-    transition: 1s;
 
     &:hover {
         transform: scale(1.2);
@@ -439,7 +471,6 @@
             &:nth-child(1) {
                 left: 15%;
                 background-image: url('./../img/cube5.png');
-                cursor: pointer;
                 transition: 1s;
 
                 &:hover {
@@ -581,7 +612,6 @@
     }
 
     background-image: url('./../img/safe-box.png');
-    cursor: pointer;
 }
 .box {
     left: 25%;
@@ -605,7 +635,10 @@
     }
 
     background-image: url('./../img/box.png');
-    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .bottle {
@@ -664,10 +697,12 @@
     }
 
     background-image: url('./../img/picture.png');
-    cursor: pointer;
-    transition: 0.6s;
+
+    &:hover(:not(.dropped)) {
+        transform: translateX(50%) scale(1.1);
+    }
+
     &.dropped {
-        cursor: default;
         transform:  translateX(-50%) rotate(15deg);
         bottom: -20px;
     }
@@ -735,10 +770,6 @@
     margin-left: -50px;
     bottom: 0;
     margin-bottom: 430px;
-
-    &:hover {
-        cursor: pointer;
-    }
 
     @include resolution(desktop) {
         margin-left: -40px;
@@ -962,10 +993,6 @@
         left: 650px;
         transform: translateX(100%);
 
-        &:hover {
-            cursor: pointer;
-        };
-
         @include resolution(desktop) {
             left: 450px;
         }
@@ -1009,16 +1036,16 @@
         @include resolution(desktop) {
             width: 500px;
         }
-    
+
         @include resolution(tablet) {
             width: 500px;
         }
-    
+
         @include resolution(big-mobile) {
             margin-top: 200px;
             width: 300px;
         }
-    
+
         @include resolution(mobile) {
             margin-top: 200px;
             width: 300px;
@@ -1039,12 +1066,12 @@
             width: 200px;
             margin-top: 300px;
         }
-    
+
         @include resolution(tablet) {
             width: 200px;
             margin-top: 300px;
         }
-    
+
         @include resolution(big-mobile) {
             width: 100px;
             margin-top: 370px;
@@ -1227,7 +1254,6 @@
   width: 42px;
   height: 42px;
   transition: $transition-300;
-  cursor: pointer;
 
     @include resolution(tablet) {
         width: 65px;
