@@ -1432,3 +1432,30 @@
         display: block;
     }
 }
+
+.share {
+    display: flex;
+    justify-content: center;
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 600px;
+        margin-top: 50px;
+    }
+
+    &__button {
+        width: 60px;
+        height: 60px;
+        border: none;
+        transition: 0.5s;
+
+        img {
+            width: 100%;
+        }
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}

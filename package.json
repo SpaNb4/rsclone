@@ -10,6 +10,7 @@
   "dependencies": {
     "locizify": "^4.1.4",
     "materialize-css": "^1.0.0-rc.2",
+    "sharer.js": "^0.4.1",
     "svg-url-loader": "^7.1.1",
     "url-loader": "^4.1.1"
   },

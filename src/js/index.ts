@@ -20,4 +20,5 @@ import './components/snake';
 import './components/languages';
 import './components/game-over';
 import './components/guess-a-number';
+import './components/share';
 import './components/fakes';
