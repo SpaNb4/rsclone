@@ -9,7 +9,6 @@ import iconWhisky from './../../assets/icons/whisky.svg';
 import matchSound from './../../assets/audio/memory_match.mp3';
 import zombieSound from './../../assets/audio/memory_zombie.mp3';
 
-import { state } from './state';
 import { shuffleArray, doubleArray, playAudio } from './utils';
 
 const OPENED = 'opened';
@@ -123,7 +122,6 @@ const onMemoryGridClick = (evt) => {
     if (count === PICS_ARR.length) {
       playAudio(audioZombie);
       memoryGrid.classList.add(WON);
-      state.memory = false;
     }
   }
 }

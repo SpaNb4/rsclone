@@ -241,7 +241,7 @@ class Room {
     }
 
     keysPressed(evt) {
-        if (!state.isMiniGameOpened) {
+        if (!state.isMiniGameOpened && !state.paused) {
             evt.preventDefault();
 
             this.keys[evt.keyCode] = true;
@@ -257,7 +257,7 @@ class Room {
     }
 
     keysReleased(evt) {
-        if (state.isMiniGameOpened) return null;
+        if (state.isMiniGameOpened && !state.paused) return null;
         this.keys[evt.keyCode] = false;
     }
 

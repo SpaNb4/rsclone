@@ -3,8 +3,6 @@ const keyboardSwitch: HTMLInputElement = document.querySelector('#keyboard-switc
 
 interface Istate {
   volume: number;
-  memory: boolean;
-  simon: boolean;
   isMiniGameOpened: boolean;
   keyboard: boolean;
   paused: boolean;
@@ -25,8 +23,6 @@ function getKeyboardValue(): boolean {
 
 const state: Istate = {
   volume: getVolume(),
-  memory: true,
-  simon: true,
   isMiniGameOpened: false,
   keyboard: getKeyboardValue(),
   paused: false,

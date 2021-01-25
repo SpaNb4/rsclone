@@ -97,7 +97,6 @@
         @include resolution(big-desktop) {
             max-width: 1320px;
         }
-
     }
 
     &.active {
@@ -120,6 +119,15 @@
     z-index: 99;
     cursor: url('./../icons/lens.png'), auto;
     transition: 1s;
+}
+
+.chandelier {
+    width: 99px;
+    height: 109px;
+    left: 50%;
+    bottom: 100%;
+    transform: translate(-50%, 100%);
+    background-image: url('./../img/chandelier.png');
 }
 
 .door {
@@ -151,8 +159,8 @@
     left: calc(50% - 15%);
     bottom: 0;
     transform: translateX(-50%);
-    width: 200px; // temp
-    height: 460px; // temp
+    width: 200px;
+    height: 460px;
     background-image: url('./../img/door-open.png');
 }
 
@@ -258,7 +266,7 @@
     background-image: url('./../img/clock.png');
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
@@ -289,32 +297,62 @@
     background-image: url('./../img/piano.png');
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.025);
     }
 }
 
 .lamp {
-    right: 10%;
-    bottom: 99%;
+    right: 5%;
+    bottom: 170px;
     width: 54px;
     height: 78px;
 
     @include resolution(tablet) {
         width: 80px;
         height: 118px;
+        bottom: 250px;
     }
 
     @include resolution(desktop) {
         width: 90px;
         height: 130px;
+        bottom: 260px;
     }
 
     @include resolution(big-desktop) {
         width: 96px;
         height: 144px;
+        bottom: 312px;
     }
 
     background-image: url('./../img/lamp.png');
+}
+
+.plant {
+    right: 29.5%;
+    bottom: 170px;
+    width: 40px;
+    height: 72px;
+
+    @include resolution(tablet) {
+        width: 60px;
+        height: 108px;
+        bottom: 250px;
+    }
+
+    @include resolution(desktop) {
+        width: 68px;
+        height: 123px;
+        bottom: 260px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 80px;
+        height: 144px;
+        bottom: 312px;
+    }
+
+    background-image: url('./../img/plant.png');
 }
 
 // wall 2
@@ -398,7 +436,7 @@
     background-image: url('./../img/frame.jpg');
 
     &:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
 }
 
@@ -495,7 +533,7 @@
                 transition: 1s;
 
                 &:hover {
-                    transform: scale(1.4);
+                    transform: scale(1.3);
                 }
             }
 
@@ -653,7 +691,7 @@
     background-image: url('./../img/box.png');
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
@@ -737,7 +775,12 @@
     &.swung {
         animation: swing 1s ease;
     }
+
+    &.hover {
+        transform:  scale(1.05);
+    }
 }
+
 .coffee-table {
     right: calc(240px / 2);
     bottom: -50px;
@@ -768,6 +811,7 @@
 
     background-image: url('./../img/coffee-table.png');
 }
+
 .cat {
     left: 15%;
     bottom: 35%;
@@ -787,6 +831,10 @@
     @include resolution(big-desktop) {
         width: 120px;
         height: 120px;
+    }
+
+    &:hover {
+        transform: scale(1.05);
     }
 
     background-image: url('./../img/cat.png');
@@ -1228,6 +1276,10 @@
 
     background-image: url('./../img/table-lamp.png');
 
+    &:hover {
+        transform: scale(1.05);
+    }
+
     &::after {
         position: absolute;
         content: '';
@@ -1330,6 +1382,10 @@
     &.dropped {
         transform: rotate(90deg);
         bottom: 0;
+    }
+
+    &:hover {
+        transform: scale(1.05);
     }
 }
 
