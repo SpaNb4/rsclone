@@ -7,12 +7,14 @@ import { getRoomState } from './room_state.js';
 
 let randomNumber: number = 0;
 let numberOfGuesses: number = 0;
+const gameName = 'guess-a-number';
 const userGuess: any = 'userGuess';
 const statusArea: string = 'statusArea';
 const historyList: string = 'historyList';
 const maxValue: number = 100;
 const buttonArea: string = 'buttonArea';
-const stateTimer = new GameTimer('guess-a-number', getRoomState());
+const codeWord: string = 'codeguess-a-number';
+const stateTimer = new GameTimer(gameName, getRoomState());
 
 function writeMessage(elementId: any, message: string, appendMessage: any) {
     const elemToUpdate = document.getElementById(elementId);
@@ -21,6 +23,10 @@ function writeMessage(elementId: any, message: string, appendMessage: any) {
     } else {
         elemToUpdate.innerHTML = message;
     }
+}
+
+function setHiddenWordVisibility(visible) {
+    document.getElementById(codeWord).innerHTML = (visible ? 'word' : '');
 }
 
 function newGame() {
@@ -32,7 +38,10 @@ function newGame() {
     createTimerView(timerContainer, stateTimer);
     stateTimer.gameOpened();
     document.getElementById(userGuess).removeAttribute('disabled');
+    document.getElementById(buttonArea).removeAttribute('disabled');
     document.getElementById(userGuess).focus();
+    const gameFinished = getRoomState().isGameFinished(gameName);
+    setHiddenWordVisibility(gameFinished);
 }
 
 function guessInRange(guess: number) {
@@ -57,6 +66,8 @@ function userGuessed() {
             stateTimer.gameFinished();
             numberOfGuesses = 0;
             document.getElementById(userGuess).setAttribute('disabled', 'disabled');
+            document.getElementById(buttonArea).setAttribute('disabled', 'disabled');
+            setHiddenWordVisibility(true);
         } else if (Number(userGuessednumber) < randomNumber) {
             // User needs to guess higher
             writeMessage(statusArea, `<p><span>You need to guess higher than</span> ${userGuessednumber}, <span>try again</span>...</p>`, '');

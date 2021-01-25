@@ -1,3 +1,20 @@
+function buildStorageKey(email) {
+    return `states_${email}`;
+}
+
+function storeStates(email, states) {
+    localStorage.setItem(buildStorageKey(email), JSON.stringify(states));
+}
+
+function loadStates(email) {
+    const states = JSON.parse(localStorage.getItem(
+        buildStorageKey(email),
+    ));
+    if (states === null) {
+        return {};
+    }
+    return states;
+}
 class RoomState {
     constructor() {
         this.states = {};
@@ -8,19 +25,14 @@ class RoomState {
         this.states = {};
         this.userEmail = email;
         if (this.userEmail !== null) {
-            this.states = JSON.parse(localStorage.getItem(
-                this.buildStorageKey(this.userEmail),
-            ));
-            if (this.states === null) {
-                this.states = {};
-            }
+            this.states = loadStates(this.userEmail);
         }
     }
 
-    saveTime(name, time) {
-        this.states[name] = time;
+    saveTime(gameName, time) {
+        this.states[gameName] = time;
         if (this.userEmail !== null) {
-            localStorage.setItem(this.buildStorageKey(this.userEmail), JSON.stringify(this.states));
+            storeStates(this.userEmail, this.states);
         }
     }
 
@@ -28,8 +40,8 @@ class RoomState {
         return { ...this.states };
     }
 
-    buildStorageKey(email) {
-        return `states_${this.email}`;
+    isGameFinished(gameName) {
+        return (gameName in this.states);
     }
 }
 

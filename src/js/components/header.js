@@ -199,3 +199,12 @@ function headerInit() {
 }
 
 document.addEventListener('DOMContentLoaded', headerInit);
+
+function loadRoomState() {
+    const currentUser = localStorage.getItem(USER);
+    if (currentUser !== null) {
+        getRoomState().setUser(currentUser);
+    }
+}
+
+loadRoomState();
