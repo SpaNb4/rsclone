@@ -77,8 +77,6 @@ const createCard = (index) => {
 }
 
 const createGrid = () => {
-  if (!state.memory) return;
-
   memoryGrid.classList.remove(WON);
   memoryGrid.innerHTML = '';
 

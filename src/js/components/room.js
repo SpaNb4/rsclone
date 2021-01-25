@@ -6,7 +6,7 @@ import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame } from './game-over';
-import { getCoordsArray } from './utils';
+import { getCoordsArray, getRandomIntInclusive } from './utils';
 import { gamearea } from './keyboard';
 import * as intro from './intro';
 import { newGame, isHangmanSolved } from './hangman';
@@ -27,7 +27,8 @@ const frame = document.querySelector('.frame-image');
 const cube = document.querySelector('.cube4');
 const lock = document.querySelector('.game-over-lock');
 const box = document.querySelector('#box');
-const picture = document.querySelector('#picture');
+const picture = document.querySelector('#picture-' + getRandomIntInclusive(1, 3));
+document.querySelector('#safe-box').style.right = getComputedStyle(picture).right;
 
 const memory = document.querySelector('#memory-game');
 const simon = document.querySelector('#simon-game');
@@ -49,13 +50,13 @@ let indexLock;
 //  open functions:
 const openMemoryGame = () => {
     memoryGame.create();
-    state.memory ? memoryGame.links[0].focus() : memoryClose.focus();
+    memoryGame.links[0].focus();
     memory.classList.add(ACTIVE);
 };
 
 const openSimonGame = () => {
     simonGame.create();
-    state.simon ? simonGame.button.focus() : simonClose.focus();
+    simonGame.button.focus();
     simon.classList.add(ACTIVE);
 };
 
@@ -232,8 +233,6 @@ class Room {
 
         // update coordinates after changing wall
         clickableCoords = getCoordsArray(openGameObjects);
-        console.log(clickableCoords);
-
     }
 
     onArrowsClick(evt) {

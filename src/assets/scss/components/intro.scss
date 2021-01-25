@@ -64,19 +64,22 @@
   }
 
   &__title {
-    margin: 0 0 35px;
+    margin: 0 0 15px;
     font-family: $font-viaoda-libre;
     font-size: 32px;
 
     @include resolution(tablet) {
-      font-size: 42px;
+      margin: 0 0 10px;
+      font-size: 36px;
     }
 
     @include resolution(desktop) {
+      margin: 0 0 25px;
       font-size: 58px;
     }
 
     @include resolution(big-desktop) {
+      margin: 0 0 35px;
       font-size: 64px;
     }
 
@@ -112,7 +115,15 @@
   }
 
   &__list {
-    margin-bottom: 25px;
+    margin-bottom: 10px;
+
+    @include resolution(desktop) {
+      margin-bottom: 25px;
+    }
+
+    @include resolution(big-desktop) {
+      margin-bottom: 25px;
+    }
   }
 
   &__link {

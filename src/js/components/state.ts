@@ -11,14 +11,26 @@ interface Istate {
   callback: () => void;
 }
 
+function getVolume(): number {
+  if (volumeRange) {
+    return Number(volumeRange.value) / 100;
+  }
+}
+
+function getKeyboardValue(): boolean {
+  if (keyboardSwitch) {
+    return keyboardSwitch.checked;
+  }
+}
+
 const state: Istate = {
-  volume: Number(volumeRange.value) / 100,
+  volume: getVolume(),
   memory: true,
   simon: true,
   isMiniGameOpened: false,
-  keyboard: keyboardSwitch.checked,
+  keyboard: getKeyboardValue(),
   paused: false,
-  callback: null
+  callback: null,
 };
 
 export { state, volumeRange, keyboardSwitch };

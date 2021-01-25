@@ -82,8 +82,13 @@ function getCoordsArray(array) {
     });
 }
 
+function getRandomElement(array) {
+    return array[getRandomInt(array.length)];
+}
+
 export {
     shuffleArray, doubleArray, checkSymbol,
     getRandomInt, getWinCombination, getRandomIntInclusive,
-    playAudio, isOnElement, getCoordsArray
+    playAudio, isOnElement, getCoordsArray, getRandomElement,
+    isIntInclude
 };

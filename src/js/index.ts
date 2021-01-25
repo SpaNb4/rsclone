@@ -6,6 +6,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import './components/header';
 import './components/footer';
 
+import './components/state'
 import './components/room';
 import './components/keyboard';
 import './components/door';
@@ -19,3 +20,4 @@ import './components/snake';
 import './components/languages';
 import './components/game-over';
 import './components/guess-a-number';
+import './components/fakes';

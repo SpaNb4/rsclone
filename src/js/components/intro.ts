@@ -71,7 +71,7 @@ const skipIntroOne = () => {
   continueButton.focus();
 }
 
-const skipIntroTwo= () => {
+const skipIntroTwo = () => {
   content2.classList.add(DISABLED);
   content1.parentElement.classList.add(DISABLED);
 }
