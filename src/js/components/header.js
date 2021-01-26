@@ -25,13 +25,12 @@ function onVolumeRangeChange(evt) {
 }
 
 function onRestartClick() {
-    state.memory = true; // restart memory
-    state.simon = true; // restart memory
 }
 
-function onKeyboardSwitchChange(evt) {
-    state.keyboard = evt.target.checked;
+function switchKeyboard(value, modal) {
+    state.keyboard = value;
     gamearea.switch();
+    if (state.keyboard) modal.open();
 }
 
 function onLogoutClick() {
@@ -153,6 +152,8 @@ function navInit() {
     M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
     M.FormSelect.init(document.querySelectorAll('select'), { classes: 'main-header__select' });
 
+    const modalInstance = M.Modal.getInstance(document.querySelector('#modal-keyboard'));
+
     const sidenavInstance = M.Sidenav.init(document.querySelector('.sidenav'), {
         edge: 'right',
         onOpenEnd: () => state.paused = true,
@@ -160,7 +161,8 @@ function navInit() {
     });
 
     document.addEventListener('keydown', (evt) => {
-        if (evt.code === 'KeyP' & state.keyboard) {
+        if (evt.code === 'F11' & state.keyboard) {
+            evt.preventDefault();
             sidenavInstance.open();
         }
 
@@ -186,7 +188,7 @@ function navInit() {
     volumeRange.addEventListener('change', onVolumeRangeChange);
     restartButton.addEventListener('click', onRestartClick);
     logoutButton.addEventListener('click', onLogoutClick);
-    keyboardSwitch.addEventListener('change', onKeyboardSwitchChange);
+    keyboardSwitch.addEventListener('change', (evt) => switchKeyboard(evt.target.checked, modalInstance));
 }
 
 function headerInit() {

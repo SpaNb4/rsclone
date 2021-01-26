@@ -6,7 +6,8 @@ interface Istate {
   isMiniGameOpened: boolean;
   keyboard: boolean;
   paused: boolean;
-  callback: () => void;
+  selector: string;
+  callback: (x: string | null) => void;
 }
 
 function getVolume(): number {
@@ -26,6 +27,7 @@ const state: Istate = {
   isMiniGameOpened: false,
   keyboard: getKeyboardValue(),
   paused: false,
+  selector: '',
   callback: null,
 };
 

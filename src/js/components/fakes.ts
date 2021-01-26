@@ -1,7 +1,6 @@
 // @ts-ignore
 import { getRandomElement, playAudio } from './utils';
 // @ts-ignore
-import { picture } from './room';
 import angryMeowSound from './../../assets/audio/meow-angry.mp3';
 import sweetMeowSound from './../../assets/audio/meow-sweet.mp3';
 import roarMeowSound from './../../assets/audio/meow-roar.mp3';
@@ -17,13 +16,17 @@ const catSays: HTMLElement = cat.querySelector('div');
 const paper: HTMLElement = document.querySelector('#paper_three');
 const lamp: HTMLElement = document.querySelector('#table-lamp');
 const maneki: HTMLElement = document.querySelector('#maneki');
-const pics: Array<HTMLElement> = Array.from(document.querySelectorAll('.picture'));
 
-interface IcatSound {
+interface ICatSound {
   [key: string]: HTMLAudioElement;
 }
 
-const catSounds: IcatSound[] = [
+interface IFakeOnbjects {
+  [0]: HTMLElement;
+  [1]: () => void;
+}
+
+const catSounds: ICatSound[] = [
   { 'meow-meow':  new Audio(angryMeowSound) },
   { 'mao': new Audio(sweetMeowSound) },
   { 'roar': new Audio(roarMeowSound) },
@@ -35,7 +38,7 @@ const lightAudio = new Audio(lightSound);
 const brakeAudio = new Audio(brakeSound);
 
 const openCatSays = (): void => {
-  const meow: IcatSound = getRandomElement(catSounds);
+  const meow: ICatSound = getRandomElement(catSounds);
   const audio: HTMLAudioElement = Object.values(meow)[0];
   cat.removeEventListener('click', onCatClick);
   cat.querySelector('div').style.display = 'block';
@@ -61,7 +64,7 @@ const outCatClick = (evt: MouseEvent): void => {
   if (evt.target !== cat) closeCatSays();
 }
 
-const onFakePaperClick = () => {
+const onFakePaperClick = (): void => {
   const bottom: number = parseFloat(getComputedStyle(paper.parentElement).bottom);
   playAudio(laughAudio);
   paper.style.transform = `translateY(${bottom + paper.offsetWidth}px) matrix(1, 0, -0.3, 0.2, 0, 0)`;
@@ -69,14 +72,14 @@ const onFakePaperClick = () => {
   paper.removeEventListener('click', onFakePaperClick);
 }
 
-const onLampClick = () => {
+const onLampClick = (): void => {
   lightAudio.currentTime = 0;
   playAudio(lightAudio);
 
   setTimeout(() => lamp.classList.toggle('on'), 300);
 }
 
-const onManekiClick = () => {
+const onManekiClick = (): void => {
   maneki.classList.add('dropped');
   setTimeout(() => {
     maneki.style.backgroundImage = `url(${manekiImage})`;
@@ -84,20 +87,22 @@ const onManekiClick = () => {
   }, 800);
 }
 
-pics.forEach((pic) => {
-  if (pic !== picture) {
-    pic.addEventListener('click', (evt: MouseEvent): void => {
-      let target: HTMLElement | any = evt.target;
-      if (target instanceof HTMLElement) {
-        target.classList.remove('swung');
-        playAudio(laughAudio);
-        setTimeout(() => target.classList.add('swung'), 0);
-      }
-    });
-  }
+const swingPicture = (id: HTMLElement): void => {
+  const pic = document.querySelector(`#${id}`);
+  pic.classList.remove('swung');
+  playAudio(laughAudio);
+  setTimeout(() => pic.classList.add('swung'), 0);
+}
+
+const fakeObjects: IFakeOnbjects[] = [
+  [maneki, onManekiClick],
+  [lamp, onLampClick],
+  [paper, onFakePaperClick],
+  [cat, onCatClick],
+]
+
+fakeObjects.forEach((elem) => {
+    elem[0].addEventListener('click', elem[1])
 });
 
-maneki.addEventListener('click', onManekiClick);
-lamp.addEventListener('click', onLampClick);
-paper.addEventListener('click', onFakePaperClick);
-cat.addEventListener('click', onCatClick);
+export { fakeObjects, swingPicture };
