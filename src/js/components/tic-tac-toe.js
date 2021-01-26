@@ -1,5 +1,5 @@
 import { playAudio, getRandomInt } from './utils';
-import { codeWordGameTicTacToe } from './game-over';
+import { codeWordGames } from './game-over';
 import soundClickTicTacToe from './../../assets/audio/tictactoe-click.mp3';
 import soundWinTicTacToe from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3';
@@ -26,7 +26,7 @@ const classCeil = '.cell',
       elemArr1 = 1,
       elemArr2 = 2,
       classCodeTicTacToe = '.codeTicTacToe',
-      textCodeTicTacToe = `<span>Code word</span> ${codeWordGameTicTacToe}`,
+      textCodeTicTacToe = `<span>Code word</span> ${codeWordGames.next().value}`,
       audioClickTicTacToe = new Audio(soundClickTicTacToe),
       audioWinTicTacToe = new Audio(soundWinTicTacToe),
       audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
