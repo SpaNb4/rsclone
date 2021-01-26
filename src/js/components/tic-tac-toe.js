@@ -1,4 +1,5 @@
 import { playAudio, getRandomInt } from './utils';
+import { definitionCodeWord } from './game-over';
 import soundClickTicTacToe from './../../assets/audio/tictactoe-click.mp3';
 import soundWinTicTacToe from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3';
@@ -25,7 +26,7 @@ const classCeil = '.cell',
       elemArr1 = 1,
       elemArr2 = 2,
       classCodeTicTacToe = '.codeTicTacToe',
-      textCodeTicTacToe = '<span>Code word:</span> TEST',
+      textCodeTicTacToe = `<span>Code word</span> `,
       audioClickTicTacToe = new Audio(soundClickTicTacToe),
       audioWinTicTacToe = new Audio(soundWinTicTacToe),
       audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
@@ -92,6 +93,7 @@ const conclusionGameTicTacToe = (win) => {
     document.querySelector(classWin).innerHTML = win;
     if (win === winX) {
         document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
+        document.querySelector(classCodeTicTacToe).innerHTML += definitionCodeWord();
         playAudio(audioWinTicTacToe);
     } else {
         playAudio(audioGameOverTicTacToe);
