@@ -20,7 +20,9 @@ const lockClose = '.lock__close',
       stateCloseLock = 0,
       stateOpenLock = 1,
       countPharese = 3,
-      countWord = 1;
+      countWord = 1,
+      indexArr = 0,
+      neededCountDublicate = 0;
 
 let arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
 
@@ -56,12 +58,35 @@ const passpharasesArr = [
 ];
 
 const codePhrase = passpharasesArr[getRandomInt(countPharese)];
-const codePhraseForLocks = codePhrase;
+
+let arrRandomIndex = [];
+
+const addRandomElement = () => {
+    let number = getRandomInt(codePhrase.length);
+    let countDublicate = neededCountDublicate;
+    arrRandomIndex.forEach(elem => {
+        if (number === elem) {
+            countDublicate++;
+        }
+    })
+
+    if (countDublicate > neededCountDublicate) {
+        addRandomElement();
+    } else {
+        arrRandomIndex.push(number)
+    }
+}
+
+const addArrayRandomElement = () => {
+    while (arrRandomIndex.length !== arrLock.length) {
+        addRandomElement();
+    }
+}
+addArrayRandomElement();
 
 export const definitionCodeWord = () => {
-    let indexWord = getRandomInt(codePhrase.length);
-    let word = codePhrase[indexWord];
-    codePhrase.splice(indexWord, countWord);
+    let word = codePhrase[arrRandomIndex[indexArr]];
+    arrRandomIndex.splice(indexArr, countWord);
     return word;
 }
 
@@ -84,7 +109,7 @@ const checkOpenLock = (elem) => {
 }
 
 const checkTextExit = () => {
-    if (document.querySelector(lockGameText).value === codePhraseForLocks[indexLock[numLockFromString] - num]) {
+    if (document.querySelector(lockGameText).value === codePhrase[indexLock[numLockFromString] - num]) {
         if (arrOpenLocks[indexLock[numLockFromString] - num] === stateCloseLock) {
             document.querySelector(lockGameClose).classList.remove(lockGameActive);
             document.querySelector(lockGameOpen).classList.add(lockGameActive);
