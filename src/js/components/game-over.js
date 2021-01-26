@@ -2,7 +2,10 @@ import { indexLock } from './room';
 import { getRandomInt } from './utils';
 
 let flagOpen = false,
-    countOpenLock = 0;
+    countOpenLock = 0,
+    stateCloseLock = 0,
+    stateOpenLock = 1,
+    arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
 
 const lockClose = '.lock__close',
       lockOpen = '.lock__open',
@@ -70,16 +73,19 @@ export const KeyDownLock = (event) => {
 const checkOpenLock = (elem) => {
     document.querySelector(`${elem} ${lockClose}`).classList.remove(lockActive);
     document.querySelector(`${elem} ${lockOpen}`).classList.add(lockActive);
-
     checkGameOverDoor();
 }
 
 const checkTextExit = () => {
-    if (document.querySelector(lockGameText).value === codePhrase[indexLock[numLockFromString] - num]) {
-        document.querySelector(lockGameClose).classList.remove(lockGameActive);
-        document.querySelector(lockGameOpen).classList.add(lockGameActive);
-        flagOpen = true;
-        countOpenLock++;
+    let index = indexLock[numLockFromString] - num;
+    if (document.querySelector(lockGameText).value === codePhrase[index]) {
+        if (arrOpenLocks[index] === stateCloseLock) {
+            document.querySelector(lockGameClose).classList.remove(lockGameActive);
+            document.querySelector(lockGameOpen).classList.add(lockGameActive);
+            flagOpen = true;
+            countOpenLock++;
+            arrOpenLocks[index] = stateOpenLock;
+        }
     }
     if (flagOpen) {
         checkOpenLock(indexLock)
