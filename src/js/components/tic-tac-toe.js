@@ -1,5 +1,5 @@
 import { playAudio, getRandomInt } from './utils';
-import { codeWordGames } from './game-over';
+import { definitionCodeWord } from './game-over';
 import soundClickTicTacToe from './../../assets/audio/tictactoe-click.mp3';
 import soundWinTicTacToe from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3';
@@ -93,7 +93,7 @@ const conclusionGameTicTacToe = (win) => {
     document.querySelector(classWin).innerHTML = win;
     if (win === winX) {
         document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
-        document.querySelector(classCodeTicTacToe).innerHTML += codeWordGames.next().value;
+        document.querySelector(classCodeTicTacToe).innerHTML += definitionCodeWord();
         playAudio(audioWinTicTacToe);
     } else {
         playAudio(audioGameOverTicTacToe);

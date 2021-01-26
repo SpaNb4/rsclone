@@ -3,8 +3,6 @@ import { getRandomInt } from './utils';
 
 let flagOpen = false,
     countOpenLock = 0,
-    stateCloseLock = 0,
-    stateOpenLock = 1,
     arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
 
 const lockClose = '.lock__close',
@@ -19,7 +17,12 @@ const lockClose = '.lock__close',
       doorNoneDisplay = 'door-none',
       enter = 13,
       numLockFromString = 5,
-      num = 1;
+      num = 1,
+      stateCloseLock = 0,
+      stateOpenLock = 1,
+      countPharese = 3,
+      countWord = 1;
+
 
 const layoutLock = `
     <div class="lock__close lock__active">
@@ -52,13 +55,14 @@ const passpharasesArr = [
     ['The answer', 'is meaningless', 'unless', 'you', 'discover', 'it', 'for', 'yourself']
 ];
 
-const codePhrase = passpharasesArr[getRandomInt(3)];
+const codePhrase = passpharasesArr[getRandomInt(countPharese)];
 
-function* genCodeWord() {
-    yield* codePhrase;
+export const definitionCodeWord = () => {
+    let indexWord = getRandomInt(codePhrase.length);
+    let word = codePhrase[indexWord];
+    codePhrase.splice(indexWord, countWord);
+    return word;
 }
-
-export const codeWordGames = genCodeWord();
 
 arrLock.forEach((elem) => {
     document.querySelector(elem).innerHTML += layoutLock;
