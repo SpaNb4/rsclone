@@ -103,7 +103,7 @@ class Pointer {
         }
         break;
       case 'KeyD':
-        if (this.x + this.size < gamearea.container) {
+        if (this.x + this.size < gamearea.canvas.width) {
           this.dx = DIFF;
         }
         break;
