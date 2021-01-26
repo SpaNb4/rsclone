@@ -2,8 +2,7 @@ import { indexLock } from './room';
 import { getRandomInt } from './utils';
 
 let flagOpen = false,
-    countOpenLock = 0,
-    arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
+    countOpenLock = 0;
 
 const lockClose = '.lock__close',
       lockOpen = '.lock__open',
@@ -23,6 +22,7 @@ const lockClose = '.lock__close',
       countPharese = 3,
       countWord = 1;
 
+let arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
 
 const layoutLock = `
     <div class="lock__close lock__active">
