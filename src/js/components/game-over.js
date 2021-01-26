@@ -44,19 +44,21 @@ export const layoutLockGame = `
     </div>
 `;
 
-function* genCodeWord() {
-    yield* codePhrase;
-}
+export const arrLock = ['.lock1', '.lock2', '.lock3', '.lock4', '.lock5', '.lock6', '.lock7', '.lock8'];
 
 const passpharasesArr = [
     ['Always', 'forgive', 'your', 'enemies', 'Nothing', 'annoys', 'them', 'more'],
     ['Success', 'is', 'one', 'percent', 'inspiration', 'ninety-nine', 'percent', 'perspiration'],
     ['The answer', 'is meaningless', 'unless', 'you', 'discover', 'it', 'for', 'yourself']
 ];
+
 const codePhrase = passpharasesArr[getRandomInt(3)];
 
-export const arrLock = ['.lock1', '.lock2', '.lock3', '.lock4', '.lock5', '.lock6', '.lock7', '.lock8'],
-             codeWordGames = genCodeWord();
+function* genCodeWord() {
+    yield* codePhrase;
+}
+
+export const codeWordGames = genCodeWord();
 
 arrLock.forEach((elem) => {
     document.querySelector(elem).innerHTML += layoutLock;

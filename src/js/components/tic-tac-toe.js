@@ -26,7 +26,7 @@ const classCeil = '.cell',
       elemArr1 = 1,
       elemArr2 = 2,
       classCodeTicTacToe = '.codeTicTacToe',
-      textCodeTicTacToe = `<span>Code word</span> ${codeWordGames.next().value}`,
+      textCodeTicTacToe = `<span>Code word</span> `,
       audioClickTicTacToe = new Audio(soundClickTicTacToe),
       audioWinTicTacToe = new Audio(soundWinTicTacToe),
       audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
@@ -93,6 +93,7 @@ const conclusionGameTicTacToe = (win) => {
     document.querySelector(classWin).innerHTML = win;
     if (win === winX) {
         document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
+        document.querySelector(classCodeTicTacToe).innerHTML += codeWordGames.next().value;
         playAudio(audioWinTicTacToe);
     } else {
         playAudio(audioGameOverTicTacToe);

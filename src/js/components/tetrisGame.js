@@ -8,7 +8,7 @@ const tetris = '.tetris__game',
       context2D = '2d',
       resultTetris = '.resultTetris',
       classCodeTetris = '.codeTetris',
-      textCodeTetris = `<span>Code word:</span> ${codeWordGames.next().value}`,
+      textCodeTetris = `<span>Code word:</span> `,
       white = 'white',
       salmon = 'salmon',
       yellow = 'yellow',
@@ -383,6 +383,7 @@ const winTetris = (score) => {
     if (score >= winScore) {
         document.querySelector(resultTetris).innerHTML = winText;
         document.querySelector(classCodeTetris).innerHTML = textCodeTetris;
+        document.querySelector(classCodeTetris).innerHTML += codeWordGames.next().value;
         gameOver = true;
         playAudio(audioWinTetris);
     }
