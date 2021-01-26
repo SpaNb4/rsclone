@@ -56,6 +56,7 @@ const passpharasesArr = [
 ];
 
 const codePhrase = passpharasesArr[getRandomInt(countPharese)];
+const codePhraseForLocks = codePhrase;
 
 export const definitionCodeWord = () => {
     let indexWord = getRandomInt(codePhrase.length);
@@ -83,14 +84,13 @@ const checkOpenLock = (elem) => {
 }
 
 const checkTextExit = () => {
-    let index = indexLock[numLockFromString] - num;
-    if (document.querySelector(lockGameText).value === codePhrase[index]) {
-        if (arrOpenLocks[index] === stateCloseLock) {
+    if (document.querySelector(lockGameText).value === codePhraseForLocks[indexLock[numLockFromString] - num]) {
+        if (arrOpenLocks[indexLock[numLockFromString] - num] === stateCloseLock) {
             document.querySelector(lockGameClose).classList.remove(lockGameActive);
             document.querySelector(lockGameOpen).classList.add(lockGameActive);
             flagOpen = true;
             countOpenLock++;
-            arrOpenLocks[index] = stateOpenLock;
+            arrOpenLocks[indexLock[numLockFromString] - num] = stateOpenLock;
         }
     }
     if (flagOpen) {
