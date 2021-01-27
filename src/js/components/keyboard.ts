@@ -2,7 +2,7 @@
 import iconPointer from "./../../assets/icons/lens.png";
 import { state } from "./state";
 // @ts-ignore
-import { clickableCoords, addEventHandlers, indexLock } from "./room";
+import { clickableCoords } from "./room";
 // @ts-ignore
 import { isOnElement } from './utils';
 
@@ -25,18 +25,20 @@ class GameArea {
   }
 
   draw() {
-    this.canvas.setAttribute("id", "game-content-canvas");
+    this.canvas.setAttribute('id', 'game-content-canvas');
     this.canvas.className = "content__canvas";
     this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
     this.canvas.height = window.innerHeight;
     content.prepend(this.canvas);
 
     document.addEventListener('keydown', (evt) => {
-      if (!state.isMiniGameOpened && !state.paused) this.key = evt.code;
+      if (!state.isMiniGameOpened && !state.paused) {
+        this.key = evt.code;
 
-      if (evt.key === 'Enter' && pointer.onElement) {
-          state.callback();
-          addEventHandlers();
+        if (evt.key === 'Enter' && pointer.onElement) {
+          state.callback(state.selector);
+        }
       }
     });
 
@@ -101,7 +103,7 @@ class Pointer {
         }
         break;
       case 'KeyD':
-        if (this.x + this.size < gamearea.container) {
+        if (this.x + this.size < gamearea.canvas.width) {
           this.dx = DIFF;
         }
         break;
@@ -140,7 +142,6 @@ window.addEventListener('resize', () => {
   gamearea.canvas.height = window.innerHeight;
   gamearea.container = document.querySelector('.wall__container').clientWidth;
 });
-
 
 imagePointer.addEventListener('load', () => {
   gamearea.draw();

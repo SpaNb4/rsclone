@@ -59,6 +59,12 @@
           <a class="intro__link" href="https://mixkit.co/free-sound-effects/goal/" target="_blank">Mixkit</a>
         </li>
       </ul>
+      <h4 class="intro__sub">Art</h4>
+      <ul class="intro__list">
+        <li>"Wine" by Aleksandra Ekster</li>
+        <li>"Eva" by Chaïm Soutine</li>
+        <li>"Tancerka" by Marc Chagall</li>
+      </ul>
       <div class="intro__copyrights">Lorem ipsum dolor @ 2021</div>
     </div>
     <canvas id="intro-canvas"></canvas>
@@ -133,7 +139,7 @@
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link collapsible-header" href="#">
+        <a class="grey-text text-lighten-5 main-header__link collapsible-header" href="#!">
           <i class="material-icons grey-text text-lighten-3">keyboard</i>
           <span>Keyboard</span>
         </a>
@@ -160,6 +166,7 @@
   <main>
     <div class="content" id="game-content">
       <div id="overlay" class="overlay"></div>
+      <div class="chandelier element"></div>
       <div id="wall-1" class="wall active">
         <div class="wall__container">
           <div class="door element">
@@ -177,9 +184,9 @@
           </div>
           <div class="door-open element door-none"></div>
           <div id="clock" class="clock element"></div>
-          <div id="piano" class="piano element">
-            <div class="lamp element"></div>
-          </div>
+          <div id="piano" class="piano element"></div>
+          <div class="plant element"></div>
+          <div class="lamp element"></div>
         </div>
 
       </div>
@@ -206,11 +213,17 @@
         <div class="wall__container">
           <div id="hat" class="hat element"></div>
           <div id="couch" class="couch element">
-            <div id="cat" class="cat element"></div>
+            <div id="cat" class="cat element">
+              <div class="cat-says"></div>
+            </div>
           </div>
           <div class="mirror element"></div>
           <div id="safe-box" class="safe-box element"></div>
-          <div id="picture" class="picture element"></div>
+          <div>
+            <div id="picture-1" class="picture element"></div>
+            <div id="picture-2" class="picture element"></div>
+            <div id="picture-3" class="picture element"></div>
+          </div>
           <div id="box" class="box element"></div>
           <div id="bottle" class="bottle element"></div>
           <div id="coffee-table" class="coffee-table element"></div>
@@ -221,10 +234,12 @@
           <div class="board_paper element">
             <div id="paper_one" class="paper element"></div>
             <div id="paper_two" class="paper element"></div>
+            <div id="paper_three" class="paper element"></div>
           </div>
           <div class="chair element"></div>
-          <div class="work_table element">
-            <div class="cat_statuette element"></div>
+          <div class="work-table element">
+            <div id="table-lamp" class="table-lamp element"></div>
+            <div id="maneki" class="cat_statuette element"></div>
             <div class="pillow element"></div>
           </div>
         </div>
@@ -393,10 +408,10 @@
 
   <div id="modal-restart" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h5>Your progress was reset. Try again!</h5>
+      <h5>Your progress has been successfully reset. Try again!</h5>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
     </div>
   </div>
 
@@ -405,7 +420,7 @@
       <h5 class="save-message">Your progress has been successfully saved!</h5>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
     </div>
   </div>
 
@@ -426,11 +441,10 @@
         <div class="row center-align">
           <button type="submit" name="btn_register" class="btn btn-large waves-effect teal">Register</button>
         </div>
-
       </form>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
     </div>
   </div>
 
@@ -450,23 +464,49 @@
         <div class="row center-align">
           <button type="submit" name="btn_login" class="btn btn-large waves-effect teal">Login</button>
         </div>
-
       </form>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
     </div>
   </div>
+
   <div id="modal-link" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
       <h4 class="center-align">Share the game with a friend</h4>
       <div class="share">
         <div class="share__buttons">
         </div>
-      </div>      
+      </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4 center">Okay</a>
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-keyboard" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 class="center-align">Keyboard control mode has been successfully activated!</h4>
+      <ul class="collection">
+        <li class="collection-item">
+          <strong>CTRL + &#8592;/&#8594;</strong> - change current wall
+        </li>
+        <li class="collection-item">
+          <strong>W/A/S/D</strong> - move pointer
+        </li>
+        <li class="collection-item">
+          <strong>ENTER</strong> - interact with objects
+        </li>
+        <li class="collection-item">
+          <strong>ESCAPE</strong> - close modal windows and sidenav
+        </li>
+        <li class="collection-item">
+          <strong>F11</strong> - pause game and open sidenav
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
     </div>
   </div>
 </body>

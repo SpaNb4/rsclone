@@ -1,4 +1,3 @@
-import { state } from './state';
 // @ts-ignore
 import { getRandomInt } from './../../js/components/utils';
 // @ts-ignore
@@ -84,7 +83,6 @@ const createNotes = (): void => {
 
 const playNote = (key: HTMLElement): void => {
     const audio: HTMLAudioElement = audios[Number(key.dataset.index)];
-    audio.currentTime = 0;
 
     playAudio(audio);
     key.classList.add('active');
@@ -152,7 +150,6 @@ const setFinishedState = () => {
     buttonStart.classList.add('disabled');
     piano.classList.add('disabled');
     piano.classList.add('won');
-    state.simon = false;
 };
 
 const setStepGoing = () => {
@@ -172,10 +169,8 @@ const setStepFinished = () => {
 };
 
 const createGame = (): void => {
-    if (state.simon) {
-        createNotes();
-        setInitState();
-    }
+    createNotes();
+    setInitState();
 };
 
 const startGame = (): void => {
@@ -185,11 +180,9 @@ const startGame = (): void => {
 };
 
 const resetGame = (): void => {
-    if (state.simon) {
-        resetSteps();
-        setInitState();
-        buttonStart.classList.remove('disabled');
-    }
+    resetSteps();
+    setInitState();
+    buttonStart.classList.remove('disabled');
 };
 
 const allElementsBlur = (): void => {

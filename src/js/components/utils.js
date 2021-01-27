@@ -48,6 +48,7 @@ function getWinCombination() {
 
 function playAudio(audio) {
     audio.volume = state.volume;
+    audio.currentTime = 0;
     audio.play();
 }
 
@@ -64,6 +65,11 @@ function isIntInclude(int, width, min, max) {
 function isOnElement(elem, pointer) {
     if (isIntInclude(pointer.x, pointer.width, elem.minX, elem.maxX) && isIntInclude(pointer.y, pointer.height, elem.minY, elem.maxY)) {
         state.callback = elem.callback;
+        if (elem.callback.name === 'openLocks') {
+            state.selector = elem.class;
+        } else if (elem.callback.name === 'swingPicture') {
+            state.selector = elem.id;
+        }
         return true;
     } else {
         state.callback = null;
@@ -73,6 +79,8 @@ function isOnElement(elem, pointer) {
 function getCoordsArray(array) {
     return array.map((elem) => {
         return {
+            id: elem[0].id,
+            class: elem[0].className,
             minX: elem[0].getBoundingClientRect().left,
             maxX: elem[0].getBoundingClientRect().left + elem[0].offsetWidth,
             minY: elem[0].getBoundingClientRect().top,
@@ -82,8 +90,13 @@ function getCoordsArray(array) {
     });
 }
 
+function getRandomElement(array) {
+    return array[getRandomInt(array.length)];
+}
+
 export {
     shuffleArray, doubleArray, checkSymbol,
     getRandomInt, getWinCombination, getRandomIntInclusive,
-    playAudio, isOnElement, getCoordsArray
+    playAudio, isOnElement, getCoordsArray, getRandomElement,
+    isIntInclude
 };

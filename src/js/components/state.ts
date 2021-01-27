@@ -3,22 +3,32 @@ const keyboardSwitch: HTMLInputElement = document.querySelector('#keyboard-switc
 
 interface Istate {
   volume: number;
-  memory: boolean;
-  simon: boolean;
   isMiniGameOpened: boolean;
   keyboard: boolean;
   paused: boolean;
-  callback: () => void;
+  selector: string;
+  callback: (x: string | null) => void;
+}
+
+function getVolume(): number {
+  if (volumeRange) {
+    return Number(volumeRange.value) / 100;
+  }
+}
+
+function getKeyboardValue(): boolean {
+  if (keyboardSwitch) {
+    return keyboardSwitch.checked;
+  }
 }
 
 const state: Istate = {
-  volume: Number(volumeRange.value) / 100,
-  memory: true,
-  simon: true,
+  volume: getVolume(),
   isMiniGameOpened: false,
-  keyboard: keyboardSwitch.checked,
+  keyboard: getKeyboardValue(),
   paused: false,
-  callback: null
+  selector: '',
+  callback: null,
 };
 
 export { state, volumeRange, keyboardSwitch };
