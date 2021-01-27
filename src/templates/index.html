@@ -338,6 +338,7 @@
   <div class="snake" id="snake">
     <a href="#" id="snake__close" class="snake__close all-close-button"><i
         class="material-icons medium grey-text text-grey">close</i></a>
+      <div id='timer-snake'></div>
     <div class="snake__content">
       <div class="gameDisplay">
         <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
@@ -350,6 +351,7 @@
         </p>
         <button id="startGame">Start new game</button>
         <h4 id="message"></h4>
+        <div id="codesnake"></div>
       </div>
     </div>
   </div>
@@ -357,19 +359,21 @@
     <a href="#" id="guess-a-number-close" class="guess-a-number__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
+    <div id="timer-guess-a-number"></div>
     <div class="guess-a-number__content">
       <h3>Number Guessing Game</h3>
       <div id="statusArea">
         <p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span>.</p>
       </div>
       <input type="number" id="userGuess" />
-      <div id="buttonArea" class="button">
+      <button id="buttonArea" class="button">
         Guess
-      </div>
+      </button>
       <div id="historyArea">
         <h4>Your Previous Guesses</h4>
         <ol id="historyList"></ol>
       </div>
+      <div id="codeguess-a-number"></div>
     </div>
   </div>
   <footer class="main-footer">
@@ -400,6 +404,7 @@
   <div id="modal-stats" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
       <h5>Game Statistics</h5>
+      <div id="game-statistics"></div>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>

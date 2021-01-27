@@ -1539,3 +1539,14 @@
         }
     }
 }
+
+#timer-snake {
+    @include resolution(big-mobile) {
+        font-size: 20px;
+    }
+}
+#timer-guess-a-number {
+    @include resolution(big-mobile) {
+        font-size: 20px;
+    }
+}
