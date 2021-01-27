@@ -11,6 +11,7 @@ import lightSound from './../../assets/audio/light.mp3';
 // @ts-ignore
 import manekiImage from './../../assets/img/cat_broken.png';
 
+const ON = 'on';
 const cat: HTMLElement = document.querySelector('#cat');
 const catSays: HTMLElement = cat.querySelector('div');
 const paper: HTMLElement = document.querySelector('#paper_three');
@@ -42,7 +43,6 @@ const openCatSays = (): void => {
   const audio: HTMLAudioElement = Object.values(meow)[0];
   cat.removeEventListener('click', onCatClick);
   cat.querySelector('div').style.display = 'block';
-  audio.currentTime = 0;
   playAudio(audio);
   catSays.innerHTML = `<span>${String(...Object.keys(meow))}</span>`;
   audio.addEventListener('ended', () => {
@@ -73,10 +73,9 @@ const onFakePaperClick = (): void => {
 }
 
 const onLampClick = (): void => {
-  lightAudio.currentTime = 0;
   playAudio(lightAudio);
 
-  setTimeout(() => lamp.classList.toggle('on'), 300);
+  setTimeout(() => lamp.classList.toggle(ON), 300);
 }
 
 const onManekiClick = (): void => {

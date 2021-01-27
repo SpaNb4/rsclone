@@ -48,6 +48,7 @@ function getWinCombination() {
 
 function playAudio(audio) {
     audio.volume = state.volume;
+    audio.currentTime = 0;
     audio.play();
 }
 

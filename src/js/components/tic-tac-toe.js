@@ -38,18 +38,17 @@ export const gameTicTacToe = () => {
     document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
             playAudio(audioClickTicTacToe);
-            audioClickTicTacToe.currentTime = 0;
             if (elem.innerHTML === '') {
                 elem.innerHTML = stepX;
                 arr[index] = elemArr1;
-    
+
                 step++;
                 if (step !== maxStep) {
                     computer();
                 }
                 winTicTacToe(elemArr1, winX);
                 winTicTacToe(elemArr2, gameOver);
-    
+
                 if (step === maxStep && document.querySelector(classWin).innerHTML === '') {
                     document.querySelector(classWin).innerHTML = gameOver;
                 }

@@ -83,7 +83,6 @@ const createNotes = (): void => {
 
 const playNote = (key: HTMLElement): void => {
     const audio: HTMLAudioElement = audios[Number(key.dataset.index)];
-    audio.currentTime = 0;
 
     playAudio(audio);
     key.classList.add('active');
