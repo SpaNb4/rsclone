@@ -1,6 +1,7 @@
 import { state, volumeRange, keyboardSwitch } from './state';
 import { gamearea } from './keyboard';
 import locizify from 'locizify';
+import { getRoomState } from './room_state';
 
 const restartButton = document.querySelector('#menu-restart-button');
 const loginButton = document.querySelector('#menu-login-button');
@@ -25,13 +26,12 @@ function onVolumeRangeChange(evt) {
 }
 
 function onRestartClick() {
-    state.memory = true; // restart memory
-    state.simon = true; // restart memory
 }
 
-function onKeyboardSwitchChange(evt) {
-    state.keyboard = evt.target.checked;
+function switchKeyboard(value, modal) {
+    state.keyboard = value;
     gamearea.switch();
+    if (state.keyboard) modal.open();
 }
 
 function onLogoutClick() {
@@ -50,6 +50,7 @@ function onLogoutClick() {
                 loginButton.classList.remove(HIDE);
                 registerButton.classList.remove(HIDE);
                 localStorage.removeItem(USER);
+                getRoomState().setUser(null);
             }
         });
 }
@@ -85,6 +86,7 @@ loginForm.addEventListener('submit', function (e) {
                 saveButton.classList.remove(HIDE);
 
                 localStorage.setItem(USER, res.success);
+                getRoomState().setUser(this.login_email.value);
             }
         });
 });
@@ -153,6 +155,8 @@ function navInit() {
     M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
     M.FormSelect.init(document.querySelectorAll('select'), { classes: 'main-header__select' });
 
+    const modalInstance = M.Modal.getInstance(document.querySelector('#modal-keyboard'));
+
     const sidenavInstance = M.Sidenav.init(document.querySelector('.sidenav'), {
         edge: 'right',
         onOpenEnd: () => state.paused = true,
@@ -160,7 +164,8 @@ function navInit() {
     });
 
     document.addEventListener('keydown', (evt) => {
-        if (evt.code === 'KeyP' & state.keyboard) {
+        if (evt.code === 'F11' & state.keyboard) {
+            evt.preventDefault();
             sidenavInstance.open();
         }
 
@@ -186,7 +191,7 @@ function navInit() {
     volumeRange.addEventListener('change', onVolumeRangeChange);
     restartButton.addEventListener('click', onRestartClick);
     logoutButton.addEventListener('click', onLogoutClick);
-    keyboardSwitch.addEventListener('change', onKeyboardSwitchChange);
+    keyboardSwitch.addEventListener('change', (evt) => switchKeyboard(evt.target.checked, modalInstance));
 }
 
 function headerInit() {
@@ -194,3 +199,12 @@ function headerInit() {
 }
 
 document.addEventListener('DOMContentLoaded', headerInit);
+
+function loadRoomState() {
+    const currentUser = localStorage.getItem(USER);
+    if (currentUser !== null) {
+        getRoomState().setUser(currentUser);
+    }
+}
+
+loadRoomState();

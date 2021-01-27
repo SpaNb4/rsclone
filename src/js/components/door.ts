@@ -1,14 +1,15 @@
+// @ts-ignore
 import { playAudio } from './utils';
 import lockedDoorSound from './../../assets/audio/locked-door.mp3';
 
-const ROTATE = 'rotate';
-const knob = document.querySelector('#knob');
+const ROTATED = 'rotated';
+const knob: HTMLElement = document.querySelector('#knob');
 const audio = new Audio(lockedDoorSound);
 
 const onKnobClick = () => {
-    knob.classList.remove(ROTATE);
+    knob.classList.remove(ROTATED);
     void knob.offsetWidth;
-    knob.classList.add(ROTATE);
+    knob.classList.add(ROTATED);
     playAudio(audio);
 }
 

@@ -10,6 +10,27 @@
     }
 }
 
+@keyframes swing {
+    15% {
+        transform: rotate(6deg);
+    }
+    30% {
+       transform: rotate(-6deg);
+    }
+    50% {
+        transform: rotate(3deg);
+    }
+    65% {
+        transform: rotate(-3deg);
+    }
+    80% {
+        transform: rotate(2deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
 .content {
     position: relative;
     width: 100%;
@@ -98,6 +119,15 @@
     z-index: 99;
     cursor: url('./../icons/lens.png'), auto;
     transition: 1s;
+}
+
+.chandelier {
+    width: 99px;
+    height: 109px;
+    left: 50%;
+    bottom: 100%;
+    transform: translate(-50%, 100%);
+    background-image: url('./../img/chandelier.png');
 }
 
 .door {
@@ -216,7 +246,7 @@
     transform-origin: 15% 50%;
     background-image: url('./../img/knob.png');
 
-    &.rotate {
+    &.rotated {
         animation: pull 0.6s;
     }
 }
@@ -260,7 +290,7 @@
     background-image: url('./../img/clock.png');
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
@@ -291,32 +321,62 @@
     background-image: url('./../img/piano.png');
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.025);
     }
 }
 
 .lamp {
-    right: 10%;
-    bottom: 99%;
+    right: 5%;
+    bottom: 170px;
     width: 54px;
     height: 78px;
 
     @include resolution(tablet) {
         width: 80px;
         height: 118px;
+        bottom: 250px;
     }
 
     @include resolution(desktop) {
         width: 90px;
         height: 130px;
+        bottom: 260px;
     }
 
     @include resolution(big-desktop) {
         width: 96px;
         height: 144px;
+        bottom: 312px;
     }
 
     background-image: url('./../img/lamp.png');
+}
+
+.plant {
+    right: 29.5%;
+    bottom: 170px;
+    width: 40px;
+    height: 72px;
+
+    @include resolution(tablet) {
+        width: 60px;
+        height: 108px;
+        bottom: 250px;
+    }
+
+    @include resolution(desktop) {
+        width: 68px;
+        height: 123px;
+        bottom: 260px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 80px;
+        height: 144px;
+        bottom: 312px;
+    }
+
+    background-image: url('./../img/plant.png');
 }
 
 // wall 2
@@ -400,7 +460,7 @@
     background-image: url('./../img/frame.jpg');
 
     &:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
 }
 
@@ -496,7 +556,7 @@
                 transition: 1s;
 
                 &:hover {
-                    transform: scale(1.4);
+                    transform: scale(1.3);
                 }
             }
 
@@ -606,28 +666,23 @@
 }
 
 .safe-box {
-    right: calc(240px / 2);
     bottom: 180px;
-    transform: translateX(50%);
     width: 84px;
     height: 84px;
 
     @include resolution(tablet) {
-        right: calc(350px / 2);
         bottom: 240px;
         width: 125px;
         height: 125px;
     }
 
     @include resolution(desktop) {
-        right: calc(390px / 2);
         bottom: 260px;
         width: 140px;
         height: 140px;
     }
 
     @include resolution(big-desktop) {
-        right: calc(470px / 2);
         bottom: 330px;
         width: 170px;
         height: 170px;
@@ -636,7 +691,7 @@
     background-image: url('./../img/safe-box.png');
 }
 .box {
-    left: 25%;
+    left: 30%;
     bottom: -60px;
     width: 85px;
     height: 85px;
@@ -659,7 +714,7 @@
     background-image: url('./../img/box.png');
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
@@ -690,35 +745,46 @@
     background-image: url('./../img/bottle.png');
 }
 
+
+
 .picture {
-    right: calc(240px / 2);
     bottom: 190px;
-    transform: translateX(50%);
     width: 84px;
     height: 84px;
+    transform-origin: top center;
 
     @include resolution(tablet) {
-        right: calc(350px / 2);
         bottom: 250px;
         width: 125px;
         height: 125px;
     }
 
     @include resolution(desktop) {
-        right: calc(390px / 2);
         bottom: 270px;
         width: 140px;
         height: 140px;
     }
 
     @include resolution(big-desktop) {
-        right: calc(470px / 2);
         bottom: 340px;
         width: 170px;
         height: 170px;
     }
 
-    background-image: url('./../img/picture.png');
+    &:nth-child(1) {
+        right: 5%;
+        background-image: url('./../img/picture-1.png');
+    }
+
+    &:nth-child(2) {
+        right: 30%;
+        background-image: url('./../img/picture-2.png');
+    }
+
+    &:nth-child(3) {
+        right: 55%;
+        background-image: url('./../img/picture-3.png');
+    }
 
     &:hover(:not(.dropped)) {
         transform: translateX(50%) scale(1.1);
@@ -728,7 +794,16 @@
         transform: translateX(-50%) rotate(15deg);
         bottom: -20px;
     }
+
+    &.swung {
+        animation: swing 1s ease;
+    }
+
+    &.hover {
+        transform:  scale(1.05);
+    }
 }
+
 .coffee-table {
     right: calc(240px / 2);
     bottom: -50px;
@@ -759,6 +834,7 @@
 
     background-image: url('./../img/coffee-table.png');
 }
+
 .cat {
     left: 15%;
     bottom: 35%;
@@ -778,6 +854,10 @@
     @include resolution(big-desktop) {
         width: 120px;
         height: 120px;
+    }
+
+    &:hover {
+        transform: scale(1.05);
     }
 
     background-image: url('./../img/cat.png');
@@ -1177,32 +1257,80 @@
     background-image: url('./../img/board-paper.jpg');
 }
 
-.work_table {
+.work-table {
     left: 0;
     bottom: -20px;
     width: 250px;
-    height: 190px;
+    height: 147px;
 
     @include resolution(tablet) {
         bottom: -30px;
         width: 375px;
-        height: 285px;
+        height: 214px;
     }
 
     @include resolution(desktop) {
         bottom: -40px;
         width: 415px;
-        height: 315px;
+        height: 244px;
     }
 
     @include resolution(big-desktop) {
         bottom: -60px;
         width: 500px;
-        height: 380px;
+        height: 294px;
     }
 
     background-image: url('./../img/work-table.png');
     background-position: center top;
+}
+
+.table-lamp {
+    left: 0;
+    bottom: 79%;
+    width: 125px;
+    height: 85px;
+
+    @include resolution(tablet) {
+        width: 190px;
+        height: 125px;
+    }
+
+    @include resolution(desktop) {
+        width: 210px;
+        height: 140px;
+    }
+
+    @include resolution(big-desktop) {
+        width: 250px;
+        height: 170px;
+    }
+
+    background-image: url('./../img/table-lamp.png');
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-image: url('./../img/table-lamp-on.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        transition: $transition-300;
+        opacity: 0;
+    }
+
+    &.on::after {
+        opacity: 1;
+    }
+
 }
 
 .chair {
@@ -1258,9 +1386,13 @@
 
 .cat_statuette {
     right: 25%;
-    bottom: 62%;
+    bottom: 79%;
     width: 30px;
     height: 40px;
+    transition-property: bottom, transform;
+    transition-duration: 0.8s, 0.1ms;
+    transition-delay: 0, 0.7s;
+    transition-timing-function: ease-in;
 
     @include resolution(tablet) {
         width: 45px;
@@ -1278,13 +1410,22 @@
     }
 
     background-image: url('./../img/cat_statuette.png');
+
+    &.dropped {
+        transform: rotate(90deg);
+        bottom: 0;
+    }
+
+    &:hover {
+        transform: scale(1.05);
+    }
 }
 
 .paper {
-    top: 30px;
-    width: 42px;
-    height: 42px;
-    transition: $transition-300;
+  width: 42px;
+  height: 42px;
+  transition: $transition-300;
+  background-position: center;
 
     @include resolution(tablet) {
         width: 65px;
@@ -1301,26 +1442,26 @@
         height: 85px;
     }
 
-    &:hover {
-        transform: translateX(-50%) scale(2);
-    }
-
     &:nth-child(1) {
+        top: 10%;
         left: 25%;
         background-image: url('./../img/paper1.png');
-
-        &:hover {
-            background-image: url('./../img/snake1.png');
-        }
     }
 
     &:nth-child(2) {
+        top: 7%;
         right: 15%;
         background-image: url('./../img/paper2.png');
+    }
 
-        &:hover {
-            background-image: url('./../img/paper2.png');
-        }
+    &:nth-child(3) {
+        top: 55%;
+        right: 20%;
+        background-image: url('./../img/paper3.png');
+    }
+
+    &:hover {
+        transform: scale(1.5);
     }
 }
 
@@ -1356,7 +1497,29 @@
         background-image: url('./../img/arrow-right.png');
     }
 }
-//
+
+.cat-says {
+    display: none;
+    position: absolute;
+    top: -50%;
+    left: -85%;
+    width: 100%;
+    height: 120px;
+    padding-top: 18%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.075em;
+    background-image: url('./../img/cloud.png');
+    background-size: contain;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+
+    span {
+        display: block;
+    }
+}
 
 .share {
     display: flex;
@@ -1390,4 +1553,15 @@
     bottom: 10%;
     left: 50%;
     z-index: 100;
+}
+
+#timer-snake {
+    @include resolution(big-mobile) {
+        font-size: 20px;
+    }
+}
+#timer-guess-a-number {
+    @include resolution(big-mobile) {
+        font-size: 20px;
+    }
 }

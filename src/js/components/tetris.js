@@ -26,7 +26,6 @@ export const KeyDown = (event) => {
             dropStart = Date.now();
             if(!stopGameTetris){
                 playAudio(audioClickTetris);
-                audioClickTetris.currentTime = 0;
             }
             break;
         case 38:
@@ -34,7 +33,6 @@ export const KeyDown = (event) => {
             dropStart = Date.now();
             if(!stopGameTetris){
                 playAudio(audioClickTetris);
-                audioClickTetris.currentTime = 0;
             }
             break;
         case 39:
@@ -42,14 +40,12 @@ export const KeyDown = (event) => {
             dropStart = Date.now();
             if(!stopGameTetris){
                 playAudio(audioClickTetris);
-                audioClickTetris.currentTime = 0;
             }
             break;
         case 40:
             piece.moveDown();
             if(!stopGameTetris){
                 playAudio(audioClickTetris);
-                audioClickTetris.currentTime = 0;
             }
             break;
     }
@@ -62,7 +58,7 @@ const drop = () => {
         piece.moveDown();
         dropStart = Date.now();
     }
-    
+
     if(!gameOver && !stopGameTetris){
         requestAnimationFrame(drop);
     }

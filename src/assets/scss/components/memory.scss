@@ -22,15 +22,15 @@
   &__grid {
     display: grid;
     padding: 10px;
-    grid-template-columns: repeat(4, 90px);
-    grid-template-rows: repeat(4, 90px);
+    grid-template-columns: repeat(4, 75px);
+    grid-template-rows: repeat(4, 75px);
     grid-gap: 10px;
     border-radius: 10px;
 
     @include resolution(tablet) {
       padding: 15px;
-      grid-template-columns: repeat(4, 110px);
-      grid-template-rows: repeat(4, 110px);
+      grid-template-columns: repeat(4, 100px);
+      grid-template-rows: repeat(4, 100px);
       grid-gap: 15px;
     }
 
@@ -48,25 +48,7 @@
       grid-gap: 20px;
     }
 
-    background-image: url('./../img/memory-bg.jpg');
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 400px;
-      height: 155px;
-      transform: translate(-50%, -50%);
-      background-image: url('./../img/memory-word.png');
-      opacity: 0;
-    }
-
-    &.won::before {
-      opacity: 1;
-      z-index: 1;
-      transition: opacity 3s;
-    }
+    background-image: url('./../img/memory.jpg');
 
     &.won > .flip-card {
       opacity: 0;

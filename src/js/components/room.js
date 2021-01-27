@@ -1,17 +1,17 @@
 import { state } from './state';
 import { memoryGame } from './memory';
 import { simonGame } from './simon';
-import { guessAnumberGame } from './guess-a-number.ts';
+import { guessAnumberGame } from './guessanumber.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown, stopTetris } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
-import { getCoordsArray } from './utils';
+import { getCoordsArray, getRandomIntInclusive } from './utils';
 import { gamearea } from './keyboard';
 import * as intro from './intro';
 import { newGame, isHangmanSolved } from './hangman';
 import { GemPuzzle } from './gem_puzzle';
-
+import { fakeObjects, swingPicture } from './fakes';
 const ACTIVE = 'active';
 
 const arrows = document.querySelector('#room-arrows');
@@ -27,7 +27,8 @@ const frame = document.querySelector('.frame-image');
 const cube = document.querySelector('.cube4');
 const lock = document.querySelector('.game-over-lock');
 const box = document.querySelector('#box');
-const picture = document.querySelector('#picture');
+const picture = document.querySelector('#picture-' + getRandomIntInclusive(1, 3));
+const fakePictures = Array.from(document.querySelectorAll('.picture')).filter (pic => pic !== picture);
 
 const memory = document.querySelector('#memory-game');
 const simon = document.querySelector('#simon-game');
@@ -46,16 +47,19 @@ const lockContent = document.querySelector('.game-over-lock__content');
 
 let indexLock;
 
+// locate safebox
+document.querySelector('#safe-box').style.right = getComputedStyle(picture).right;
+
 //  open functions:
 const openMemoryGame = () => {
     memoryGame.create();
-    state.memory ? memoryGame.links[0].focus() : memoryClose.focus();
+    memoryGame.links[0].focus();
     memory.classList.add(ACTIVE);
 };
 
 const openSimonGame = () => {
     simonGame.create();
-    state.simon ? simonGame.button.focus() : simonClose.focus();
+    simonGame.button.focus();
     simon.classList.add(ACTIVE);
 };
 
@@ -143,7 +147,6 @@ const closeHangmanGame = () => {
 };
 
 const closeGemPuzzleGame = () => {
-
     gemPuzzle.classList.remove(ACTIVE);
 };
 
@@ -156,21 +159,42 @@ const clearTicTacToeGame = () => {
     closeGameTicTacToe();
 };
 
+
+// open overlay and add handlers
+const openMiniGame = (callback) => {
+    return (elem) => {
+        callback(elem);
+        overlay.classList.add(ACTIVE);
+        document.addEventListener('keydown', onDocumentEscPress);
+        document.addEventListener('click', outGameClick);
+        state.isMiniGameOpened = true;
+        gamearea.switch();
+    }
+};
+
 // all clickable objects
 const openGameObjects = [
-    [piano, openSimonGame],
-    [clock, openMemoryGame],
-    [box, openHangmanGame],
-    [picture, openGemPuzzleGame],
-    [frame, openTicTacToeGame],
-    [cube, openTetrisGame],
-    [paperTwo, openGuessaNumberGame],
-    [paperOne, openSnakeGameClick],
+    [piano, openMiniGame(openSimonGame)],
+    [clock, openMiniGame(openMemoryGame)],
+    [box, openMiniGame(openHangmanGame)],
+    [picture, openMiniGame(openGemPuzzleGame)],
+    [frame, openMiniGame(openTicTacToeGame)],
+    [cube, openMiniGame(openTetrisGame)],
+    [paperTwo, openMiniGame(openGuessaNumberGame)],
+    [paperOne, openMiniGame(openSnakeGameClick)],
 ];
 
+const getClickableCoords = () => {
+ return getCoordsArray([
+    ...openGameObjects,
+    ...fakeObjects,
+    ...arrLock.map(elem => [document.querySelector(elem), openMiniGame(openLocks)]),
+    ...fakePictures.map(elem => [elem, swingPicture])
+    ]);
+}
+
 // all clickable objects coordinates
-let clickableCoords = getCoordsArray([...openGameObjects, ...arrLock
-    .map(elem => [document.querySelector(elem), openLocks])]);
+let clickableCoords = getClickableCoords();
 
 const clearGameOBjects = [
     [repeatTicTacToe, clearTicTacToeGame],
@@ -184,15 +208,8 @@ const closeAllGames = () => {
     overlay.classList.remove(ACTIVE);
     document.removeEventListener('keydown', onDocumentEscPress);
     document.removeEventListener('click', outGameClick);
-    miniGameHandler();
-};
-
-// open overlay and add handlers
-const addEventHandlers = () => {
-    overlay.classList.add(ACTIVE);
-    document.addEventListener('keydown', onDocumentEscPress);
-    document.addEventListener('click', outGameClick);
-    miniGameHandler();
+    state.isMiniGameOpened = false;
+    gamearea.switch();
 };
 
 const onDocumentEscPress = (evt) => {
@@ -206,11 +223,6 @@ const outGameClick = (evt) => {
         closeAllGames();
     }
 };
-
-const miniGameHandler = () => {
-    state.isMiniGameOpened = !state.isMiniGameOpened;
-    gamearea.switch();
-}
 
 class Room {
     constructor() {
@@ -233,7 +245,7 @@ class Room {
         this.activeWall.classList.add(ACTIVE);
 
         // update coordinates after changing wall
-        clickableCoords = getCoordsArray(openGameObjects);
+        clickableCoords = getClickableCoords();
     }
 
     onArrowsClick(evt) {
@@ -241,7 +253,7 @@ class Room {
     }
 
     keysPressed(evt) {
-        if (!state.isMiniGameOpened) {
+        if (!state.isMiniGameOpened && !state.paused) {
             evt.preventDefault();
 
             this.keys[evt.keyCode] = true;
@@ -257,7 +269,7 @@ class Room {
     }
 
     keysReleased(evt) {
-        if (state.isMiniGameOpened) return null;
+        if (state.isMiniGameOpened && !state.paused) return null;
         this.keys[evt.keyCode] = false;
     }
 
@@ -266,10 +278,7 @@ class Room {
 
         // open any games
         openGameObjects.forEach((item) => {
-            item[0].addEventListener('click', () => {
-                item[1]();
-                addEventHandlers();
-            });
+            item[0].addEventListener('click', item[1]);
         });
 
         // clear
@@ -282,12 +291,16 @@ class Room {
             button.addEventListener('click', closeAllGames);
         });
 
-        // open clocks
+        // open locks
         arrLock.forEach((elem) => {
             document.querySelector(elem).addEventListener('click', () => {
-                openLocks(elem);
-                addEventHandlers();
+                openMiniGame(openLocks)(elem);
             });
+        });
+
+        // fake pictures
+        fakePictures.forEach((pic) => {
+            pic.addEventListener('click', (evt) => swingPicture(evt.target.id));
         });
 
         // arrows
@@ -301,4 +314,13 @@ window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
 });
 
-export { ACTIVE, overlay, onDocumentEscPress, outGameClick, indexLock, picture, clickableCoords, addEventHandlers };
+export {
+    ACTIVE,
+    overlay,
+    onDocumentEscPress,
+    outGameClick,
+    openMiniGame,
+    indexLock,
+    picture,
+    clickableCoords,
+};

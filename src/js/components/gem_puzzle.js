@@ -3,9 +3,18 @@ import * as swap from './gem_puzzle_swap';
 import { picture } from './room';
 import { playAudio } from './utils';
 
+import { GameTimer } from './timer.js';
+import { createTimerView } from './timer_view.js';
+import { getRoomState } from './room_state.js';
+import { definitionCodeWord } from './game-over.js'
+
 const container = document.querySelector('.gem-puzzle-container');
 const modal = document.querySelector('.gem-puzzle');
-const SECRET_WORD = 'test word';
+
+const gameName = 'название вашей игры';
+const codeWord = 'див с уникальным id для сохранения ключа';
+const stateTimer = new GameTimer(gameName, getRoomState());
+const secretWord = definitionCodeWord();
 
 export const GemPuzzle = {
     size: 16,
@@ -263,7 +272,7 @@ export const GemPuzzle = {
 
             const win = document.querySelector('.gem-puzzle .win');
             win.innerHTML = `<i class="material-icons close_btn">close</i><p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves</p>
-            <p>The word is <span class="highlight">${SECRET_WORD}</span>!</p>`;
+            <p>The word is <span class="highlight">${secretWord}</span>!</p>`;
 
             const closeBtn = document.querySelector('.close_btn');
             closeBtn.addEventListener('click', () => {

@@ -1,5 +1,5 @@
 import { playAudio } from './utils';
-import { codeWordGameTetris } from './game-over';
+import { definitionCodeWord } from './game-over';
 import soundWinTetris from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTetris from './../../assets/audio/tictactoe-gameover.mp3';
 
@@ -8,7 +8,7 @@ const tetris = '.tetris__game',
       context2D = '2d',
       resultTetris = '.resultTetris',
       classCodeTetris = '.codeTetris',
-      textCodeTetris = `<span>Code word:</span> ${codeWordGameTetris}`,
+      textCodeTetris = `<span>Code word:</span> `,
       white = 'white',
       salmon = 'salmon',
       yellow = 'yellow',
@@ -383,6 +383,7 @@ const winTetris = (score) => {
     if (score >= winScore) {
         document.querySelector(resultTetris).innerHTML = winText;
         document.querySelector(classCodeTetris).innerHTML = textCodeTetris;
+        document.querySelector(classCodeTetris).innerHTML += definitionCodeWord();
         gameOver = true;
         playAudio(audioWinTetris);
     }

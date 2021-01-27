@@ -1,5 +1,5 @@
 import { playAudio, getRandomInt } from './utils';
-import { codeWordGameTicTacToe } from './game-over';
+import { definitionCodeWord } from './game-over';
 import soundClickTicTacToe from './../../assets/audio/tictactoe-click.mp3';
 import soundWinTicTacToe from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3';
@@ -26,7 +26,7 @@ const classCeil = '.cell',
       elemArr1 = 1,
       elemArr2 = 2,
       classCodeTicTacToe = '.codeTicTacToe',
-      textCodeTicTacToe = `<span>Code word</span> ${codeWordGameTicTacToe}`,
+      textCodeTicTacToe = `<span>Code word</span> `,
       audioClickTicTacToe = new Audio(soundClickTicTacToe),
       audioWinTicTacToe = new Audio(soundWinTicTacToe),
       audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
@@ -38,18 +38,17 @@ export const gameTicTacToe = () => {
     document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
             playAudio(audioClickTicTacToe);
-            audioClickTicTacToe.currentTime = 0;
             if (elem.innerHTML === '') {
                 elem.innerHTML = stepX;
                 arr[index] = elemArr1;
-    
+
                 step++;
                 if (step !== maxStep) {
                     computer();
                 }
                 winTicTacToe(elemArr1, winX);
                 winTicTacToe(elemArr2, gameOver);
-    
+
                 if (step === maxStep && document.querySelector(classWin).innerHTML === '') {
                     document.querySelector(classWin).innerHTML = gameOver;
                 }
@@ -93,6 +92,7 @@ const conclusionGameTicTacToe = (win) => {
     document.querySelector(classWin).innerHTML = win;
     if (win === winX) {
         document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
+        document.querySelector(classCodeTicTacToe).innerHTML += definitionCodeWord();
         playAudio(audioWinTicTacToe);
     } else {
         playAudio(audioGameOverTicTacToe);
