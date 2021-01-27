@@ -4,6 +4,8 @@ import { GameTimer } from './timer';
 import { getRoomState } from './room_state';
 import winSound from '../../assets/audio/snake-game-win.mp3';
 import overSound from '../../assets/audio/snake-game-over.mp3';
+import { definitionCodeWord } from './game-over';
+
 
 const display = [];
 let viewPort;
@@ -30,6 +32,7 @@ const gameName = 'snake';
 const codeWord = 'codesnake';
 const timerSnake = '#timer-snake';
 const stateTimer = new GameTimer(gameName, getRoomState());
+const secretWord = definitionCodeWord();
 
 const rectStyles = [
     {
@@ -201,7 +204,7 @@ function setTouchEvents(container) {
 }
 
 function setHiddenWordVisibility(visible) {
-    document.getElementById(codeWord).innerHTML = (visible ? 'word' : '');
+    document.getElementById(codeWord).innerHTML = (visible ? secretWord : '');
 }
 
 function gameOver(endType) {

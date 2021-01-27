@@ -4,6 +4,7 @@ import uncorrectSound from '../../assets/audio/guessanumber_wrong_answer.mp3';
 import { GameTimer } from './timer.js';
 import { createTimerView } from './timer_view.js';
 import { getRoomState } from './room_state.js';
+import { definitionCodeWord } from './game-over.js';
 
 let randomNumber: number = 0;
 let numberOfGuesses: number = 0;
@@ -12,9 +13,12 @@ const userGuess: any = 'userGuess';
 const statusArea: string = 'statusArea';
 const historyList: string = 'historyList';
 const maxValue: number = 100;
+const maxGuesses: number = 9;
 const buttonArea: string = 'buttonArea';
 const codeWord: string = 'codeguess-a-number';
+const timerguessanumber: string = '#timer-guess-a-number';
 const stateTimer = new GameTimer(gameName, getRoomState());
+const secretWord = definitionCodeWord();
 
 function writeMessage(elementId: any, message: string, appendMessage: any) {
     const elemToUpdate = document.getElementById(elementId);
@@ -26,14 +30,14 @@ function writeMessage(elementId: any, message: string, appendMessage: any) {
 }
 
 function setHiddenWordVisibility(visible) {
-    document.getElementById(codeWord).innerHTML = (visible ? 'word' : '');
+    document.getElementById(codeWord).innerHTML = (visible ? secretWord : '');
 }
 
 function newGame() {
     randomNumber = getRandomInt(maxValue) + 1;
     numberOfGuesses = 0;
     writeMessage('historyList', '', '');
-    const timerContainer = document.querySelector('#timer-guess-a-number');
+    const timerContainer = document.querySelector(timerguessanumber);
     timerContainer.innerHTML = '';
     createTimerView(timerContainer, stateTimer);
     stateTimer.gameOpened();
@@ -58,7 +62,7 @@ function userGuessed() {
     } else {
         numberOfGuesses += 1;
 
-        if (Number(userGuessednumber) === randomNumber && numberOfGuesses < 9) {
+        if (Number(userGuessednumber) === randomNumber && numberOfGuesses < maxGuesses) {
             // Got it
             writeMessage(statusArea, `<p style='color:rgb(245, 0, 6)'><span>You got me in</span> ${numberOfGuesses} <span>guesses</span>, <span>I was thinking</span> ${randomNumber}. <span>You won</span>!</p>`, '');
             const audioWin = new Audio(winSound);
@@ -82,7 +86,7 @@ function userGuessed() {
             playAudio(audioUncorrect);
         }
 
-        if (numberOfGuesses >= 9) {
+        if (numberOfGuesses >= maxGuesses) {
             writeMessage(statusArea, '<p><span>Game over! Try new game.</span><span>Please enter a number</span> 1-100 <span>and press the Guess button</span></p>', '');
             document.getElementById(historyList).innerHTML = '';
             randomNumber = getRandomInt(maxValue) + 1;

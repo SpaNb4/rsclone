@@ -1,7 +1,7 @@
 import { state } from './state';
 import { memoryGame } from './memory';
 import { simonGame } from './simon';
-import { guessAnumberGame } from './guess-a-number.ts';
+import { guessAnumberGame } from './guessanumber.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown, stopTetris } from './tetris';
 import { snakeGame } from './snake';

@@ -19,7 +19,7 @@ import './components/tetris';
 import './components/snake';
 import './components/languages';
 import './components/game-over';
-import './components/guess-a-number';
+import './components/guessanumber';
 import './components/share';
 import './components/fakes';
 import './components/statistics_view';
