@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="intro">
+  <div class="intro disabled">
     <div id="intro-content-1" class="intro__content">
       <h4 class="intro__sub">welcome to</h4>
       <h1 class="intro__title">Lorem ipsum dolor</h1>
@@ -119,12 +119,6 @@
           href="#modal-restart">
           <i class="material-icons grey-text text-lighten-3">refresh</i>
           <span>Restart</span>
-        </a>
-      </li>
-      <li>
-        <a id="menu-save-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-save">
-          <i class="material-icons grey-text text-lighten-3">save</i>
-          <span>Save Game</span>
         </a>
       </li>
       <li>
@@ -251,7 +245,7 @@
       <button class="arrow arrow--right" type="button" data-side="right"></button>
     </div>
   </main>
-  <div class="tic-tac-toe">
+  <div class="tic-tac-toe game_modal">
     <a href="#!" class="tic-tac-toe__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
@@ -272,7 +266,7 @@
     <div class="win"></div>
     <div class="codeTicTacToe"></div>
   </div>
-  <div class="tetris">
+  <div class="tetris game_modal">
     <a href="#!" class="tetris__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
@@ -286,13 +280,14 @@
     <div class="resultTetris"></div>
     <div class="codeTetris"></div>
   </div>
-  <div id="memory-game" class="memory-game">
+  <div id="memory-game" class="memory-game game_modal">
     <a href="#" class="memory-game__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
     <div id="memory-game-grid" class="memory-game__grid"></div>
   </div>
-  <div class="hangman">
+  <div class="hangman game_modal">
+    <div id='timer-hangman'></div>
     <span class="hangman_close_btn all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </span>
@@ -312,13 +307,13 @@
     </form>
     <div class="message"></div>
   </div>
-  <div class="gem-puzzle">
+  <div class="gem-puzzle game_modal">
     <a href="#" class="gem-puzzle_close_btn all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
     <div class="gem-puzzle-container"></div>
   </div>
-  <div id="simon-game" class="simon-game">
+  <div id="simon-game" class="simon-game game_modal">
     <a href="#!" class="simon-game__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
@@ -335,10 +330,10 @@
     </a>
     <div class="game-over-lock__content"></div>
   </div>
-  <div class="snake" id="snake">
+  <div class="snake game_modal" id="snake">
     <a href="#" id="snake__close" class="snake__close all-close-button"><i
         class="material-icons medium grey-text text-grey">close</i></a>
-      <div id='timer-snake'></div>
+    <div id='timer-snake'></div>
     <div class="snake__content">
       <div class="gameDisplay">
         <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
@@ -351,11 +346,10 @@
         </p>
         <button id="startGame">Start new game</button>
         <h4 id="message"></h4>
-        <div id="codesnake"></div>
       </div>
     </div>
   </div>
-  <div class="guess-a-number" id="guess-a-number">
+  <div class="guess-a-number game_modal" id="guess-a-number">
     <a href="#" id="guess-a-number-close" class="guess-a-number__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
@@ -373,7 +367,6 @@
         <h4>Your Previous Guesses</h4>
         <ol id="historyList"></ol>
       </div>
-      <div id="codeguess-a-number"></div>
     </div>
   </div>
   <footer class="main-footer">
@@ -414,15 +407,6 @@
   <div id="modal-restart" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
       <h5>Your progress has been successfully reset. Try again!</h5>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
-    </div>
-  </div>
-
-  <div id="modal-save" class="modal">
-    <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h5 class="save-message">Your progress has been successfully saved!</h5>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
@@ -494,19 +478,19 @@
       <h4 class="center-align">Keyboard control mode has been successfully activated!</h4>
       <ul class="collection">
         <li class="collection-item">
-          <strong>CTRL + &#8592;/&#8594;</strong> - change current wall
+          <strong>CTRL + &#8592;/&#8594;</strong> - <span>change current wall</span>
         </li>
         <li class="collection-item">
-          <strong>W/A/S/D</strong> - move pointer
+          <strong>W/A/S/D</strong> - <span>move pointer</span>
         </li>
         <li class="collection-item">
-          <strong>ENTER</strong> - interact with objects
+          <strong>ENTER</strong> - <span>interact with objects</span>
         </li>
         <li class="collection-item">
-          <strong>ESCAPE</strong> - close modal windows and sidenav
+          <strong>ESCAPE</strong> - <span>close modal windows and sidenav</span>
         </li>
         <li class="collection-item">
-          <strong>F11</strong> - pause game and open sidenav
+          <strong>F11</strong> - <span>pause game and open sidenav</span>
         </li>
       </ul>
     </div>
@@ -514,6 +498,7 @@
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
     </div>
   </div>
+  <div id="code_word" class="code_word"></div>
 </body>
 
 </html>

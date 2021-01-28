@@ -1,7 +1,7 @@
 import locizify from 'locizify';
 
-const loc_projectId = 'a0a8f50e-6410-40b5-8e4d-bf4952fde133';
-const loc_apikey = '7944dbd0-7248-412b-8ca3-4b7abd39fdf3';
+const loc_projectId = '67ad2d21-8e1c-412f-a776-e5bb3b32d25c';
+const loc_apikey = '5a810be2-b20a-4c9f-9afa-4d6c3692bb82';
 const loc_version = 'latest';
 
 locizify.init({
@@ -11,7 +11,5 @@ locizify.init({
         version: loc_version,
         allowedAddOrUpdateHosts: ['localhost'],
     },
-    // optional
-    // ignoreIds: ['ignoreMeId'],
     ignoreClasses: ['flip-card__back', 'display','menu_btn'],
 });

@@ -5,17 +5,17 @@ import { GameTimer } from './timer.js';
 import { createTimerView } from './timer_view.js';
 import { getRoomState } from './room_state.js';
 import { definitionCodeWord } from './game-over.js';
+import {setHiddenWordVisibility} from './room.js';
 
 let randomNumber: number = 0;
 let numberOfGuesses: number = 0;
-const gameName = 'guess-a-number';
+const gameName = 'guess_a_number';
 const userGuess: any = 'userGuess';
 const statusArea: string = 'statusArea';
 const historyList: string = 'historyList';
 const maxValue: number = 100;
 const maxGuesses: number = 9;
 const buttonArea: string = 'buttonArea';
-const codeWord: string = 'codeguess-a-number';
 const timerguessanumber: string = '#timer-guess-a-number';
 const stateTimer = new GameTimer(gameName, getRoomState());
 const secretWord = definitionCodeWord();
@@ -27,10 +27,6 @@ function writeMessage(elementId: any, message: string, appendMessage: any) {
     } else {
         elemToUpdate.innerHTML = message;
     }
-}
-
-function setHiddenWordVisibility(visible) {
-    document.getElementById(codeWord).innerHTML = (visible ? secretWord : '');
 }
 
 function newGame() {
@@ -45,7 +41,7 @@ function newGame() {
     document.getElementById(buttonArea).removeAttribute('disabled');
     document.getElementById(userGuess).focus();
     const gameFinished = getRoomState().isGameFinished(gameName);
-    setHiddenWordVisibility(gameFinished);
+    setHiddenWordVisibility(gameFinished, secretWord);
 }
 
 function guessInRange(guess: number) {
@@ -71,7 +67,7 @@ function userGuessed() {
             numberOfGuesses = 0;
             document.getElementById(userGuess).setAttribute('disabled', 'disabled');
             document.getElementById(buttonArea).setAttribute('disabled', 'disabled');
-            setHiddenWordVisibility(true);
+            setHiddenWordVisibility(true, secretWord);
         } else if (Number(userGuessednumber) < randomNumber) {
             // User needs to guess higher
             writeMessage(statusArea, `<p><span>You need to guess higher than</span> ${userGuessednumber}, <span>try again</span>...</p>`, '');
@@ -87,7 +83,7 @@ function userGuessed() {
         }
 
         if (numberOfGuesses >= maxGuesses) {
-            writeMessage(statusArea, '<p><span>Game over! Try new game.</span><span>Please enter a number</span> 1-100 <span>and press the Guess button</span></p>', '');
+            writeMessage(statusArea, '<p><p>Game over! Try new game.</p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span></p>', '');
             document.getElementById(historyList).innerHTML = '';
             randomNumber = getRandomInt(maxValue) + 1;
             numberOfGuesses = 0;

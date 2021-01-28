@@ -1,16 +1,6 @@
 .tetris {
-    position: fixed;
-    top: 50%;
-    left: 50%;
     display: flex;
     justify-content: center;
-    transform: translate(-50%, -50%) scale(0);
-    transition: $transition-300;
-    z-index: 199;
-
-    &.active {
-        transform: translate(-50%, -50%) scale(1);
-    }
 
     &__close {
         position: absolute;

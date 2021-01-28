@@ -5,7 +5,7 @@ import { getRoomState } from './room_state';
 import winSound from '../../assets/audio/snake-game-win.mp3';
 import overSound from '../../assets/audio/snake-game-over.mp3';
 import { definitionCodeWord } from './game-over';
-
+import {setHiddenWordVisibility} from './room';
 
 const display = [];
 let viewPort;
@@ -29,7 +29,6 @@ const codGray = 'rgb(25, 25, 25)';
 const snakeLength = 'snakeLength';
 const displayId = 'display';
 const gameName = 'snake';
-const codeWord = 'codesnake';
 const timerSnake = '#timer-snake';
 const stateTimer = new GameTimer(gameName, getRoomState());
 const secretWord = definitionCodeWord();
@@ -64,7 +63,9 @@ const rectStyles = [
 function createDisplay(width = 15, height = 15) {
     for (let w = 0; w < width; w += 1) {
         for (let h = 0; h < height; h += 1) {
-            if (!display[h]) { display[h] = []; }
+            if (!display[h]) {
+                display[h] = [];
+            }
 
             display[h][w] = {
                 h,
@@ -203,25 +204,21 @@ function setTouchEvents(container) {
     });
 }
 
-function setHiddenWordVisibility(visible) {
-    document.getElementById(codeWord).innerHTML = (visible ? secretWord : '');
-}
-
 function gameOver(endType) {
     clearInterval(gameTimer);
     gameStatus = 'stopped';
-    document.querySelector(message).textContent = 'The game is over. You can try again!';
+    document.querySelector(message).innerHTML = '<span>The game is over. You can try again!</span>';
     const audioOver = new Audio(overSound);
     playAudio(audioOver);
 }
 
 function gameWin(endType) {
     gameStatus = 'win';
-    document.querySelector(message).textContent = 'You won!';
+    document.querySelector(message).innerHTML = '<span>You won</span>!';
     stateTimer.gameFinished();
     const audioWin = new Audio(winSound);
     playAudio(audioWin);
-    setHiddenWordVisibility(true);
+    setHiddenWordVisibility(true, secretWord);
 }
 
 function setSnakeOnDisplay() {
@@ -250,14 +247,14 @@ function renderSnake() {
     // check for bite
     if (snake.sections.length > 1) {
         for (let index = 1; index < snake.sections.length; index += 1) {
-            if ((headNewX === snake.sections[index].x) && (headNewY === snake.sections[index].y)) {
+            if (headNewX === snake.sections[index].x && headNewY === snake.sections[index].y) {
                 return gameOver('Bite');
             }
         }
     }
 
     // check for food
-    if ((food.x === headNewX) && (food.y === headNewY)) {
+    if (food.x === headNewX && food.y === headNewY) {
         const newSections = [{ x: headNewX, y: headNewY }];
         for (const section of snake.sections) {
             newSections.push(section);
@@ -295,7 +292,7 @@ function tick() {
     if (renderIndex > speedUpLimit) {
         renderIndex = 0;
         clearInterval(gameTimer);
-        gameTimer = setInterval(tick, 1000 - (gameSpeed * 50));
+        gameTimer = setInterval(tick, 1000 - gameSpeed * 50);
     }
 
     clearDisplay();
@@ -320,7 +317,7 @@ function startGame(onTickHandler) {
     food = createFood();
     gameStatus = 'game';
     onTick = onTickHandler;
-    gameTimer = setInterval(tick, 1000 - (gameSpeed * 50));
+    gameTimer = setInterval(tick, 1000 - gameSpeed * 50);
 }
 
 function statRender() {
@@ -344,7 +341,7 @@ function openSnakeGame() {
     createTimerView(timerContainer, stateTimer);
     stateTimer.gameOpened();
     const gameFinished = getRoomState().isGameFinished(gameName);
-    setHiddenWordVisibility(gameFinished);
+    setHiddenWordVisibility(gameFinished, secretWord);
 }
 
 function closeSnakeGame() {

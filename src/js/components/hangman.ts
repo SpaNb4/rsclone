@@ -9,19 +9,29 @@ import { checkSymbol } from './../../js/components/utils';
 // @ts-ignore
 import { playAudio } from './utils';
 // @ts-ignore
-import { ACTIVE } from './room';
+import { ACTIVE, setHiddenWordVisibility } from './room';
+// @ts-ignore
+import { GameTimer } from './timer';
+// @ts-ignore
+import { createTimerView } from './timer_view';
+// @ts-ignore
+import { getRoomState } from './room_state';
+// @ts-ignore
+import { definitionCodeWord } from './game-over';
+
+const gameName = 'hangman';
+const stateTimer = new GameTimer(gameName, getRoomState());
 
 const wordField = document.querySelector('.word_field');
 const messageDiv = document.querySelector('.message');
 const wrongLetters = document.querySelector('.wrong_letters');
 const hangmanImg: HTMLImageElement = document.querySelector('.hangman_img');
 const hangmanForm = document.querySelector('.hangman_form');
-const closeBtn = document.querySelector('.hangman_close_btn');
 
 // once you got six wrong letters, you lose
 const SIX_ERRORS: number = 6;
 const UNDERSCORE: string = '_ ';
-const SECRET_WORD = 'test word';
+const secretWord = definitionCodeWord();
 
 const wordsArr: Array<string> = [
     'javascript',
@@ -70,7 +80,7 @@ let random: number;
 let keyword: Array<string>;
 let partGuessWord: Array<string>;
 let errors: number = 0;
-export let isHangmanSolved: boolean = false;
+let isHangmanSolved: boolean = false;
 
 export function newGame(): void {
     random = Math.floor(Math.random() * (wordsArr.length - 1));
@@ -88,6 +98,13 @@ export function newGame(): void {
     wrongLetters.innerHTML = '<p>Wrong Letters:</p>';
     hangmanImg.src = './assets/img/hangman_0.png';
     printGuessField();
+
+    const timerContainer = document.querySelector('#timer-hangman');
+    timerContainer.innerHTML = '';
+    createTimerView(timerContainer, stateTimer);
+    stateTimer.gameOpened();
+    const gameFinished = getRoomState().isGameFinished(gameName);
+    setHiddenWordVisibility(gameFinished, secretWord);
 }
 
 const guessBtn = document.querySelector('.guess_btn');
@@ -121,9 +138,12 @@ function checkWin(): void {
 
     if (isHangmanSolved) {
         messageDiv.classList.add(ACTIVE);
-        messageDiv.innerHTML = `<h1 class="title">Awesome, You Won! The word is <span class="highlight">${SECRET_WORD}</span>!`;
+        messageDiv.innerHTML = `<h1 class="title">Awesome, You Won! The word is <span class="highlight">${secretWord}</span>!`;
         const audioWin = new Audio(winSound);
         playAudio(audioWin);
+
+        stateTimer.gameFinished();
+        setHiddenWordVisibility(true, secretWord);
     }
 
     if (errors === SIX_ERRORS) {
