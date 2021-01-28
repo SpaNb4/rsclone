@@ -4,12 +4,16 @@ function createStatistics() {
     const roomState = getRoomState();
     const statistics = document.querySelector('#game-statistics');
     document.querySelector('#menu-stats-button').addEventListener('click', () => {
-        const result = [];
+        statistics.innerHTML = '';
         const allGames = roomState.getAllGames();
         for (const [name, time] of Object.entries(allGames)) {
-            result.push(`${name} - ${addZero(Math.floor(time/60))}:${addZero(time % 60)}</br>`);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${name.split('_').join(' ')}</td>
+                <td>${addZero(Math.floor(time/60))}:${addZero(time % 60)}</td>
+            `;
+            statistics.append(tr);
         }
-        statistics.innerHTML = result.join('');
     });
 }
 
