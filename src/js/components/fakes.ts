@@ -88,9 +88,9 @@ const onManekiClick = (): void => {
 
 const swingPicture = (id: HTMLElement): void => {
   const pic = document.querySelector(`#${id}`);
-  pic.classList.remove('swung');
   playAudio(laughAudio);
   setTimeout(() => pic.classList.add('swung'), 0);
+  setTimeout(() => pic.classList.remove('swung'), 1000);
 }
 
 const fakeObjects: IFakeOnbjects[] = [

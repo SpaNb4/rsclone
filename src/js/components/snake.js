@@ -207,14 +207,14 @@ function setTouchEvents(container) {
 function gameOver(endType) {
     clearInterval(gameTimer);
     gameStatus = 'stopped';
-    document.querySelector(message).textContent = 'The game is over. You can try again!';
+    document.querySelector(message).innerHTML = '<span>The game is over. You can try again!</span>';
     const audioOver = new Audio(overSound);
     playAudio(audioOver);
 }
 
 function gameWin(endType) {
     gameStatus = 'win';
-    document.querySelector(message).textContent = 'You won!';
+    document.querySelector(message).textContent = '<span>You won</span>!';
     stateTimer.gameFinished();
     const audioWin = new Audio(winSound);
     playAudio(audioWin);

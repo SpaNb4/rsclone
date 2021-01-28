@@ -83,7 +83,7 @@ function userGuessed() {
         }
 
         if (numberOfGuesses >= maxGuesses) {
-            writeMessage(statusArea, '<p><span>Game over! Try new game.</span><span>Please enter a number</span> 1-100 <span>and press the Guess button</span></p>', '');
+            writeMessage(statusArea, '<p><p>Game over! Try new game.</p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span></p>', '');
             document.getElementById(historyList).innerHTML = '';
             randomNumber = getRandomInt(maxValue) + 1;
             numberOfGuesses = 0;
