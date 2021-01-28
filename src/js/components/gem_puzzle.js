@@ -1,12 +1,12 @@
 import movesound from './../../assets/audio/move.mp3';
 import * as swap from './gem_puzzle_swap';
-import { picture } from './room';
+import { picture, setHiddenWordVisibility } from './room';
 import { playAudio } from './utils';
 
-import { GameTimer } from './timer.js';
-import { createTimerView } from './timer_view.js';
-import { getRoomState } from './room_state.js';
-import { definitionCodeWord } from './game-over.js';
+import { GameTimer } from './timer';
+import { createTimerView } from './timer_view';
+import { getRoomState } from './room_state';
+import { definitionCodeWord } from './game-over';
 
 const container = document.querySelector('.gem-puzzle-container');
 const modal = document.querySelector('.gem-puzzle');
@@ -227,17 +227,13 @@ export const GemPuzzle = {
         }
     },
 
-    setHiddenWordVisibility(visible) {
-        document.getElementById('code').innerHTML = visible ? secretWord : '';
-    },
-
     getTime() {
         const timerContainer = document.querySelector('#timer-gem-puzzle');
         timerContainer.innerHTML = '';
         createTimerView(timerContainer, stateTimer);
         stateTimer.gameOpened();
         const gameFinished = getRoomState().isGameFinished(gameName);
-        this.setHiddenWordVisibility(gameFinished);
+        setHiddenWordVisibility(gameFinished, secretWord);
     },
 
     incrementMoves() {
@@ -251,7 +247,7 @@ export const GemPuzzle = {
             const minutes = document.querySelector('.minutes').innerHTML;
 
             const win = document.querySelector('.gem-puzzle .win');
-            win.innerHTML = `<i class="material-icons close_btn">close</i><p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves} moves</p>
+            win.innerHTML = `<i class="material-icons close_btn">close</i><p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves</p>
             <p>The word is <span class="highlight">${secretWord}</span>!</p>`;
 
             const closeBtn = document.querySelector('.close_btn');
@@ -262,7 +258,7 @@ export const GemPuzzle = {
             win.classList.toggle('visible');
 
             stateTimer.gameFinished();
-            this.setHiddenWordVisibility(true);
+            setHiddenWordVisibility(true, secretWord);
 
             setTimeout(() => {
                 picture.classList.add('dropped');

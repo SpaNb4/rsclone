@@ -9,7 +9,7 @@ import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
 import { getCoordsArray, getRandomIntInclusive } from './utils';
 import { gamearea } from './keyboard';
 import * as intro from './intro';
-import { newGame, isHangmanSolved } from './hangman';
+import { newGame } from './hangman';
 import { GemPuzzle } from './gem_puzzle';
 import { fakeObjects, swingPicture } from './fakes';
 const ACTIVE = 'active';
@@ -46,6 +46,8 @@ const gemPuzzle = document.querySelector('.gem-puzzle');
 const lockContent = document.querySelector('.game-over-lock__content');
 
 let indexLock;
+
+const codeWordDivID='code_word';
 
 // locate safebox
 document.querySelector('#safe-box').style.right = getComputedStyle(picture).right;
@@ -94,17 +96,13 @@ const openSnakeGameClick = () => {
 };
 
 const openHangmanGame = () => {
-    if (!isHangmanSolved) {
         newGame();
         hangman.classList.add(ACTIVE);
-    }
 };
 
 const openGemPuzzleGame = () => {
-    if (!GemPuzzle.isPuzzleSolved) {
         GemPuzzle.init();
         gemPuzzle.classList.add(ACTIVE);
-    }
 };
 
 //  close functions:
@@ -210,7 +208,7 @@ const closeAllGames = () => {
     document.removeEventListener('click', outGameClick);
     state.isMiniGameOpened = false;
     gamearea.switch();
-    document.getElementById('code').innerHTML = '';
+    document.getElementById(codeWordDivID).innerHTML = '';
 };
 
 const onDocumentEscPress = (evt) => {
@@ -224,6 +222,10 @@ const outGameClick = (evt) => {
         closeAllGames();
     }
 };
+
+function setHiddenWordVisibility(visible, secretWord) {
+    document.getElementById(codeWordDivID).innerHTML = visible ? secretWord : '';
+}
 
 class Room {
     constructor() {
@@ -324,4 +326,6 @@ export {
     indexLock,
     picture,
     clickableCoords,
+    codeWordDivID,
+    setHiddenWordVisibility,
 };
