@@ -224,7 +224,7 @@ const outGameClick = (evt) => {
 };
 
 function setHiddenWordVisibility(visible, secretWord) {
-    document.getElementById(codeWordDivID).innerHTML = visible ? secretWord : '';
+    document.getElementById(codeWordDivID).innerHTML = visible ? `Code word: ${secretWord}` : '';
 }
 
 class Room {

@@ -15,7 +15,7 @@
         transform: rotate(6deg);
     }
     30% {
-       transform: rotate(-6deg);
+        transform: rotate(-6deg);
     }
     50% {
         transform: rotate(3deg);
@@ -745,8 +745,6 @@
     background-image: url('./../img/bottle.png');
 }
 
-
-
 .picture {
     bottom: 190px;
     width: 84px;
@@ -800,7 +798,7 @@
     }
 
     &.hover {
-        transform:  scale(1.05);
+        transform: scale(1.05);
     }
 }
 
@@ -1330,7 +1328,6 @@
     &.on::after {
         opacity: 1;
     }
-
 }
 
 .chair {
@@ -1422,10 +1419,10 @@
 }
 
 .paper {
-  width: 42px;
-  height: 42px;
-  transition: $transition-300;
-  background-position: center;
+    width: 42px;
+    height: 42px;
+    transition: $transition-300;
+    background-position: center;
 
     @include resolution(tablet) {
         width: 65px;
@@ -1551,8 +1548,34 @@
 .code_word {
     position: absolute;
     bottom: 10%;
-    left: 50%;
+    font-size: 24px;
+    font-weight: bold;
     z-index: 100;
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.time {
+    display: flex;
+    align-items: center;
+    i {
+        font-size: 36px;
+        margin-right: 10px;
+    }
+}
+
+.game_modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 199;
+    transform: translate(-50%, -50%) scale(0);
+    transition: $transition-300;
+    &.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 #timer-snake {
