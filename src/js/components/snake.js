@@ -214,7 +214,7 @@ function gameOver(endType) {
 
 function gameWin(endType) {
     gameStatus = 'win';
-    document.querySelector(message).textContent = '<span>You won</span>!';
+    document.querySelector(message).innerHTML = '<span>You won</span>!';
     stateTimer.gameFinished();
     const audioWin = new Audio(winSound);
     playAudio(audioWin);

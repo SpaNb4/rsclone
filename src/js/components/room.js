@@ -29,6 +29,7 @@ const lock = document.querySelector('.game-over-lock');
 const box = document.querySelector('#box');
 const picture = document.querySelector('#picture-' + getRandomIntInclusive(1, 3));
 const fakePictures = Array.from(document.querySelectorAll('.picture')).filter (pic => pic !== picture);
+const safeBox = document.querySelector('#safe-box');
 
 const memory = document.querySelector('#memory-game');
 const simon = document.querySelector('#simon-game');
@@ -176,6 +177,7 @@ const openGameObjects = [
     [clock, openMiniGame(openMemoryGame)],
     [box, openMiniGame(openHangmanGame)],
     [picture, openMiniGame(openGemPuzzleGame)],
+    [safeBox, openMiniGame(openGemPuzzleGame)],
     [frame, openMiniGame(openTicTacToeGame)],
     [cube, openMiniGame(openTetrisGame)],
     [paperTwo, openMiniGame(openGuessaNumberGame)],
