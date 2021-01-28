@@ -65,8 +65,8 @@ function isIntInclude(int, width, min, max) {
 function isOnElement(elem, pointer) {
     if (isIntInclude(pointer.x, pointer.width, elem.minX, elem.maxX) && isIntInclude(pointer.y, pointer.height, elem.minY, elem.maxY)) {
         state.callback = elem.callback;
-        if (elem.callback.name === 'openLocks') {
-            state.selector = elem.class;
+        if (/^lock/.test(elem.class)) {
+            state.selector = `.${elem.class}`;
         } else if (elem.callback.name === 'swingPicture') {
             state.selector = elem.id;
         }
