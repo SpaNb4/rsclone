@@ -28,7 +28,7 @@ interface IFakeOnbjects {
 }
 
 const catSounds: ICatSound[] = [
-  { 'meow-meow':  new Audio(angryMeowSound) },
+  { 'meow-meow': new Audio(angryMeowSound) },
   { 'mao': new Audio(sweetMeowSound) },
   { 'roar': new Audio(roarMeowSound) },
   { '* eat *': new Audio(beggingMeowSound) }
@@ -101,7 +101,7 @@ const fakeObjects: IFakeOnbjects[] = [
 ]
 
 fakeObjects.forEach((elem) => {
-    elem[0].addEventListener('click', elem[1])
+  elem[0].addEventListener('click', elem[1])
 });
 
 export { fakeObjects, swingPicture };

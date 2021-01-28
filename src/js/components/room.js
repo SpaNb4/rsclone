@@ -28,8 +28,8 @@ const cube = document.querySelector('.cube4');
 const lock = document.querySelector('.game-over-lock');
 const box = document.querySelector('#box');
 const picture = document.querySelector('#picture-' + getRandomIntInclusive(1, 3));
-const fakePictures = Array.from(document.querySelectorAll('.picture')).filter (pic => pic !== picture);
-const safebox = document.querySelector('#safe-box');
+const fakePictures = Array.from(document.querySelectorAll('.picture')).filter(pic => pic !== picture);
+const safeBox = document.querySelector('#safe-box');
 
 const memory = document.querySelector('#memory-game');
 const simon = document.querySelector('#simon-game');
@@ -48,7 +48,7 @@ const lockContent = document.querySelector('.game-over-lock__content');
 
 let indexLock;
 
-const codeWordDivID='code_word';
+const codeWordDivID = 'code_word';
 
 //  open functions:
 const openMemoryGame = () => {
@@ -94,13 +94,13 @@ const openSnakeGameClick = () => {
 };
 
 const openHangmanGame = () => {
-        newGame();
-        hangman.classList.add(ACTIVE);
+    newGame();
+    hangman.classList.add(ACTIVE);
 };
 
 const openGemPuzzleGame = () => {
-        GemPuzzle.init();
-        gemPuzzle.classList.add(ACTIVE);
+    GemPuzzle.init();
+    gemPuzzle.classList.add(ACTIVE);
 };
 
 //  close functions:
@@ -174,6 +174,7 @@ const openGameObjects = [
     [clock, openMiniGame(openMemoryGame)],
     [box, openMiniGame(openHangmanGame)],
     [picture, openMiniGame(openGemPuzzleGame)],
+    [safeBox, openMiniGame(openGemPuzzleGame)],
     [frame, openMiniGame(openTicTacToeGame)],
     [cube, openMiniGame(openTetrisGame)],
     [paperTwo, openMiniGame(openGuessaNumberGame)],
@@ -181,11 +182,11 @@ const openGameObjects = [
 ];
 
 const getClickableCoords = () => {
- return getCoordsArray([
-    ...openGameObjects,
-    ...fakeObjects,
-    ...arrLock.map(elem => [document.querySelector(elem), openMiniGame(openLocks)]),
-    ...fakePictures.map(elem => [elem, swingPicture])
+    return getCoordsArray([
+        ...openGameObjects,
+        ...fakeObjects,
+        ...arrLock.map(elem => [document.querySelector(elem), openMiniGame(openLocks)]),
+        ...fakePictures.map(elem => [elem, swingPicture])
     ]);
 }
 
@@ -222,7 +223,7 @@ const outGameClick = (evt) => {
 };
 
 function setHiddenWordVisibility(visible, secretWord) {
-    document.getElementById(codeWordDivID).innerHTML = visible ? secretWord : '';
+    document.getElementById(codeWordDivID).innerHTML = visible ? `Code word: ${secretWord}` : '';
 }
 
 class Room {

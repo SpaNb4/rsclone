@@ -1,12 +1,6 @@
 .snake {
-    position: fixed;
-    top: 50%;
-    left: 50%;
     width: 700px;
-    transform: translate(-50%, -50%) scale(0);
-    transition: 200ms ease-in-out;
     overflow: hidden;
-    z-index: 199;
 
     @include resolution(big-mobile) {
         width: 445px;
@@ -14,10 +8,6 @@
 
     @include resolution(mobile) {
         width: 355px;
-    }
-
-    &.active {
-        transform: translate(-50%, -50%) scale(1);
     }
 
     &__close {
