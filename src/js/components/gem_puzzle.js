@@ -6,28 +6,25 @@ import { playAudio } from './utils';
 import { GameTimer } from './timer.js';
 import { createTimerView } from './timer_view.js';
 import { getRoomState } from './room_state.js';
-import { definitionCodeWord } from './game-over.js'
+import { definitionCodeWord } from './game-over.js';
 
 const container = document.querySelector('.gem-puzzle-container');
 const modal = document.querySelector('.gem-puzzle');
+let seconds;
 
-const gameName = 'название вашей игры';
-const codeWord = 'див с уникальным id для сохранения ключа';
+const gameName = 'gem-puzzle';
 const stateTimer = new GameTimer(gameName, getRoomState());
 const secretWord = definitionCodeWord();
 
 export const GemPuzzle = {
     size: 16,
     moves: 0,
-    isPause: false,
     isPuzzleSolved: false,
-    currTime: 0,
     arr: [],
     movesArr: [],
     cols: null,
     winMovesArr: [],
     interval: null,
-    timeInterval: null,
 
     init() {
         this.clearField();
@@ -40,7 +37,7 @@ export const GemPuzzle = {
                               grid-template-rows: repeat(${cellsItemRowCount}, minmax(30px, 60px));`;
 
         const time = document.createElement('div');
-        time.classList.add('time');
+        time.id = 'timer-gem-puzzle';
         time.innerHTML = `<i class="material-icons">alarm</i>
                         <span class='minutes'>00</span>
                         <span class='separator'>:</span>
@@ -132,13 +129,10 @@ export const GemPuzzle = {
 
     clearField() {
         container.innerHTML = '';
-        this.isPause = false;
         this.isPuzzleSolved = false;
-        this.currTime = 0;
         this.arr = [];
         this.movesArr = [];
         this.moves = 0;
-        clearInterval(this.timeInterval);
     },
 
     fieldFill() {
@@ -202,8 +196,6 @@ export const GemPuzzle = {
     },
 
     openMenu() {
-        this.isPause = !this.isPause;
-        this.getTime();
         const overlay = document.querySelector('.gem-puzzle .overlay');
         overlay.classList.toggle('visible');
 
@@ -214,16 +206,8 @@ export const GemPuzzle = {
             menuBtn.innerHTML = '<i class="material-icons">menu</i>';
         }
 
-        const time = document.querySelector('.time i');
-        if (time.innerHTML === 'alarm') {
-            time.innerHTML = 'alarm_off';
-        } else {
-            time.innerHTML = 'alarm';
-        }
-
         const newGameLi = document.querySelector('.game_menu li');
         newGameLi.addEventListener('click', () => {
-            this.isPause = !this.isPause;
             this.init();
         });
     },
@@ -232,7 +216,8 @@ export const GemPuzzle = {
         let i = 0;
         let j = 0;
 
-        if (this.isPuzzleSolved || !modal.classList.contains('active') || this.currTime == 0) {
+        seconds = document.querySelector('.seconds').innerHTML;
+        if (this.isPuzzleSolved || !modal.classList.contains('active') || seconds == '00') {
             clearInterval(this.interval);
             this.interval = null;
         } else {
@@ -242,21 +227,17 @@ export const GemPuzzle = {
         }
     },
 
+    setHiddenWordVisibility(visible) {
+        document.getElementById('code').innerHTML = visible ? secretWord : '';
+    },
+
     getTime() {
-        function pad(val) {
-            return val > 9 ? val : `0${val}`;
-        }
-        const seconds = document.querySelector('.seconds');
-        const minutes = document.querySelector('.minutes');
-        if (!this.isPause) {
-            this.timeInterval = setInterval(() => {
-                // eslint-disable-next-line no-plusplus
-                seconds.innerHTML = pad(++this.currTime % 60);
-                minutes.innerHTML = pad(parseInt(this.currTime / 60, 10));
-            }, 1000);
-        } else {
-            clearInterval(this.timeInterval);
-        }
+        const timerContainer = document.querySelector('#timer-gem-puzzle');
+        timerContainer.innerHTML = '';
+        createTimerView(timerContainer, stateTimer);
+        stateTimer.gameOpened();
+        const gameFinished = getRoomState().isGameFinished(gameName);
+        this.setHiddenWordVisibility(gameFinished);
     },
 
     incrementMoves() {
@@ -268,10 +249,9 @@ export const GemPuzzle = {
     addResToScore() {
         if (this.isPuzzleSolved) {
             const minutes = document.querySelector('.minutes').innerHTML;
-            const seconds = document.querySelector('.seconds').innerHTML;
 
             const win = document.querySelector('.gem-puzzle .win');
-            win.innerHTML = `<i class="material-icons close_btn">close</i><p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves</p>
+            win.innerHTML = `<i class="material-icons close_btn">close</i><p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves} moves</p>
             <p>The word is <span class="highlight">${secretWord}</span>!</p>`;
 
             const closeBtn = document.querySelector('.close_btn');
@@ -280,6 +260,9 @@ export const GemPuzzle = {
             });
 
             win.classList.toggle('visible');
+
+            stateTimer.gameFinished();
+            this.setHiddenWordVisibility(true);
 
             setTimeout(() => {
                 picture.classList.add('dropped');

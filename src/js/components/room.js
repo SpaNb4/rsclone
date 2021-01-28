@@ -210,6 +210,7 @@ const closeAllGames = () => {
     document.removeEventListener('click', outGameClick);
     state.isMiniGameOpened = false;
     gamearea.switch();
+    document.getElementById('code').innerHTML = '';
 };
 
 const onDocumentEscPress = (evt) => {
