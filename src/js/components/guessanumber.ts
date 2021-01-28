@@ -9,7 +9,7 @@ import {setHiddenWordVisibility} from './room.js';
 
 let randomNumber: number = 0;
 let numberOfGuesses: number = 0;
-const gameName = 'guess-a-number';
+const gameName = 'guess_a_number';
 const userGuess: any = 'userGuess';
 const statusArea: string = 'statusArea';
 const historyList: string = 'historyList';

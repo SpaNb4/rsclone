@@ -1,17 +1,51 @@
+import { backendURL } from './header';
+
 function buildStorageKey(email) {
     return `states_${email}`;
 }
 
 function storeStates(email, states) {
     localStorage.setItem(buildStorageKey(email), JSON.stringify(states));
+
+    fetch(`${backendURL}/save`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: email,
+            complitedGame: states,
+        }),
+    });
 }
 
-function loadStates(email) {
-    const states = JSON.parse(localStorage.getItem(
-        buildStorageKey(email),
-    ));
+async function loadStates(email) {
+    let states = JSON.parse(localStorage.getItem(buildStorageKey(email)));
     if (states === null) {
-        return {};
+        states = await fetch(`${backendURL}/getsave`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: email,
+                complitedGame: states,
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.errors) {
+                    return {};
+                } else if (res.success.complitedGame) {
+                    return res.success.complitedGame;
+                } else {
+                    return {};
+                }
+            });
+        if (Object.keys(states).length !== 0) {
+            storeStates(email, states);
+            return states;
+        }
     }
     return states;
 }
@@ -21,11 +55,11 @@ class RoomState {
         this.userEmail = null;
     }
 
-    setUser(email) {
+    async setUser(email) {
         this.states = {};
         this.userEmail = email;
         if (this.userEmail !== null) {
-            this.states = loadStates(this.userEmail);
+            this.states = await loadStates(this.userEmail);
         }
     }
 
@@ -41,7 +75,9 @@ class RoomState {
     }
 
     isGameFinished(gameName) {
-        return (gameName in this.states);
+        if (this.states[gameName]) {
+            return gameName in this.states;
+        }
     }
 }
 

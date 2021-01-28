@@ -12,7 +12,7 @@ const container = document.querySelector('.gem-puzzle-container');
 const modal = document.querySelector('.gem-puzzle');
 let seconds;
 
-const gameName = 'gem-puzzle';
+const gameName = 'gem_puzzle';
 const stateTimer = new GameTimer(gameName, getRoomState());
 const secretWord = definitionCodeWord();
 
