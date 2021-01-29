@@ -1,7 +1,15 @@
 // @ts-ignore
-import { getRandomInt } from './../../js/components/utils';
+import { playAudio, getRandomInt } from './utils';
 // @ts-ignore
-import { playAudio } from './utils';
+import { GameTimer } from './timer';
+// @ts-ignore
+import { createTimerView } from './timer_view';
+// @ts-ignore
+import { getRoomState } from './room_state';
+// @ts-ignore
+import { definitionCodeWord } from './game-over'
+// @ts-ignore
+import { setHiddenWordVisibility } from './room';
 
 import C from './../../assets/audio/notes/C.mp3';
 import Db from './../../assets/audio/notes/Db.mp3';
@@ -35,11 +43,14 @@ const ROUND_NUMBER: number = 3;
 const CLASS: string = 'simon-game__key';
 const STAR_ELEMENT = '<i class="material-icons">star</i>';
 
+const gameName = 'simon';
 const piano: HTMLElement = document.querySelector('#simon-game-piano');
 const buttonStart: HTMLElement = document.querySelector('#simon-game-start');
 const score: HTMLElement = document.querySelector('#simon-game-score');
 const message: HTMLElement = document.querySelector('#simon-game-message');
-const buttonClose: HTMLElement = document.querySelector('#simon-game-close');
+const timerContainer: HTMLElement = document.querySelector(`#timer-${gameName}`);
+const stateTimer = new GameTimer(gameName, getRoomState());
+const secretWord = definitionCodeWord();
 
 interface IGameState {
     keys: Array<HTMLElement>;
@@ -131,12 +142,18 @@ const resetSteps = (): void => {
 
 const setInitState = () => {
     game.count = 0;
-    message.innerHTML = '<p>Press The Clef to start game</p>';
+    message.innerHTML = '<p>Press The Clef</p>';
     score.innerHTML = '';
     buttonStart.classList.remove('disabled');
     buttonStart.focus();
     piano.classList.add('disabled');
     piano.classList.remove('won');
+
+    //  timer
+    timerContainer.innerHTML = '';
+    createTimerView(timerContainer, stateTimer);
+    stateTimer.gameOpened();
+    setHiddenWordVisibility(getRoomState().isGameFinished(gameName), secretWord);
 };
 
 const setStartedState = () => {
@@ -145,11 +162,14 @@ const setStartedState = () => {
 };
 
 const setFinishedState = () => {
-    message.innerHTML = '<p><span>Congrats! The word is</span> *****!</p>';
-    buttonClose.focus();
+    message.innerHTML = '<p><span>Congrats!</p>';
     buttonStart.classList.add('disabled');
     piano.classList.add('disabled');
     piano.classList.add('won');
+
+    //  timer
+    stateTimer.gameFinished();
+    setHiddenWordVisibility(true, secretWord);
 };
 
 const setStepGoing = () => {

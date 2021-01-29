@@ -79,11 +79,13 @@ const onLampClick = (): void => {
 }
 
 const onManekiClick = (): void => {
-  maneki.classList.add('dropped');
-  setTimeout(() => {
-    maneki.style.backgroundImage = `url(${manekiImage})`;
-    playAudio(brakeAudio);
-  }, 800);
+  if (!maneki.classList.contains('dropped')) {
+    maneki.classList.add('dropped');
+    setTimeout(() => {
+      maneki.style.backgroundImage = `url(${manekiImage})`;
+      playAudio(brakeAudio);
+    }, 800);
+  }
 }
 
 const swingPicture = (id: HTMLElement): void => {

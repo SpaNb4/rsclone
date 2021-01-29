@@ -10,16 +10,27 @@ import matchSound from './../../assets/audio/memory_match.mp3';
 import zombieSound from './../../assets/audio/memory_zombie.mp3';
 
 import { shuffleArray, doubleArray, playAudio } from './utils';
+import { GameTimer } from './timer';
+import { createTimerView } from './timer_view';
+import { getRoomState } from './room_state';
+import { definitionCodeWord } from './game-over'
+import { setHiddenWordVisibility } from './room';
 
 const OPENED = 'opened';
 const DISABLED = 'disabled';
 const WON = 'won';
+
+const gameName = 'memory';
+const memoryGrid = document.querySelector('#memory-game-grid');
+const timerContainer = document.querySelector(`#timer-${gameName}`);
+const stateTimer = new GameTimer(gameName, getRoomState());
+const secretWord = definitionCodeWord();
 const audioMatch = new Audio(matchSound);
 const audioZombie = new Audio(zombieSound);
 const links = [];
 const openCards = [];
 let count = 0;
-const memoryGrid = document.querySelector('#memory-game-grid');
+
 
 const PICS_ARR = [
   {
@@ -86,6 +97,12 @@ const createGrid = () => {
   }
 
   memoryGrid.appendChild(fragment);
+
+  //  timer
+  timerContainer.innerHTML = '';
+  createTimerView(timerContainer, stateTimer);
+  stateTimer.gameOpened();
+  setHiddenWordVisibility(getRoomState().isGameFinished(gameName), secretWord);
 }
 
 //  remove open cards from array:
@@ -122,6 +139,10 @@ const onMemoryGridClick = (evt) => {
     if (count === PICS_ARR.length) {
       playAudio(audioZombie);
       memoryGrid.classList.add(WON);
+
+      //  timer
+      stateTimer.gameFinished();
+      setHiddenWordVisibility(true, secretWord);
     }
   }
 }
@@ -129,7 +150,7 @@ const onMemoryGridClick = (evt) => {
 const resetGame = () => {
   count = 0;
   removeOpencards();
-  [... memoryGrid.children].forEach((elem) => {
+  [...memoryGrid.children].forEach((elem) => {
     elem.classList.remove(DISABLED);
     elem.classList.remove(OPENED);
   })
@@ -138,25 +159,25 @@ const resetGame = () => {
 const onMemoryKeyPress = (evt) => {
   let index = Number(document.activeElement.dataset.index);
 
-  if((evt.keyCode == 37 || evt.keyCode == 65) && index % 4) {
+  if ((evt.keyCode == 37 || evt.keyCode == 65) && index % 4) {
     //  left
     index -= 1;
     links[index].focus();
   }
 
-  if((evt.keyCode == 38 || evt.keyCode == 87) && index > cardsPicsArray.length / 4 - 1) {
+  if ((evt.keyCode == 38 || evt.keyCode == 87) && index > cardsPicsArray.length / 4 - 1) {
     //  up
     index -= 4;
     links[index].focus();
   }
 
-  if((evt.keyCode == 39 || evt.keyCode == 68) && (index + 1) % 4) {
+  if ((evt.keyCode == 39 || evt.keyCode == 68) && (index + 1) % 4) {
     //  right
     index += 1;
     links[index].focus();
   }
 
-  if((evt.keyCode == 40 || evt.keyCode == 83) && index < cardsPicsArray.length * 3 / 4) {
+  if ((evt.keyCode == 40 || evt.keyCode == 83) && index < cardsPicsArray.length * 3 / 4) {
     // down
     index += 4;
     links[index].focus();

@@ -1411,9 +1411,10 @@
     &.dropped {
         transform: rotate(90deg);
         bottom: 0;
+        pointer-events: none;
     }
 
-    &:hover {
+    &:not(.dropped):hover {
         transform: scale(1.05);
     }
 }
