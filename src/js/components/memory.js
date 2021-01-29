@@ -31,7 +31,6 @@ const links = [];
 const openCards = [];
 let count = 0;
 
-
 const PICS_ARR = [
   {
     src: iconBank,

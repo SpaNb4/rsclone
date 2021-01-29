@@ -1,4 +1,6 @@
 import { state } from './state';
+import { headerInit, loadRoomState } from './header';
+import { footerInit } from './footer';
 import { memoryGame } from './memory';
 import { simonGame } from './simon';
 import { guessAnumberGame } from './guessanumber.ts';
@@ -12,10 +14,12 @@ import * as intro from './intro';
 import { newGame } from './hangman';
 import { GemPuzzle } from './gem_puzzle';
 import { fakeObjects, swingPicture } from './fakes';
+
 const ACTIVE = 'active';
 
 const arrows = document.querySelector('#room-arrows');
 const overlay = document.querySelector('#overlay');
+const preloader = document.querySelector('#preloader');
 const walls = [...document.querySelectorAll('.wall')];
 const allCloseButtons = [...document.querySelectorAll('.all-close-button')];
 
@@ -234,7 +238,10 @@ class Room {
 
     changeWall(side) {
         let index = walls.indexOf(this.activeWall);
+
+        preloader.classList.add(ACTIVE);
         this.activeWall.classList.remove(ACTIVE);
+
         safebox.style.right = getComputedStyle(picture).right;
 
         if (side === 'right') {
@@ -246,9 +253,10 @@ class Room {
         }
 
         this.activeWall.classList.add(ACTIVE);
-
         // update coordinates after changing wall
         clickableCoords = getClickableCoords();
+
+        setTimeout(() => preloader.classList.remove(ACTIVE), 300);
     }
 
     onArrowsClick(evt) {
@@ -277,8 +285,6 @@ class Room {
     }
 
     init() {
-        intro.init();
-
         // open any games
         openGameObjects.forEach((item) => {
             item[0].addEventListener('click', item[1]);
@@ -315,6 +321,10 @@ class Room {
 
 window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
+    intro.init();
+    loadRoomState();
+    headerInit();
+    footerInit();
 });
 
 export {
