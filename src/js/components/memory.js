@@ -9,7 +9,7 @@ import iconWhisky from './../../assets/icons/whisky.svg';
 import matchSound from './../../assets/audio/memory_match.mp3';
 import zombieSound from './../../assets/audio/memory_zombie.mp3';
 
-import { shuffleArray, doubleArray, playAudio } from './utils';
+import { shuffleArray, doubleArray, playAudio, removeAllElements } from './utils';
 import { GameTimer } from './timer';
 import { createTimerView } from './timer_view';
 import { getRoomState } from './room_state';
@@ -104,13 +104,6 @@ const createGrid = () => {
   setHiddenWordVisibility(getRoomState().isGameFinished(gameName), secretWord);
 }
 
-//  remove open cards from array:
-const removeOpencards = () => {
-  while (openCards.length > 0) {
-    openCards.pop();
-  }
-}
-
 const onMemoryGridClick = (evt) => {
   const card = evt.target.closest('.flip-card');
 
@@ -118,11 +111,11 @@ const onMemoryGridClick = (evt) => {
 
   if (openCards.length === 2) {
     openCards.forEach((elem) => elem.classList.remove(OPENED));
-    removeOpencards();
+    removeAllElements(openCards);
   }
 
   if (openCards.includes(card)) {
-    removeOpencards();
+    removeAllElements(openCards);
   }
 
   card.classList.add(OPENED);
@@ -131,7 +124,7 @@ const onMemoryGridClick = (evt) => {
   if (openCards.length === 2 && openCards[0].dataset.name === openCards[1].dataset.name) {
     openCards.forEach((elem) => elem.classList.add(DISABLED));
     count += 1;
-    removeOpencards();
+    removeAllElements(openCards);
     playAudio(audioMatch);
 
     // check if game won?
@@ -148,7 +141,7 @@ const onMemoryGridClick = (evt) => {
 
 const resetGame = () => {
   count = 0;
-  removeOpencards();
+  removeAllElements(openCards);
   [...memoryGrid.children].forEach((elem) => {
     elem.classList.remove(DISABLED);
     elem.classList.remove(OPENED);

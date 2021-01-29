@@ -68,7 +68,7 @@ function isOnElement(elem, pointer) {
         if (/^lock/.test(elem.class)) {
             state.selector = `.${elem.class}`;
         } else if (elem.callback.name === 'swingPicture') {
-            state.selector = elem.id;
+            state.selector = `#${elem.id}`;
         }
         return true;
     } else {
@@ -94,9 +94,21 @@ function getRandomElement(array) {
     return array[getRandomInt(array.length)];
 }
 
+function addClickListeners(array) {
+    array.forEach((elem) => {
+        elem[0].addEventListener('click', elem[1]);
+    });
+}
+
+function removeAllElements(array) {
+    while (array.length > 0) {
+        array.pop();
+    }
+}
+
 export {
     shuffleArray, doubleArray, checkSymbol,
     getRandomInt, getWinCombination, getRandomIntInclusive,
     playAudio, isOnElement, getCoordsArray, getRandomElement,
-    isIntInclude
+    isIntInclude, addClickListeners, removeAllElements
 };

@@ -8,7 +8,7 @@ import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown, stopTetris } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
-import { getCoordsArray, getRandomIntInclusive } from './utils';
+import { getCoordsArray, getRandomIntInclusive, addClickListeners } from './utils';
 import { gamearea } from './keyboard';
 import * as intro from './intro';
 import { newGame } from './hangman';
@@ -311,6 +311,9 @@ class Room {
         fakePictures.forEach((pic) => {
             pic.addEventListener('click', (evt) => swingPicture(evt.target.id));
         });
+
+        // another fake objects
+        addClickListeners(fakeObjects);
 
         // arrows
         arrows.addEventListener('click', this.onArrowsClick.bind(this));

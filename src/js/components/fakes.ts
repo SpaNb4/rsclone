@@ -88,8 +88,8 @@ const onManekiClick = (): void => {
   }
 }
 
-const swingPicture = (id: HTMLElement): void => {
-  const pic = document.querySelector(`#${id}`);
+const swingPicture = (id: string): void => {
+  const pic = document.querySelector(id);
   pic.classList.add('swung');
   playAudio(laughAudio);
   setTimeout(() => pic.classList.remove('swung'), 1000);
@@ -101,9 +101,5 @@ const fakeObjects: IFakeOnbjects[] = [
   [paper, onFakePaperClick],
   [cat, onCatClick],
 ]
-
-fakeObjects.forEach((elem) => {
-  elem[0].addEventListener('click', elem[1])
-});
 
 export { fakeObjects, swingPicture };
