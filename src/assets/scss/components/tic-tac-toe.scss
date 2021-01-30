@@ -15,7 +15,7 @@
 
         @include resolution(mobile) {
             left: 300px;
-            top: 40px;
+            top: -50px;
         }
     }
 
@@ -39,7 +39,7 @@
 
         @include resolution(mobile) {
             left: 370px;
-            top: 40px;
+            top: -48px;
         }
     }
 
@@ -61,7 +61,7 @@
         @include resolution(mobile) {
             width: 470px;
             height: 470px;
-            margin-top: 20%;
+            margin-top: 0;
         }
     }
 
@@ -98,6 +98,11 @@
             width: 120px;
             padding-top: 15px;
         }
+
+        @include resolution(mobile) {
+            top: 470px;
+            font-size: 20px;
+        }
     }
 
     .win, .codeTicTacToe {
@@ -105,9 +110,27 @@
         text-align: center;
         font-size: 30px;
         top: 400px;
+
+        @include resolution(big-mobile) {
+            top: 470px;
+            font-size: 20px;
+        }
+
+        @include resolution(mobile) {
+            top: 470px;
+            font-size: 20px;
+        }
     }
     
     .codeTicTacToe {
         margin-top: 50px;
+
+        @include resolution(big-mobile) {
+            margin-top: 30px;
+        }
+
+        @include resolution(mobile) {
+            margin-top: 30px;
+        }
     }
 }
