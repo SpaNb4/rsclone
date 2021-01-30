@@ -139,4 +139,12 @@
     position: absolute;
     top: -150px;
     left: 0;
+    
+    @include resolution(big-mobile) {
+        top: -50px;
+    }
+
+    @include resolution(mobile) {
+        top: -50px;
+    }
 }
