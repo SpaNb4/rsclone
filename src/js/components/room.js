@@ -3,7 +3,7 @@ import { memoryGame } from './memory';
 import { simonGame } from './simon';
 import { guessAnumberGame } from './guessanumber.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
-import { startTetris, KeyDown, stopTetris } from './tetris';
+import { startTetris, KeyDown, stopTetris, touchDown } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
 import { getCoordsArray, getRandomIntInclusive } from './utils';
@@ -89,6 +89,7 @@ const openTetrisGame = () => {
     gameTetris.classList.add(ACTIVE);
     document.addEventListener('', KeyDown);
     document.addEventListener('keydown', KeyDown);
+    touchDown();
 };
 
 const openSnakeGameClick = () => {
