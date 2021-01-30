@@ -113,8 +113,6 @@ const conclusionGameTicTacToe = (win) => {
     stateTimerTicTacToe.gameFinished();
     setHiddenWordVisibility(true, secretWordTicTacToe);
     if (win === winX) {
-        //document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
-        //document.querySelector(classCodeTicTacToe).innerHTML += definitionCodeWord();
         playAudio(audioWinTicTacToe);
     } else {
         playAudio(audioGameOverTicTacToe);
