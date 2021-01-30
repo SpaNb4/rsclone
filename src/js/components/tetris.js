@@ -22,30 +22,38 @@ export const stopTetris = () => {
 export const KeyDown = (event) => {
     switch(event.keyCode) {
         case 37:
-            piece.moveLeft();
-            dropStart = Date.now();
-            if(!stopGameTetris){
-                playAudio(audioClickTetris);
+            if (!gameOver) {
+                piece.moveLeft();
+                dropStart = Date.now();
+                if(!stopGameTetris){
+                    playAudio(audioClickTetris);
+                }
             }
             break;
         case 38:
-            piece.rotate();
-            dropStart = Date.now();
-            if(!stopGameTetris){
-                playAudio(audioClickTetris);
+            if (!gameOver) {
+                piece.rotate();
+                dropStart = Date.now();
+                if(!stopGameTetris){
+                    playAudio(audioClickTetris);
+                }
             }
             break;
         case 39:
-            piece.moveRight();
-            dropStart = Date.now();
-            if(!stopGameTetris){
-                playAudio(audioClickTetris);
+            if (!gameOver) {
+                piece.moveRight();
+                dropStart = Date.now();
+                if(!stopGameTetris){
+                    playAudio(audioClickTetris);
+                }
             }
             break;
         case 40:
-            piece.moveDown();
-            if(!stopGameTetris){
-                playAudio(audioClickTetris);
+            if (!gameOver) {
+                piece.moveDown();
+                if(!stopGameTetris){
+                    playAudio(audioClickTetris);
+                }
             }
             break;
     }
