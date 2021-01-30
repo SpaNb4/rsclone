@@ -1,5 +1,9 @@
 import { playAudio, getRandomInt } from './utils';
 import { definitionCodeWord } from './game-over';
+import { GameTimer } from './timer.js';
+import { createTimerView } from './timer_view.js';
+import { getRoomState } from './room_state.js';
+import { setHiddenWordVisibility } from './room';
 import soundClickTicTacToe from './../../assets/audio/tictactoe-click.mp3';
 import soundWinTicTacToe from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3';
@@ -30,7 +34,11 @@ const classCeil = '.cell',
       audioClickTicTacToe = new Audio(soundClickTicTacToe),
       audioWinTicTacToe = new Audio(soundWinTicTacToe),
       audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe),
-      timeStepComputer = 300;
+      timeStepComputer = 300,
+      gameNameTicTacToe = 'tic_tac_toe',
+      stateTimerTicTacToe = new GameTimer(gameNameTicTacToe, getRoomState()),
+      secretWordTicTacToe = definitionCodeWord(),
+      idTimerTicTacToe = '#timer-tictactoe';
 
 let step = firstStep,
     gameOverTicTacToe = false,
@@ -38,6 +46,12 @@ let step = firstStep,
     
 export const gameTicTacToe = () => {
     gameOverTicTacToe = false;
+    const timerContainer = document.querySelector(idTimerTicTacToe);
+    timerContainer.innerHTML = '';
+    createTimerView(timerContainer, stateTimerTicTacToe);
+    stateTimerTicTacToe.gameOpened();
+    const gameFinished = getRoomState().isGameFinished(gameNameTicTacToe);
+    setHiddenWordVisibility(gameFinished, secretWordTicTacToe);
     document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
             if (!gameOverTicTacToe) {
@@ -96,9 +110,11 @@ const winTicTacToe = (step, win) => {
 const conclusionGameTicTacToe = (win) => {
     document.querySelector(classWin).innerHTML = win;
     gameOverTicTacToe = true;
+    stateTimerTicTacToe.gameFinished();
+    setHiddenWordVisibility(true, secretWordTicTacToe);
     if (win === winX) {
-        document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
-        document.querySelector(classCodeTicTacToe).innerHTML += definitionCodeWord();
+        //document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
+        //document.querySelector(classCodeTicTacToe).innerHTML += definitionCodeWord();
         playAudio(audioWinTicTacToe);
     } else {
         playAudio(audioGameOverTicTacToe);
