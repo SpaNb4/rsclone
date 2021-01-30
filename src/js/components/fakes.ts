@@ -28,7 +28,7 @@ interface IFakeOnbjects {
 }
 
 const catSounds: ICatSound[] = [
-  { 'meow-meow':  new Audio(angryMeowSound) },
+  { 'meow-meow': new Audio(angryMeowSound) },
   { 'mao': new Audio(sweetMeowSound) },
   { 'roar': new Audio(roarMeowSound) },
   { '* eat *': new Audio(beggingMeowSound) }
@@ -79,17 +79,19 @@ const onLampClick = (): void => {
 }
 
 const onManekiClick = (): void => {
-  maneki.classList.add('dropped');
-  setTimeout(() => {
-    maneki.style.backgroundImage = `url(${manekiImage})`;
-    playAudio(brakeAudio);
-  }, 800);
+  if (!maneki.classList.contains('dropped')) {
+    maneki.classList.add('dropped');
+    setTimeout(() => {
+      maneki.style.backgroundImage = `url(${manekiImage})`;
+      playAudio(brakeAudio);
+    }, 800);
+  }
 }
 
-const swingPicture = (id: HTMLElement): void => {
-  const pic = document.querySelector(`#${id}`);
+const swingPicture = (id: string): void => {
+  const pic = document.querySelector(id);
+  pic.classList.add('swung');
   playAudio(laughAudio);
-  setTimeout(() => pic.classList.add('swung'), 0);
   setTimeout(() => pic.classList.remove('swung'), 1000);
 }
 
@@ -99,9 +101,5 @@ const fakeObjects: IFakeOnbjects[] = [
   [paper, onFakePaperClick],
   [cat, onCatClick],
 ]
-
-fakeObjects.forEach((elem) => {
-    elem[0].addEventListener('click', elem[1])
-});
 
 export { fakeObjects, swingPicture };

@@ -22,7 +22,7 @@ function onVolumeRangeChange(evt) {
     state.volume = Number(evt.target.value) / 100;
 }
 
-function onRestartClick() {}
+function onRestartClick() { }
 
 function switchKeyboard(value, modal) {
     state.keyboard = value;
@@ -81,7 +81,7 @@ loginForm.addEventListener('submit', function (e) {
 
                 localStorage.setItem(USER, this.login_email.value);
                 getRoomState().setUser(this.login_email.value);
-                
+
             }
         });
 });
@@ -122,7 +122,7 @@ selectLng.addEventListener('change', () => {
     }
 });
 
-function navInit() {
+function headerInit() {
     M.Modal.init(document.querySelectorAll('.modal'), { startingTop: '10%' });
     M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
     M.FormSelect.init(document.querySelectorAll('select'), { classes: 'main-header__select' });
@@ -164,12 +164,6 @@ function navInit() {
     keyboardSwitch.addEventListener('change', (evt) => switchKeyboard(evt.target.checked, modalInstance));
 }
 
-function headerInit() {
-    navInit();
-}
-
-document.addEventListener('DOMContentLoaded', headerInit);
-
 function loadRoomState() {
     const currentUser = localStorage.getItem(USER);
     if (currentUser !== null) {
@@ -177,6 +171,4 @@ function loadRoomState() {
     }
 }
 
-loadRoomState();
-
-export { backendURL };
+export { backendURL, headerInit, loadRoomState };

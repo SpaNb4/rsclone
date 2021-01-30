@@ -1,4 +1,6 @@
 import { state } from './state';
+import { headerInit, loadRoomState } from './header';
+import { footerInit } from './footer';
 import { memoryGame } from './memory';
 import { simonGame } from './simon';
 import { guessAnumberGame } from './guessanumber.ts';
@@ -6,16 +8,18 @@ import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown, stopTetris } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
-import { getCoordsArray, getRandomIntInclusive } from './utils';
+import { getCoordsArray, getRandomIntInclusive, addClickListeners } from './utils';
 import { gamearea } from './keyboard';
 import * as intro from './intro';
 import { newGame } from './hangman';
 import { GemPuzzle } from './gem_puzzle';
 import { fakeObjects, swingPicture } from './fakes';
-const ACTIVE = 'active';
 
+const ACTIVE = 'active';
+const LOAD_TIME = 300;
 const arrows = document.querySelector('#room-arrows');
 const overlay = document.querySelector('#overlay');
+const preloader = document.querySelector('#preloader');
 const walls = [...document.querySelectorAll('.wall')];
 const allCloseButtons = [...document.querySelectorAll('.all-close-button')];
 
@@ -28,8 +32,8 @@ const cube = document.querySelector('.cube4');
 const lock = document.querySelector('.game-over-lock');
 const box = document.querySelector('#box');
 const picture = document.querySelector('#picture-' + getRandomIntInclusive(1, 3));
-const fakePictures = Array.from(document.querySelectorAll('.picture')).filter (pic => pic !== picture);
-const safeBox = document.querySelector('#safe-box');
+const fakePictures = Array.from(document.querySelectorAll('.picture')).filter(pic => pic !== picture);
+const safebox = document.querySelector('#safe-box');
 
 const memory = document.querySelector('#memory-game');
 const simon = document.querySelector('#simon-game');
@@ -48,10 +52,7 @@ const lockContent = document.querySelector('.game-over-lock__content');
 
 let indexLock;
 
-const codeWordDivID='code_word';
-
-// locate safebox
-document.querySelector('#safe-box').style.right = getComputedStyle(picture).right;
+const codeWordDivID = 'code_word';
 
 //  open functions:
 const openMemoryGame = () => {
@@ -97,13 +98,13 @@ const openSnakeGameClick = () => {
 };
 
 const openHangmanGame = () => {
-        newGame();
-        hangman.classList.add(ACTIVE);
+    newGame();
+    hangman.classList.add(ACTIVE);
 };
 
 const openGemPuzzleGame = () => {
-        GemPuzzle.init();
-        gemPuzzle.classList.add(ACTIVE);
+    GemPuzzle.init();
+    gemPuzzle.classList.add(ACTIVE);
 };
 
 //  close functions:
@@ -177,7 +178,7 @@ const openGameObjects = [
     [clock, openMiniGame(openMemoryGame)],
     [box, openMiniGame(openHangmanGame)],
     [picture, openMiniGame(openGemPuzzleGame)],
-    [safeBox, openMiniGame(openGemPuzzleGame)],
+    [safebox, openMiniGame(openGemPuzzleGame)],
     [frame, openMiniGame(openTicTacToeGame)],
     [cube, openMiniGame(openTetrisGame)],
     [paperTwo, openMiniGame(openGuessaNumberGame)],
@@ -185,11 +186,11 @@ const openGameObjects = [
 ];
 
 const getClickableCoords = () => {
- return getCoordsArray([
-    ...openGameObjects,
-    ...fakeObjects,
-    ...arrLock.map(elem => [document.querySelector(elem), openMiniGame(openLocks)]),
-    ...fakePictures.map(elem => [elem, swingPicture])
+    return getCoordsArray([
+        ...openGameObjects,
+        ...fakeObjects,
+        ...arrLock.map(elem => [document.querySelector(elem), openMiniGame(openLocks)]),
+        ...fakePictures.map(elem => [elem, swingPicture])
     ]);
 }
 
@@ -237,7 +238,11 @@ class Room {
 
     changeWall(side) {
         let index = walls.indexOf(this.activeWall);
+
+        preloader.classList.add(ACTIVE);
         this.activeWall.classList.remove(ACTIVE);
+
+        safebox.style.right = getComputedStyle(picture).right;
 
         if (side === 'right') {
             this.activeWall = index < walls.length - 1 ? walls[index + 1] : walls[0];
@@ -248,9 +253,10 @@ class Room {
         }
 
         this.activeWall.classList.add(ACTIVE);
-
         // update coordinates after changing wall
         clickableCoords = getClickableCoords();
+
+        setTimeout(() => preloader.classList.remove(ACTIVE), LOAD_TIME);
     }
 
     onArrowsClick(evt) {
@@ -279,8 +285,6 @@ class Room {
     }
 
     init() {
-        intro.init();
-
         // open any games
         openGameObjects.forEach((item) => {
             item[0].addEventListener('click', item[1]);
@@ -308,6 +312,9 @@ class Room {
             pic.addEventListener('click', (evt) => swingPicture(evt.target.id));
         });
 
+        // another fake objects
+        addClickListeners(fakeObjects);
+
         // arrows
         arrows.addEventListener('click', this.onArrowsClick.bind(this));
         document.addEventListener('keydown', this.keysPressed.bind(this), false);
@@ -317,6 +324,10 @@ class Room {
 
 window.addEventListener('DOMContentLoaded', () => {
     new Room().init();
+    intro.init();
+    loadRoomState();
+    headerInit();
+    footerInit();
 });
 
 export {

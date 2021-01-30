@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test</title>
+  <title>Crime, Trap and One Cat</title>
   <link rel="shortcut icon" href="./favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-  <div class="intro disabled">
+  <div class="intro">
     <div id="intro-content-1" class="intro__content">
       <h4 class="intro__sub">welcome to</h4>
       <h1 class="intro__title">Lorem ipsum dolor</h1>
@@ -281,6 +281,7 @@
     <div class="codeTetris"></div>
   </div>
   <div id="memory-game" class="memory-game game_modal">
+    <div id='timer-memory'></div>
     <a href="#" class="memory-game__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
@@ -314,6 +315,7 @@
     <div class="gem-puzzle-container"></div>
   </div>
   <div id="simon-game" class="simon-game game_modal">
+    <div id='timer-simon'></div>
     <a href="#!" class="simon-game__close all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
@@ -380,7 +382,7 @@
 
   <div id="modal-rules" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h5>How to play this Game?</h5>
+      <h4>How to play this Game?</h4>
       <p>how_to_play</p>
       <p>
         You can use the mouse as well as keybord (WASD & Enter) to play this game.
@@ -396,8 +398,12 @@
 
   <div id="modal-stats" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h5>Game Statistics</h5>
-      <div id="game-statistics"></div>
+      <h4>Game Statistics</h4>
+      <div>
+        <table class="striped">
+          <tbody id="game-statistics"></tbody>
+        </table>
+      </div>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
@@ -406,7 +412,7 @@
 
   <div id="modal-restart" class="modal">
     <div class="modal-content grey lighten-5 grey-text text-darken-4">
-      <h5>Your progress has been successfully reset. Try again!</h5>
+      <p>Your progress has been successfully reset. Try again!</p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
@@ -499,6 +505,12 @@
     </div>
   </div>
   <div id="code_word" class="code_word"></div>
+  <div id="preloader">
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 </body>
 
 </html>
