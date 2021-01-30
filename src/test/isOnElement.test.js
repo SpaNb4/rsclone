@@ -1,8 +1,8 @@
 import { isOnElement } from '../js/components/utils';
 import { state } from '../js/components/state';
 
-const swingPicture = () => 2;
-const shakePicture = () => 2;
+const swingPicture = () => null;
+const shakePicture = () => null;
 
 const element1 = {
   minX: 0,

@@ -16,7 +16,7 @@ import { GemPuzzle } from './gem_puzzle';
 import { fakeObjects, swingPicture } from './fakes';
 
 const ACTIVE = 'active';
-
+const LOAD_TIME = 300;
 const arrows = document.querySelector('#room-arrows');
 const overlay = document.querySelector('#overlay');
 const preloader = document.querySelector('#preloader');
@@ -256,7 +256,7 @@ class Room {
         // update coordinates after changing wall
         clickableCoords = getClickableCoords();
 
-        setTimeout(() => preloader.classList.remove(ACTIVE), 300);
+        setTimeout(() => preloader.classList.remove(ACTIVE), LOAD_TIME);
     }
 
     onArrowsClick(evt) {
