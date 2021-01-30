@@ -156,6 +156,7 @@ const clearTetrisGame = () => {
 
 const clearTicTacToeGame = () => {
     closeGameTicTacToe();
+    gameTicTacToe();
 };
 
 

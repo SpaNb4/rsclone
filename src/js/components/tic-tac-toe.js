@@ -6,8 +6,8 @@ import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3'
 
 const classCeil = '.cell',
       classWin = '.win',
-      stepX = '<img src="./assets/img/lollipops.png">',
-      step0 = '<img src="./assets/img/donut.png">',
+      stepX = '<img src="./assets/img/pistols.png">',
+      step0 = '<img src="./assets/img/losso.png">',
       index0 = 0,
       index1 = 1,
       index2 = 2,
@@ -29,28 +29,33 @@ const classCeil = '.cell',
       textCodeTicTacToe = `<span>Code word</span> `,
       audioClickTicTacToe = new Audio(soundClickTicTacToe),
       audioWinTicTacToe = new Audio(soundWinTicTacToe),
-      audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
+      audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe),
+      timeStepComputer = 300;
 
 let step = firstStep,
+    gameOverTicTacToe = false,
     arr = [elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0];
-
+    
 export const gameTicTacToe = () => {
+    gameOverTicTacToe = false;
     document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
-            playAudio(audioClickTicTacToe);
-            if (elem.innerHTML === '') {
-                elem.innerHTML = stepX;
-                arr[index] = elemArr1;
+            if (!gameOverTicTacToe) {
+                if (elem.innerHTML === '') {
+                    playAudio(audioClickTicTacToe);
+                    elem.innerHTML = stepX;
+                    arr[index] = elemArr1;
 
-                step++;
-                if (step !== maxStep) {
-                    computer();
-                }
-                winTicTacToe(elemArr1, winX);
-                winTicTacToe(elemArr2, gameOver);
+                    step++;
+                    if (step !== maxStep) {
+                        setTimeout(() => computer(), timeStepComputer);
+                    }
+                    winTicTacToe(elemArr1, winX);
+                    winTicTacToe(elemArr2, gameOver);
 
-                if (step === maxStep && document.querySelector(classWin).innerHTML === '') {
-                    document.querySelector(classWin).innerHTML = gameOver;
+                    if (step === maxStep && document.querySelector(classWin).innerHTML === '') {
+                        document.querySelector(classWin).innerHTML = gameOver;
+                    }
                 }
             }
         });
@@ -90,6 +95,7 @@ const winTicTacToe = (step, win) => {
 
 const conclusionGameTicTacToe = (win) => {
     document.querySelector(classWin).innerHTML = win;
+    gameOverTicTacToe = true;
     if (win === winX) {
         document.querySelector(classCodeTicTacToe).innerHTML = textCodeTicTacToe;
         document.querySelector(classCodeTicTacToe).innerHTML += definitionCodeWord();
