@@ -117,6 +117,8 @@ const checkTextExit = () => {
             countOpenLock++;
             arrOpenLocks[indexLock[numLockFromString] - num] = stateOpenLock;
         }
+    } else {
+        flagOpen = false;
     }
     if (flagOpen) {
         checkOpenLock(indexLock)

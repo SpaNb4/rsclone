@@ -10,12 +10,12 @@
 
         @include resolution(big-mobile) {
             left: 110px;
-            top: 0;
+            top: -50px;
         }
 
         @include resolution(mobile) {
             left: 120px;
-            top: -150px;
+            top: -50px;
         }
     }
 
@@ -41,12 +41,12 @@
 
         @include resolution(big-mobile) {
             left: 180px;
-            top: 0;
+            top: -48px;
         }
 
         @include resolution(mobile) {
             left: 180px;
-            top: -150px;
+            top: -48px;
         }
     }
 
@@ -68,10 +68,24 @@
             font-size: 25px;
             font-weight: bold;
             text-align: center;
+
+            @include resolution(big-mobile) {
+                font-size: 20px;
+            }
+
+            @include resolution(mobile) {
+                font-size: 20px;
+            }
         }
 
         @include resolution(big-mobile) {
-            margin-top: 50px;
+            margin-top: 0;
+            height: 450px;
+        }
+
+        @include resolution(mobile) {
+            margin-top: 0;
+            height: 450px;
         }
     }
 
@@ -80,10 +94,41 @@
         font-size: 30px;
         text-align: center;
         top: 400px;
+
+        @include resolution(big-mobile) {
+            top: 450px;
+            font-size: 20px;
+        }
+
+        @include resolution(mobile) {
+            top: 450px;
+            font-size: 20px;
+        }
     }
 
     .codeTetris {
         margin-top: 50px;
+
+        @include resolution(big-mobile) {
+            margin-top: 30px;
+        }
+
+        @include resolution(mobile) {
+            margin-top: 30px;
+        }
     }
 }
 
+#timer-tetris {
+    position: absolute;
+    top: -150px;
+    left: 0;
+
+    @include resolution(big-mobile) {
+        top: -50px;
+    }
+
+    @include resolution(mobile) {
+        top: -50px;
+    }
+}

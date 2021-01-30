@@ -1,10 +1,13 @@
 import { playAudio } from './utils';
 import { definitionCodeWord } from './game-over';
+import { GameTimer } from './timer.js';
+import { createTimerView } from './timer_view.js';
+import { getRoomState } from './room_state.js';
+import { setHiddenWordVisibility } from './room';
 import soundWinTetris from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTetris from './../../assets/audio/tictactoe-gameover.mp3';
 
-const tetris = '.tetris__game',
-      numberScore = '.numberScore',
+const numberScore = '.numberScore',
       context2D = '2d',
       resultTetris = '.resultTetris',
       classCodeTetris = '.codeTetris',
@@ -34,7 +37,13 @@ const tetris = '.tetris__game',
       addScore = 10,
       coord0 = 0,
       coordStartX = 3,
-      coodStartY = -2;
+      coodStartY = -2,
+      gameNameTetris = 'tetris',
+      stateTimerTetris = new GameTimer(gameNameTetris, getRoomState()),
+      secretWordTetris = definitionCodeWord(),
+      idTimerTetris = '#timer-tetris';
+
+export const tetris = '.tetris__game';
 
 let score = startScore,
     board = [];
@@ -215,6 +224,13 @@ export const createBoard = () => {
             board[y][x] = colorBackground;
         }
     }
+
+    const timerContainer = document.querySelector(idTimerTetris);
+    timerContainer.innerHTML = '';
+    createTimerView(timerContainer, stateTimerTetris);
+    stateTimerTetris.gameOpened();
+    const gameFinished = getRoomState().isGameFinished(gameNameTetris);
+    setHiddenWordVisibility(gameFinished, secretWordTetris);
 }
 
 export const drawBoard = () => {
@@ -381,9 +397,9 @@ export let gameOver = false;
 
 const winTetris = (score) => {
     if (score >= winScore) {
+        stateTimerTetris.gameFinished();
+        setHiddenWordVisibility(true, secretWordTetris);
         document.querySelector(resultTetris).innerHTML = winText;
-        document.querySelector(classCodeTetris).innerHTML = textCodeTetris;
-        document.querySelector(classCodeTetris).innerHTML += definitionCodeWord();
         gameOver = true;
         playAudio(audioWinTetris);
     }
