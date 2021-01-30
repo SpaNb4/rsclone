@@ -7,8 +7,7 @@ import { setHiddenWordVisibility } from './room';
 import soundWinTetris from './../../assets/audio/tictactoe-win.mp3';
 import soundGameOverTetris from './../../assets/audio/tictactoe-gameover.mp3';
 
-const tetris = '.tetris__game',
-      numberScore = '.numberScore',
+const numberScore = '.numberScore',
       context2D = '2d',
       resultTetris = '.resultTetris',
       classCodeTetris = '.codeTetris',
@@ -43,6 +42,8 @@ const tetris = '.tetris__game',
       stateTimerTetris = new GameTimer(gameNameTetris, getRoomState()),
       secretWordTetris = definitionCodeWord(),
       idTimerTetris = '#timer-tetris';
+
+export const tetris = '.tetris__game';
 
 let score = startScore,
     board = [];

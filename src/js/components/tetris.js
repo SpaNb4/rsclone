@@ -1,5 +1,6 @@
 import {createBoard, drawBoard, piece, gameOver, clear} from './tetrisGame.js'
 import { playAudio } from './utils';
+import { tetris } from './tetrisGame';
 import soundClickTetris from './../../assets/audio/tetris-click.mp3';
 
 const audioClickTetris = new Audio(soundClickTetris);
@@ -71,11 +72,11 @@ export const KeyDown = (event) => {
 export const touchDown = () => {
     let start_x = 0;
     let start_y = 0;
-    document.querySelector('.tetris__game').addEventListener('touchstart', (event) => {
+    document.querySelector(tetris).addEventListener('touchstart', (event) => {
         start_x = event.touches[0].clientX;
         start_y = event.touches[0].clientY;
     });
-    document.querySelector('.tetris__game').addEventListener('touchend', (event) => {
+    document.querySelector(tetris).addEventListener('touchend', (event) => {
         const end_x = event.changedTouches[0].clientX;
         const end_y = event.changedTouches[0].clientY;
         const x = end_x - start_x;
