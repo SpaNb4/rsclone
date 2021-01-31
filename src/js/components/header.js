@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
@@ -51,7 +52,7 @@ function onLogoutClick() {
         });
 }
 
-loginForm.addEventListener('submit', (e) => {
+loginForm.addEventListener('submit', function (e) {
     e.preventDefault();
     fetch(`${backendURL}/login`, {
         method: 'post',
@@ -86,7 +87,7 @@ loginForm.addEventListener('submit', (e) => {
         });
 });
 
-registerForm.addEventListener('submit', (e) => {
+registerForm.addEventListener('submit', function (e) {
     e.preventDefault();
     fetch(`${backendURL}/register`, {
         method: 'post',
