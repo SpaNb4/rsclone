@@ -310,7 +310,7 @@ class Room {
         // open locks
         arrLock.forEach((elem) => {
             document.querySelector(elem).addEventListener('click', () => {
-                openMiniGame(openLocks)(elem);
+                openMiniGame(openLocks, lock)(elem);
             });
         });
 

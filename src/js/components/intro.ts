@@ -75,11 +75,13 @@ const skipIntroOne = () => {
 };
 
 const skipIntroTwo = () => {
-    content2.classList.add(DISABLED);
-    content1.parentElement.classList.add(DISABLED);
-};
+  content2.classList.add(DISABLED);
+  content1.parentElement.classList.add(DISABLED);
+}
 
-const playAgain = () => {};
+const playAgain = () => {
+  location.reload();
+}
 
 // eslint-disable-next-line import/prefer-default-export
 export function init(): void {
