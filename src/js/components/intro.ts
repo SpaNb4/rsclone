@@ -7,6 +7,7 @@ const VELOCITY: number = 0.15;
 const PADDING: number = 10;
 const startButton: HTMLElement = document.querySelector('#intro-start-button');
 const continueButton: HTMLElement = document.querySelector('#intro-continue-button');
+const playAgainButton: HTMLElement = document.querySelector('#intro-play-again-button');
 const content1: HTMLElement = document.querySelector('#intro-content-1');
 const content2: HTMLElement = document.querySelector('#intro-content-2');
 const canvas: HTMLCanvasElement = document.querySelector('#intro-canvas');
@@ -76,11 +77,16 @@ const skipIntroTwo = () => {
   content1.parentElement.classList.add(DISABLED);
 }
 
+const playAgain = () => {
+
+}
+
 export function init(): void {
   startButton.focus();
 
-  startButton.addEventListener('click',skipIntroOne);
+  startButton.addEventListener('click', skipIntroOne);
   continueButton.addEventListener('click', skipIntroTwo);
+  playAgainButton.addEventListener('click', playAgain);
 
   startButton.addEventListener('keydown', (evt) => {
     if (evt.key === 'Enter') skipIntroOne();
