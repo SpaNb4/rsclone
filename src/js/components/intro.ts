@@ -78,7 +78,7 @@ const skipIntroTwo = () => {
 }
 
 const playAgain = () => {
-
+  location.reload();
 }
 
 export function init(): void {

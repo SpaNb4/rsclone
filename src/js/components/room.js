@@ -181,7 +181,7 @@ const getClickableCoords = () => {
     return getCoordsArray([
         ...openGameObjects,
         ...fakeObjects,
-        ...arrLock.map(elem => [document.querySelector(elem), openMiniGame(openLocks)]),
+        ...arrLock.map(elem => [document.querySelector(elem), openMiniGame(openLocks, lock)]),
         ...fakePictures.map(elem => [elem, swingPicture])
     ]);
 }
@@ -296,7 +296,7 @@ class Room {
         // open locks
         arrLock.forEach((elem) => {
             document.querySelector(elem).addEventListener('click', () => {
-                openMiniGame(openLocks)(elem);
+                openMiniGame(openLocks, lock)(elem);
             });
         });
 
