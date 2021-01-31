@@ -6,7 +6,6 @@ import { gamearea } from './keyboard.ts';
 // eslint-disable-next-line import/no-cycle
 import { getRoomState } from './room_state';
 
-const restartButton = document.querySelector('#menu-restart-button');
 const loginButton = document.querySelector('#menu-login-button');
 const logoutButton = document.querySelector('#menu-logout-button');
 const statsButton = document.querySelector('#menu-stats-button');
@@ -25,8 +24,6 @@ const USER = 'user';
 function onVolumeRangeChange(evt) {
     state.volume = Number(evt.target.value) / 100;
 }
-
-function onRestartClick() {}
 
 function switchKeyboard(value, modal) {
     state.keyboard = value;
@@ -162,7 +159,6 @@ function headerInit() {
     }
 
     volumeRange.addEventListener('change', onVolumeRangeChange);
-    restartButton.addEventListener('click', onRestartClick);
     logoutButton.addEventListener('click', onLogoutClick);
     keyboardSwitch.addEventListener('change', (evt) => switchKeyboard(evt.target.checked, modalInstance));
 }

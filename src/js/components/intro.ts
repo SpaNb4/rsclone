@@ -1,7 +1,10 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable lines-between-class-members */
 /* eslint-disable no-use-before-define */
 // @ts-ignore
 import { getRandomIntInclusive } from './utils';
+// eslint-disable-next-line import/extensions
+import { state } from './state';
 
 const DISABLED: string = 'disabled';
 const STAR_NUMBER: number = 120;
@@ -12,6 +15,7 @@ const continueButton: HTMLElement = document.querySelector('#intro-continue-butt
 const playAgainButton: HTMLElement = document.querySelector('#intro-play-again-button');
 const content1: HTMLElement = document.querySelector('#intro-content-1');
 const content2: HTMLElement = document.querySelector('#intro-content-2');
+const content3: HTMLElement = document.querySelector('#intro-content-3');
 const canvas: HTMLCanvasElement = document.querySelector('#intro-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -75,13 +79,35 @@ const skipIntroOne = () => {
 };
 
 const skipIntroTwo = () => {
-  content2.classList.add(DISABLED);
-  content1.parentElement.classList.add(DISABLED);
+    content2.classList.add(DISABLED);
+    content1.parentElement.classList.add(DISABLED);
+};
+
+export function openFinalIntro() {
+    content3.classList.remove('disabled');
+    content3.parentElement.classList.remove('disabled');
+    playAgainButton.focus();
 }
 
 const playAgain = () => {
-  location.reload();
-}
+    window.location.reload(true);
+    document.removeEventListener('keydown', onOpenedDoorEnterPress);
+    document.removeEventListener('keydown', onFinalIntroEnterpress);
+};
+
+const onOpenedDoorEnterPress = (evt: KeyboardEvent) => {
+    if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
+        openFinalIntro();
+
+        document.addEventListener('keydown', onFinalIntroEnterpress);
+    }
+};
+
+const onFinalIntroEnterpress = (evt: KeyboardEvent) => {
+    if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
+        playAgain();
+    }
+};
 
 // eslint-disable-next-line import/prefer-default-export
 export function init(): void {
@@ -103,6 +129,8 @@ export function init(): void {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
+
+    document.addEventListener('keydown', onOpenedDoorEnterPress);
 
     for (let i = 0; i < STAR_NUMBER; i += 1) {
         stars.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, i));

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-use-before-define */
 import correctSound from '../../assets/audio/hangman_correct.mp3';
 import uncorrectSound from '../../assets/audio/hangman_uncorrect.mp3';

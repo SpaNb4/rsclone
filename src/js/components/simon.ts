@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-use-before-define */
 // @ts-ignore
 import { playAudio, getRandomInt } from './utils';

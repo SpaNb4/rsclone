@@ -81,6 +81,7 @@ const openLocks = (elem) => {
     lockContent.innerHTML = layoutLockGame;
     document.addEventListener('keydown', KeyDownLock);
     displayLock(indexLock);
+    document.querySelector('.lock-game__text').focus();
 };
 
 const openTetrisGame = () => {

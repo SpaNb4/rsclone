@@ -2,7 +2,9 @@
 /* eslint-disable indent */
 /* eslint-disable import/no-cycle */
 import { indexLock } from './room';
+import { state } from './state.ts';
 import { getRandomInt } from './utils';
+import { openFinalIntro } from './intro.ts';
 
 let flagOpen = false;
 let countOpenLock = 0;
@@ -61,7 +63,6 @@ const passpharasesArr = [
 ];
 
 const codePhrase = passpharasesArr[getRandomInt(countPharese)];
-
 const arrRandomIndex = [];
 
 const addRandomElement = () => {
@@ -134,15 +135,13 @@ const checkGameOverDoor = () => {
     if (countOpenLock === arrLock.length) {
         document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
         document.querySelector(door).classList.add(doorNoneDisplay);
+        state.locksOpen = true;
         openDoor();
     }
 };
 
 const openDoor = () => {
-    document.querySelector(doorOpen).addEventListener('click', () => {
-        document.querySelector('#intro-content-3').classList.remove('disabled');
-        document.querySelector('#intro-content-3').parentElement.classList.remove('disabled');
-    });
+    document.querySelector(doorOpen).addEventListener('click', openFinalIntro);
 };
 
 export const displayLock = (elem) => {
