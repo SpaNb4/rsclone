@@ -153,7 +153,7 @@ const setInitState = () => {
     timerContainer.innerHTML = '';
     createTimerView(timerContainer, stateTimer);
     stateTimer.gameOpened();
-    setHiddenWordVisibility(getRoomState().isGameFinished(gameName), secretWord);
+    setHiddenWordVisibility(getRoomState().isGameFinished(gameName), secretWord, gameName);
 };
 
 const setStartedState = () => {
@@ -169,7 +169,7 @@ const setFinishedState = () => {
 
     //  timer
     stateTimer.gameFinished();
-    setHiddenWordVisibility(true, secretWord);
+    setHiddenWordVisibility(true, secretWord, gameName);
 };
 
 const setStepGoing = () => {

@@ -1,5 +1,6 @@
 // @ts-ignore
 import { getRandomIntInclusive } from './utils';
+import { state } from './state';
 
 const DISABLED: string = 'disabled';
 const STAR_NUMBER: number = 120;
@@ -7,8 +8,10 @@ const VELOCITY: number = 0.15;
 const PADDING: number = 10;
 const startButton: HTMLElement = document.querySelector('#intro-start-button');
 const continueButton: HTMLElement = document.querySelector('#intro-continue-button');
+const playAgainButton: HTMLElement = document.querySelector('#intro-play-again-button');
 const content1: HTMLElement = document.querySelector('#intro-content-1');
 const content2: HTMLElement = document.querySelector('#intro-content-2');
+const content3: HTMLElement = document.querySelector('#intro-content-3');
 const canvas: HTMLCanvasElement = document.querySelector('#intro-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -76,11 +79,38 @@ const skipIntroTwo = () => {
   content1.parentElement.classList.add(DISABLED);
 }
 
+export function openFinalIntro() {
+  content3.classList.remove('disabled');
+  content3.parentElement.classList.remove('disabled');
+  playAgainButton.focus();
+}
+
+const playAgain = () => {
+  window.location.reload(true);
+  document.removeEventListener('keydown', onOpenedDoorEnterPress);
+  document.removeEventListener('keydown', onFinalIntroEnterpress);
+}
+
+const onOpenedDoorEnterPress = (evt: KeyboardEvent) => {
+  if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
+    openFinalIntro();
+
+    document.addEventListener('keydown', onFinalIntroEnterpress);
+  }
+}
+
+const onFinalIntroEnterpress = (evt: KeyboardEvent) => {
+  if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
+    playAgain();
+  }
+}
+
 export function init(): void {
   startButton.focus();
 
-  startButton.addEventListener('click',skipIntroOne);
+  startButton.addEventListener('click', skipIntroOne);
   continueButton.addEventListener('click', skipIntroTwo);
+  playAgainButton.addEventListener('click', playAgain);
 
   startButton.addEventListener('keydown', (evt) => {
     if (evt.key === 'Enter') skipIntroOne();
@@ -95,10 +125,11 @@ export function init(): void {
     canvas.height = window.innerHeight;
   });
 
+  document.addEventListener('keydown', onOpenedDoorEnterPress);
+
   for (let i = 0; i < STAR_NUMBER; i += 1) {
     stars.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, i));
   }
 
   animate();
 }
-

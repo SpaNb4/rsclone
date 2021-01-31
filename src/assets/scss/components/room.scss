@@ -1546,16 +1546,14 @@
     }
 }
 
-.code_word {
-    position: absolute;
-    bottom: 10%;
+.secret-word {
+    color: $color-pavlova;
     font-size: 24px;
     font-weight: bold;
-    z-index: 100;
-    margin: auto;
-    left: 0;
-    right: 0;
+    line-height: 2;
     text-align: center;
+    text-transform: uppercase;
+      text-shadow: 2px 2px 1px $color-black;
 }
 
 .time {
@@ -1589,3 +1587,4 @@
         font-size: 20px;
     }
 }
+
