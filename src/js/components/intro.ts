@@ -79,20 +79,30 @@ const skipIntroTwo = () => {
   content1.parentElement.classList.add(DISABLED);
 }
 
-const openFinalIntro = () => {
+export function openFinalIntro() {
   content3.classList.remove('disabled');
   content3.parentElement.classList.remove('disabled');
   playAgainButton.focus();
-
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
-      playAgain();
-    }
-  });
 }
 
 const playAgain = () => {
-  location.reload();
+  window.location.reload(true);
+  document.removeEventListener('keydown', onOpenedDoorEnterPress);
+  document.removeEventListener('keydown', onFinalIntroEnterpress);
+}
+
+const onOpenedDoorEnterPress = (evt: KeyboardEvent) => {
+  if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
+    openFinalIntro();
+
+    document.addEventListener('keydown', onFinalIntroEnterpress);
+  }
+}
+
+const onFinalIntroEnterpress = (evt: KeyboardEvent) => {
+  if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
+    playAgain();
+  }
 }
 
 export function init(): void {
@@ -115,11 +125,11 @@ export function init(): void {
     canvas.height = window.innerHeight;
   });
 
+  document.addEventListener('keydown', onOpenedDoorEnterPress);
+
   for (let i = 0; i < STAR_NUMBER; i += 1) {
     stars.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, i));
   }
 
   animate();
 }
-
-export { openFinalIntro };

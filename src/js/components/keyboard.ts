@@ -59,7 +59,7 @@ class GameArea {
       content.dataset.keyboard = 'on';
     }
 
-    if (!state.isMiniGameOpened) {
+    if (!state.isMiniGameOpened && state.keyboard) {
       animate();
     }
   }

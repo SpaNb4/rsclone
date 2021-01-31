@@ -61,7 +61,6 @@ const passpharasesArr = [
 ];
 
 const codePhrase = passpharasesArr[getRandomInt(countPharese)];
-
 let arrRandomIndex = [];
 
 const addRandomElement = () => {
@@ -139,11 +138,6 @@ const checkGameOverDoor = () => {
 
 const openDoor = () => {
     document.querySelector(doorOpen).addEventListener('click', openFinalIntro);
-    document.addEventListener('keydown', (evt) => {
-        if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
-            openFinalIntro();
-        }
-    });
 }
 
 export const displayLock = (elem) => {
