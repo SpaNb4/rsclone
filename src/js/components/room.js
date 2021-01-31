@@ -38,9 +38,9 @@ const safebox = document.querySelector('#safe-box');
 const memory = document.querySelector('#memory-game');
 const simon = document.querySelector('#simon-game');
 const snake = document.querySelector('#snake');
-const gameTetris = document.querySelector('.tetris');
+const tetris = document.querySelector('.tetris');
 const guessAnumber = document.querySelector('#guess-a-number');
-const gameTicTacToePlay = document.querySelector('.tic-tac-toe');
+const ticTacToe = document.querySelector('.tic-tac-toe');
 
 const repeatTicTacToe = document.querySelector('.tic-tac-toe__repeat');
 const repeatTetris = document.querySelector('.tetris__repeat');
@@ -49,37 +49,30 @@ const hangman = document.querySelector('.hangman');
 const gemPuzzle = document.querySelector('.gem-puzzle');
 
 const lockContent = document.querySelector('.game-over-lock__content');
-
+const secretWordContainers = [...document.querySelectorAll('.secret-word')];
 let indexLock;
-
-const codeWordDivID = 'code_word';
 
 //  open functions:
 const openMemoryGame = () => {
     memoryGame.create();
     memoryGame.links[0].focus();
-    memory.classList.add(ACTIVE);
 };
 
 const openSimonGame = () => {
     simonGame.create();
     simonGame.button.focus();
-    simon.classList.add(ACTIVE);
 };
 
 const openGuessaNumberGame = () => {
     guessAnumberGame.create();
-    guessAnumber.classList.add(ACTIVE);
 };
 
 const openTicTacToeGame = () => {
     gameTicTacToe();
-    gameTicTacToePlay.classList.add(ACTIVE);
 };
 
 const openLocks = (elem) => {
     indexLock = elem;
-    lock.classList.add(ACTIVE);
     lockContent.innerHTML = layoutLockGame;
     document.addEventListener('keydown', KeyDownLock);
     displayLock(indexLock);
@@ -87,7 +80,6 @@ const openLocks = (elem) => {
 
 const openTetrisGame = () => {
     startTetris();
-    gameTetris.classList.add(ACTIVE);
     document.addEventListener('', KeyDown);
     document.addEventListener('keydown', KeyDown);
     touchDown();
@@ -95,17 +87,14 @@ const openTetrisGame = () => {
 
 const openSnakeGameClick = () => {
     snakeGame.create();
-    snake.classList.add(ACTIVE);
 };
 
 const openHangmanGame = () => {
     newGame();
-    hangman.classList.add(ACTIVE);
 };
 
 const openGemPuzzleGame = () => {
     GemPuzzle.init();
-    gemPuzzle.classList.add(ACTIVE);
 };
 
 //  close functions:
@@ -126,7 +115,7 @@ const closeGuessaNumberGame = () => {
 
 const closeTicTacToeGame = () => {
     closeGameTicTacToe();
-    gameTicTacToePlay.classList.remove(ACTIVE);
+    ticTacToe.classList.remove(ACTIVE);
 };
 
 const closeLocks = () => {
@@ -135,7 +124,7 @@ const closeLocks = () => {
 
 const closeTetrisGame = () => {
     stopTetris();
-    gameTetris.classList.remove(ACTIVE);
+    tetris.classList.remove(ACTIVE);
 };
 
 const closeSnakeGameClick = () => {
@@ -163,9 +152,10 @@ const clearTicTacToeGame = () => {
 
 
 // open overlay and add handlers
-const openMiniGame = (callback) => {
+const openMiniGame = (callback, game) => {
     return (elem) => {
         callback(elem);
+        game.classList.add(ACTIVE);
         overlay.classList.add(ACTIVE);
         document.addEventListener('keydown', onDocumentEscPress);
         document.addEventListener('click', outGameClick);
@@ -176,15 +166,15 @@ const openMiniGame = (callback) => {
 
 // all clickable objects
 const openGameObjects = [
-    [piano, openMiniGame(openSimonGame)],
-    [clock, openMiniGame(openMemoryGame)],
-    [box, openMiniGame(openHangmanGame)],
-    [picture, openMiniGame(openGemPuzzleGame)],
-    [safebox, openMiniGame(openGemPuzzleGame)],
-    [frame, openMiniGame(openTicTacToeGame)],
-    [cube, openMiniGame(openTetrisGame)],
-    [paperTwo, openMiniGame(openGuessaNumberGame)],
-    [paperOne, openMiniGame(openSnakeGameClick)],
+    [piano, openMiniGame(openSimonGame, simon)],
+    [clock, openMiniGame(openMemoryGame, memory)],
+    [box, openMiniGame(openHangmanGame, hangman)],
+    [picture, openMiniGame(openGemPuzzleGame, gemPuzzle)],
+    [safebox, openMiniGame(openGemPuzzleGame, gemPuzzle)],
+    [frame, openMiniGame(openTicTacToeGame, ticTacToe)],
+    [cube, openMiniGame(openTetrisGame, tetris)],
+    [paperTwo, openMiniGame(openGuessaNumberGame, guessAnumber)],
+    [paperOne, openMiniGame(openSnakeGameClick, snake)],
 ];
 
 const getClickableCoords = () => {
@@ -213,7 +203,8 @@ const closeAllGames = () => {
     document.removeEventListener('click', outGameClick);
     state.isMiniGameOpened = false;
     gamearea.switch();
-    document.getElementById(codeWordDivID).innerHTML = '';
+    // clean secret words container
+    secretWordContainers.forEach((secretWordContainer) => secretWordContainer.innerHTML = '');
 };
 
 const onDocumentEscPress = (evt) => {
@@ -228,8 +219,8 @@ const outGameClick = (evt) => {
     }
 };
 
-function setHiddenWordVisibility(visible, secretWord) {
-    document.getElementById(codeWordDivID).innerHTML = visible ? `Code word: ${secretWord}` : '';
+const setHiddenWordVisibility = (visible, secretWord, gameName) => {
+    document.querySelector(`#${gameName}-secret-word`).innerHTML = visible ? `Code word: ${secretWord}` : '';
 }
 
 class Room {
@@ -311,7 +302,7 @@ class Room {
 
         // fake pictures
         fakePictures.forEach((pic) => {
-            pic.addEventListener('click', (evt) => swingPicture(evt.target.id));
+            pic.addEventListener('click', (evt) => swingPicture(`#${evt.target.id}`));
         });
 
         // another fake objects
@@ -341,6 +332,5 @@ export {
     indexLock,
     picture,
     clickableCoords,
-    codeWordDivID,
     setHiddenWordVisibility,
 };

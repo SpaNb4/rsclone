@@ -101,7 +101,7 @@ const createGrid = () => {
   timerContainer.innerHTML = '';
   createTimerView(timerContainer, stateTimer);
   stateTimer.gameOpened();
-  setHiddenWordVisibility(getRoomState().isGameFinished(gameName), secretWord);
+  setHiddenWordVisibility(getRoomState().isGameFinished(gameName), secretWord, gameName);
 }
 
 const onMemoryGridClick = (evt) => {
@@ -134,7 +134,7 @@ const onMemoryGridClick = (evt) => {
 
       //  timer
       stateTimer.gameFinished();
-      setHiddenWordVisibility(true, secretWord);
+      setHiddenWordVisibility(true, secretWord, gameName);
     }
   }
 }
@@ -182,7 +182,9 @@ memoryGrid.addEventListener('keydown', onMemoryKeyPress);
 const memoryGame = {
   reset: resetGame,
   create: createGrid,
-  links: links
+  links: links,
+  name: gameName,
+  word: secretWord
 }
 
 export { memoryGame };

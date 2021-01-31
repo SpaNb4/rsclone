@@ -10,10 +10,10 @@
 </head>
 
 <body>
-  <div class="intro">
+  <div class="intro disabled">
     <div id="intro-content-1" class="intro__content">
       <h4 class="intro__sub">welcome to</h4>
-      <h1 class="intro__title">Lorem ipsum dolor</h1>
+      <h1 class="intro__title">Crime, Trap and One Cat</h1>
       <div class="intro__image">
         <img src="./assets/img/door-intro.png" alt="">
       </div>
@@ -29,43 +29,66 @@
     </div>
     <div id="intro-content-3" class="intro__content disabled">
       <h2 class="intro__title">Credits</h2>
-      <h4 class="intro__sub">Created by</h4>
-      <ul class="intro__list">
-        <li>
-          <a class="intro__link" href="https://github.com/AlesyaKuptsova">Alesya</a>
-        </li>
-        <li>
-          <a class="intro__link" href="https://github.com/lemeshkonastya" target="_blank">Anastasia</a>
-        </li>
-        <li>
-          <a class="intro__link" href="https://github.com/spanb4" target="_blank">Dzmitry</a>
-        </li>
-        <li>
-          <a class="intro__link" href="https://github.com/magklax" target="_blank">Nadezda</a>
-        </li>
-      </ul>
-      <h4 class="intro__sub">Images and Icons</h4>
-      <ul class="intro__list">
-        <li>
-          <a class="intro__link" href="https://www.flaticon.com/" target="_blank">Flaticon</a>
-        </li>
-        <li>
-          <a class="intro__link" href="https://www.freepik.com/" target="_blank">Freepik</a>
-        </li>
-      </ul>
-      <h4 class="intro__sub">Sound Effects</h4>
-      <ul class="intro__list">
-        <li>
-          <a class="intro__link" href="https://mixkit.co/free-sound-effects/goal/" target="_blank">Mixkit</a>
-        </li>
-      </ul>
-      <h4 class="intro__sub">Art</h4>
-      <ul class="intro__list">
-        <li>"Wine" by Aleksandra Ekster</li>
-        <li>"Eva" by Chaïm Soutine</li>
-        <li>"Tancerka" by Marc Chagall</li>
-      </ul>
-      <div class="intro__copyrights">Lorem ipsum dolor @ 2021</div>
+      <div class="intro__wrapper">
+        <div class="intro__item">
+          <h4 class="intro__sub">Created by</h4>
+          <ul class="intro__list">
+            <li>
+              <a class="intro__link" href="https://github.com/AlesyaKuptsova">Alesya</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://github.com/lemeshkonastya" target="_blank">Anastasia</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://github.com/spanb4" target="_blank">Dzmitry</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://github.com/magklax" target="_blank">Nadezda</a>
+            </li>
+          </ul>
+        </div>
+        <div class="intro__item">
+          <h4 class="intro__sub">Art</h4>
+          <ul class="intro__list">
+            <li>
+              <a class="intro__link" href="https://www.wikiart.org/en/aleksandra-ekster/wine-1914">Wine by Aleksandra
+                Ekster</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://artbelarus.by/en/artists/1536.html">Eva by Chaïm Soutine</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://www.wikiart.org/en/marc-chagall/over-the-town-1918">Over The Town by
+                Marc Chagall</a>
+            </li>
+          </ul>
+        </div>
+        <div class="intro__item">
+          <h4 class="intro__sub">Images and Icons</h4>
+          <ul class="intro__list">
+            <li>
+              <a class="intro__link" href="https://www.flaticon.com/" target="_blank">Flaticon</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://www.freepik.com/" target="_blank">Freepik</a>
+            </li>
+          </ul>
+        </div>
+        <div class="intro__item">
+          <h4 class="intro__sub">Sound Effects</h4>
+          <ul class="intro__list">
+            <li>
+              <a class="intro__link" href="https://mixkit.co/free-sound-effects/goal/" target="_blank">Mixkit</a>
+            </li>
+          </ul>
+        </div>
+        <div class="intro__button-wrapper">
+          <a href="#!" id="play-again-button" class="btn amber lighten-3 black-text pulse">Play Again</a>
+        </div>
+
+        <div class="intro__copyrights">Crime, Trap and One Cat @ 2021</div>
+      </div>
+
     </div>
     <canvas id="intro-canvas"></canvas>
   </div>
@@ -265,7 +288,8 @@
       </div>
     </div>
     <div class="win"></div>
-    <div class="codeTicTacToe"></div>
+    <div class="codeTicTacToe"></div><!--  можно убрать -->
+    <div id="tic_tac_toe-secret-word" class="secret-word"></div>
   </div>
   <div class="tetris game_modal">
     <div id='timer-tetris'></div>
@@ -280,7 +304,8 @@
       </div>
     </div>
     <div class="resultTetris"></div>
-    <div class="codeTetris"></div>
+    <div class="codeTetris"></div><!--  можно убрать -->
+    <div id="tetris-secret-word" class="secret-word"></div>
   </div>
   <div id="memory-game" class="memory-game game_modal">
     <div id='timer-memory'></div>
@@ -288,6 +313,7 @@
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
     <div id="memory-game-grid" class="memory-game__grid"></div>
+    <div id="memory-secret-word" class="secret-word"></div>
   </div>
   <div class="hangman game_modal">
     <div id='timer-hangman'></div>
@@ -309,12 +335,14 @@
       </div>
     </form>
     <div class="message"></div>
+    <div id="hangman-secret-word" class="secret-word"></div>
   </div>
   <div class="gem-puzzle game_modal">
     <a href="#" class="gem-puzzle_close_btn all-close-button">
       <i class="material-icons medium grey-text text-grey">close</i>
     </a>
     <div class="gem-puzzle-container"></div>
+    <div id="gem_puzzle-secret-word" class="secret-word"></div>
   </div>
   <div id="simon-game" class="simon-game game_modal">
     <div id='timer-simon'></div>
@@ -327,6 +355,7 @@
       <div id="simon-game-message" class="simon-game__message"></div>
     </div>
     <div id="simon-game-piano" class="simon-game__piano"></div>
+    <div id="simon-secret-word" class="secret-word"></div>
   </div>
   <div class="game-over-lock">
     <a href="#!" class="game-over-lock__close all-close-button">
@@ -352,6 +381,7 @@
         <h4 id="message"></h4>
       </div>
     </div>
+    <div id="snake-secret-word" class="secret-word"></div>
   </div>
   <div class="guess-a-number game_modal" id="guess-a-number">
     <a href="#" id="guess-a-number-close" class="guess-a-number__close all-close-button">
@@ -372,6 +402,7 @@
         <ol id="historyList"></ol>
       </div>
     </div>
+    <div id="guess_a_number-secret-word" class="secret-word"></div>
   </div>
   <footer class="main-footer">
     <a href="https://rs.school/js/" target="_blank">
@@ -506,7 +537,6 @@
       <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
     </div>
   </div>
-  <div id="code_word" class="code_word"></div>
   <div id="preloader">
     <div class="lds-ripple">
       <div></div>
