@@ -1,5 +1,6 @@
 // @ts-ignore
 import { getRandomIntInclusive } from './utils';
+import { state } from './state';
 
 const DISABLED: string = 'disabled';
 const STAR_NUMBER: number = 120;
@@ -10,6 +11,7 @@ const continueButton: HTMLElement = document.querySelector('#intro-continue-butt
 const playAgainButton: HTMLElement = document.querySelector('#intro-play-again-button');
 const content1: HTMLElement = document.querySelector('#intro-content-1');
 const content2: HTMLElement = document.querySelector('#intro-content-2');
+const content3: HTMLElement = document.querySelector('#intro-content-3');
 const canvas: HTMLCanvasElement = document.querySelector('#intro-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -77,6 +79,18 @@ const skipIntroTwo = () => {
   content1.parentElement.classList.add(DISABLED);
 }
 
+const openFinalIntro = () => {
+  content3.classList.remove('disabled');
+  content3.parentElement.classList.remove('disabled');
+  playAgainButton.focus();
+
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
+      playAgain();
+    }
+  });
+}
+
 const playAgain = () => {
   location.reload();
 }
@@ -108,3 +122,4 @@ export function init(): void {
   animate();
 }
 
+export { openFinalIntro };

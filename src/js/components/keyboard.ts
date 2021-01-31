@@ -36,7 +36,7 @@ class GameArea {
       if (!state.isMiniGameOpened && !state.paused) {
         this.key = evt.code;
 
-        if (evt.key === 'Enter' && pointer.onElement) {
+        if (evt.key === 'Enter' && pointer.onElement && !state.locksOpen) {
           state.callback(state.selector);
         }
       }

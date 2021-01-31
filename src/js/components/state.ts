@@ -7,6 +7,7 @@ interface Istate {
   keyboard: boolean;
   paused: boolean;
   selector: string;
+  locksOpen: boolean;
   callback: (x: string | null) => void;
 }
 
@@ -27,6 +28,7 @@ const state: Istate = {
   isMiniGameOpened: false,
   keyboard: getKeyboardValue(),
   paused: false,
+  locksOpen: false,
   selector: '',
   callback: null,
 };

@@ -140,6 +140,7 @@ const onMemoryGridClick = (evt) => {
 }
 
 const resetGame = () => {
+  shuffleArray(cardsPicsArray);
   count = 0;
   removeAllElements(openCards);
   [...memoryGrid.children].forEach((elem) => {

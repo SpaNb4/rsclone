@@ -7,7 +7,7 @@ import { guessAnumberGame } from './guessanumber.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown, stopTetris, touchDown } from './tetris';
 import { snakeGame } from './snake';
-import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
+import { KeyDownLock, arrLock, layoutLockGame, displayLock, lockGameText } from './game-over';
 import { getCoordsArray, getRandomIntInclusive, addClickListeners } from './utils';
 import { gamearea } from './keyboard';
 import * as intro from './intro';
@@ -76,6 +76,7 @@ const openLocks = (elem) => {
     lockContent.innerHTML = layoutLockGame;
     document.addEventListener('keydown', KeyDownLock);
     displayLock(indexLock);
+    document.querySelector('.lock-game__text').focus();
 };
 
 const openTetrisGame = () => {

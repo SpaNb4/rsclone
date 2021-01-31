@@ -1,28 +1,31 @@
 import { indexLock } from './room';
+import { state } from './state';
 import { getRandomInt } from './utils';
+import { openFinalIntro } from './intro';
 
 let flagOpen = false,
     countOpenLock = 0;
 
 const lockClose = '.lock__close',
-      lockOpen = '.lock__open',
-      lockActive = 'lock__active',
-      lockGameText = '.lock-game__text',
-      lockGameClose = '.lock-game__close',
-      lockGameOpen = '.lock-game__open',
-      lockGameActive = 'lock-game__active',
-      doorOpen = '.door-open',
-      door = '.door',
-      doorNoneDisplay = 'door-none',
-      enter = 13,
-      numLockFromString = 5,
-      num = 1,
-      stateCloseLock = 0,
-      stateOpenLock = 1,
-      countPharese = 3,
-      countWord = 1,
-      indexArr = 0,
-      neededCountDublicate = 0;
+    lockOpen = '.lock__open',
+    lockActive = 'lock__active',
+    lockGameText = '.lock-game__text',
+    lockGameClose = '.lock-game__close',
+    lockGameOpen = '.lock-game__open',
+    lockGameActive = 'lock-game__active',
+    doorOpen = '.door-open',
+    door = '.door',
+    doorNoneDisplay = 'door-none',
+    enter = 13,
+    numLockFromString = 5,
+    num = 1,
+    stateCloseLock = 0,
+    stateOpenLock = 1,
+    countPharese = 3,
+    countWord = 1,
+    indexArr = 0,
+    neededCountDublicate = 0;
+
 
 let arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
 
@@ -34,7 +37,7 @@ const layoutLock = `
         <img src="./assets/img/open.png">
     </div>
 `;
-  
+
 export const layoutLockGame = `
     <div class="lock-game">
         <div class="lock-game__close lock-game__active">
@@ -95,7 +98,7 @@ arrLock.forEach((elem) => {
 });
 
 export const KeyDownLock = (event) => {
-    switch(event.keyCode) {
+    switch (event.keyCode) {
         case enter:
             checkTextExit();
             break;
@@ -129,14 +132,17 @@ const checkGameOverDoor = () => {
     if (countOpenLock === arrLock.length) {
         document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
         document.querySelector(door).classList.add(doorNoneDisplay);
+        state.locksOpen = true;
         openDoor();
     }
 }
 
 const openDoor = () => {
-    document.querySelector(doorOpen).addEventListener('click', () => {
-        document.querySelector('#intro-content-3').classList.remove('disabled');
-        document.querySelector('#intro-content-3').parentElement.classList.remove('disabled');
+    document.querySelector(doorOpen).addEventListener('click', openFinalIntro);
+    document.addEventListener('keydown', (evt) => {
+        if (evt.key === 'Enter' && state.keyboard && state.locksOpen) {
+            openFinalIntro();
+        }
     });
 }
 
