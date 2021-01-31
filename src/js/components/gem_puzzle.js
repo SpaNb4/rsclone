@@ -233,7 +233,7 @@ export const GemPuzzle = {
         createTimerView(timerContainer, stateTimer);
         stateTimer.gameOpened();
         const gameFinished = getRoomState().isGameFinished(gameName);
-        setHiddenWordVisibility(gameFinished, secretWord);
+        setHiddenWordVisibility(gameFinished, secretWord, gameName);
     },
 
     incrementMoves() {
@@ -258,7 +258,7 @@ export const GemPuzzle = {
             win.classList.toggle('visible');
 
             stateTimer.gameFinished();
-            setHiddenWordVisibility(true, secretWord);
+            setHiddenWordVisibility(true, secretWord, gameName);
 
             setTimeout(() => {
                 picture.classList.add('dropped');

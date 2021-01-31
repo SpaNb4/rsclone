@@ -104,7 +104,7 @@ export function newGame(): void {
     createTimerView(timerContainer, stateTimer);
     stateTimer.gameOpened();
     const gameFinished = getRoomState().isGameFinished(gameName);
-    setHiddenWordVisibility(gameFinished, secretWord);
+    setHiddenWordVisibility(gameFinished, secretWord, gameName);
 }
 
 const guessBtn = document.querySelector('.guess_btn');
@@ -143,7 +143,7 @@ function checkWin(): void {
         playAudio(audioWin);
 
         stateTimer.gameFinished();
-        setHiddenWordVisibility(true, secretWord);
+        setHiddenWordVisibility(true, secretWord, gameName);
     }
 
     if (errors === SIX_ERRORS) {
