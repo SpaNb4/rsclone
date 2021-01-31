@@ -183,8 +183,6 @@ const memoryGame = {
   reset: resetGame,
   create: createGrid,
   links: links,
-  name: gameName,
-  word: secretWord
 }
 
 export { memoryGame };
