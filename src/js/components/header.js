@@ -1,5 +1,9 @@
-import { state, volumeRange, keyboardSwitch } from './state';
-import { gamearea } from './keyboard';
+/* eslint-disable no-return-assign */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+import { state, volumeRange, keyboardSwitch } from './state.ts';
+import { gamearea } from './keyboard.ts';
+// eslint-disable-next-line import/no-cycle
 import { getRoomState } from './room_state';
 
 const restartButton = document.querySelector('#menu-restart-button');
@@ -22,7 +26,7 @@ function onVolumeRangeChange(evt) {
     state.volume = Number(evt.target.value) / 100;
 }
 
-function onRestartClick() { }
+function onRestartClick() {}
 
 function switchKeyboard(value, modal) {
     state.keyboard = value;
@@ -50,7 +54,7 @@ function onLogoutClick() {
         });
 }
 
-loginForm.addEventListener('submit', function (e) {
+loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     fetch(`${backendURL}/login`, {
         method: 'post',
@@ -81,12 +85,11 @@ loginForm.addEventListener('submit', function (e) {
 
                 localStorage.setItem(USER, this.login_email.value);
                 getRoomState().setUser(this.login_email.value);
-
             }
         });
 });
 
-registerForm.addEventListener('submit', function (e) {
+registerForm.addEventListener('submit', (e) => {
     e.preventDefault();
     fetch(`${backendURL}/register`, {
         method: 'post',
@@ -113,11 +116,11 @@ registerForm.addEventListener('submit', function (e) {
 });
 
 selectLng.addEventListener('change', () => {
-    if (selectLng.value == 'english') {
+    if (selectLng.value === 'english') {
         location.href = '/?lng=en';
-    } else if (selectLng.value == 'russian') {
+    } else if (selectLng.value === 'russian') {
         location.href = '/?lng=ru';
-    } else if (selectLng.value == 'japanese') {
+    } else if (selectLng.value === 'japanese') {
         location.href = '/?lng=ja';
     }
 });
@@ -136,7 +139,7 @@ function headerInit() {
     });
 
     document.addEventListener('keydown', (evt) => {
-        if ((evt.code === 'F11') & state.keyboard) {
+        if (evt.code === 'F11' && state.keyboard) {
             evt.preventDefault();
             sidenavInstance.open();
         }

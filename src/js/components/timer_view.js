@@ -15,10 +15,11 @@ function createTimerView(container, timer) {
         return val > 9 ? val : `0${val}`;
     }
     setInterval(() => {
-        let currentTime = timer.getTimeSeconds();
+        const currentTime = timer.getTimeSeconds();
         seconds.innerHTML = pad(currentTime % 60);
         minutes.innerHTML = pad(parseInt(currentTime / 60, 10));
     }, updateInterval);
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export { createTimerView };

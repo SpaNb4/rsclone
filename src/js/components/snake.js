@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { getRandomIntInclusive, playAudio } from './utils';
 import { createTimerView } from './timer_view';
 import { GameTimer } from './timer';
@@ -5,7 +6,7 @@ import { getRoomState } from './room_state';
 import winSound from '../../assets/audio/snake-game-win.mp3';
 import overSound from '../../assets/audio/snake-game-over.mp3';
 import { definitionCodeWord } from './game-over';
-import {setHiddenWordVisibility} from './room';
+import { setHiddenWordVisibility } from './room';
 
 const display = [];
 let viewPort;
@@ -91,8 +92,8 @@ function render(element) {
     ctx.canvas.width = ctx.canvas.clientWidth;
     ctx.canvas.height = ctx.canvas.clientHeight;
 
-    const rectWidth = parseInt(ctx.canvas.width / display[0].length - 1);
-    const rectHeight = parseInt(ctx.canvas.height / display.length - 1);
+    const rectWidth = parseInt(ctx.canvas.width / display[0].length - 1, 10);
+    const rectHeight = parseInt(ctx.canvas.height / display.length - 1, 10);
 
     for (let h = 0; h < display.length; h += 1) {
         for (let w = 0; w < display[h].length; w += 1) {
@@ -133,8 +134,8 @@ function createSnake() {
         yDir: 0,
         sections: [
             {
-                x: parseInt(display[0].length / 2),
-                y: parseInt(display.length / 2),
+                x: parseInt(display[0].length / 2, 10),
+                y: parseInt(display.length / 2, 10),
             },
         ],
     };
@@ -204,7 +205,7 @@ function setTouchEvents(container) {
     });
 }
 
-function gameOver(endType) {
+function gameOver() {
     clearInterval(gameTimer);
     gameStatus = 'stopped';
     document.querySelector(message).innerHTML = '<span>The game is over. You can try again!</span>';
@@ -212,7 +213,7 @@ function gameOver(endType) {
     playAudio(audioOver);
 }
 
-function gameWin(endType) {
+function gameWin() {
     gameStatus = 'win';
     document.querySelector(message).innerHTML = '<span>You won</span>!';
     stateTimer.gameFinished();
@@ -256,6 +257,7 @@ function renderSnake() {
     // check for food
     if (food.x === headNewX && food.y === headNewY) {
         const newSections = [{ x: headNewX, y: headNewY }];
+        // eslint-disable-next-line no-restricted-syntax
         for (const section of snake.sections) {
             newSections.push(section);
         }
@@ -280,6 +282,8 @@ function renderSnake() {
 
     // Then show them on display
     setSnakeOnDisplay();
+
+    return 0;
 }
 
 function renderFood() {
@@ -356,4 +360,5 @@ const snakeGame = {
     reset: closeSnakeGame,
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export { snakeGame };

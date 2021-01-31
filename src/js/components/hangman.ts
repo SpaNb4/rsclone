@@ -1,13 +1,11 @@
 /* eslint-disable no-use-before-define */
-import correctSound from './../../assets/audio/hangman_correct.mp3';
-import uncorrectSound from './../../assets/audio/hangman_uncorrect.mp3';
-import loseSound from './../../assets/audio/hangman_lose.mp3';
-import winSound from './../../assets/audio/hangman_win.mp3';
+import correctSound from '../../assets/audio/hangman_correct.mp3';
+import uncorrectSound from '../../assets/audio/hangman_uncorrect.mp3';
+import loseSound from '../../assets/audio/hangman_lose.mp3';
+import winSound from '../../assets/audio/hangman_win.mp3';
 
 // @ts-ignore
-import { checkSymbol } from './../../js/components/utils';
-// @ts-ignore
-import { playAudio } from './utils';
+import { checkSymbol, playAudio } from './utils';
 // @ts-ignore
 import { ACTIVE, setHiddenWordVisibility } from './room';
 // @ts-ignore
@@ -82,6 +80,7 @@ let partGuessWord: Array<string>;
 let errors: number = 0;
 let isHangmanSolved: boolean = false;
 
+// eslint-disable-next-line import/prefer-default-export
 export function newGame(): void {
     random = Math.floor(Math.random() * (wordsArr.length - 1));
     keyword = wordsArr[random].split('');
@@ -169,7 +168,7 @@ function checkSymbols(): void {
     let userLetter: string = letter.value;
     userLetter = userLetter.toUpperCase();
 
-    let isCorrectLetter = checkSymbol(keyword, userLetter, partGuessWord);
+    const isCorrectLetter = checkSymbol(keyword, userLetter, partGuessWord);
     if (isCorrectLetter) {
         const audioCorrect = new Audio(correctSound);
         playAudio(audioCorrect);

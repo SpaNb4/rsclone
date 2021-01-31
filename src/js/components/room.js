@@ -1,19 +1,23 @@
-import { state } from './state';
+/* eslint-disable no-return-assign */
+/* eslint-disable no-use-before-define */
+/* eslint-disable object-curly-newline */
+/* eslint-disable import/no-cycle */
+import { state } from './state.ts';
 import { headerInit, loadRoomState } from './header';
-import { footerInit } from './footer';
+import { footerInit } from './footer.ts';
 import { memoryGame } from './memory';
-import { simonGame } from './simon';
+import { simonGame } from './simon.ts';
 import { guessAnumberGame } from './guessanumber.ts';
 import { gameTicTacToe, closeGameTicTacToe } from './tic-tac-toe';
 import { startTetris, KeyDown, stopTetris, touchDown } from './tetris';
 import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
 import { getCoordsArray, getRandomIntInclusive, addClickListeners } from './utils';
-import { gamearea } from './keyboard';
-import * as intro from './intro';
-import { newGame } from './hangman';
+import { gamearea } from './keyboard.ts';
+import * as intro from './intro.ts';
+import { newGame } from './hangman.ts';
 import { GemPuzzle } from './gem_puzzle';
-import { fakeObjects, swingPicture } from './fakes';
+import { fakeObjects, swingPicture } from './fakes.ts';
 
 const ACTIVE = 'active';
 const LOAD_TIME = 300;
@@ -31,8 +35,8 @@ const frame = document.querySelector('.frame-image');
 const cube = document.querySelector('.cube4');
 const lock = document.querySelector('.game-over-lock');
 const box = document.querySelector('#box');
-const picture = document.querySelector('#picture-' + getRandomIntInclusive(1, 3));
-const fakePictures = Array.from(document.querySelectorAll('.picture')).filter(pic => pic !== picture);
+const picture = document.querySelector(`#picture-${getRandomIntInclusive(1, 3)}`);
+const fakePictures = Array.from(document.querySelectorAll('.picture')).filter((pic) => pic !== picture);
 const safebox = document.querySelector('#safe-box');
 
 const memory = document.querySelector('#memory-game');
@@ -50,6 +54,7 @@ const gemPuzzle = document.querySelector('.gem-puzzle');
 
 const lockContent = document.querySelector('.game-over-lock__content');
 const secretWordContainers = [...document.querySelectorAll('.secret-word')];
+// eslint-disable-next-line import/no-mutable-exports
 let indexLock;
 
 //  open functions:
@@ -150,18 +155,15 @@ const clearTicTacToeGame = () => {
     gameTicTacToe();
 };
 
-
 // open overlay and add handlers
-const openMiniGame = (callback, game) => {
-    return (elem) => {
-        callback(elem);
-        game.classList.add(ACTIVE);
-        overlay.classList.add(ACTIVE);
-        document.addEventListener('keydown', onDocumentEscPress);
-        document.addEventListener('click', outGameClick);
-        state.isMiniGameOpened = true;
-        gamearea.switch();
-    }
+const openMiniGame = (callback, game) => (elem) => {
+    callback(elem);
+    game.classList.add(ACTIVE);
+    overlay.classList.add(ACTIVE);
+    document.addEventListener('keydown', onDocumentEscPress);
+    document.addEventListener('click', outGameClick);
+    state.isMiniGameOpened = true;
+    gamearea.switch();
 };
 
 // all clickable objects
@@ -177,16 +179,15 @@ const openGameObjects = [
     [paperOne, openMiniGame(openSnakeGameClick, snake)],
 ];
 
-const getClickableCoords = () => {
-    return getCoordsArray([
-        ...openGameObjects,
-        ...fakeObjects,
-        ...arrLock.map(elem => [document.querySelector(elem), openMiniGame(openLocks)]),
-        ...fakePictures.map(elem => [elem, swingPicture])
-    ]);
-}
+const getClickableCoords = () => getCoordsArray([
+    ...openGameObjects,
+    ...fakeObjects,
+    ...arrLock.map((elem) => [document.querySelector(elem), openMiniGame(openLocks)]),
+    ...fakePictures.map((elem) => [elem, swingPicture]),
+]);
 
 // all clickable objects coordinates
+// eslint-disable-next-line import/no-mutable-exports
 let clickableCoords = getClickableCoords();
 
 const clearGameOBjects = [
@@ -194,7 +195,17 @@ const clearGameOBjects = [
     [repeatTetris, clearTetrisGame],
 ];
 
-const closeCallbacks = [closeMemoryGame, closeHangmanGame, closeGemPuzzleGame, closeSimonGame, closeGuessaNumberGame, closeTicTacToeGame, closeTetrisGame, closeLocks, closeSnakeGameClick];
+const closeCallbacks = [
+    closeMemoryGame,
+    closeHangmanGame,
+    closeGemPuzzleGame,
+    closeSimonGame,
+    closeGuessaNumberGame,
+    closeTicTacToeGame,
+    closeTetrisGame,
+    closeLocks,
+    closeSnakeGameClick,
+];
 
 const closeAllGames = () => {
     closeCallbacks.forEach((callback) => callback());
@@ -204,7 +215,8 @@ const closeAllGames = () => {
     state.isMiniGameOpened = false;
     gamearea.switch();
     // clean secret words container
-    secretWordContainers.forEach((secretWordContainer) => secretWordContainer.innerHTML = '');
+    // eslint-disable-next-line no-param-reassign
+    secretWordContainers.forEach((secretWordContainer) => (secretWordContainer.innerHTML = ''));
 };
 
 const onDocumentEscPress = (evt) => {
@@ -221,16 +233,17 @@ const outGameClick = (evt) => {
 
 const setHiddenWordVisibility = (visible, secretWord, gameName) => {
     document.querySelector(`#${gameName}-secret-word`).innerHTML = visible ? `Code word: ${secretWord}` : '';
-}
+};
 
 class Room {
     constructor() {
         this.keys = [];
+        // eslint-disable-next-line prefer-destructuring
         this.activeWall = walls[0];
     }
 
     changeWall(side) {
-        let index = walls.indexOf(this.activeWall);
+        const index = walls.indexOf(this.activeWall);
 
         preloader.classList.add(ACTIVE);
         this.activeWall.classList.remove(ACTIVE);
@@ -275,6 +288,7 @@ class Room {
     keysReleased(evt) {
         if (state.isMiniGameOpened && !state.paused) return null;
         this.keys[evt.keyCode] = false;
+        return 0;
     }
 
     init() {
@@ -323,14 +337,4 @@ window.addEventListener('DOMContentLoaded', () => {
     footerInit();
 });
 
-export {
-    ACTIVE,
-    overlay,
-    onDocumentEscPress,
-    outGameClick,
-    openMiniGame,
-    indexLock,
-    picture,
-    clickableCoords,
-    setHiddenWordVisibility,
-};
+export { ACTIVE, overlay, onDocumentEscPress, outGameClick, openMiniGame, indexLock, picture, clickableCoords, setHiddenWordVisibility };
