@@ -12,8 +12,16 @@
         color: $color-malibu;
     }
     .hangman_img {
-        max-width: 100%;
-        height: auto;
+        height: 180px;
+        @include resolution(tablet) {
+            height: 160px;
+        }
+        @include resolution(big-mobile) {
+            height: 140px;
+        }
+        @include resolution(mobile) {
+            height: 120px;
+        }
     }
     h1 {
         font-size: 50px;
@@ -25,9 +33,13 @@
         }
         @include resolution(big-mobile) {
             font-size: 38px;
+            margin-top: 10px;
+            margin-bottom: 10;
         }
         @include resolution(mobile) {
             font-size: 30px;
+            margin-top: 10px;
+            margin-bottom: 10;
         }
     }
     .correct {
@@ -39,10 +51,6 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            @include resolution(tablet) {
-                flex-direction: column;
-                align-items: center;
-            }
             @include resolution(big-mobile) {
                 flex-direction: column;
                 align-items: center;
@@ -58,15 +66,12 @@
                 font-size: 30px;
                 color: $color-white;
                 @include resolution(tablet) {
-                    width: 100%;
                     font-size: 28px;
                 }
                 @include resolution(big-mobile) {
-                    width: 100%;
                     font-size: 24px;
                 }
                 @include resolution(mobile) {
-                    width: 100%;
                     font-size: 22px;
                 }
             }
@@ -105,6 +110,12 @@
     .wrong_letters {
         font-size: 20px;
         height: 120px;
+        @include resolution(big-mobile) {
+            height: 100px;
+        }
+        @include resolution(mobile) {
+            height: 70px;
+        }
         p {
             margin-bottom: 10px;
         }
