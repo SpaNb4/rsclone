@@ -231,7 +231,7 @@ export const createBoard = () => {
             board[y][x] = colorBackground;
         }
     }
-}
+};
 
 export const startTimerTetris = () => {
     const timerContainer = document.querySelector(idTimerTetris);
@@ -240,7 +240,7 @@ export const startTimerTetris = () => {
     stateTimerTetris.gameOpened();
     const gameFinished = getRoomState().isGameFinished(gameNameTetris);
     setHiddenWordVisibility(gameFinished, secretWordTetris, gameNameTetris);
-}
+};
 
 export const drawBoard = () => {
     for (let y = 0; y < row; y++) {

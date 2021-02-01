@@ -5,8 +5,10 @@
 import { state, volumeRange, keyboardSwitch } from './state.ts';
 import { gamearea } from './keyboard.ts';
 // eslint-disable-next-line import/no-cycle
-import { getRoomState } from './room_state';
-import { createWordList } from './wordlist';
+// eslint-disable-next-line import/no-unresolved
+import { getRoomState } from './room_state.ts';
+// eslint-disable-next-line import/no-unresolved
+import { createWordList } from './wordlist.ts';
 
 const loginButton = document.querySelector('#menu-login-button');
 const logoutButton = document.querySelector('#menu-logout-button');
