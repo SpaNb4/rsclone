@@ -53,7 +53,7 @@ function newGame() {
     document.getElementById(buttonArea).removeAttribute('disabled');
     document.getElementById(userGuess).focus();
     const gameFinished = getRoomState().isGameFinished(gameName);
-    setHiddenWordVisibility(gameFinished, secretWord);
+    setHiddenWordVisibility(gameFinished, secretWord, gameName);
 }
 
 function guessInRange(guess: number) {
@@ -85,7 +85,7 @@ function userGuessed() {
             numberOfGuesses = 0;
             document.getElementById(userGuess).setAttribute('disabled', 'disabled');
             document.getElementById(buttonArea).setAttribute('disabled', 'disabled');
-            setHiddenWordVisibility(true, secretWord);
+            setHiddenWordVisibility(true, secretWord, gameName);
         } else if (Number(userGuessednumber) < randomNumber) {
             // User needs to guess higher
             writeMessage(statusArea, `<p><span>You need to guess higher than</span> ${userGuessednumber}, <span>try again</span>...</p>`, '');

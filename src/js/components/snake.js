@@ -219,7 +219,7 @@ function gameWin() {
     stateTimer.gameFinished();
     const audioWin = new Audio(winSound);
     playAudio(audioWin);
-    setHiddenWordVisibility(true, secretWord);
+    setHiddenWordVisibility(true, secretWord, gameName);
 }
 
 function setSnakeOnDisplay() {
@@ -345,7 +345,7 @@ function openSnakeGame() {
     createTimerView(timerContainer, stateTimer);
     stateTimer.gameOpened();
     const gameFinished = getRoomState().isGameFinished(gameName);
-    setHiddenWordVisibility(gameFinished, secretWord);
+    setHiddenWordVisibility(gameFinished, secretWord, gameName);
 }
 
 function closeSnakeGame() {
