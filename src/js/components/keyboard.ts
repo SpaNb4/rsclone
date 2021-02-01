@@ -43,7 +43,7 @@ class GameArea {
             if (!state.isMiniGameOpened && !state.paused) {
                 this.key = evt.code;
 
-                if (evt.key === 'Enter' && pointer.onElement) {
+                if (evt.key === 'Enter' && pointer.onElement && !state.locksOpen) {
                     state.callback(state.selector);
                 }
             }
@@ -65,7 +65,7 @@ class GameArea {
             content.dataset.keyboard = 'on';
         }
 
-        if (!state.isMiniGameOpened) {
+        if (!state.isMiniGameOpened && state.keyboard) {
             animate();
         }
     }

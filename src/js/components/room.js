@@ -183,7 +183,7 @@ const openGameObjects = [
 const getClickableCoords = () => getCoordsArray([
     ...openGameObjects,
     ...fakeObjects,
-    ...arrLock.map((elem) => [document.querySelector(elem), openMiniGame(openLocks)]),
+    ...arrLock.map((elem) => [document.querySelector(elem), openMiniGame(openLocks, lock)]),
     ...fakePictures.map((elem) => [elem, swingPicture]),
 ]);
 
