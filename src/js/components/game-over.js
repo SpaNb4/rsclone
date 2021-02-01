@@ -26,7 +26,8 @@ const lockClose = '.lock__close',
     countPharese = 3,
     countWord = 1,
     indexArr = 0,
-    neededCountDublicate = 0;
+    neededCountDublicate = 0,
+    timeReplaceDoor = 300;
 
 
 let arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
@@ -132,7 +133,7 @@ const checkTextExit = () => {
 const checkGameOverDoor = () => {
     if (countOpenLock === arrLock.length) {
         document.querySelector(conteinerWall1).innerHTML += htmlDoorOpen;
-        setTimeout(() => replaceTheDoor(), 1000);
+        setTimeout(() => replaceTheDoor(), timeReplaceDoor);
         state.locksOpen = true;
         openDoor();
     }
