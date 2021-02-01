@@ -1553,7 +1553,16 @@
     line-height: 2;
     text-align: center;
     text-transform: uppercase;
-      text-shadow: 2px 2px 1px $color-black;
+    text-shadow: 2px 2px 1px $color-black;
+    @include resolution(tablet) {
+        font-size: 22px;
+    }
+    @include resolution(big-mobile) {
+        font-size: 20px;
+    }
+    @include resolution(mobile) {
+        font-size: 16px;
+    }
 }
 
 .time {
@@ -1576,15 +1585,3 @@
         transform: translate(-50%, -50%) scale(1);
     }
 }
-
-#timer-snake {
-    @include resolution(big-mobile) {
-        font-size: 20px;
-    }
-}
-#timer-guess-a-number {
-    @include resolution(big-mobile) {
-        font-size: 20px;
-    }
-}
-

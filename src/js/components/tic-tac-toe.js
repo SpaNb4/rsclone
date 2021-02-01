@@ -1,47 +1,49 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable import/no-cycle */
 import { playAudio, getRandomInt } from './utils';
 import { definitionCodeWord } from './game-over';
-import { GameTimer } from './timer.js';
-import { createTimerView } from './timer_view.js';
-import { getRoomState } from './room_state.js';
+import { GameTimer } from './timer';
+import { createTimerView } from './timer_view';
+import { getRoomState } from './room_state';
 import { setHiddenWordVisibility } from './room';
-import soundClickTicTacToe from './../../assets/audio/tictactoe-click.mp3';
-import soundWinTicTacToe from './../../assets/audio/tictactoe-win.mp3';
-import soundGameOverTicTacToe from './../../assets/audio/tictactoe-gameover.mp3';
+import soundClickTicTacToe from '../../assets/audio/tictactoe-click.mp3';
+import soundWinTicTacToe from '../../assets/audio/tictactoe-win.mp3';
+import soundGameOverTicTacToe from '../../assets/audio/tictactoe-gameover.mp3';
 
-const classCeil = '.cell',
-      classWin = '.win',
-      stepX = '<img src="./assets/img/pistols.png">',
-      step0 = '<img src="./assets/img/losso.png">',
-      index0 = 0,
-      index1 = 1,
-      index2 = 2,
-      index3 = 3,
-      index4 = 4,
-      index5 = 5,
-      index6 = 6,
-      index7 = 7,
-      index8 = 8,
-      winX = '<span>You won</span> !',
-      gameOver = '<span>The game is over, you lose</span>',
-      countBlock = 9,
-      maxStep = 5,
-      firstStep = 0,
-      elemArr0 = 0,
-      elemArr1 = 1,
-      elemArr2 = 2,
-      audioClickTicTacToe = new Audio(soundClickTicTacToe),
-      audioWinTicTacToe = new Audio(soundWinTicTacToe),
-      audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe),
-      timeStepComputer = 300,
-      gameNameTicTacToe = 'tic_tac_toe',
-      stateTimerTicTacToe = new GameTimer(gameNameTicTacToe, getRoomState()),
-      secretWordTicTacToe = definitionCodeWord(),
-      idTimerTicTacToe = '#timer-tictactoe';
+const classCeil = '.cell';
+const classWin = '.win';
+const stepX = '<img src="./assets/img/pistols.png">';
+const step0 = '<img src="./assets/img/losso.png">';
+const index0 = 0;
+const index1 = 1;
+const index2 = 2;
+const index3 = 3;
+const index4 = 4;
+const index5 = 5;
+const index6 = 6;
+const index7 = 7;
+const index8 = 8;
+const winX = '<span>You won</span> !';
+const gameOver = '<span>The game is over, you lose</span>';
+const countBlock = 9;
+const maxStep = 5;
+const firstStep = 0;
+const elemArr0 = 0;
+const elemArr1 = 1;
+const elemArr2 = 2;
+const audioClickTicTacToe = new Audio(soundClickTicTacToe);
+const audioWinTicTacToe = new Audio(soundWinTicTacToe);
+const audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
+const timeStepComputer = 300;
+const gameNameTicTacToe = 'tic_tac_toe';
+const stateTimerTicTacToe = new GameTimer(gameNameTicTacToe, getRoomState());
+const secretWordTicTacToe = definitionCodeWord();
+const idTimerTicTacToe = '#timer-tictactoe';
 
-let step = firstStep,
-    gameOverTicTacToe = false,
-    arr = [elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0];
-    
+let step = firstStep;
+let gameOverTicTacToe = false;
+let arr = [elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0];
+
 export const gameTicTacToe = () => {
     gameOverTicTacToe = false;
     const timerContainer = document.querySelector(idTimerTicTacToe);
@@ -55,6 +57,7 @@ export const gameTicTacToe = () => {
             if (!gameOverTicTacToe) {
                 if (elem.innerHTML === '') {
                     playAudio(audioClickTicTacToe);
+                    // eslint-disable-next-line no-param-reassign
                     elem.innerHTML = stepX;
                     arr[index] = elemArr1;
 
@@ -72,28 +75,30 @@ export const gameTicTacToe = () => {
             }
         });
     });
-}
+};
 
 export const closeGameTicTacToe = () => {
     document.querySelectorAll(classCeil).forEach((elem) => {
+        // eslint-disable-next-line no-param-reassign
         elem.innerHTML = '';
     });
 
     document.querySelector(classWin).innerHTML = '';
     step = firstStep;
     arr = [elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0, elemArr0];
-}
+};
 
 const computer = () => {
-    let index = getRandomInt(countBlock);
+    const index = getRandomInt(countBlock);
     if (document.querySelectorAll(classCeil)[index].innerHTML === '') {
         document.querySelectorAll(classCeil)[index].innerHTML = step0;
         arr[index] = elemArr2;
     } else {
         computer();
     }
-}
+};
 
+// eslint-disable-next-line no-shadow
 const winTicTacToe = (step, win) => {
     if (arr[index0] === step && arr[index3] === step && arr[index6] === step) conclusionGameTicTacToe(win);
     else if (arr[index1] === step && arr[index4] === step && arr[index7] === step) conclusionGameTicTacToe(win);
@@ -103,7 +108,7 @@ const winTicTacToe = (step, win) => {
     else if (arr[index6] === step && arr[index7] === step && arr[index8] === step) conclusionGameTicTacToe(win);
     else if (arr[index0] === step && arr[index4] === step && arr[index8] === step) conclusionGameTicTacToe(win);
     else if (arr[index2] === step && arr[index4] === step && arr[index6] === step) conclusionGameTicTacToe(win);
-}
+};
 
 const conclusionGameTicTacToe = (win) => {
     document.querySelector(classWin).innerHTML = win;
@@ -115,4 +120,4 @@ const conclusionGameTicTacToe = (win) => {
     } else {
         playAudio(audioGameOverTicTacToe);
     }
-}
+};

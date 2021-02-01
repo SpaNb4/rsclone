@@ -1,5 +1,10 @@
-import { state, volumeRange, keyboardSwitch } from './state';
-import { gamearea } from './keyboard';
+/* eslint-disable func-names */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+import { state, volumeRange, keyboardSwitch } from './state.ts';
+import { gamearea } from './keyboard.ts';
+// eslint-disable-next-line import/no-cycle
 import { getRoomState } from './room_state';
 
 const loginButton = document.querySelector('#menu-login-button');
@@ -78,7 +83,6 @@ loginForm.addEventListener('submit', function (e) {
 
                 localStorage.setItem(USER, this.login_email.value);
                 getRoomState().setUser(this.login_email.value);
-
             }
         });
 });
@@ -110,11 +114,11 @@ registerForm.addEventListener('submit', function (e) {
 });
 
 selectLng.addEventListener('change', () => {
-    if (selectLng.value == 'english') {
+    if (selectLng.value === 'english') {
         location.href = '/?lng=en';
-    } else if (selectLng.value == 'russian') {
+    } else if (selectLng.value === 'russian') {
         location.href = '/?lng=ru';
-    } else if (selectLng.value == 'japanese') {
+    } else if (selectLng.value === 'japanese') {
         location.href = '/?lng=ja';
     }
 });
@@ -133,7 +137,7 @@ function headerInit() {
     });
 
     document.addEventListener('keydown', (evt) => {
-        if ((evt.code === 'F11') & state.keyboard) {
+        if (evt.code === 'F11' && state.keyboard) {
             evt.preventDefault();
             sidenavInstance.open();
         }
