@@ -329,9 +329,12 @@ class Room {
     }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    new Room().init();
+window.addEventListener('load', () => {
+    document.body.classList.remove('preload');
+    preloader.classList.remove(ACTIVE);
+
     intro.init();
+    new Room().init();
     loadRoomState();
     headerInit();
     footerInit();
