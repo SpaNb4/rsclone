@@ -6,6 +6,7 @@ import { state, volumeRange, keyboardSwitch } from './state.ts';
 import { gamearea } from './keyboard.ts';
 // eslint-disable-next-line import/no-cycle
 import { getRoomState } from './room_state';
+import { createWordList } from './wordlist';
 
 const loginButton = document.querySelector('#menu-login-button');
 const logoutButton = document.querySelector('#menu-logout-button');
@@ -130,6 +131,14 @@ function headerInit() {
     M.Modal.init(document.querySelectorAll('.modal'), { startingTop: '10%' });
     M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
     M.FormSelect.init(document.querySelectorAll('select'), { classes: 'main-header__select' });
+
+    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), {
+        onOpenStart: () => {
+            createWordList();
+        },
+        closeOnClick: false,
+        coverTrigger: false,
+    });
 
     const modalInstance = M.Modal.getInstance(document.querySelector('#modal-keyboard'));
 

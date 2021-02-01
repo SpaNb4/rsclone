@@ -189,4 +189,4 @@ const memoryGame = {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export { memoryGame };
+export { memoryGame, secretWord };

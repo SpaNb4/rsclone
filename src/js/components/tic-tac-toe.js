@@ -37,7 +37,7 @@ const audioGameOverTicTacToe = new Audio(soundGameOverTicTacToe);
 const timeStepComputer = 300;
 const gameNameTicTacToe = 'tic_tac_toe';
 const stateTimerTicTacToe = new GameTimer(gameNameTicTacToe, getRoomState());
-const secretWordTicTacToe = definitionCodeWord();
+export const secretWordTicTacToe = definitionCodeWord();
 const idTimerTicTacToe = '#timer-tictactoe';
 
 let step = firstStep;

@@ -138,7 +138,8 @@
         </a>
       </li>
       <li>
-        <a id="menu-histogram-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-histogram">
+        <a id="menu-histogram-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-histogram">
           <i class="material-icons grey-text text-lighten-3">insert_chart</i>
           <span>Histogram</span>
         </a>
@@ -175,9 +176,16 @@
         </a>
       </li>
     </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger main-header__button">
-      <i class="material-icons grey-text text-lighten-3 medium">pause_circle_outline</i>
-    </a>
+    <div class="main-header__buttons">
+      <a href="#" data-target="slide-out" class="sidenav-trigger">
+        <i class="material-icons grey-text text-lighten-3 medium">pause_circle_outline</i>
+      </a>
+      <a href="#!" data-target="dropdown" class="dropdown-trigger">
+        <i class="material-icons grey-text text-lighten-3 medium">filter_8</i>
+      </a>
+      <ul id="dropdown" class='dropdown-content'></ul>
+    </div>
+
   </header>
   <main>
     <div class="content" id="game-content">

@@ -361,4 +361,4 @@ const snakeGame = {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export { snakeGame };
+export { snakeGame, secretWord };

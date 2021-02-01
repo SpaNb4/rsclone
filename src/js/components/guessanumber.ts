@@ -75,7 +75,7 @@ function userGuessed() {
             // Got it
             writeMessage(
                 statusArea,
-                `<p style='color:rgb(245, 0, 6)'><span>You got me in</span> ${numberOfGuesses} 
+                `<p style='color:rgb(245, 0, 6)'><span>You got me in</span> ${numberOfGuesses}
                 <span>guesses</span>, <span>I was thinking</span> ${randomNumber}. <span>You won</span>!</p>`,
                 '',
             );
@@ -144,4 +144,4 @@ const guessAnumberGame = {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export { guessAnumberGame };
+export { guessAnumberGame, secretWord };

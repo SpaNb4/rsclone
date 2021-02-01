@@ -41,7 +41,7 @@ const coordStartX = 3;
 const coodStartY = -2;
 const gameNameTetris = 'tetris';
 const stateTimerTetris = new GameTimer(gameNameTetris, getRoomState());
-const secretWordTetris = definitionCodeWord();
+export const secretWordTetris = definitionCodeWord();
 const idTimerTetris = '#timer-tetris';
 
 export const tetris = '.tetris__game';

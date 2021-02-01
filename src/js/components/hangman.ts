@@ -30,7 +30,7 @@ const hangmanForm = document.querySelector('.hangman_form');
 // once you got six wrong letters, you lose
 const SIX_ERRORS: number = 6;
 const UNDERSCORE: string = '_ ';
-const secretWord = definitionCodeWord();
+export const secretWord = definitionCodeWord();
 
 const wordsArr: Array<string> = [
     'javascript',

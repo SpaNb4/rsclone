@@ -25,3 +25,4 @@ import './components/timer_view';
 import './components/room_state';
 import './components/histogram';
 import './components/restart';
+import './components/wordlist';

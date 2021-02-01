@@ -23,7 +23,7 @@
     padding: 0 25px;
   }
 
-  input[type="range"] {
+  input[type=range] {
     border: none;
   }
 
@@ -35,16 +35,33 @@
     display: none !important;
   }
 
-  &__button {
+  &__buttons {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     top: 15px;
     left: 15px;
-    opacity: 0.5;
-    transition: all 0.5s ease;
-    z-index: 1;
 
-    &:hover {
+    a {
+      margin-bottom: 10px;
+      opacity: 0.5;
+      transition: all 0.5s ease;
+      z-index: 1;
+
+      &:hover {
       opacity: 1;
+      }
     }
+  }
+}
+
+#dropdown {
+  width: 120px!important;
+  height: auto!important;
+
+  li {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px 16px;
   }
 }
