@@ -8,6 +8,7 @@
     "> 5%"
   ],
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.13",
     "locizify": "^4.1.4",
     "materialize-css": "^1.0.0-rc.2",
     "sharer.js": "^0.4.1",

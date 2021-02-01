@@ -21,6 +21,7 @@ const INVALID = 'invalid';
 const CORRECT = 'correct';
 const HIDE = 'hide';
 const USER = 'user';
+const histogramButton = document.querySelector('#menu-histogram-button');
 
 function onVolumeRangeChange(evt) {
     state.volume = Number(evt.target.value) / 100;
@@ -47,6 +48,7 @@ function onLogoutClick() {
                 loginButton.classList.remove(HIDE);
                 registerButton.classList.remove(HIDE);
                 localStorage.removeItem(USER);
+                histogramButton.classList.add(HIDE);
                 getRoomState().setUser(null);
             }
         });
@@ -80,6 +82,7 @@ loginForm.addEventListener('submit', function (e) {
                 loginButton.classList.add(HIDE);
                 registerButton.classList.add(HIDE);
                 statsButton.classList.remove(HIDE);
+                histogramButton.classList.remove(HIDE);
 
                 localStorage.setItem(USER, this.login_email.value);
                 getRoomState().setUser(this.login_email.value);
@@ -152,11 +155,13 @@ function headerInit() {
         registerButton.classList.add(HIDE);
         logoutButton.classList.remove(HIDE);
         statsButton.classList.remove(HIDE);
+        histogramButton.classList.remove(HIDE);
     } else {
         loginButton.classList.remove(HIDE);
         registerButton.classList.remove(HIDE);
         logoutButton.classList.add(HIDE);
         statsButton.classList.add(HIDE);
+        histogramButton.classList.add(HIDE);
     }
 
     volumeRange.addEventListener('change', onVolumeRangeChange);
