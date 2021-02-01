@@ -89,8 +89,18 @@ export function openFinalIntro() {
     playAgainButton.focus();
 }
 
+const refreshCacheAndReload = () => {
+    if (caches) {
+        caches.keys().then(async (names) => {
+            await Promise.all(names.map(name => caches.delete(name)))
+        })
+    }
+    window.location.reload();
+}
+
 const playAgain = () => {
-    window.location.reload(true);
+    refreshCacheAndReload();
+
     document.removeEventListener('keydown', onOpenedDoorEnterPress);
     document.removeEventListener('keydown', onFinalIntroEnterpress);
 };

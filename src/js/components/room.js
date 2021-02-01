@@ -187,10 +187,6 @@ const getClickableCoords = () => getCoordsArray([
     ...fakePictures.map((elem) => [elem, swingPicture]),
 ]);
 
-// all clickable objects coordinates
-// eslint-disable-next-line import/no-mutable-exports
-let clickableCoords = getClickableCoords();
-
 const clearGameOBjects = [
     [repeatTicTacToe, clearTicTacToeGame],
     [repeatTetris, clearTetrisGame],
@@ -261,7 +257,7 @@ class Room {
 
         this.activeWall.classList.add(ACTIVE);
         // update coordinates after changing wall
-        clickableCoords = getClickableCoords();
+        state.coords = getClickableCoords();
 
         setTimeout(() => preloader.classList.remove(ACTIVE), LOAD_TIME);
     }
@@ -293,6 +289,10 @@ class Room {
     }
 
     init() {
+        // all clickable objects coordinates
+        // eslint-disable-next-line import/no-mutable-exports
+        state.coords = getClickableCoords();
+
         // open any games
         openGameObjects.forEach((item) => {
             item[0].addEventListener('click', item[1]);
@@ -338,4 +338,6 @@ window.addEventListener('DOMContentLoaded', () => {
     footerInit();
 });
 
-export { ACTIVE, overlay, onDocumentEscPress, outGameClick, openMiniGame, indexLock, picture, clickableCoords, setHiddenWordVisibility };
+export {
+    ACTIVE, overlay, onDocumentEscPress, outGameClick, openMiniGame, indexLock, picture, setHiddenWordVisibility, getClickableCoords
+};

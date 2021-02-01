@@ -8,6 +8,7 @@ interface Istate {
     paused: boolean;
     selector: string;
     locksOpen: boolean;
+    coords: [];
     callback: (x: string | null) => void;
 }
 
@@ -33,6 +34,7 @@ const state: Istate = {
     locksOpen: false,
     selector: '',
     callback: null,
+    coords: [],
 };
 
 export { state, volumeRange, keyboardSwitch };
