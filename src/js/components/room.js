@@ -290,7 +290,6 @@ class Room {
 
     init() {
         // all clickable objects coordinates
-        // eslint-disable-next-line import/no-mutable-exports
         state.coords = getClickableCoords();
 
         // open any games
@@ -339,5 +338,5 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 export {
-    ACTIVE, overlay, onDocumentEscPress, outGameClick, openMiniGame, indexLock, picture, setHiddenWordVisibility, getClickableCoords
+    ACTIVE, overlay, onDocumentEscPress, outGameClick, openMiniGame, indexLock, picture, setHiddenWordVisibility, getClickableCoords,
 };
