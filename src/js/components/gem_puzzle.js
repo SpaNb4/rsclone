@@ -1,4 +1,5 @@
-import movesound from './../../assets/audio/move.mp3';
+/* eslint-disable import/no-cycle */
+import movesound from '../../assets/audio/move.mp3';
 import * as swap from './gem_puzzle_swap';
 import { picture, setHiddenWordVisibility } from './room';
 import { playAudio } from './utils';
@@ -16,6 +17,7 @@ const gameName = 'gem_puzzle';
 const stateTimer = new GameTimer(gameName, getRoomState());
 const secretWord = definitionCodeWord();
 
+// eslint-disable-next-line import/prefer-default-export
 export const GemPuzzle = {
     size: 16,
     moves: 0,
@@ -93,7 +95,7 @@ export const GemPuzzle = {
                 cellsItem.style.backgroundColor = 'transparent';
                 cellsItem.style.border = 'none';
             }
-            cellsItem.style.background = `url(./assets/img/gem_puzzle_bg.png)`;
+            cellsItem.style.background = 'url(./assets/img/gem_puzzle_bg.png)';
             main.appendChild(cellsItem);
         }
 
@@ -217,7 +219,7 @@ export const GemPuzzle = {
         let j = 0;
 
         seconds = document.querySelector('.seconds').innerHTML;
-        if (this.isPuzzleSolved || !modal.classList.contains('active') || seconds == '00') {
+        if (this.isPuzzleSolved || !modal.classList.contains('active') || seconds === '00') {
             clearInterval(this.interval);
             this.interval = null;
         } else {
@@ -233,7 +235,7 @@ export const GemPuzzle = {
         createTimerView(timerContainer, stateTimer);
         stateTimer.gameOpened();
         const gameFinished = getRoomState().isGameFinished(gameName);
-        setHiddenWordVisibility(gameFinished, secretWord);
+        setHiddenWordVisibility(gameFinished, secretWord, gameName);
     },
 
     incrementMoves() {
@@ -247,7 +249,8 @@ export const GemPuzzle = {
             const minutes = document.querySelector('.minutes').innerHTML;
 
             const win = document.querySelector('.gem-puzzle .win');
-            win.innerHTML = `<i class="material-icons close_btn">close</i><p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves</p>
+            win.innerHTML = `<i class="material-icons close_btn">close</i>
+            <p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves</p>
             <p>The word is <span class="highlight">${secretWord}</span>!</p>`;
 
             const closeBtn = document.querySelector('.close_btn');
@@ -258,7 +261,7 @@ export const GemPuzzle = {
             win.classList.toggle('visible');
 
             stateTimer.gameFinished();
-            setHiddenWordVisibility(true, secretWord);
+            setHiddenWordVisibility(true, secretWord, gameName);
 
             setTimeout(() => {
                 picture.classList.add('dropped');

@@ -1,59 +1,62 @@
-import {createBoard, drawBoard, piece, gameOver, clear} from './tetrisGame.js'
+/* eslint-disable indent */
+/* eslint-disable import/no-cycle */
+// eslint-disable-next-line object-curly-newline
+import { createBoard, drawBoard, piece, gameOver, clear, tetris } from './tetrisGame';
 import { playAudio } from './utils';
-import { tetris } from './tetrisGame';
-import soundClickTetris from './../../assets/audio/tetris-click.mp3';
+import soundClickTetris from '../../assets/audio/tetris-click.mp3';
 
 const audioClickTetris = new Audio(soundClickTetris);
 
-let dropStart = Date.now(),
-    stopGameTetris = false;
+let dropStart = Date.now();
+let stopGameTetris = false;
 
 export const startTetris = () => {
     stopGameTetris = false;
     createBoard();
     drawBoard();
     clear();
+    // eslint-disable-next-line no-use-before-define
     drop();
-}
+};
 
 export const stopTetris = () => {
     stopGameTetris = true;
-}
+};
 
 const audioGameTetris = () => {
-    if(!stopGameTetris){
+    if (!stopGameTetris) {
         playAudio(audioClickTetris);
     }
-}
+};
 
 const checkGame = (movement) => {
     if (!gameOver) {
-        movement;
+        movement();
         audioGameTetris();
     }
-}
+};
 
 const movementLeft = () => {
     piece.moveLeft();
     dropStart = Date.now();
-}
+};
 
 const movementUp = () => {
     piece.rotate();
     dropStart = Date.now();
-}
+};
 
 const movementRight = () => {
     piece.moveRight();
     dropStart = Date.now();
-}
+};
 
 const movementDown = () => {
     piece.moveDown();
-}
+};
 
 export const KeyDown = (event) => {
-    switch(event.keyCode) {
+    switch (event.keyCode) {
         case 37:
             checkGame(movementLeft());
             break;
@@ -66,21 +69,23 @@ export const KeyDown = (event) => {
         case 40:
             checkGame(movementDown());
             break;
+        default:
+            break;
     }
-}
+};
 
 export const touchDown = () => {
-    let start_x = 0;
-    let start_y = 0;
+    let startX = 0;
+    let startY = 0;
     document.querySelector(tetris).addEventListener('touchstart', (event) => {
-        start_x = event.touches[0].clientX;
-        start_y = event.touches[0].clientY;
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
     });
     document.querySelector(tetris).addEventListener('touchend', (event) => {
-        const end_x = event.changedTouches[0].clientX;
-        const end_y = event.changedTouches[0].clientY;
-        const x = end_x - start_x;
-        const y = end_y - start_y;
+        const endX = event.changedTouches[0].clientX;
+        const endY = event.changedTouches[0].clientY;
+        const x = endX - startX;
+        const y = endY - startY;
 
         if (Math.abs(x) >= Math.abs(y)) {
             if (x > 0) {
@@ -94,17 +99,17 @@ export const touchDown = () => {
             checkGame(movementUp());
         }
     });
-}
+};
 
 const drop = () => {
-    let now = Date.now();
-    let delta = now - dropStart;
-    if(delta > 1000){
+    const now = Date.now();
+    const delta = now - dropStart;
+    if (delta > 1000) {
         piece.moveDown();
         dropStart = Date.now();
     }
 
-    if(!gameOver && !stopGameTetris){
+    if (!gameOver && !stopGameTetris) {
         requestAnimationFrame(drop);
     }
-}
+};

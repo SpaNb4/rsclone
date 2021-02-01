@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-restricted-syntax */
 import { getRoomState } from './room_state';
 
 function createStatistics() {
@@ -10,7 +12,7 @@ function createStatistics() {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${name.split('_').join(' ')}</td>
-                <td>${addZero(Math.floor(time/60))}:${addZero(time % 60)}</td>
+                <td>${addZero(Math.floor(time / 60))}:${addZero(time % 60)}</td>
             `;
             statistics.append(tr);
         }

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { backendURL } from './header';
 
 function buildStorageKey(email) {
@@ -36,6 +37,7 @@ async function loadStates(email) {
             .then((res) => {
                 if (res.errors) {
                     return {};
+                // eslint-disable-next-line no-else-return
                 } else if (res.success.complitedGame) {
                     return res.success.complitedGame;
                 } else {
@@ -78,6 +80,7 @@ class RoomState {
         if (this.states[gameName]) {
             return gameName in this.states;
         }
+        return 0;
     }
 }
 
@@ -87,4 +90,5 @@ function getRoomState() {
     return roomState;
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export { getRoomState };

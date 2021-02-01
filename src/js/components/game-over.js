@@ -1,36 +1,36 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable indent */
+/* eslint-disable import/no-cycle */
 import { indexLock } from './room';
-import { state } from './state';
+import { state } from './state.ts';
 import { getRandomInt } from './utils';
-import { openFinalIntro } from './intro';
+import { openFinalIntro } from './intro.ts';
 
-let flagOpen = false,
-    countOpenLock = 0;
+let flagOpen = false;
+let countOpenLock = 0;
 
-const lockClose = '.lock__close',
-    lockOpen = '.lock__open',
-    lockActive = 'lock__active',
-    lockGameText = '.lock-game__text',
-    lockGameClose = '.lock-game__close',
-    lockGameOpen = '.lock-game__open',
-    lockGameActive = 'lock-game__active',
-    doorOpen = '.door-open',
-    conteinerWall1 = '.wall__container',
-    htmlDoorOpen = '<div class="door-open element door-none"></div>',
-    door = '.door',
-    doorNoneDisplay = 'door-none',
-    enter = 13,
-    numLockFromString = 5,
-    num = 1,
-    stateCloseLock = 0,
-    stateOpenLock = 1,
-    countPharese = 3,
-    countWord = 1,
-    indexArr = 0,
-    neededCountDublicate = 0,
-    timeReplaceDoor = 300;
+const lockClose = '.lock__close';
+const lockOpen = '.lock__open';
+const lockActive = 'lock__active';
+const lockGameText = '.lock-game__text';
+const lockGameClose = '.lock-game__close';
+const lockGameOpen = '.lock-game__open';
+const lockGameActive = 'lock-game__active';
+const doorOpen = '.door-open';
+const door = '.door';
+const doorNoneDisplay = 'door-none';
+const enter = 13;
+const numLockFromString = 5;
+const num = 1;
+const stateCloseLock = 0;
+const stateOpenLock = 1;
+const countPharese = 3;
+const countWord = 1;
+const indexArr = 0;
+const neededCountDublicate = 0;
+const timeReplaceDoor = 300;
 
-
-let arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
+const arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
 
 const layoutLock = `
     <div class="lock__close lock__active">
@@ -60,40 +60,40 @@ export const arrLock = ['.lock1', '.lock2', '.lock3', '.lock4', '.lock5', '.lock
 const passpharasesArr = [
     ['Always', 'forgive', 'your', 'enemies', 'Nothing', 'annoys', 'them', 'more'],
     ['Success', 'is', 'one', 'percent', 'inspiration', 'ninety-nine', 'percent', 'perspiration'],
-    ['The answer', 'is meaningless', 'unless', 'you', 'discover', 'it', 'for', 'yourself']
+    ['The answer', 'is meaningless', 'unless', 'you', 'discover', 'it', 'for', 'yourself'],
 ];
 
 const codePhrase = passpharasesArr[getRandomInt(countPharese)];
-let arrRandomIndex = [];
+const arrRandomIndex = [];
 
 const addRandomElement = () => {
-    let number = getRandomInt(codePhrase.length);
+    const number = getRandomInt(codePhrase.length);
     let countDublicate = neededCountDublicate;
-    arrRandomIndex.forEach(elem => {
+    arrRandomIndex.forEach((elem) => {
         if (number === elem) {
             countDublicate++;
         }
-    })
+    });
 
     if (countDublicate > neededCountDublicate) {
         addRandomElement();
     } else {
-        arrRandomIndex.push(number)
+        arrRandomIndex.push(number);
     }
-}
+};
 
 const addArrayRandomElement = () => {
     while (arrRandomIndex.length !== arrLock.length) {
         addRandomElement();
     }
-}
+};
 addArrayRandomElement();
 
 export const definitionCodeWord = () => {
-    let word = codePhrase[arrRandomIndex[indexArr]];
+    const word = codePhrase[arrRandomIndex[indexArr]];
     arrRandomIndex.splice(indexArr, countWord);
     return word;
-}
+};
 
 arrLock.forEach((elem) => {
     document.querySelector(elem).innerHTML += layoutLock;
@@ -104,17 +104,19 @@ export const KeyDownLock = (event) => {
         case enter:
             checkTextExit();
             break;
+        default:
+            break;
     }
-}
+};
 
 const checkOpenLock = (elem) => {
     document.querySelector(`${elem} ${lockClose}`).classList.remove(lockActive);
     document.querySelector(`${elem} ${lockOpen}`).classList.add(lockActive);
     checkGameOverDoor();
-}
+};
 
 const checkTextExit = () => {
-    if (document.querySelector(lockGameText).value === codePhrase[indexLock[numLockFromString] - num]) {
+    if (document.querySelector(lockGameText).value.toLowerCase() === codePhrase[indexLock[numLockFromString] - num].toLowerCase()) {
         if (arrOpenLocks[indexLock[numLockFromString] - num] === stateCloseLock) {
             document.querySelector(lockGameClose).classList.remove(lockGameActive);
             document.querySelector(lockGameOpen).classList.add(lockGameActive);
@@ -126,9 +128,9 @@ const checkTextExit = () => {
         flagOpen = false;
     }
     if (flagOpen) {
-        checkOpenLock(indexLock)
+        checkOpenLock(indexLock);
     }
-}
+};
 
 const checkGameOverDoor = () => {
     if (countOpenLock === arrLock.length) {
@@ -137,7 +139,7 @@ const checkGameOverDoor = () => {
         state.locksOpen = true;
         openDoor();
     }
-}
+};
 
 const replaceTheDoor = () => {
     document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
@@ -146,11 +148,11 @@ const replaceTheDoor = () => {
 
 const openDoor = () => {
     document.querySelector(doorOpen).addEventListener('click', openFinalIntro);
-}
+};
 
 export const displayLock = (elem) => {
     if (document.querySelector(`${elem} ${lockOpen}`).classList.contains(lockActive)) {
         document.querySelector(lockGameClose).classList.remove(lockGameActive);
         document.querySelector(lockGameOpen).classList.add(lockGameActive);
     }
-}
+};
