@@ -115,7 +115,7 @@ const checkOpenLock = (elem) => {
 };
 
 const checkTextExit = () => {
-    if (document.querySelector(lockGameText).value === codePhrase[indexLock[numLockFromString] - num]) {
+    if (document.querySelector(lockGameText).value.toLowerCase() === codePhrase[indexLock[numLockFromString] - num].toLowerCase()) {
         if (arrOpenLocks[indexLock[numLockFromString] - num] === stateCloseLock) {
             document.querySelector(lockGameClose).classList.remove(lockGameActive);
             document.querySelector(lockGameOpen).classList.add(lockGameActive);
