@@ -35,4 +35,5 @@ class GameTimer {
     }
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export { GameTimer };

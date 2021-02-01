@@ -1,4 +1,5 @@
-import { state } from './state';
+/* eslint-disable no-param-reassign */
+import { state } from './state.ts';
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -71,23 +72,21 @@ function isOnElement(elem, pointer) {
             state.selector = `#${elem.id}`;
         }
         return true;
-    } else {
-        state.callback = null;
     }
+    state.callback = null;
+    return false;
 }
 
 function getCoordsArray(array) {
-    return array.map((elem) => {
-        return {
-            id: elem[0].id,
-            class: elem[0].className,
-            minX: elem[0].getBoundingClientRect().left,
-            maxX: elem[0].getBoundingClientRect().left + elem[0].offsetWidth,
-            minY: elem[0].getBoundingClientRect().top,
-            maxY: elem[0].getBoundingClientRect().top + elem[0].offsetHeight,
-            callback: elem[1]
-        };
-    });
+    return array.map((elem) => ({
+        id: elem[0].id,
+        class: elem[0].className,
+        minX: elem[0].getBoundingClientRect().left,
+        maxX: elem[0].getBoundingClientRect().left + elem[0].offsetWidth,
+        minY: elem[0].getBoundingClientRect().top,
+        maxY: elem[0].getBoundingClientRect().top + elem[0].offsetHeight,
+        callback: elem[1],
+    }));
 }
 
 function getRandomElement(array) {
@@ -107,8 +106,17 @@ function removeAllElements(array) {
 }
 
 export {
-    shuffleArray, doubleArray, checkSymbol,
-    getRandomInt, getWinCombination, getRandomIntInclusive,
-    playAudio, isOnElement, getCoordsArray, getRandomElement,
-    isIntInclude, addClickListeners, removeAllElements
+    shuffleArray,
+    doubleArray,
+    checkSymbol,
+    getRandomInt,
+    getWinCombination,
+    getRandomIntInclusive,
+    playAudio,
+    isOnElement,
+    getCoordsArray,
+    getRandomElement,
+    isIntInclude,
+    addClickListeners,
+    removeAllElements,
 };

@@ -1,3 +1,5 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable no-use-before-define */
 // @ts-ignore
 import { playAudio, getRandomInt } from './utils';
 // @ts-ignore
@@ -7,22 +9,22 @@ import { createTimerView } from './timer_view';
 // @ts-ignore
 import { getRoomState } from './room_state';
 // @ts-ignore
-import { definitionCodeWord } from './game-over'
+import { definitionCodeWord } from './game-over';
 // @ts-ignore
 import { setHiddenWordVisibility } from './room';
 
-import C from './../../assets/audio/notes/C.mp3';
-import Db from './../../assets/audio/notes/Db.mp3';
-import D from './../../assets/audio/notes/D.mp3';
-import Eb from './../../assets/audio/notes/Eb.mp3';
-import E from './../../assets/audio/notes/E.mp3';
-import F from './../../assets/audio/notes/F.mp3';
-import Gb from './../../assets/audio/notes/Gb.mp3';
-import G from './../../assets/audio/notes/G.mp3';
-import Ab from './../../assets/audio/notes/Ab.mp3';
-import A from './../../assets/audio/notes/A.mp3';
-import Bb from './../../assets/audio/notes/Bb.mp3';
-import B from './../../assets/audio/notes/B.mp3';
+import C from '../../assets/audio/notes/C.mp3';
+import Db from '../../assets/audio/notes/Db.mp3';
+import D from '../../assets/audio/notes/D.mp3';
+import Eb from '../../assets/audio/notes/Eb.mp3';
+import E from '../../assets/audio/notes/E.mp3';
+import F from '../../assets/audio/notes/F.mp3';
+import Gb from '../../assets/audio/notes/Gb.mp3';
+import G from '../../assets/audio/notes/G.mp3';
+import Ab from '../../assets/audio/notes/Ab.mp3';
+import A from '../../assets/audio/notes/A.mp3';
+import Bb from '../../assets/audio/notes/Bb.mp3';
+import B from '../../assets/audio/notes/B.mp3';
 
 const notes = [
     { src: C, name: 'C' },
@@ -104,7 +106,7 @@ const playNote = (key: HTMLElement): void => {
 };
 
 const createNextStep = (): void => {
-    let key: HTMLElement = game.keys[getRandomInt(notes.length)];
+    const key: HTMLElement = game.keys[getRandomInt(notes.length)];
     game.pianoSteps.push(key);
 
     setStepGoing();
@@ -112,9 +114,10 @@ const createNextStep = (): void => {
 };
 
 const showNextSteps = (): void => {
-    let promise = new Promise(function (resolve) {
+    const promise = new Promise((resolve) => {
         let iterations: number = 0;
 
+        // eslint-disable-next-line no-undef
         const interval: NodeJS.Timeout = setInterval(() => {
             iterations += 1;
             createNextStep();
@@ -131,9 +134,7 @@ const showNextSteps = (): void => {
     });
 };
 
-const isStepsCorrect = (): boolean => {
-    return game.userSteps.length === game.pianoSteps.length && game.userSteps.every((v, i) => v === game.pianoSteps[i]);
-};
+const isStepsCorrect = (): boolean => game.userSteps.length === game.pianoSteps.length && game.userSteps.every((v, i) => v === game.pianoSteps[i]);
 
 const resetSteps = (): void => {
     game.pianoSteps = [];
@@ -194,6 +195,7 @@ const createGame = (): void => {
 };
 
 const startGame = (): void => {
+    // eslint-disable-next-line prefer-destructuring
     game.pressed = game.keys[0];
     showNextSteps();
     setStartedState();
@@ -245,7 +247,7 @@ const onPianoKeyPress = (evt: KeyboardEvent): void => {
         index = Number(document.activeElement.dataset.index);
     }
 
-    if ((evt.code == 'ArrowLeft' || evt.code == 'KeyA') && index > 0) {
+    if ((evt.code === 'ArrowLeft' || evt.code === 'KeyA') && index > 0) {
         index -= 1;
         game.keys[index].focus();
     }
@@ -271,4 +273,5 @@ const simonGame = {
     button: buttonStart,
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export { simonGame };

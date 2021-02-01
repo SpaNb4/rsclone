@@ -1,11 +1,23 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/extensions */
+// @ts-ignore
+// eslint-disable-next-line import/extensions
 import { getRandomInt, playAudio } from './utils.js';
 import winSound from '../../assets/audio/guessanumber_win.mp3';
 import uncorrectSound from '../../assets/audio/guessanumber_wrong_answer.mp3';
+// @ts-ignore
+// eslint-disable-next-line import/extensions
 import { GameTimer } from './timer.js';
+// @ts-ignore
+// eslint-disable-next-line import/extensions
 import { createTimerView } from './timer_view.js';
+// @ts-ignore
+// eslint-disable-next-line import/extensions
 import { getRoomState } from './room_state.js';
+// @ts-ignore
 import { definitionCodeWord } from './game-over.js';
-import {setHiddenWordVisibility} from './room.js';
+// @ts-ignore
+import { setHiddenWordVisibility } from './room.js';
 
 let randomNumber: number = 0;
 let numberOfGuesses: number = 0;
@@ -45,10 +57,11 @@ function newGame() {
 }
 
 function guessInRange(guess: number) {
-    return (guess > 0 && guess < 101);
+    return guess > 0 && guess < 101;
 }
 
 function userGuessed() {
+    // @ts-ignore
     const userGuessednumber: any = document.getElementById(userGuess).value;
     if (!userGuessednumber.length || !guessInRange(userGuessednumber)) {
         // Nothing entered or our of range.
@@ -60,7 +73,12 @@ function userGuessed() {
 
         if (Number(userGuessednumber) === randomNumber && numberOfGuesses < maxGuesses) {
             // Got it
-            writeMessage(statusArea, `<p style='color:rgb(245, 0, 6)'><span>You got me in</span> ${numberOfGuesses} <span>guesses</span>, <span>I was thinking</span> ${randomNumber}. <span>You won</span>!</p>`, '');
+            writeMessage(
+                statusArea,
+                `<p style='color:rgb(245, 0, 6)'><span>You got me in</span> ${numberOfGuesses} 
+                <span>guesses</span>, <span>I was thinking</span> ${randomNumber}. <span>You won</span>!</p>`,
+                '',
+            );
             const audioWin = new Audio(winSound);
             playAudio(audioWin);
             stateTimer.gameFinished();
@@ -83,13 +101,18 @@ function userGuessed() {
         }
 
         if (numberOfGuesses >= maxGuesses) {
-            writeMessage(statusArea, '<p><p>Game over! Try new game.</p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span></p>', '');
+            writeMessage(
+                statusArea,
+                '<p><p>Game over! Try new game.</p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span></p>',
+                '',
+            );
             document.getElementById(historyList).innerHTML = '';
             randomNumber = getRandomInt(maxValue) + 1;
             numberOfGuesses = 0;
             writeMessage('historyList', '', '');
         }
     }
+    // @ts-ignore
     document.getElementById(userGuess).value = '';
     document.getElementById(userGuess).focus();
 }
@@ -104,6 +127,7 @@ document.getElementById(userGuess).addEventListener('keydown', (e: KeyboardEvent
 function resetGame() {
     numberOfGuesses = 0;
     document.getElementById(statusArea).innerHTML = '<p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span>.</p>';
+    // @ts-ignore
     document.getElementById(userGuess).value = '';
     document.getElementById(userGuess).focus();
     document.getElementById(userGuess).setAttribute('active', 'active');
@@ -119,4 +143,5 @@ const guessAnumberGame = {
     reset: resetGame,
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export { guessAnumberGame };
