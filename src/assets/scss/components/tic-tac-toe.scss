@@ -105,7 +105,7 @@
         }
     }
 
-    .win, .codeTicTacToe {
+    .win {
         position: absolute;
         text-align: center;
         font-size: 30px;
@@ -122,15 +122,18 @@
         }
     }
     
-    .codeTicTacToe {
-        margin-top: 50px;
+    #tic_tac_toe-secret-word {
+        position: absolute;
+        margin-top: 450px;
 
         @include resolution(big-mobile) {
-            margin-top: 30px;
+            margin-top: 500px;
+            font-size: 20px;
         }
 
         @include resolution(mobile) {
-            margin-top: 30px;
+            margin-top: 500px;
+            font-size: 20px;
         }
     }
 }

@@ -89,7 +89,7 @@
         }
     }
 
-    .resultTetris, .codeTetris {
+    .resultTetris {
         position: absolute;
         font-size: 30px;
         text-align: center;
@@ -106,15 +106,16 @@
         }
     }
 
-    .codeTetris {
-        margin-top: 50px;
+    #tetris-secret-word {
+        position: absolute;
+        top: 470px;
 
         @include resolution(big-mobile) {
-            margin-top: 30px;
+            font-size: 20px;
         }
 
         @include resolution(mobile) {
-            margin-top: 30px;
+            font-size: 20px;
         }
     }
 }

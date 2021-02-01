@@ -51,7 +51,7 @@ export const gameTicTacToe = () => {
     createTimerView(timerContainer, stateTimerTicTacToe);
     stateTimerTicTacToe.gameOpened();
     const gameFinished = getRoomState().isGameFinished(gameNameTicTacToe);
-    setHiddenWordVisibility(gameFinished, secretWordTicTacToe);
+    setHiddenWordVisibility(gameFinished, secretWordTicTacToe, gameNameTicTacToe);
     document.querySelectorAll(classCeil).forEach((elem, index) => {
         elem.addEventListener('click', () => {
             if (!gameOverTicTacToe) {
@@ -114,7 +114,7 @@ const conclusionGameTicTacToe = (win) => {
     document.querySelector(classWin).innerHTML = win;
     gameOverTicTacToe = true;
     stateTimerTicTacToe.gameFinished();
-    setHiddenWordVisibility(true, secretWordTicTacToe);
+    setHiddenWordVisibility(true, secretWordTicTacToe, gameNameTicTacToe);
     if (win === winX) {
         playAudio(audioWinTicTacToe);
     } else {

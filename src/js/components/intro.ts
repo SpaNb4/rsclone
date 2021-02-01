@@ -3,6 +3,8 @@
 /* eslint-disable no-use-before-define */
 // @ts-ignore
 import { getRandomIntInclusive } from './utils';
+// @ts-ignore
+import { restartGame } from './restart';
 // eslint-disable-next-line import/extensions
 import { state } from './state';
 import { IStar } from './../interfaces';
@@ -13,7 +15,7 @@ const VELOCITY: number = 0.15;
 const PADDING: number = 10;
 const startButton: HTMLElement = document.querySelector('#intro-start-button');
 const continueButton: HTMLElement = document.querySelector('#intro-continue-button');
-const playAgainButton: HTMLElement = document.querySelector('#intro-play-again-button');
+export const playAgainButton: HTMLElement = document.querySelector('#intro-play-again-button');
 const content1: HTMLElement = document.querySelector('#intro-content-1');
 const content2: HTMLElement = document.querySelector('#intro-content-2');
 const content3: HTMLElement = document.querySelector('#intro-content-3');
@@ -99,6 +101,7 @@ const playAgain = () => {
 
     document.removeEventListener('keydown', onOpenedDoorEnterPress);
     document.removeEventListener('keydown', onFinalIntroEnterpress);
+    restartGame();
 };
 
 const onOpenedDoorEnterPress = (evt: KeyboardEvent) => {
