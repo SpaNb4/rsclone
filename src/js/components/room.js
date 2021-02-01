@@ -14,7 +14,7 @@ import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
 import { getCoordsArray, getRandomIntInclusive, addClickListeners } from './utils';
 import { gamearea } from './keyboard.ts';
-import * as intro from './intro.ts';
+import { introInit } from './intro.ts';
 import { newGame } from './hangman.ts';
 import { GemPuzzle } from './gem_puzzle';
 import { fakeObjects, swingPicture, fakesInit } from './fakes.ts';
@@ -333,7 +333,7 @@ window.addEventListener('load', () => {
     document.body.classList.remove('preload');
     preloader.classList.remove(ACTIVE);
 
-    intro.init();
+    introInit();
     new Room().init();
     loadRoomState();
     headerInit();

@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 // @ts-ignore
 import { getRandomElement, playAudio } from './utils';
+import { ICatSound, IFakeOnbjects } from './../interfaces';
 // @ts-ignore
 import angryMeowSound from '../../assets/audio/meow-angry.mp3';
 import sweetMeowSound from '../../assets/audio/meow-sweet.mp3';
@@ -18,15 +19,6 @@ const catSays: HTMLElement = cat.querySelector('div');
 const paper: HTMLElement = document.querySelector('#paper_three');
 const lamp: HTMLElement = document.querySelector('#table-lamp');
 const maneki: HTMLElement = document.querySelector('#maneki');
-
-interface ICatSound {
-    [key: string]: HTMLAudioElement;
-}
-
-interface IFakeOnbjects {
-    [0]: HTMLElement;
-    [1]: () => void;
-}
 
 const catSounds: ICatSound[] = [
     { 'meow-meow': new Audio(angryMeowSound) },

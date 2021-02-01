@@ -3,14 +3,11 @@
 /* eslint-disable lines-between-class-members */
 /* eslint-disable import/no-cycle */
 /* eslint-disable import/no-unresolved */
-// @ts-ignore
 // eslint-disable-next-line max-classes-per-file
 import iconPointer from '../../assets/icons/lens.png';
 // eslint-disable-next-line import/extensions
 import { state } from './state';
-// @ts-ignore
 import { isOnElement } from './utils';
-// @ts-ignore
 import { getClickableCoords } from './room';
 
 const DIFF = 2;

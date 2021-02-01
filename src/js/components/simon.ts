@@ -1,16 +1,11 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable no-use-before-define */
-// @ts-ignore
+import { IGameState } from './../interfaces';
 import { playAudio, getRandomInt } from './utils';
-// @ts-ignore
 import { GameTimer } from './timer';
-// @ts-ignore
 import { createTimerView } from './timer_view';
-// @ts-ignore
 import { getRoomState } from './room_state';
-// @ts-ignore
 import { definitionCodeWord } from './game-over';
-// @ts-ignore
 import { setHiddenWordVisibility } from './room';
 
 import C from '../../assets/audio/notes/C.mp3';
@@ -54,13 +49,7 @@ const timerContainer: HTMLElement = document.querySelector(`#timer-${gameName}`)
 const stateTimer = new GameTimer(gameName, getRoomState());
 const secretWord = definitionCodeWord();
 
-interface IGameState {
-    keys: Array<HTMLElement>;
-    pianoSteps: Array<HTMLElement>;
-    userSteps: Array<HTMLElement>;
-    pressed: HTMLElement;
-    count: number;
-}
+
 
 const game: IGameState = {
     keys: [],
