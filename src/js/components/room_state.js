@@ -79,6 +79,13 @@ class RoomState {
             return gameName in this.states;
         }
     }
+
+    deleteTime(gameName) {
+        this.states[gameName] = 0;
+        if (this.userEmail !== null) {
+            storeStates(this.userEmail, this.states);
+        }
+    }
 }
 
 const roomState = new RoomState();
