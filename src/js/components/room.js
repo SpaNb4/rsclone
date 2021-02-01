@@ -17,7 +17,7 @@ import { gamearea } from './keyboard.ts';
 import * as intro from './intro.ts';
 import { newGame } from './hangman.ts';
 import { GemPuzzle } from './gem_puzzle';
-import { fakeObjects, swingPicture } from './fakes.ts';
+import { fakeObjects, swingPicture, fakesInit } from './fakes.ts';
 
 const ACTIVE = 'active';
 const LOAD_TIME = 300;
@@ -335,6 +335,7 @@ window.addEventListener('DOMContentLoaded', () => {
     loadRoomState();
     headerInit();
     footerInit();
+    fakesInit();
 });
 
 export {
