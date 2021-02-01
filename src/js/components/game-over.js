@@ -29,6 +29,8 @@ const countWord = 1;
 const indexArr = 0;
 const neededCountDublicate = 0;
 const timeReplaceDoor = 300;
+const conteinerWall1 = '#wall-1 .wall__container';
+const htmlDoorOpen = '<div class="door-open element door-none"></div>';
 
 const arrOpenLocks = [stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock, stateCloseLock];
 
