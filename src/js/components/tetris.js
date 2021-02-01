@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line object-curly-newline
-import { createBoard, drawBoard, piece, gameOver, clear, tetris } from './tetrisGame';
+import { createBoard, drawBoard, piece, gameOver, clear, tetris, startTimerTetris } from './tetrisGame';
 import { playAudio } from './utils';
 import soundClickTetris from '../../assets/audio/tetris-click.mp3';
 
@@ -17,7 +17,8 @@ export const startTetris = () => {
     clear();
     // eslint-disable-next-line no-use-before-define
     drop();
-};
+    startTimerTetris();
+}
 
 export const stopTetris = () => {
     stopGameTetris = true;
@@ -58,16 +59,16 @@ const movementDown = () => {
 export const KeyDown = (event) => {
     switch (event.keyCode) {
         case 37:
-            checkGame(movementLeft());
+            checkGame(movementLeft);
             break;
         case 38:
-            checkGame(movementUp());
+            checkGame(movementUp);
             break;
         case 39:
-            checkGame(movementRight());
+            checkGame(movementRight);
             break;
         case 40:
-            checkGame(movementDown());
+            checkGame(movementDown);
             break;
         default:
             break;

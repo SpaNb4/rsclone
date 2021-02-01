@@ -231,14 +231,16 @@ export const createBoard = () => {
             board[y][x] = colorBackground;
         }
     }
+}
 
+export const startTimerTetris = () => {
     const timerContainer = document.querySelector(idTimerTetris);
     timerContainer.innerHTML = '';
     createTimerView(timerContainer, stateTimerTetris);
     stateTimerTetris.gameOpened();
     const gameFinished = getRoomState().isGameFinished(gameNameTetris);
-    setHiddenWordVisibility(gameFinished, secretWordTetris);
-};
+    setHiddenWordVisibility(gameFinished, secretWordTetris, gameNameTetris);
+}
 
 export const drawBoard = () => {
     for (let y = 0; y < row; y++) {
@@ -405,7 +407,7 @@ export let gameOver = false;
 const winTetris = (score) => {
     if (score >= winScore) {
         stateTimerTetris.gameFinished();
-        setHiddenWordVisibility(true, secretWordTetris);
+        setHiddenWordVisibility(true, secretWordTetris, gameNameTetris);
         document.querySelector(resultTetris).innerHTML = winText;
         gameOver = true;
         playAudio(audioWinTetris);
