@@ -3,6 +3,8 @@
 /* eslint-disable no-use-before-define */
 // @ts-ignore
 import { getRandomIntInclusive } from './utils';
+// @ts-ignore
+import { restartGame } from './restart';
 // eslint-disable-next-line import/extensions
 import { state } from './state';
 
@@ -93,6 +95,7 @@ const playAgain = () => {
     window.location.reload(true);
     document.removeEventListener('keydown', onOpenedDoorEnterPress);
     document.removeEventListener('keydown', onFinalIntroEnterpress);
+    restartGame();
 };
 
 const onOpenedDoorEnterPress = (evt: KeyboardEvent) => {
