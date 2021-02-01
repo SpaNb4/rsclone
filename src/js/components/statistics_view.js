@@ -2,6 +2,8 @@
 /* eslint-disable no-restricted-syntax */
 import { getRoomState } from './room_state';
 
+const secondsPerMinute = 60;
+
 function createStatistics() {
     const roomState = getRoomState();
     const statistics = document.querySelector('#game-statistics');
@@ -12,7 +14,7 @@ function createStatistics() {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${name.split('_').join(' ')}</td>
-                <td>${addZero(Math.floor(time / 60))}:${addZero(time % 60)}</td>
+                <td>${addZero(Math.floor(time / secondsPerMinute))}:${addZero(time % secondsPerMinute)}</td>
             `;
             statistics.append(tr);
         }
