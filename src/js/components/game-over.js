@@ -14,6 +14,8 @@ const lockClose = '.lock__close',
     lockGameOpen = '.lock-game__open',
     lockGameActive = 'lock-game__active',
     doorOpen = '.door-open',
+    conteinerWall1 = '.wall__container',
+    htmlDoorOpen = '<div class="door-open element door-none"></div>',
     door = '.door',
     doorNoneDisplay = 'door-none',
     enter = 13,
@@ -129,11 +131,16 @@ const checkTextExit = () => {
 
 const checkGameOverDoor = () => {
     if (countOpenLock === arrLock.length) {
-        document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
-        document.querySelector(door).classList.add(doorNoneDisplay);
+        document.querySelector(conteinerWall1).innerHTML += htmlDoorOpen;
+        setTimeout(() => replaceTheDoor(), 1000);
         state.locksOpen = true;
         openDoor();
     }
+}
+
+const replaceTheDoor = () => {
+    document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
+    document.querySelector(door).classList.add(doorNoneDisplay);
 }
 
 const openDoor = () => {
