@@ -1,15 +1,7 @@
+import { Istate } from './../interfaces';
+
 const volumeRange: HTMLInputElement = document.querySelector('#volume-range');
 const keyboardSwitch: HTMLInputElement = document.querySelector('#keyboard-switch');
-
-interface Istate {
-    volume: number;
-    isMiniGameOpened: boolean;
-    keyboard: boolean;
-    paused: boolean;
-    selector: string;
-    locksOpen: boolean;
-    callback: (x: string | null) => void;
-}
 
 function getVolume(): number {
     if (volumeRange) {
@@ -33,6 +25,7 @@ const state: Istate = {
     locksOpen: false,
     selector: '',
     callback: null,
+    coords: [],
 };
 
 export { state, volumeRange, keyboardSwitch };

@@ -14,10 +14,10 @@ import { snakeGame } from './snake';
 import { KeyDownLock, arrLock, layoutLockGame, displayLock } from './game-over';
 import { getCoordsArray, getRandomIntInclusive, addClickListeners } from './utils';
 import { gamearea } from './keyboard.ts';
-import * as intro from './intro.ts';
+import { introInit } from './intro.ts';
 import { newGame } from './hangman.ts';
 import { GemPuzzle } from './gem_puzzle';
-import { fakeObjects, swingPicture } from './fakes.ts';
+import { fakeObjects, swingPicture, fakesInit } from './fakes.ts';
 
 const ACTIVE = 'active';
 const LOAD_TIME = 300;
@@ -187,10 +187,6 @@ const getClickableCoords = () => getCoordsArray([
     ...fakePictures.map((elem) => [elem, swingPicture]),
 ]);
 
-// all clickable objects coordinates
-// eslint-disable-next-line import/no-mutable-exports
-let clickableCoords = getClickableCoords();
-
 const clearGameOBjects = [
     [repeatTicTacToe, clearTicTacToeGame],
     [repeatTetris, clearTetrisGame],
@@ -261,7 +257,7 @@ class Room {
 
         this.activeWall.classList.add(ACTIVE);
         // update coordinates after changing wall
-        clickableCoords = getClickableCoords();
+        state.coords = getClickableCoords();
 
         setTimeout(() => preloader.classList.remove(ACTIVE), LOAD_TIME);
     }
@@ -293,6 +289,9 @@ class Room {
     }
 
     init() {
+        // all clickable objects coordinates
+        state.coords = getClickableCoords();
+
         // open any games
         openGameObjects.forEach((item) => {
             item[0].addEventListener('click', item[1]);
@@ -330,12 +329,18 @@ class Room {
     }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
+    document.body.classList.remove('preload');
+    preloader.classList.remove(ACTIVE);
+
+    introInit();
     new Room().init();
-    intro.init();
     loadRoomState();
     headerInit();
     footerInit();
+    fakesInit();
 });
 
-export { ACTIVE, overlay, onDocumentEscPress, outGameClick, openMiniGame, indexLock, picture, clickableCoords, setHiddenWordVisibility };
+export {
+    ACTIVE, overlay, onDocumentEscPress, outGameClick, openMiniGame, indexLock, picture, setHiddenWordVisibility, getClickableCoords,
+};

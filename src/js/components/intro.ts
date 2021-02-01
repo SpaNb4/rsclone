@@ -7,6 +7,7 @@ import { getRandomIntInclusive } from './utils';
 import { restartGame } from './restart';
 // eslint-disable-next-line import/extensions
 import { state } from './state';
+import { IStar } from './../interfaces';
 
 const DISABLED: string = 'disabled';
 const STAR_NUMBER: number = 120;
@@ -24,11 +25,6 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const stars: Array<IStar> = [];
-
-interface IStar {
-    draw: () => void;
-    update: () => void;
-}
 
 class Star implements IStar {
     x: number;
@@ -85,14 +81,24 @@ const skipIntroTwo = () => {
     content1.parentElement.classList.add(DISABLED);
 };
 
-export function openFinalIntro() {
+const openFinalIntro = () => {
     content3.classList.remove('disabled');
     content3.parentElement.classList.remove('disabled');
     playAgainButton.focus();
+};
+
+const refreshCacheAndReload = () => {
+    if (caches) {
+        caches.keys().then(async (names) => {
+            await Promise.all(names.map(name => caches.delete(name)))
+        })
+    }
+    window.location.reload();
 }
 
 const playAgain = () => {
-    window.location.reload(true);
+    refreshCacheAndReload();
+
     document.removeEventListener('keydown', onOpenedDoorEnterPress);
     document.removeEventListener('keydown', onFinalIntroEnterpress);
     restartGame();
@@ -113,7 +119,7 @@ const onFinalIntroEnterpress = (evt: KeyboardEvent) => {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export function init(): void {
+const introInit = (): void => {
     startButton.focus();
 
     startButton.addEventListener('click', skipIntroOne);
@@ -141,3 +147,5 @@ export function init(): void {
 
     animate();
 }
+
+export { openFinalIntro, introInit };

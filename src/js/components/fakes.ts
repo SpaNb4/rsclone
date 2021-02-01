@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 // @ts-ignore
 import { getRandomElement, playAudio } from './utils';
+import { ICatSound, IFakeOnbjects } from './../interfaces';
 // @ts-ignore
 import angryMeowSound from '../../assets/audio/meow-angry.mp3';
 import sweetMeowSound from '../../assets/audio/meow-sweet.mp3';
@@ -18,15 +19,6 @@ const catSays: HTMLElement = cat.querySelector('div');
 const paper: HTMLElement = document.querySelector('#paper_three');
 const lamp: HTMLElement = document.querySelector('#table-lamp');
 const maneki: HTMLElement = document.querySelector('#maneki');
-
-interface ICatSound {
-  [key: string]: HTMLAudioElement;
-}
-
-interface IFakeOnbjects {
-  [0]: HTMLElement;
-  [1]: () => void;
-}
 
 const catSounds: ICatSound[] = [
     { 'meow-meow': new Audio(angryMeowSound) },
@@ -65,12 +57,19 @@ const outCatClick = (evt: MouseEvent): void => {
     if (evt.target !== cat) closeCatSays();
 };
 
-const onFakePaperClick = (): void => {
+const dropFakePaper = (): void => {
     const bottom: number = parseFloat(getComputedStyle(paper.parentElement).bottom);
-    playAudio(laughAudio);
-    paper.style.transform = `translateY(${bottom + paper.offsetWidth}px) matrix(1, 0, -0.3, 0.2, 0, 0)`;
-
+    const width: number = parseFloat(getComputedStyle(paper).width);
+    paper.style.transform = `translateY(${bottom + width}px) matrix(1, 0, -0.3, 0.2, 0, 0)`;
     paper.removeEventListener('click', onFakePaperClick);
+}
+
+const onFakePaperClick = (): void => {
+    dropFakePaper();
+    if (!localStorage.getItem('paper')) {
+        playAudio(laughAudio);
+    }
+    localStorage.setItem('paper', 'dropped');
 };
 
 const onLampClick = (): void => {
@@ -82,6 +81,7 @@ const onLampClick = (): void => {
 const onManekiClick = (): void => {
     if (!maneki.classList.contains('dropped')) {
         maneki.classList.add('dropped');
+        localStorage.setItem('maneki', 'broken');
         setTimeout(() => {
             maneki.style.backgroundImage = `url(${manekiImage})`;
             playAudio(brakeAudio);
@@ -103,4 +103,15 @@ const fakeObjects: IFakeOnbjects[] = [
     [cat, onCatClick],
 ];
 
-export { fakeObjects, swingPicture };
+const fakesInit = () => {
+    if (localStorage.getItem('maneki') === 'broken') {
+        maneki.classList.add('dropped');
+        maneki.style.backgroundImage = `url(${manekiImage})`;
+    }
+
+    if (localStorage.getItem('paper') === 'dropped') {
+        dropFakePaper();
+    }
+}
+
+export { fakeObjects, swingPicture, fakesInit };

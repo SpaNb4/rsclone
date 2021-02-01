@@ -3,15 +3,12 @@
 /* eslint-disable lines-between-class-members */
 /* eslint-disable import/no-cycle */
 /* eslint-disable import/no-unresolved */
-// @ts-ignore
 // eslint-disable-next-line max-classes-per-file
 import iconPointer from '../../assets/icons/lens.png';
 // eslint-disable-next-line import/extensions
 import { state } from './state';
-// @ts-ignore
-import { clickableCoords } from './room';
-// @ts-ignore
 import { isOnElement } from './utils';
+import { getClickableCoords } from './room';
 
 const DIFF = 2;
 const content: HTMLElement = document.querySelector('#game-content');
@@ -40,7 +37,7 @@ class GameArea {
         content.prepend(this.canvas);
 
         document.addEventListener('keydown', (evt) => {
-            if (!state.isMiniGameOpened && !state.paused) {
+            if (!state.isMiniGameOpened && !state.paused && state.keyboard) {
                 this.key = evt.code;
 
                 if (evt.key === 'Enter' && pointer.onElement && !state.locksOpen) {
@@ -57,6 +54,7 @@ class GameArea {
     }
 
     switch() {
+        state.coords = getClickableCoords();
         if (state.keyboard) {
             this.canvas.classList.add('active');
             content.dataset.keyboard = 'off';
@@ -131,7 +129,7 @@ class Pointer {
         this.x += this.dx;
         this.y += this.dy;
 
-        this.onElement = clickableCoords.some((elem: any) => isOnElement(elem, this));
+        this.onElement = state.coords.some((elem: any) => isOnElement(elem, this));
 
         this.draw();
     }
@@ -150,6 +148,7 @@ window.addEventListener('resize', () => {
     gamearea.canvas.width = window.innerWidth;
     gamearea.canvas.height = window.innerHeight;
     gamearea.container = document.querySelector('.wall__container').clientWidth;
+    state.coords = getClickableCoords();
 });
 
 imagePointer.addEventListener('load', () => {
