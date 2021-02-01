@@ -23,3 +23,4 @@ import './components/statistics_view';
 import './components/timer';
 import './components/timer_view';
 import './components/room_state';
+import './components/restart';
