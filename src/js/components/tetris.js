@@ -1,6 +1,5 @@
-import {createBoard, drawBoard, piece, gameOver, clear} from './tetrisGame.js'
+import {createBoard, drawBoard, piece, gameOver, clear, tetris, startTimerTetris} from './tetrisGame.js'
 import { playAudio } from './utils';
-import { tetris } from './tetrisGame';
 import soundClickTetris from './../../assets/audio/tetris-click.mp3';
 
 const audioClickTetris = new Audio(soundClickTetris);
@@ -14,6 +13,7 @@ export const startTetris = () => {
     drawBoard();
     clear();
     drop();
+    startTimerTetris();
 }
 
 export const stopTetris = () => {
