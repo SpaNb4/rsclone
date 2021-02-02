@@ -87,7 +87,7 @@ export function newGame(): void {
     keyword = wordsArr[random].split('');
     partGuessWord = new Array(keyword.length);
     errors = 0;
-
+    
     // underscore in the guessfield
     for (let i = 0; i < partGuessWord.length; i += 1) {
         partGuessWord[i] = UNDERSCORE;
@@ -138,7 +138,7 @@ function checkWin(): void {
 
     if (isHangmanSolved) {
         messageDiv.classList.add(ACTIVE);
-        messageDiv.innerHTML = `<h1 class="title">Awesome, You Won! The word is <span class="highlight">${secretWord}</span>!`;
+        messageDiv.innerHTML = `<h1 class="title"><span>Awesome, You Won! The code word is</span> <span class="highlight">${secretWord}</span>!`;
         const audioWin = new Audio(winSound);
         playAudio(audioWin);
 
@@ -149,7 +149,7 @@ function checkWin(): void {
     if (errors === SIX_ERRORS) {
         messageDiv.classList.add(ACTIVE);
         messageDiv.innerHTML = `
-            <h1 class='title'>You Lost.. The word was <span class="highlight">${keyword.join('')}</span></h1>
+            <h1 class='title'><span>You Lost.. The word was</span><span class="highlight">${keyword.join('')}</span></h1>
             <p class="text">Don't worry, you'll get the next one!</p>
             <button class="res_btn">Play Again?</button>`;
         const audioLose = new Audio(loseSound);
