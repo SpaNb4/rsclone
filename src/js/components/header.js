@@ -6,7 +6,7 @@ import { state, volumeRange, keyboardSwitch } from './state.ts';
 import { gamearea } from './keyboard.ts';
 // eslint-disable-next-line import/no-cycle
 // eslint-disable-next-line import/no-unresolved
-import { getRoomState } from './room_state.ts';
+import { getRoomState } from './room_state.js';
 // eslint-disable-next-line import/no-unresolved
 import { createWordList } from './wordlist.ts';
 
