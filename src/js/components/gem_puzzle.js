@@ -250,8 +250,8 @@ export const GemPuzzle = {
 
             const win = document.querySelector('.gem-puzzle .win');
             win.innerHTML = `<i class="material-icons close_btn">close</i>
-            <p><span>You solved the puzzle in<span> ${minutes}:${seconds} <span>and</span> ${this.moves + 1} <span>moves</span></p>
-            <p><span>The word is</span> <span class="highlight">${secretWord}</span>!</p>`;
+            <p>You solved the puzzle in ${minutes}:${seconds} and ${this.moves + 1} moves</p>
+            <p>The word is <span class="highlight">${secretWord}</span>!</p>`;
 
             const closeBtn = document.querySelector('.close_btn');
             closeBtn.addEventListener('click', () => {

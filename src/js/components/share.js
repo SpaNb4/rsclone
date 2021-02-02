@@ -3,7 +3,7 @@ import Sharer from 'sharer.js';
 
 const classShare = 'share__button';
 const textLink = 'Link to the game Quest Escape Room: ';
-const urlLink = 'https://rsclone-test1.netlify.app/';
+const urlLink = 'https://rsclone-trap-quest.netlify.app';
 const urlDeploy = document.location.origin;
 const vk = 'vk';
 const facebook = 'facebook';
@@ -25,11 +25,11 @@ const arrImgLink = [imgVK, imgFacebook, imgTwitter, imgWhatsapp, imgTelegram, im
 const linkMenu = () => {
     for (let i = 0; i < arrLink.length; i++) {
         if (i === arrLink.length - 1) {
-            document.querySelector('.share__buttons').innerHTML += `<button class=${classShare} 
-            data-sharer=${arrLink[i]} 
-            data-title=${textLink} 
-            data-url=${urlLink} 
-            data-subject=${themeLink} 
+            document.querySelector('.share__buttons').innerHTML += `<button class=${classShare}
+            data-sharer=${arrLink[i]}
+            data-title=${textLink}
+            data-url=${urlLink}
+            data-subject=${themeLink}
             data-to=${addressEmail}>
             <img src=${arrImgLink[i]} alt=${arrLink[i]}>
             </button>`;

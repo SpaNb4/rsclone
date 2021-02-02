@@ -2,11 +2,11 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
+/* eslint-disable import/no-cycle */
 import { state, volumeRange, keyboardSwitch } from './state.ts';
 import { gamearea } from './keyboard.ts';
-// eslint-disable-next-line import/no-cycle
 // eslint-disable-next-line import/no-unresolved
-import { getRoomState } from './room_state.js';
+import { getRoomState } from './room_state';
 // eslint-disable-next-line import/no-unresolved
 import { createWordList } from './wordlist.ts';
 
