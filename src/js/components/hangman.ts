@@ -87,7 +87,7 @@ export function newGame(): void {
     keyword = wordsArr[random].split('');
     partGuessWord = new Array(keyword.length);
     errors = 0;
-console.log(keyword)
+    
     // underscore in the guessfield
     for (let i = 0; i < partGuessWord.length; i += 1) {
         partGuessWord[i] = UNDERSCORE;
