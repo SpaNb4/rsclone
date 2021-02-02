@@ -229,7 +229,7 @@ const outGameClick = (evt) => {
 };
 
 const setHiddenWordVisibility = (visible, secretWord, gameName) => {
-    document.querySelector(`#${gameName}-secret-word`).innerHTML = visible ? `Code word: ${secretWord}` : '';
+    document.querySelector(`#${gameName}-secret-word`).innerHTML = visible ? `<span>Code word:</span> ${secretWord}` : '';
 };
 
 class Room {
