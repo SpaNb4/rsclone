@@ -23,7 +23,7 @@
     padding: 0 25px;
   }
 
-  input[type="range"] {
+  input[type=range] {
     border: none;
   }
 
@@ -35,16 +35,44 @@
     display: none !important;
   }
 
-  &__button {
+  &__buttons {
     position: absolute;
+    display: flex;
     top: 15px;
     left: 15px;
-    opacity: 0.5;
-    transition: all 0.5s ease;
-    z-index: 1;
 
-    &:hover {
+    a {
+      margin-bottom: 10px;
+      opacity: 0.5;
+      transition: all 0.5s ease;
+      z-index: 1;
+
+      &:hover {
       opacity: 1;
+      }
     }
   }
 }
+
+#wordlist {
+  width: 140px!important;
+  height: auto!important;
+
+  li {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+    text-align: center;
+  }
+}
+
+#keyboard {
+  display: none;
+
+  @media screen and (min-width: 800px) {
+    display: block;
+  }
+}
+
+
+

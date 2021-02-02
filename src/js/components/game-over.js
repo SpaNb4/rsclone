@@ -146,7 +146,7 @@ const checkGameOverDoor = () => {
 const replaceTheDoor = () => {
     document.querySelector(doorOpen).classList.remove(doorNoneDisplay);
     document.querySelector(door).classList.add(doorNoneDisplay);
-}
+};
 
 const openDoor = () => {
     document.querySelector(doorOpen).addEventListener('click', openFinalIntro);

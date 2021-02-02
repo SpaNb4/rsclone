@@ -15,7 +15,7 @@ let seconds;
 
 const gameName = 'gem_puzzle';
 const stateTimer = new GameTimer(gameName, getRoomState());
-const secretWord = definitionCodeWord();
+export const secretWord = definitionCodeWord();
 
 // eslint-disable-next-line import/prefer-default-export
 export const GemPuzzle = {

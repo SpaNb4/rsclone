@@ -121,6 +121,7 @@ const onMemoryGridClick = (evt) => {
     }
 
     card.classList.add(OPENED);
+    card.focus();
     openCards.push(card);
 
     if (openCards.length === 2 && openCards[0].dataset.name === openCards[1].dataset.name) {
@@ -144,6 +145,7 @@ const onMemoryGridClick = (evt) => {
 const resetGame = () => {
     shuffleArray(cardsPicsArray);
     count = 0;
+    removeAllElements(links);
     removeAllElements(openCards);
     [...memoryGrid.children].forEach((elem) => {
         elem.classList.remove(DISABLED);
@@ -189,4 +191,4 @@ const memoryGame = {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export { memoryGame };
+export { memoryGame, secretWord };

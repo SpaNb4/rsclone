@@ -3,10 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=480, initial-scale=1.0">
   <title>Crime, Trap and One Cat</title>
   <link rel="shortcut icon" href="./favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preload" href="./../assets/fonts/raleway-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="./../assets/fonts/raleway-600.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="./../assets/fonts/raleway-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="./../assets/fonts/viaoda-libre.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 </head>
 
 <body class="preload">
@@ -138,7 +142,8 @@
         </a>
       </li>
       <li>
-        <a id="menu-histogram-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-histogram">
+        <a id="menu-histogram-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-histogram">
           <i class="material-icons grey-text text-lighten-3">insert_chart</i>
           <span>Histogram</span>
         </a>
@@ -155,7 +160,7 @@
         </a>
       </li>
       <li>
-        <a class="grey-text text-lighten-5 main-header__link collapsible-header" href="#!">
+        <a id="keyboard" class="grey-text text-lighten-5 main-header__link collapsible-header" href="#!">
           <i class="material-icons grey-text text-lighten-3">keyboard</i>
           <span>Keyboard</span>
         </a>
@@ -175,9 +180,16 @@
         </a>
       </li>
     </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger main-header__button">
-      <i class="material-icons grey-text text-lighten-3 medium">pause_circle_outline</i>
-    </a>
+    <div class="main-header__buttons">
+      <a href="#" data-target="slide-out" class="sidenav-trigger">
+        <i class="material-icons grey-text text-lighten-3 medium">menu</i>
+      </a>
+      <a href="#!" data-target="wordlist" class="dropdown-trigger" id="wordlist-open-button">
+        <i class="material-icons grey-text text-lighten-3 medium">vpn_key</i>
+      </a>
+      <ul id="wordlist" class='dropdown-content'></ul>
+    </div>
+
   </header>
   <main>
     <div class="content" id="game-content">
@@ -526,7 +538,10 @@
           <strong>ESCAPE</strong> - <span>close modal windows and sidenav</span>
         </li>
         <li class="collection-item">
-          <strong>F11</strong> - <span>pause game and open sidenav</span>
+          <strong>F11</strong> - <span>open main menu</span>
+        </li>
+        <li class="collection-item">
+          <strong>F2</strong> - <span>open list of guessed words</span>
         </li>
       </ul>
     </div>

@@ -18,7 +18,7 @@ export const startTetris = () => {
     // eslint-disable-next-line no-use-before-define
     drop();
     startTimerTetris();
-}
+};
 
 export const stopTetris = () => {
     stopGameTetris = true;

@@ -1,5 +1,17 @@
 # Changelog
-
+### Feb 2, 2021
+>:tada: realease :tada:<br/>
+### Feb 1, 2021
+>clean up code<br/>
+>fix bugs<br/>
+>add secret words list<br/>
+>add unit tests<br/>
+### Jan 31, 2021
+>add play again button<br/>
+>implement restart functionality<br/>
+### Jan 30, 2021
+>unify timers<br/>
+>fix bugs<br/>
 ### Jan 29, 2021
 >implement timer to games<br/>
 ### Jan 28, 2021

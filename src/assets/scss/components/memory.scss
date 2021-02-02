@@ -92,23 +92,8 @@
     }
 
     img {
-      width: 70px;
-      height: 70px;
-
-      @include resolution(tablet) {
-        width: 80px;
-        height: 80px;
-      }
-
-      @include resolution(desktop) {
-        width: 90px;
-        height: 90px;
-      }
-
-      @include resolution(big-desktop) {
-        width: 100px;
-        height: 100px;
-      }
+      width: 90%;
+      height: 90%;
     }
   }
 }

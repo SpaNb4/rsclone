@@ -60,12 +60,12 @@ let indexLock;
 //  open functions:
 const openMemoryGame = () => {
     memoryGame.create();
-    memoryGame.links[0].focus();
+    setTimeout(() => memoryGame.links[0].focus(), 100);
 };
 
 const openSimonGame = () => {
     simonGame.create();
-    simonGame.button.focus();
+    setTimeout(() => simonGame.button.focus(), 100);
 };
 
 const openGuessaNumberGame = () => {
