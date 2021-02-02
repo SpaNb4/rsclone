@@ -15,7 +15,7 @@ import { secretWord as gemSecretWord } from './gem_puzzle';
 // @ts-ignore
 import { secretWord as snakeSecretWord } from './snake';
 
-const list: HTMLUListElement = document.querySelector('#dropdown');
+const list: HTMLUListElement = document.querySelector('#wordlist');
 
 const words: ICatSound[] = [
   { 'memory': memorySecretWord },

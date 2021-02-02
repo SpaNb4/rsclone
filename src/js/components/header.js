@@ -14,6 +14,7 @@ const loginButton = document.querySelector('#menu-login-button');
 const logoutButton = document.querySelector('#menu-logout-button');
 const statsButton = document.querySelector('#menu-stats-button');
 const registerButton = document.querySelector('#menu-register-button');
+const dropdowOpenButton = document.querySelectorAll('#wordlist-open-button');
 const emailLoginHelperText = document.querySelector('#email_helper_login');
 const emailRegisterHelperText = document.querySelector('#email_helper_register');
 const loginForm = document.querySelector('#login_form');
@@ -134,9 +135,12 @@ function headerInit() {
     M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
     M.FormSelect.init(document.querySelectorAll('select'), { classes: 'main-header__select' });
 
-    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), {
+    M.Dropdown.init(dropdowOpenButton, {
         onOpenStart: () => {
             createWordList();
+        },
+        onCloseEnd: () => {
+            dropdowOpenButton[0].blur();
         },
         closeOnClick: false,
         coverTrigger: false,
@@ -151,9 +155,14 @@ function headerInit() {
     });
 
     document.addEventListener('keydown', (evt) => {
-        if (evt.code === 'F11' && state.keyboard) {
+        if (evt.code === 'F11' && state.keyboard && !state.isMiniGameOpened) {
             evt.preventDefault();
             sidenavInstance.open();
+        }
+
+        if (evt.code === 'F2' && state.keyboard && !state.isMiniGameOpened) {
+            evt.preventDefault();
+            M.Dropdown.getInstance(dropdowOpenButton[0]).open();
         }
 
         if (evt.code === 'Escape') {
