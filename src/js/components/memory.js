@@ -121,6 +121,7 @@ const onMemoryGridClick = (evt) => {
     }
 
     card.classList.add(OPENED);
+    card.focus();
     openCards.push(card);
 
     if (openCards.length === 2 && openCards[0].dataset.name === openCards[1].dataset.name) {
