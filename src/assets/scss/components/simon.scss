@@ -1,0 +1,172 @@
+.simon-game {
+  &__piano {
+    display: flex;
+
+    &.disabled {
+      pointer-events: none;
+    }
+
+    &.won {
+      a {
+        outline-color: black;
+        background-color: $color-black;
+        border-color: $color-black;
+        transition: background-color 1s;
+      }
+    }
+  }
+
+  &__key {
+    position: relative;
+    height: calc(var(--width) * 4);
+    width: var(--width);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    &::after {
+      content: '*';
+      position: absolute;
+      left: 50%;
+      bottom: 5px;
+      transform: translateX(-50%);
+      font-size: 28px;
+      opacity: 0;
+      transition: opacity $transition-300;
+      z-index: 5;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus::after {
+      opacity: 1;
+    }
+
+    &--white {
+      --width: 50px;
+
+      @include resolution(tablet) {
+        --width: 75px;
+      }
+
+      @include resolution(desktop) {
+        --width: 100px;
+      }
+
+      @include resolution(big-desktop) {
+        --width: 100px;
+      }
+
+      background-color: $color-white;
+      border: 1px solid $color-mine-shaft;
+
+      &::after {
+        color: $color-black;
+      }
+
+      &.active {
+        background-color: $color-silver;
+      }
+    }
+
+    &--black {
+      --width: 30px;
+
+      @include resolution(tablet) {
+        --width: 45px;
+      }
+
+      @include resolution(desktop) {
+        --width: 60px;
+      }
+
+      @include resolution(big-desktop) {
+        --width: 60px;
+      }
+
+      background-color: $color-black;
+      margin-left: calc(var(--width) / -2);
+      margin-right: calc(var(--width) / -2);
+      z-index: 2;
+
+      &::after {
+        color: $color-white;
+      }
+
+      &.active {
+        background-color: $color-mine-shaft;
+      }
+    }
+  }
+
+  &__start {
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    transform: translate(100%, -50%);
+    width: 57px;
+    height: 155px;
+
+    @include resolution(big-mobile) {
+      width: 32px;
+      height: 86px;
+    }
+
+    background-image: url('./../icons/clef.svg');
+    background-size: contain;
+    background-color: transparent;
+    background-position: 0 0;
+    opacity: 0.5;
+    border: none;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+      background-color: transparent;
+      outline: none;
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    transform: translateX(100%);
+  }
+
+  &__control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 80px;
+    padding: 0 15px;
+
+    @include resolution(big-mobile) {
+      padding: 0 10px;
+    }
+
+    color: $color-pavlova;
+    background-color: $color-black;
+  }
+
+  &__message {
+    font-size: 22px;
+
+    @include resolution(big-mobile) {
+      font-size: 16px;
+    }
+
+    color: $color-pavlova;
+    text-align: center;
+    z-index: 5;
+  }
+
+
+}

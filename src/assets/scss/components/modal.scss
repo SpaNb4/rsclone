@@ -1,0 +1,24 @@
+#modal-stats {
+  max-height: 100% !important;
+
+  table {
+    text-transform: capitalize;
+  }
+}
+
+.modal {
+  h4 {
+    color: $color-red-berry;
+    font-family: $font-viaoda-libre;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+#modal-histogram {
+  max-height: 100% !important;
+
+  &__content {
+    height: 400px;
+  }
+}

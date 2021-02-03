@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=480, initial-scale=1.0">
+  <title>Crime, Trap and One Cat</title>
+  <link rel="shortcut icon" href="./favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preload" href="./../assets/fonts/raleway-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="./../assets/fonts/raleway-600.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="./../assets/fonts/raleway-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="./../assets/fonts/viaoda-libre.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<body class="preload">
+  <div class="intro">
+    <div id="intro-content-1" class="intro__content">
+      <h4 class="intro__sub">welcome to</h4>
+      <h1 class="intro__title">Crime, Trap and One Cat</h1>
+      <div class="intro__image">
+        <img src="./assets/img/door-intro.png" alt="">
+      </div>
+      <a href="#!" id="intro-start-button" class="btn amber lighten-3 black-text pulse">Start Game</a>
+    </div>
+    <div id="intro-content-2" class="intro__content disabled">
+      <p class="intro__text">
+      <p>first_paragraph</p>
+      <p>second_paragraph</p>
+      <p>third_paragraph</p>
+      </p>
+      <a href="#!" id="intro-continue-button" class="btn amber lighten-3 black-text pulse">Continue</a>
+    </div>
+    <div id="intro-content-3" class="intro__content disabled">
+      <h2 class="intro__title">Credits</h2>
+      <div class="intro__wrapper">
+        <div class="intro__item">
+          <h4 class="intro__sub">Created by</h4>
+          <ul class="intro__list">
+            <li>
+              <a class="intro__link" href="https://github.com/AlesyaKuptsova">Alesya</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://github.com/lemeshkonastya" target="_blank">Anastasia</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://github.com/spanb4" target="_blank">Dzmitry</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://github.com/magklax" target="_blank">Nadezda</a>
+            </li>
+          </ul>
+        </div>
+        <div class="intro__item">
+          <h4 class="intro__sub">Art</h4>
+          <ul class="intro__list">
+            <li>
+              <a class="intro__link" href="https://www.wikiart.org/en/aleksandra-ekster/wine-1914">Wine by Aleksandra
+                Ekster</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://artbelarus.by/en/artists/1536.html">Eva by Chaïm Soutine</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://www.wikiart.org/en/marc-chagall/over-the-town-1918">Over The Town by
+                Marc Chagall</a>
+            </li>
+          </ul>
+        </div>
+        <div class="intro__item">
+          <h4 class="intro__sub">Images and Icons</h4>
+          <ul class="intro__list">
+            <li>
+              <a class="intro__link" href="https://www.flaticon.com/" target="_blank">Flaticon</a>
+            </li>
+            <li>
+              <a class="intro__link" href="https://www.freepik.com/" target="_blank">Freepik</a>
+            </li>
+          </ul>
+        </div>
+        <div class="intro__item">
+          <h4 class="intro__sub">Sound Effects</h4>
+          <ul class="intro__list">
+            <li>
+              <a class="intro__link" href="https://mixkit.co/free-sound-effects/goal/" target="_blank">Mixkit</a>
+            </li>
+          </ul>
+        </div>
+        <div class="intro__button-wrapper">
+          <a href="#!" id="intro-play-again-button" class="btn amber lighten-3 black-text pulse">Play Again</a>
+        </div>
+
+        <div class="intro__copyrights">Crime, Trap and One Cat @ 2021</div>
+      </div>
+
+    </div>
+    <canvas id="intro-canvas"></canvas>
+  </div>
+
+  <header class="main-header">
+    <ul id="slide-out" class="sidenav grey darken-3 main-header__list collapsible">
+      <li>
+        <a id="menu-register-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-register">
+          <i class="material-icons grey-text text-lighten-3">account_circle</i>
+          <span>Register</span>
+        </a>
+      </li>
+      <li>
+        <a id="menu-login-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-login">
+          <i class="material-icons grey-text text-lighten-3">account_box</i>
+          <span>Login</span>
+        </a>
+      </li>
+      <li>
+        <a id="menu-logout-button" class="hide grey-text text-lighten-5 main-header__link" href="#">
+          <i class="material-icons grey-text text-lighten-3">account_box</i>
+          <span>Logout</span>
+        </a>
+      </li>
+      <li>
+        <a class="grey-text text-lighten-5 main-header__link collapsible-header" href="#">
+          <i class="material-icons grey-text text-lighten-3">insert_chart</i>
+          <span>Volume</span>
+        </a>
+        <form action="#" class="main-header__volume collapsible-body grey darken-3">
+          <div class="range-field">
+            <input type="range" id="volume-range" min="0" max="100" class="grey-text text-lighten-5" />
+          </div>
+        </form>
+      </li>
+      <li>
+        <a class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-rules">
+          <i class="material-icons grey-text text-lighten-3">info</i>
+          <span>How to play?</span>
+        </a>
+      </li>
+      <li>
+        <a id="menu-stats-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-stats">
+          <i class="material-icons grey-text text-lighten-3">timeline</i>
+          <span>Statistics</span>
+        </a>
+      </li>
+      <li>
+        <a id="menu-histogram-button" class="grey-text text-lighten-5 main-header__link modal-trigger"
+          href="#modal-histogram">
+          <i class="material-icons grey-text text-lighten-3">insert_chart</i>
+          <span>Histogram</span>
+        </a>
+      </li>
+      <li>
+        <a class="main-header__link custom-select">
+          <i class="material-icons grey-text text-lighten-3">language</i>
+          <select class='select-lang'>
+            <option value="" disabled selected>Language</option>
+            <option value="english">English</option>
+            <option value="russian">Russian</option>
+            <option value="japanese">Japanese</option>
+          </select>
+        </a>
+      </li>
+      <li>
+        <a id="keyboard" class="grey-text text-lighten-5 main-header__link collapsible-header" href="#!">
+          <i class="material-icons grey-text text-lighten-3">keyboard</i>
+          <span>Keyboard</span>
+        </a>
+        <div class="switch collapsible-body grey darken-3">
+          <label>
+            Off
+            <input type="checkbox" id="keyboard-switch">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+      </li>
+      <li>
+        <a id="menu-link-button" class="grey-text text-lighten-5 main-header__link modal-trigger" href="#modal-link">
+          <i class="material-icons grey-text text-lighten-3">link</i>
+          <span>Link</span>
+        </a>
+      </li>
+    </ul>
+    <div class="main-header__buttons">
+      <a href="#" data-target="slide-out" class="sidenav-trigger">
+        <i class="material-icons grey-text text-lighten-3 medium">menu</i>
+      </a>
+      <a href="#!" data-target="wordlist" class="dropdown-trigger" id="wordlist-open-button">
+        <i class="material-icons grey-text text-lighten-3 medium">vpn_key</i>
+      </a>
+      <ul id="wordlist" class='dropdown-content'></ul>
+    </div>
+
+  </header>
+  <main>
+    <div class="content" id="game-content">
+      <div id="overlay" class="overlay"></div>
+      <div class="chandelier element"></div>
+      <div id="wall-1" class="wall active">
+        <div class="wall__container">
+          <div class="door element">
+            <div class="lock element">
+              <span id="knob" class="knob element"></span>
+            </div>
+            <div class="lock1"></div>
+            <div class="lock2"></div>
+            <div class="lock3"></div>
+            <div class="lock4"></div>
+            <div class="lock5"></div>
+            <div class="lock6"></div>
+            <div class="lock7"></div>
+            <div class="lock8"></div>
+          </div>
+          <div id="clock" class="clock element"></div>
+          <div id="piano" class="piano element"></div>
+          <div class="plant element"></div>
+          <div class="lamp element"></div>
+        </div>
+      </div>
+      <div id="wall-2" class="wall">
+        <div class="wall__container">
+          <div class="rack element"></div>
+          <div class="chest element">
+            <div class="frame element frame-image"></div>
+          </div>
+          <div class="shelfs element">
+            <div class="shelf element"></div>
+            <div class="shelf element">
+              <div class="cube cube4 element"></div>
+              <div class="cube element"></div>
+            </div>
+            <div class="shelf element">
+              <div class="cube element"></div>
+              <div class="cube element"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="wall-3" class="wall">
+        <div class="wall__container">
+          <div id="hat" class="hat element"></div>
+          <div id="couch" class="couch element">
+            <div id="cat" class="cat element">
+              <div class="cat-says"></div>
+            </div>
+          </div>
+          <div class="mirror element"></div>
+          <div id="safe-box" class="safe-box element"></div>
+          <div>
+            <div id="picture-1" class="picture element"></div>
+            <div id="picture-2" class="picture element"></div>
+            <div id="picture-3" class="picture element"></div>
+          </div>
+          <div id="box" class="box element"></div>
+          <div id="bottle" class="bottle element"></div>
+          <div id="coffee-table" class="coffee-table element"></div>
+        </div>
+      </div>
+      <div id="wall-4" class="wall">
+        <div class="wall__container">
+          <div class="board_paper element">
+            <div id="paper_one" class="paper element"></div>
+            <div id="paper_two" class="paper element"></div>
+            <div id="paper_three" class="paper element"></div>
+          </div>
+          <div class="chair element"></div>
+          <div class="work-table element">
+            <div id="table-lamp" class="table-lamp element"></div>
+            <div id="maneki" class="cat_statuette element"></div>
+            <div class="pillow element"></div>
+          </div>
+        </div>
+      </div>
+      <div class="floor"></div>
+    </div>
+    <div id="room-arrows">
+      <button class="arrow arrow--left" type="button" data-side="left"></button>
+      <button class="arrow arrow--right" type="button" data-side="right"></button>
+    </div>
+  </main>
+  <div class="tic-tac-toe game_modal">
+    <div id='timer-tictactoe'></div>
+    <a href="#!" class="tic-tac-toe__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
+    <div class="tic-tac-toe__repeat"><img src="./assets/img/repeat.png"></div>
+    <div class="tic-tac-toe__content">
+      <div class="tic-tac-toe__game">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+    </div>
+    <div class="win"></div>
+    <div id="tic_tac_toe-secret-word" class="secret-word"></div>
+  </div>
+  <div class="tetris game_modal">
+    <div id='timer-tetris'></div>
+    <a href="#!" class="tetris__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
+    <div class="tetris__repeat"><img src="./assets/img/repeat.png"></div>
+    <div class="tetris__content">
+      <canvas class="tetris__game" width="200" height="400"></canvas>
+      <div class="tetrisScore">
+        Score : <span class="numberScore">0</span>
+      </div>
+    </div>
+    <div class="resultTetris"></div>
+    <div id="tetris-secret-word" class="secret-word"></div>
+  </div>
+  <div id="memory-game" class="memory-game game_modal">
+    <div id='timer-memory'></div>
+    <a href="#" class="memory-game__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
+    <div id="memory-game-grid" class="memory-game__grid"></div>
+    <div id="memory-secret-word" class="secret-word"></div>
+  </div>
+  <div class="hangman game_modal">
+    <div id='timer-hangman'></div>
+    <span class="hangman_close_btn all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </span>
+    <h1>Hangman</h1>
+    <p class="word_field"></p>
+    <form class="hangman_form">
+      <div class="input_wrapper">
+        <input class="letter_input" placeholder="Enter a letter . . . ⏎" type="text" size="5" maxlength="1">
+        <input class="guess_btn" type="button" value="Guess">
+      </div>
+      <ul class="wrong_letters">
+        <p>Wrong Letters:</p>
+      </ul>
+      <div class="hangman_image_wrap">
+        <img class="hangman_img" src="./assets/img/hangman_0.png">
+      </div>
+    </form>
+    <div class="message"></div>
+    <div id="hangman-secret-word" class="secret-word"></div>
+  </div>
+  <div class="gem-puzzle game_modal">
+    <a href="#" class="gem-puzzle_close_btn all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
+    <div class="gem-puzzle-container"></div>
+    <div id="gem_puzzle-secret-word" class="secret-word"></div>
+  </div>
+  <div id="simon-game" class="simon-game game_modal">
+    <div id='timer-simon'></div>
+    <a href="#!" class="simon-game__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
+    <a href="#!" id="simon-game-start" class="simon-game__start"></a>
+    <div class="simon-game__control">
+      <div id="simon-game-score" class="simon-game__score"></div>
+      <div id="simon-game-message" class="simon-game__message"></div>
+    </div>
+    <div id="simon-game-piano" class="simon-game__piano"></div>
+    <div id="simon-secret-word" class="secret-word"></div>
+  </div>
+  <div class="game-over-lock">
+    <a href="#!" class="game-over-lock__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
+    <div class="game-over-lock__content"></div>
+  </div>
+  <div class="snake game_modal" id="snake">
+    <a href="#" id="snake__close" class="snake__close all-close-button"><i
+        class="material-icons medium grey-text text-grey">close</i></a>
+    <div id='timer-snake'></div>
+    <div class="snake__content">
+      <div class="gameDisplay">
+        <canvas class="display" id="display"> Sorry, your browser does not support &lt;canvas&gt; element.</canvas>
+      </div>
+      <div class="rightMenu">
+        <h3>Information</h3>
+        <p><label>Snake length:</label> <span id="snakeLength"></span></p>
+        <p id="snake-p-size">
+          Arrows - movement
+        </p>
+        <button id="startGame">Start new game</button>
+        <h4 id="message"></h4>
+      </div>
+    </div>
+    <div id="snake-secret-word" class="secret-word"></div>
+  </div>
+  <div class="guess-a-number game_modal" id="guess-a-number">
+    <a href="#" id="guess-a-number-close" class="guess-a-number__close all-close-button">
+      <i class="material-icons medium grey-text text-grey">close</i>
+    </a>
+    <div id="timer-guess-a-number"></div>
+    <div class="guess-a-number__content">
+      <h3>Number Guessing Game</h3>
+      <div id="statusArea">
+        <p><span>Please enter a number</span> 1-100 <span>and press the Guess button</span>.</p>
+      </div>
+      <input type="number" id="userGuess" />
+      <button id="buttonArea" class="button">
+        Guess
+      </button>
+      <div id="historyArea">
+        <h4>Your Previous Guesses</h4>
+        <ol id="historyList"></ol>
+      </div>
+    </div>
+    <div id="guess_a_number-secret-word" class="secret-word"></div>
+  </div>
+  <footer class="main-footer">
+    <a href="https://rs.school/js/" target="_blank">
+      <img src="./assets/img/rs_school_js.svg" alt="RS Shcool Log" width="55" height="20">
+    </a>
+    <ul id="footer-list" class="main-footer__list">
+      <li>© 2021</li>
+    </ul>
+  </footer>
+
+  <div id="modal-rules" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4>How to play this Game?</h4>
+      <p>how_to_play</p>
+      <p>
+        You can use the mouse as well as keybord (WASD & Enter) to play this game.
+      </p>
+      <p>
+        Turn sound off if you prefer to play in silent mode.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-stats" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4>Game Statistics</h4>
+      <div>
+        <table class="striped">
+          <tbody id="game-statistics"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-histogram" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4>Histogram</h4>
+      <div id="modal-histogram__content">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-register" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 class="center-align">Register your account</h4>
+      <form id="register_form">
+        <div class="input-field">
+          <input class="validate" type="email" name="register_email" id="register_email" required />
+          <label for="register_email">Enter your email</label>
+          <span id="email_helper_register" class="email_helper helper-text hide">Helper text</span>
+        </div>
+        <div class="input-field">
+          <input class="validate" type="password" minlength="4" maxlength="8" name="register_password"
+            id="register_password" required />
+          <label for="register_password">Enter your password</label>
+        </div>
+        <div class="row center-align">
+          <button type="submit" name="btn_register" class="btn btn-large waves-effect teal">Register</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-login" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 id="login_heading" class="center-align">Login to your account</h4>
+      <form id="login_form">
+        <div class="input-field">
+          <input class="validate" type="email" name="login_email" id="login_email" />
+          <label for="login_email">Enter your email</label>
+          <span id="email_helper_login" class="email_helper helper-text hide">Helper text</span>
+        </div>
+        <div class="input-field">
+          <input class="validate" type="password" name="login_password" id="login_password" />
+          <label for="login_password">Enter your password</label>
+        </div>
+        <div class="row center-align">
+          <button type="submit" name="btn_login" class="btn btn-large waves-effect teal">Login</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-link" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 class="center-align">Share the game with a friend</h4>
+      <div class="share">
+        <div class="share__buttons">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+
+  <div id="modal-keyboard" class="modal">
+    <div class="modal-content grey lighten-5 grey-text text-darken-4">
+      <h4 class="center-align">Keyboard control mode has been successfully activated!</h4>
+      <ul class="collection">
+        <li class="collection-item">
+          <strong>CTRL + &#8592;/&#8594;</strong> - <span>change current wall</span>
+        </li>
+        <li class="collection-item">
+          <strong>W/A/S/D</strong> - <span>move pointer</span>
+        </li>
+        <li class="collection-item">
+          <strong>ENTER</strong> - <span>interact with objects</span>
+        </li>
+        <li class="collection-item">
+          <strong>ESCAPE</strong> - <span>close modal windows and sidenav</span>
+        </li>
+        <li class="collection-item">
+          <strong>F11</strong> - <span>open main menu</span>
+        </li>
+        <li class="collection-item">
+          <strong>F2</strong> - <span>open list of guessed words</span>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-light btn grey darken-4">Okay</a>
+    </div>
+  </div>
+  <div id="preloader" class="active">
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</body>
+
+</html>

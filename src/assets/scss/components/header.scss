@@ -1,0 +1,79 @@
+.main-header {
+  position: absolute;
+
+  &__list {
+    padding: 15px 0;
+  }
+
+  &__link {
+    font-size: 18px !important;
+    cursor: pointer;
+
+    &.custom-select {
+      display: flex;
+    }
+  }
+
+  // materilize custom styles
+  .sidenav .collapsible-header {
+    padding: 0 32px;
+  }
+
+  .sidenav .collapsible-body {
+    padding: 0 25px;
+  }
+
+  input[type=range] {
+    border: none;
+  }
+
+  .select-wrapper .select-dropdown {
+    color: #fafafa !important;
+  }
+
+  .thumb {
+    display: none !important;
+  }
+
+  &__buttons {
+    position: absolute;
+    display: flex;
+    top: 15px;
+    left: 15px;
+
+    a {
+      margin-bottom: 10px;
+      opacity: 0.5;
+      transition: all 0.5s ease;
+      z-index: 1;
+
+      &:hover {
+      opacity: 1;
+      }
+    }
+  }
+}
+
+#wordlist {
+  width: 140px!important;
+  height: auto!important;
+
+  li {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+    text-align: center;
+    cursor: text;
+  }
+}
+
+#keyboard {
+  display: none;
+
+  @media screen and (min-width: 800px) {
+    display: block;
+  }
+}
+
+
+

@@ -1,0 +1,135 @@
+.tetris {
+    display: flex;
+    justify-content: center;
+
+    &__close {
+        position: absolute;
+        left: 250px;
+        transform: translateX(100%);
+        top: -100px;
+
+        @include resolution(big-mobile) {
+            left: 110px;
+            top: -50px;
+        }
+
+        @include resolution(mobile) {
+            left: 120px;
+            top: -50px;
+        }
+    }
+
+    &__repeat {
+        position: absolute;
+        top: -40px;
+        left: 268px;
+        transform: translateX(100%);
+        width: 50px;
+        height: 50px;
+
+        img {
+            width: 100%;
+        }
+
+        &:hover {
+            cursor: pointer;
+        };
+
+        @include resolution(table) {
+            left: 230px;
+        }
+
+        @include resolution(big-mobile) {
+            left: 180px;
+            top: -48px;
+        }
+
+        @include resolution(mobile) {
+            left: 180px;
+            top: -48px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: $color-black;
+        margin-top: -100px;
+        width: 300px;
+        height: 500px;
+
+        canvas {
+            display: block;
+            margin:0 auto;
+        }
+
+        .tetrisScore {
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+
+            @include resolution(big-mobile) {
+                font-size: 20px;
+            }
+
+            @include resolution(mobile) {
+                font-size: 20px;
+            }
+        }
+
+        @include resolution(big-mobile) {
+            margin-top: 0;
+            height: 450px;
+        }
+
+        @include resolution(mobile) {
+            margin-top: 0;
+            height: 450px;
+        }
+    }
+
+    .resultTetris {
+        position: absolute;
+        font-size: 30px;
+        text-align: center;
+        top: 400px;
+
+        @include resolution(big-mobile) {
+            top: 450px;
+            font-size: 20px;
+        }
+
+        @include resolution(mobile) {
+            top: 450px;
+            font-size: 20px;
+        }
+    }
+
+    #tetris-secret-word {
+        position: absolute;
+        top: 470px;
+
+        @include resolution(big-mobile) {
+            font-size: 20px;
+        }
+
+        @include resolution(mobile) {
+            font-size: 20px;
+        }
+    }
+}
+
+#timer-tetris {
+    position: absolute;
+    top: -150px;
+    left: 0;
+
+    @include resolution(big-mobile) {
+        top: -50px;
+    }
+
+    @include resolution(mobile) {
+        top: -50px;
+    }
+}

@@ -1,0 +1,67 @@
+@import "fonts";
+@import "variables";
+@import "_mixins";
+@import "./utils/normalize";
+
+@import "./components/header";
+@import "./components/footer";
+@import "./components/intro";
+
+@import "./components/room";
+@import "./components/tic-tac-toe";
+@import "./components/memory";
+@import "./components/simon";
+@import "./components//tetris";
+@import "./components/hangman.scss";
+@import "./components/snake.scss";
+@import "./components/guess_a_number.scss";
+@import "./components/gem-puzzle.scss";
+@import "./components/auth.scss";
+@import "./components/modal.scss";
+@import "./components/preloader.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  min-width: 480px;
+  font-size: 14px;
+
+  @include resolution(tablet) {
+    font-size: 16px;
+  }
+
+  @include resolution(desktop) {
+    font-size: 18px;
+  }
+
+  @include resolution(big-desktop) {
+    font-size: 20px;
+  }
+
+  line-height: 1.3;
+  font-weight: normal;
+  color: $color-pavlova;
+  background-color: $color-pickled-bluewood;
+}
+
+.preload * {
+  transition: none !important;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

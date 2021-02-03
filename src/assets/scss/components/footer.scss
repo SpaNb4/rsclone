@@ -1,0 +1,39 @@
+.main-footer {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1480px;
+  padding: 10px 3.3%;
+
+  &__list {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+
+    li {
+      margin-left: 15px;
+      height: auto;
+      font-size: 14px;
+
+      a {
+        filter: grayscale(50%);
+        transition: $transition-300;
+
+        &:hover,
+        &:focus {
+          opacity: 1;
+          filter: grayscale(0%);
+        }
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}

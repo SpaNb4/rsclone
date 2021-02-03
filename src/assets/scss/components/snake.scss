@@ -1,0 +1,103 @@
+.snake {
+    width: 700px;
+    overflow: hidden;
+
+    @include resolution(big-mobile) {
+        width: 445px;
+    }
+
+    @include resolution(mobile) {
+        width: 355px;
+    }
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 50px;
+        transform: translateX(100%);
+    }
+
+    &__content {
+        display: flex;
+        z-index: 500;
+    }
+
+    h4 {
+        color: $color-red;
+        font-size: 18px;
+        width: 150px;
+
+        @include resolution(big-mobile) {
+            font-size: 14px;
+            width: 95px;
+        }
+
+        @include resolution(mobile) {
+            font-size: 10px;
+            width: 85px;
+            margin-top: 3px;
+        }
+    }
+
+    h3 {
+        font-size: 20px;
+
+        @include resolution(big-mobile) {
+            font-size: 14px;
+        }
+
+        @include resolution(mobile) {
+            font-size: 14px;
+        }
+    }
+
+   .gameDisplay {
+        display: inline-block;
+        padding: 0;
+        font-size: 16px;
+        vertical-align: top;
+    }
+
+    #snake-p-size {
+        font-size: 16px;
+
+        @include resolution(mobile) {
+            font-size: 12px;
+        }
+    }
+    
+    .rightMenu {
+        background: $color-mine-shaft;
+        display: inline-block;
+        vertical-align: top;
+        height: 500px;
+        width: 150px;
+
+        @include resolution(big-mobile) {
+            height: 300px;
+            width: 95px;
+        }
+        @include resolution(mobile) {
+            height: 220px;
+            width: 85px;
+        }
+    }
+
+    .display {
+        font-size: 0;
+        margin: 0;
+        padding: 0;
+        width: 500px;
+        height: 500px;
+        background: $color-mine-shaft;
+
+        @include resolution(big-mobile) {
+            width: 300px;
+            height: 300px;
+        }
+        @include resolution(mobile) {
+            height: 220px;
+            width: 220px;
+        }
+    }
+}
