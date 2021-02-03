@@ -204,27 +204,30 @@ const closeCallbacks = [
     closeSnakeGameClick,
 ];
 
-const closeAllGames = () => {
-    closeCallbacks.forEach((callback) => callback());
-    overlay.classList.remove(ACTIVE);
-    document.removeEventListener('keydown', onDocumentEscPress);
-    document.removeEventListener('click', outGameClick);
-    state.isMiniGameOpened = false;
-    gamearea.switch();
-    // clean secret words container
-    // eslint-disable-next-line no-param-reassign
-    secretWordContainers.forEach((secretWordContainer) => (secretWordContainer.innerHTML = ''));
+const closeAllGames = (evt) => {
+    evt.target.blur();
+    setTimeout(() => {
+        closeCallbacks.forEach((callback) => callback());
+        overlay.classList.remove(ACTIVE);
+        document.removeEventListener('keydown', onDocumentEscPress);
+        document.removeEventListener('click', outGameClick);
+        state.isMiniGameOpened = false;
+        gamearea.switch();
+        // clean secret words container
+        // eslint-disable-next-line no-param-reassign
+        secretWordContainers.forEach((secretWordContainer) => (secretWordContainer.innerHTML = ''));
+    }, 0);
 };
 
 const onDocumentEscPress = (evt) => {
     if (evt.keyCode === 27) {
-        closeAllGames();
+        closeAllGames(evt);
     }
 };
 
 const outGameClick = (evt) => {
     if (evt.target === overlay) {
-        closeAllGames();
+        closeAllGames(evt);
     }
 };
 

@@ -99,6 +99,8 @@ const refreshCacheAndReload = () => {
 const playAgain = () => {
     refreshCacheAndReload();
 
+    localStorage.setItem('maneki', '');
+    localStorage.setItem('paper', '');
     document.removeEventListener('keydown', onOpenedDoorEnterPress);
     document.removeEventListener('keydown', onFinalIntroEnterpress);
     restartGame();
